@@ -31,7 +31,8 @@ website:
   title: "mizer course"
   site-url: "https://mizer.course.sizespectrum.org"
   favicon: images/favicon-16x16.png
-  repo-url: https://github.com/sizespectrum/mizerCourse
+  repo-url: https://github.com/gustavdelius/mizerCourse
+  repo-branch: master
   repo-actions: [edit, issue]
   twitter-card:
     site: "@mizer_model"
@@ -39,7 +40,7 @@ website:
   open-graph: true
   comments:
     giscus:
-      repo: sizespectrum/mizerCourse
+      repo: gustavdelius/mizerCourse
       category: Comments
       reactions-enabled: false
       input-position: bottom
