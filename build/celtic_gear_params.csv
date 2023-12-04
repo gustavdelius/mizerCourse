@@ -1,0 +1,18 @@
+species,gear,sel_func,l50,l25,catchability
+Herring,Commercial,sigmoid_length,23.1,19.6,0.536
+Sprat,Commercial,sigmoid_length,9.4,8,0.514
+Cod,Commercial,sigmoid_length,47.9,40.7,0.466
+Haddock,Commercial,sigmoid_length,27.8,23.6,0.148
+Whiting,Commercial,sigmoid_length,20.1,17.1,0.484
+Blue whiting,Commercial,sigmoid_length,14.8,12.6,0.053
+Norway Pout,Commercial,sigmoid_length,13.2,11.2,0.08
+Poor Cod,Commercial,sigmoid_length,14,11.9,0.011
+European Hake,Commercial,sigmoid_length,34.5,29.4,0.787
+Monkfish,Commercial,sigmoid_length,32.1,27.3,0.319
+Horse Mackerel,Commercial,sigmoid_length,15.4,13.1,0.296
+Mackerel,Commercial,sigmoid_length,26.8,22.8,0.564
+Common Dab,Commercial,sigmoid_length,9.1,7.8,0.682
+Plaice,Commercial,sigmoid_length,22.3,18.9,0.611
+Megrim,Commercial,sigmoid_length,25.9,22,0.688
+Sole,Commercial,sigmoid_length,18.1,15.4,0.189
+Boarfish,Commercial,sigmoid_length,8.3,7,0.128
