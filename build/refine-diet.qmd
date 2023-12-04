@@ -8,9 +8,9 @@ In this tutorial we will start to refine the mizer model that we created in the 
 
 As always, we start by updating and loading packages.
 
-```{r message=FALSE}
-try(unload("mizerExperimental"), silent = TRUE)
-remotes::install_github("sizespectrum/mizerExperimental", quiet = TRUE)
+```{r}
+#| message: false
+library(mizer)
 library(mizerExperimental)
 library(tidyverse)
 ```

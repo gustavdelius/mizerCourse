@@ -11,6 +11,7 @@ In this tutorial you are also going to start using mizer functions. When you wan
 First, load some required packages with the following commands:
 
 ```{r}
+#| message: false
 library(mizer)
 library(mizerExperimental)
 library(tidyverse)

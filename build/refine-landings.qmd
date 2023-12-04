@@ -6,9 +6,9 @@ We will now continue to refine our model by matching it to observed landings.
 
 As always, we start by updating and loading packages.
 
-```{r message=FALSE}
-try(unload("mizerExperimental"), silent = TRUE)
-remotes::install_github("sizespectrum/mizerExperimental", quiet = TRUE)
+```{r}
+#| message: false
+library(mizer)
 library(mizerExperimental)
 library(tidyverse)
 ```

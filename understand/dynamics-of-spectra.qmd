@@ -33,7 +33,7 @@ As always, we start by making sure we have the latest version of the mizerExperi
 
 ```{r}
 #| message: false
-remotes::install_github("sizespectrum/mizerExperimental")
+library(mizer)
 library(mizerExperimental)
 library(tidyverse)
 ```

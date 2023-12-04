@@ -6,9 +6,9 @@ In this tutorial we will discuss how to find the species-level information that 
 
 As always we start with installing and loading the latest version of mizerExperimental and of the tidyverse.
 
-```{r message=FALSE}
-try(unload("mizerExperimental"), silent = TRUE)
-remotes::install_github("sizespectrum/mizerExperimental", quiet = TRUE)
+```{r}
+#| message: false
+library(mizer)
 library(mizerExperimental)
 library(tidyverse)
 ```

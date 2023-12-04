@@ -50,7 +50,7 @@ These tutorials contain a lot of working R code, because learning R coding for m
 
 To analyse and plot the data we will be making use of the [tidyverse](https://www.tidyverse.org/) package, in particular [dplyr](https://dplyr.tidyverse.org/) and [ggplot2](https://ggplot2.tidyverse.org/). If you are not familiar with these, you can learn what is needed just by studying the example code in this tutorial. Before we can use a package we need to load it in from the package library with the `library()` function:
 
-```{r message=FALSE}
+```{r}
 library(tidyverse)
 ```
 
@@ -72,12 +72,13 @@ The `library()` function loads the named package from your package library. The 
 install.packages(c("mizer", "tidyverse", "plotly", "remotes", "usethis",
                    "rmarkdown", "rstudioapi"))
 ```
+The message that the `library(tidyverse)` command displays is showing you that it has loaded several other packages that together make up the tidyverse. It also warns you that the "dplyr" package overwrites two functions that already existed in the "stats" package, which is no problem for us.
 :::
 
 ## The data
 
 So let's see if we can find Sheldon's pattern ourselves. First we download the data from the internet.
-```{r}
+```{r eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourseNew/raw/master/understand/size-data.rds",
               destfile = "size-data.rds")
 ```

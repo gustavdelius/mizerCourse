@@ -5,6 +5,7 @@ title: "Species interactions"
 In the previous tutorials we studied a single species interacting with a fixed background community. In this tutorial we want to acknowledge that there is no such thing as a fixed background community. Instead, all species form part of a dynamical ecosystem in which changes to any species has knock-on effects on other species. Furthermore, the resulting changes in the other species will react back on the first species, which now finds its prey community and its predator community changed. This is where we realise that we need multi-species models, because without such a model we cannot predict how all these changes will affect each other.
 
 ```{r}
+#| message: false
 library(mizer)
 library(mizerExperimental)
 library(tidyverse)

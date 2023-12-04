@@ -10,9 +10,9 @@ This final tutorial gives some examples from another mizer model, tuned to a dif
 
 As usual, we need to have some packages installed.
 
-```{r message=FALSE}
-try(unload("mizerExperimental"), silent = TRUE)
-remotes::install_github("sizespectrum/mizerExperimental", quiet = TRUE)
+```{r}
+#| message: false
+library(mizer)
 library(mizerExperimental)
 library(tidyverse)
 ```
