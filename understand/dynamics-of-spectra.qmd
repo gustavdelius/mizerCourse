@@ -27,10 +27,6 @@ Size spectrum dynamics is very intuitive: The rate at which the number of indivi
 
 What makes these seemingly obvious dynamics interesting is how the growth rate and the death rate are determined in terms of the abundance of prey and predators and the feeding preferences and physiological parameters of the individuals. We have discussed a bit of that in previous tutorials and will discuss it much more in upcoming tutorials. We will discuss the birth rate $R_{dd}$ below in the section on [how reproduction is modelled](dynamics-of-spectra.html#how-reproduction-is-modelled). But first we want to look at the results of simulating the size spectrum dynamics.
 
-You will be doing your own work for this tutorial in the accompanying worksheet file "worksheet5-dynamics-of-spectra.Rmd". You will find this file in the worksheet repository for this week that you already used in previous tutorials.
-
-As always, we start by making sure we have the latest version of the mizerExperimental package and load it as well as the tidyverse.
-
 ```{r}
 #| message: false
 library(mizer)
@@ -89,13 +85,15 @@ Of course we can also get at the numeric values of the spectra at different time
 getTimes(sim_lessRes)
 ```
 
+The simulation results have been saved at yearly intervals. We could have changed that via the `t_save` argument to `project()`.
+
 The function `N()` returns a three-dimensional array (time x species x size) with the number density of consumers. To get for example the number density for the 2nd species after 5 years in the 1st size class we do
 
 ```{r}
 N(sim_lessRes)[6, 2, 1]
 ```
 
-If the function `getBiomass()` is supplied with a MizerSim object then it returns an array (time x species) containing the biomass in grams at each time step for all species. So for example the biomass in grams of the 2nd species after 5 years is
+The function `getBiomass()` acting on a MizerSim object returns an array (time x species) containing the total biomass in grams at each time step for each species. So for example the biomass in grams of the 2nd species after 5 years is
 
 ```{r}
 getBiomass(sim_lessRes)[6, 2]
@@ -107,7 +105,7 @@ The biomass time series can be plotted with `plotBiomass()`:
 plotBiomass(sim_lessRes)
 ```
 
-Mizer provides many more functions to analyse the results of a simulation, some of which you will learn later about in this course.
+Mizer provides many more functions to analyse the results of a simulation, some of which you will learn about later in this course.
 
 ## Reproduction dynamics
 
@@ -116,10 +114,8 @@ The above simulation was run with constant abundance in the smallest size class 
 To see the effect we run the same code as above after deleting the two lines that turned off the reproduction dynamics. We also specify with `t_save = 2` that we want to save the spectrum only every second year, which speeds up the display of the animation.
 
 ```{r message=FALSE}
-# Create trait-based model
-mp <- newTraitParams() |> 
-    # run to steady state with constant reproduction rate
-    steady()
+# Create trait-based model and run to steady state
+mp <- newTraitParams() |> steady()
 
 # We make a copy of the model
 mp_lessRes <- mp
@@ -134,15 +130,13 @@ animateSpectra(sim_lessRes, total = TRUE, power = 2,
                ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
-I think you might be surprised at the result when you press the Play button now.
+Note that now the fish species whose access to resources was decreased continue to decrease in abundance as time goes on. Interestingly, species 1 appears to be driven to extinction by the increased abundance of its predators that in turn is due to the decrease in predation from the larger species.
 
-What is going on with species 1?
-
-## How reproduction is modelled
+Given that reproduction has such an important impact on the response of species to fishing, it is worth taking a look at how reproduction is modelled in mizer.
 
 ### Energy invested into reproduction
 
-We already discussed the [investment into reproduction](single-species-spectra.html#investment-into-reproduction) in an earlier tutorial. As mature individuals grow they invest an increasing proportion of their income into reproduction and at their asymptotic size they would be investing all income into reproduction. Summing up all these investments from mature individuals of a particular species gives the total rate $E_R$ at which that species invests energy into reproduction. This total rate of investment is multiplied by a reproduction efficiency factor `erepro`, divided by a factor of 2 to take into account that only females reproduce, and then divided by the egg weight `w_min` to convert it into the rate at which eggs are produced. The equation is:
+We already discussed the [investment into reproduction](single-species-spectra.html#investment-into-reproduction) in an earlier tutorial. As mature individuals grow, they invest an increasing proportion of their income into reproduction and at their asymptotic size they would be investing all income into reproduction. Summing up all these investments from mature individuals of a particular species gives the total rate $E_R$ at which that species invests energy into reproduction. This total rate of investment is multiplied by a reproduction efficiency factor `erepro`, divided by a factor of 2 to take into account that only females reproduce, and then divided by the egg weight `w_min` to convert it into the rate at which eggs are produced. The equation is:
 
 $$
 R_{di} = \frac{\rm{erepro}}{2 w_{min}} E_R.
@@ -154,7 +148,7 @@ This is calculated in mizer with `getRDI()`:
 getRDI(mp)
 ```
 
-The `erepro` parameter or reproduction efficiency can vary between 0 and 1 (although 0 would be bad) and reflects the fact that only a fraction of energy invested into reproduction can make into viable eggs or larvae.
+The `erepro` parameter or reproduction efficiency can vary between 0 and 1 (although 0 would be bad) and gives the proportion of energy invested into reproduction that is converted into viable eggs or larvae.
 
 ### Density-dependence in reproduction
 
@@ -164,7 +158,7 @@ Note that mizer models the rate of egg production. The size spectrum dynamics th
 The stock-recruitment relationship is an emergent phenomenon in mizer, with several sources of density dependence. Firstly, the amount of energy invested into reproduction depends on the energy income of the spawners, which is density-dependent due to competition for prey. Secondly, the proportion of larvae that grow up to recruitment size depends on the larval mortality, which depends on the density of predators, and on larval growth rate, which depends on density of prey.
 :::
 
-However there are other sources of density dependence that are not explicitly modelled mechanistically in mizer. An example would be a limited carrying capacity of suitable spawning grounds and other spatial effects. So mizer has another species parameter $R_{max}$ that gives the maximum possible rate of recruitment. Imposing a finite maximum reproduction rate leads to a non-linear relationship between energy invested and eggs hatched. This density-dependent reproduction rate $R_{dd}$ is given by a Beverton-Holt type function:
+However, there are other sources of density dependence that are not explicitly modelled mechanistically in mizer. An example would be a limited carrying capacity of suitable spawning grounds and other spatial effects. So mizer has another species parameter $R_{max}$ that gives the maximum possible rate of recruitment. Imposing a finite maximum reproduction rate leads to a non-linear relationship between energy invested and eggs hatched. This density-dependent reproduction rate $R_{dd}$ is given by a Beverton-Holt type function:
 
 $$ R_{dd} = R_{di} \frac{R_{max}}{R_{di} + R_{max}}$$
 
@@ -216,7 +210,7 @@ getRDD(mp)
 
 This is the rate at which new individuals are entering the smallest size class. The actual number density in the smallest size class is then determined by the usual size-spectrum dynamics.
 
-## Reproduction level
+### Reproduction level
 
 We have seen the two species parameters that determine how the energy invested into reproduction is converted to the number of eggs produced: `erepro` and `R_max`. For neither of these is it obvious what value they should have. The choice of values influences two important properties of a model: the steady state abundances of the species and the density-dependence in reproduction. It is therefore useful to change to a new set of two parameters that reflect these two properties better. These are:
 
@@ -238,7 +232,7 @@ We see that by default `newTraitParams()` had given all species the same reprodu
 mp9 <- setBevertonHolt(mp, reproduction_level = 0.9)
 ```
 
-Changing the reproduction level has no effect on the steady state, because that only depends on the rate of egg production $R_dd$ and that is kept fixed when changing the reproduction level. We can check that by running our new model to steady state and plotting that steady state together with the original steady state. They overlap perfectly.
+Changing the reproduction level has no effect on the steady state, because that only depends on the rate of egg production $R_{dd}$ and that is kept fixed when changing the reproduction level. We can check that by running our new model to steady state and plotting that steady state together with the original steady state. 
 
 ```{r}
 mp9 <- projectToSteady(mp9)
@@ -248,7 +242,7 @@ plotSpectra2(mp, name1 = "reproduction_level = 0.25",
              total = TRUE, power = 2, ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
-However the reproduction level has an effect on how sensitive the system is to changes. As an example, let us look at the dynamics that is triggered by the reduction in interaction with the resource by species 8 through 11.
+They overlap perfectly. However the reproduction level does have an effect on how sensitive the system is to changes. As an example, let us look at the dynamics that is triggered by the reduction in interaction with the resource by species 8 through 11.
 
 ```{r}
 # We make a copy of the model
@@ -264,19 +258,39 @@ animateSpectra(sim_lessRes9, total = TRUE, power = 2,
 
 Notice how the species have settled down to a new steady state after 30 years without any extinctions and the impact on species 1 is much less extreme. As expected, the higher reproduction level has made the species more resilient to perturbations.
 
-The problem of course is that in practice the reproduction level is hardly ever known. Instead one will need to use any information one has about the sensitivity of the system from observed past perturbations to calibrate the reproduction levels. We'll discuss this again in week 3.
+The problem of course is that in practice the reproduction level is hardly ever known. Instead, one will need to use any information one has about the sensitivity of the system from observed past perturbations to calibrate the reproduction levels. We'll discuss this again towards the end of Part 2.
 
 ::: {.callout-caution collapse="false"}
 ### Exercise 1
 
-Go back to the example with fishing on individuals above 1kg from the section on [fishing-induced cascades](species-interactions.html#fishing-induced-cascades). Impose the same fishing, but now on the trait-based model with reproduction dynamics left turned on and with a reproduction level of 0.5 for all species. Project the model for 20 years. How many species have a reduced total biomass after 20 years? What is the total biomass of species 1 after 20 years?
+Go back to the example with fishing on individuals above 1kg from the section on [fishing-induced cascades](species-interactions.html#fishing-induced-cascades). Impose the same fishing, but now on the trait-based model with reproduction dynamics left turned on and with a reproduction level of 0.5 for all species. Project the model for 20 years and animate the result. 
+
+::: {.callout-caution collapse="true"}
+#### Show me the solution
+```{r message=FALSE}
+# We make a copy of the trait-based model
+mp_fishing <- mp
+# Set the reproduction level set to 0.5 for all species
+mp_fishing <- setBevertonHolt(mp, reproduction_level = 0.5)
+# Set fishing effort to 1
+initial_effort(mp_fishing) <- 1
+
+# Simulate the dynamics for 20 years
+sim_fishing <- project(mp_fishing, t_max = 20, t_save = 2)
+
+# Animate the result
+animateSpectra(sim_fishing, total = TRUE, power = 2, 
+               ylim = c(1e-8, NA), wlim = c(1e-3, NA))
+```
+
+:::
 :::
 
 ## Resource dynamics
 
 The resource spectrum is not described by size spectrum dynamics, because in reality it is typically not made up of individuals that grow over a large size range during their life time. In mizer, the resource number density in each size class is describe by semichemostat dynamics: the resource number density in each size class recovers after depletion, and this biomass growth or recovery rate will decrease as the number density gets close to a carrying capacity. If you want the mathematical details, you can find them in the [mizer model description](https://sizespectrum.org/mizer/articles/model_description.html) in the section on [resource density](https://sizespectrum.org/mizer/articles/model_description.html#resource-density).
 
-The effect of these dynamics is that if the number of fish consuming the resource in a certain size range increases, the resource abundance in that size range will decrease, if it cannot recover quickly enough (regeneration rate of the resource is set by the user). So there is competition for the resource, which provides a stabilising influence on the fish abundances. We will be discussing this more in week 3.
+The effect of these dynamics is that if the number of fish consuming the resource in a certain size range increases, the resource abundance in that size range will decrease, if it cannot recover quickly enough (regeneration rate of the resource is set by the user). So there is competition for the resource, which provides a stabilising influence on the fish abundances. We will be discussing this more in later tutorials.
 
 ## Summary and recap
 
@@ -284,7 +298,7 @@ The effect of these dynamics is that if the number of fish consuming the resourc
 
 2\) The `project()` function simulates the dynamics and creates a MizerSim object that contains the resulting time series of size spectra.
 
-3\) Mizer provides many functions for extracting, analysing and plotting the results of a simulation, some of which we will be using in week 3.
+3\) Mizer provides many functions for extracting, analysing and plotting the results of a simulation, some of which we will be using in Part 3.
 
 4\) Instead of a stock-recruitment relationship as used in other fisheries models, a mizer model relates the energy invested into reproduction to the number of eggs produced. The growth and mortality that the larvae experience until they are recruited to the fishery lead to density-dependence in the recruitment. Additional density dependence is applied to the egg production.
 
@@ -293,3 +307,9 @@ The effect of these dynamics is that if the number of fish consuming the resourc
 6\) In practice a more useful way to parametrise the reproduction is by two other parameters: the birth rate $R_{dd}$ at steady state (which determines the total abundance of a species) and the *reproduction level* (which determines the amount the amount of density dependence that applies to egg production).
 
 7\) A change in the reproduction level does not change the steady state but it changes the sensitivity of a species and the system to changes.
+
+8\) The resource abundance is also dynamic and thus decreases when there is increased consumption, which has a stabilising effect on the fish community.
+
+## Recap of Part 1
+
+You have reached the end of Part 1 of the mizer course. You have learned to understand plots of size spectra and how the size-spectra are shaped by the interplay between growth and mortality. You have seen that both growth and mortality are emergent effects in mizer, both being caused by predation and thus dependent on the abundance of predator and prey. You appreciate that size-spectrum dynamics is very different from usual predator-prey dynamics, because the abundance of prey affects the growth rate of the predator rather than its abundance. You have seen the interesting trophic cascades that result from the size-based interaction between predator and prey. Finally you learned that stock-recruitment relationships are also emergent phenomena in mizer. This was a lot to take in. You will probably want to come back to some of these ideas while you learn how to build mizer models in Part 2 of the course.
