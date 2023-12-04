@@ -29,9 +29,9 @@ execute:
 
 website:
   title: "mizer course"
-  site-url: "https://mizer.course.nov22.sizespectrum.org"
+  site-url: "https://mizer.course.sizespectrum.org"
   favicon: images/favicon-16x16.png
-  repo-url: https://github.com/sizespectrum/mizerCourse_Nov22
+  repo-url: https://github.com/sizespectrum/mizerCourse
   repo-actions: [edit, issue]
   twitter-card:
     site: "@mizer_model"
@@ -39,12 +39,12 @@ website:
   open-graph: true
   comments:
     giscus:
-      repo: sizespectrum/mizerCourse_Nov22
+      repo: sizespectrum/mizerCourse
       category: Comments
       reactions-enabled: false
       input-position: bottom
-      repo-id: R_kgDOISYpnA
-      category-id: DIC_kwDOISYpnM4CSJOj
+      repo-id: R_kgDOK0vNNg
+      category-id: DIC_kwDOK0vNNs4CbfmH
       loading: lazy
       mapping: title
   search: 

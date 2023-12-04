@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>mizer course - Predation, growth and mortality</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../understand/species-interactions.html" rel="next">
+<link href="../understand/single-species-spectra.html" rel="prev">
+<link href="../images/favicon-16x16.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="mizer course - Predation, growth and mortality">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://mizer.course.sizespectrum.org/understand/predation-growth-and-mortality_files/figure-html/unnamed-chunk-3-1.png">
+<meta property="og:site-name" content="mizer course">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+<meta name="twitter:title" content="mizer course - Predation, growth and mortality">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://mizer.course.sizespectrum.org/understand/predation-growth-and-mortality_files/figure-html/unnamed-chunk-3-1.png">
+<meta name="twitter:creator" content="gustavdelius">
+<meta name="twitter:site" content="@mizer_model">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../understand/index.html">Part 1: Understand</a></li><li class="breadcrumb-item"><a href="../understand/predation-growth-and-mortality.html">Predation, growth and mortality</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">mizer course</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepare/install-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Install tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Part 1: Understand</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../understand/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../understand/observed-size-spectra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Observed size spectra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../understand/single-species-spectra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Single species spectra</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../understand/predation-growth-and-mortality.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Predation, growth and mortality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../understand/species-interactions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Species interactions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../understand/dynamics-of-spectra.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dynamics of size spectra</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#growth" id="toc-growth" class="nav-link active" data-scroll-target="#growth">Growth</a>
+  <ul class="collapse">
+<li><a href="#effect-of-prey-availability" id="toc-effect-of-prey-availability" class="nav-link" data-scroll-target="#effect-of-prey-availability">Effect of prey availability</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#how-predation-is-modelled" id="toc-how-predation-is-modelled" class="nav-link" data-scroll-target="#how-predation-is-modelled">How predation is modelled</a>
+  <ul class="collapse">
+<li><a href="#the-predation-kernel" id="toc-the-predation-kernel" class="nav-link" data-scroll-target="#the-predation-kernel">The predation kernel</a></li>
+  <li><a href="#search-volume" id="toc-search-volume" class="nav-link" data-scroll-target="#search-volume">Search volume</a></li>
+  <li><a href="#feeding-level" id="toc-feeding-level" class="nav-link" data-scroll-target="#feeding-level">Feeding level</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#mortality" id="toc-mortality" class="nav-link" data-scroll-target="#mortality">Mortality</a>
+  <ul class="collapse">
+<li><a href="#predation-mortality" id="toc-predation-mortality" class="nav-link" data-scroll-target="#predation-mortality">Predation mortality</a></li>
+  <li><a href="#background-and-external-mortality" id="toc-background-and-external-mortality" class="nav-link" data-scroll-target="#background-and-external-mortality">Background and external mortality</a></li>
+  <li><a href="#fishing-mortality" id="toc-fishing-mortality" class="nav-link" data-scroll-target="#fishing-mortality">Fishing mortality</a></li>
+  </ul>
+</li>
+  <li><a href="#summary-and-recap" id="toc-summary-and-recap" class="nav-link" data-scroll-target="#summary-and-recap">Summary and recap</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/sizespectrum/mizerCourse/edit/main/understand/predation-growth-and-mortality.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/sizespectrum/mizerCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Predation, growth and mortality</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>It is now time to discuss the important issue of predation. It is through predation that a fish obtains the energy it needs to maintain its metabolism, to grow and to invest in reproduction. But also a large proportion of the natural mortality of fish comes from predation by their predators. So it is important how mizer models predation. While you can also read about the details in the description of <a href="https://sizespectrum.org/mizer/articles/model_description.html">the general mizer size-spectrum model</a>, in this tutorial we will approach the topic in a more hands-on fashion, using the mizer package itself to experiment and help us build intuition.</p>
+<p>As in the previous tutorial, we load the mizer, mizerExperimental and tidyverse packages and create a single-species model with a power-law background with exponent -2.05.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-1_54989d9c3a13293471e264910ee9007c">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizer/">mizer</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizerExperimental">mizerExperimental</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html">newSingleSpeciesParams</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">2.05</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="growth" class="level2"><h2 class="anchored" data-anchor-id="growth">Growth</h2>
+<section id="effect-of-prey-availability" class="level3"><h3 class="anchored" data-anchor-id="effect-of-prey-availability">Effect of prey availability</h3>
+<p>The energy income for a fish comes from predation on its prey. If there is less prey, the fish consumes less and its growth rate will decrease. Let us investigate this by artificially removing some prey. Because in our simple single-species model we work with a fixed community spectrum that is under our control, we can do that.</p>
+<p>Below we decrease the community spectrum by a factor of 10 in the size range from 1mg to 10mg.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-2_e40d442254cab90b31af8f3197dcd050">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create a new parameter object to be able to keep the old one unchanged.</span></span>
+<span><span class="va">params_starved</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
+<span></span>
+<span><span class="co"># Create logical vector identifying the size bins we want to change. </span></span>
+<span><span class="co"># Here `w_full(params)` returns a vector with all size bins in the model</span></span>
+<span><span class="va">size_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/w.html">w_full</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">3</span> <span class="op">&amp;</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/w.html">w_full</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co"># Divide the abundances in those size bins by 10</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
+<span>    <span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">/</span> <span class="fl">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s make a plot to check that this did what we intended:</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-3_3d4e9a968e54316dd91c7e3daab6d1f9">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># The `species = FALSE` means that we will only plot the background</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotSpectra.html">plotSpectra</a></span><span class="op">(</span><span class="va">params_starved</span>, power <span class="op">=</span> <span class="fl">2</span>, species <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model. We will use the method that we saw at the end of the previous tutorial in the section “<a href="../understand/single-species-spectra.html#two-curves-in-one-plot">Two curves in one plot</a>”.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-4_390cc5d5b63d6148a90c25f351d119e2">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gf_original</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getEGrowth.html">getEGrowth</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gf_original</span><span class="op">$</span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="st">"Original"</span></span>
+<span><span class="va">gf_starved</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getEGrowth.html">getEGrowth</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gf_starved</span><span class="op">$</span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="st">"Less prey"</span></span>
+<span><span class="va">gf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">gf_original</span>, <span class="va">gf_starved</span><span class="op">)</span></span>
+<span><span class="va">growth_rates_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">gf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">w</span>, y <span class="op">=</span> <span class="va">value</span>, linetype <span class="op">=</span> <span class="va">Model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span><span class="st">"Weight [g]"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Growth rate [g/year]"</span><span class="op">)</span></span>
+<span><span class="va">growth_rates_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The slow-down occurs at a size that is about a factor of 100 larger than the size at which food is reduced. Why this is we will discuss in the next section.</p>
+<p>The dip in the growth rate may not seem very significant in the above plot, but it has a dramatic effect on the steady state size distribution of our species. We know from the previous tutorial that we can set the abundances in the single-species model to the steady state value with</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-5_a721ac4eac6679909c299c01f952246d">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_starved</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now visualise the difference in the size spectra with the <code><a href="https://sizespectrum.org/mizerExperimental/reference/plotSpectra2.html">plotSpectra2()</a></code> function:</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-6_803f5d8b51a87eadab70c076674d695b">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">spectra_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"Original"</span>,</span>
+<span>                             <span class="va">params_starved</span>, name2 <span class="op">=</span> <span class="st">"Less prey"</span>,</span>
+<span>                             power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">spectra_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The lack of food and the resulting slow-down in growth leads to a severe drop in the density of large fish. Because fish do not get enough food and do not grow into the next size class, they are stuck in smaller size classes for a longer time and are affected by mortality, which is higher for small size classes.</p>
+<p>One may think that the drop in abundance is at sizes where the predator encounters fewer prey than before and thus has lower growth rate. This is what classic predator-prey thinking would suggest: low prey abundance leads to low predator abundance. Size spectrum dynamics is different. To drive this point home we will display the growth rate plots and the spectrum plots directly above each other</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell quarto-layout-cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-7_4119671ee28f1c884a7db05b92c9bfa0" style="flex-basis: 100.0%;justify-content: center;">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">growth_rates_plot</span></span>
+<span><span class="va">spectra_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+<p>We see that where the growth starts slowing down, the abundance actually increases. This is because a decrease in the growth rate leads to a pile-up of individuals. You know this phenomenon from traffic jams. Where the speed of the cars decreases on a motorway, their density increases. Then when the speed increases again on the other side of the traffic jam, the density of cars drops and you wonder what caused the traffic jam in the first place. We see the same phenomenon in size spectrum dynamics. We see from the graphs above: it is where the growth rate starts growing faster again that the density goes down.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The above shows that size spectrum dynamics is very different from predator-prey dynamics.</p>
+</div>
+</div>
+</div>
+<p>The reduction of prey has led to a significant reduction in the overall abundance of the species. This is in spite of the fact that we have kept the abundance constant at the lowest size, i.e.&nbsp;we assumed that recruitment of new fish is not affected by what happens in larger size classes. In reality, the drastic reduction of spawning stock biomass will lead to a reduction in the number of eggs as well, so the effect will be even more dramatic.</p>
+<p>Here we hand over to you to investigate what happens when the prey abundance is increased instead of decreased. Please open the worksheet named “worksheet3-predation-growth-and-mortality.Rmd” in your worksheet repository, where you will find the following exercise:</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Make a single plot, similar to the one above, comparing the steady state biomass density in log weight in the original model with that when the community abundance is <strong>increased</strong> by a factor of 10 in the size range from 1mg to 10mg.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Show me the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-8_76f0659368e242b735eeb2749219aea4">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_overfed</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_overfed</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
+<span>    <span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">*</span> <span class="fl">10</span></span>
+<span></span>
+<span><span class="va">params_overfed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_overfed</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"Original"</span>,</span>
+<span>             <span class="va">params_overfed</span>, name2 <span class="op">=</span> <span class="st">"More prey"</span>,</span>
+<span>             power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="how-predation-is-modelled" class="level2"><h2 class="anchored" data-anchor-id="how-predation-is-modelled">How predation is modelled</h2>
+<p>The easiest case in which to understand predation is to imagine a filter-feeding fish, swimming around with its mouth open. Clearly the amount of food it takes in is determined by four things:</p>
+<ul>
+<li>the density of prey in the water,</li>
+<li>how much volume of water the fish is able to filter, which will depend on how fast it swims as well as on its gape size.</li>
+<li>what sizes of prey the fish is able to filter out of the water, which will be limited by its gape size and by how fine its gill rakers are,</li>
+<li>how fast it can digest the food. If it can filter the prey faster than it can digest, it will have to start letting prey go uneaten.</li>
+</ul>
+<p>For a more active hunter the situation will be similar. The rate at which it predates will depend on four things:</p>
+<ul>
+<li>the density of prey in the water</li>
+<li>the volume of water that the fish patrols and in which it will be able to seek out its prey. This may depend on things like radius of vision.</li>
+<li>which of this detected prey the fish is able to catch, which will depend on its mouth size but also on its agility and skill as well as on the defensive mechanisms of the prey.</li>
+<li>how fast it can digest the food.</li>
+</ul>
+<p>Of these four factors, we have already been discussing the density of prey. In the next section we will discuss the ability to filter out or catch prey of particular sizes, which we model via the predation kernel. In the section after that we will discuss the search volume and then in the following section the maximum consumption rate.</p>
+<section id="the-predation-kernel" class="level3"><h3 class="anchored" data-anchor-id="the-predation-kernel">The predation kernel</h3>
+<p>Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function <code><a href="https://sizespectrum.org/mizer/reference/setPredKernel.html">getPredKernel()</a></code>.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-9_b9a93bbd9615ec199c5059edc16dd996">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pred_kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/setPredKernel.html">getPredKernel</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is a large three-dimensional array (predator species x predator size x prey size). We extract the kernel of a predator of size 10g (using that we remember that this is in size class 81)</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-10_04e6f1a1297ccd03f5a12fcbaa415fd1">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pred_kernel_10</span> <span class="op">&lt;-</span> <span class="va">pred_kernel</span><span class="op">[</span>, <span class="fl">81</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>drop = FALSE</code> option is there to prevent R from dropping any of the array dimensions. We can now plot this as usual</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-11_3f68fd6077ba0ef3134268c7ab2b7bd9">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="va">pred_kernel_10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">w_prey</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1e-4</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 181 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We see that the predator of size 10g likes to feed on prey that is about the size of 0.1g, which is about 100 times smaller than itself. But it also feeds on other sizes, just with reduced preference. The preferred predator/prey size ratio is determined by the species parameter <code>beta</code> and the width of the feeding kernel, i.e., how fussy the predator is regarding their prey size, is determined by the species parameter <code>sigma</code>. <code>beta</code> is the <em>preferred</em> predator prey mass ratio or PPMR. Larger PPMR values mean that the predator prefers to feed on a relatively smaller prey (larger ratio). In our model these have the values</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-12_1c60b8e4e05b7e022e6762606649b267">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span>, <span class="va">beta</span>, <span class="va">sigma</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["beta"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["sigma"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"100","2":"1.3","_rn_":"Target species"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Let us change the preferred predator prey mass ratio from 100 to 1000. As usual, we first create a copy of the parameter object, then we make the change in that copy.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-13_597c713d0e103c1136a3fcaa3594bbf2">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_pk</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span><span class="op">$</span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s make a plot to see that the predation kernel has indeed changed.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-14_dd5b34b9b7b4f0a655da381455626fad">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/setPredKernel.html">getPredKernel</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span><span class="op">[</span>, <span class="fl">81</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">w_prey</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_log10</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1e-4</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 181 rows containing missing values (`geom_line()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If we now again reduce the prey in the size range from 1mg to 10mg as before, we now expect this to produce a peak in the biomass spectrum somewhere between 1g and 10g. Let’s check.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-15_3becf62169772b9ecf9ce17883fbe036">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Put reduced resource abundance values into params_pk </span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span></span>
+<span><span class="co"># Find the new steady state, because conditions have changed.</span></span>
+<span><span class="va">params_pk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params_starved</span>, name1 <span class="op">=</span> <span class="st">"beta = 100"</span>,</span>
+<span>             <span class="va">params_pk</span>, name2 <span class="op">=</span> <span class="st">"beta = 1000"</span>,</span>
+<span>             power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The dip is indeed happening later.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Links to documentation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For details of how <code>beta</code> and <code>sigma</code> parametrise the predation kernel, see <a href="https://sizespectrum.org/mizer/reference/lognormal_pred_kernel.html#details" class="uri">https://sizespectrum.org/mizer/reference/lognormal_pred_kernel.html#details</a>. For information on how to change the predation kernel, see <a href="https://sizespectrum.org/mizer/reference/setPredKernel.html#setting-predation-kernel" class="uri">https://sizespectrum.org/mizer/reference/setPredKernel.html#setting-predation-kernel</a></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Do not confuse the prey preference with the diet. Just because a predator might prefer to feed on prey of a particular size if it had free choice does not mean that it actually feeds predominantly on such prey. The actual diet of the fish depends also on the availability of prey. Because smaller prey are more abundant, the realised predator prey mass ratio in the diet will be smaller than the preferred predator prey mass ratio. This is particularly important when estimating the predation kernel from stomach data.</p>
+</div>
+</div>
+</div>
+</section><section id="search-volume" class="level3"><h3 class="anchored" data-anchor-id="search-volume">Search volume</h3>
+<p>Next we consider the factor that models the volume of water a filter feeder is able to filter in a certain amount of time, or the volume of water a predatory fish is able to patrol in a certain amount of time. This is difficult to model from first principles, although people have tried to argue in terms of swimming speeds of fish. We assume that this search volume rate is also an allometric rate. Let <span class="math inline">\gamma(w)</span>, also called gamma, denote this rate for a predator of size <span class="math inline">w</span>. Thus we assume that <span class="math display">\gamma(w) = \gamma_0\ w^q</span> for some exponent <span class="math inline">q</span>. We know that a fish needs to consume prey at a rate that scales with its body size to the power <span class="math inline">n</span>, with <span class="math inline">n</span> about <span class="math inline">3/4</span>. We also know that the prey density will be approximately described by a power law, i.e., that <span class="math inline">N(w) \approx N_0\ w^{-\lambda}</span>. A bit of maths then says that <span class="math display">q = 2 - \lambda + n.</span> The formula is based on observations about size distributions and the fact that in the real world, evolution had made sure that the fish have developed a feeding strategy that allows it to cover its metabolic costs. Together this would have led to that search volume exponent of approximately <span class="math inline">q=2-\lambda+n</span> but of course in reality there is quite a bit of variability.</p>
+<p>This is one of many powerful aspects about strong theoretical basis behind size based models. We can of course disagree with this assumption if we have evidence and data, but at least there is a basic assumption to base the discussion on.</p>
+<p>Most people using mizer rarely modify the default assumptions about the body scaling exponents and focus on more on the coefficients. So let us see what effect changing the coefficient <span class="math inline">\gamma_0</span> in the search volume rate has. Its current value in our model is</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-16_4dfe1c3066eb56cb7f0def8fa384baae">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">$</span><span class="va">gamma</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2066.004</code></pre>
+</div>
+</div>
+<p>We change that to 1000 and find the new steady state.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-17_a9daa2ee30190caa4fe07fa49c2ca842">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_new_gamma</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span><span class="op">$</span><span class="va">gamma</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">params_new_gamma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see the effect in the growth curve of our species.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-18_c0e9db0870d3f0995e70eb8fa238dc52">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gf_original</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotGrowthCurves.html">plotGrowthCurves</a></span><span class="op">(</span><span class="va">params</span>, return_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">gf_original</span><span class="op">$</span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="st">"Original"</span></span>
+<span><span class="va">gf_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotGrowthCurves.html">plotGrowthCurves</a></span><span class="op">(</span><span class="va">params_new_gamma</span>, return_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">gf_new</span><span class="op">$</span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="st">"Reduced search volume"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">gf_original</span>, <span class="va">gf_new</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Age</span>, y <span class="op">=</span> <span class="va">value</span>, colour <span class="op">=</span> <span class="va">Model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As expected, the smaller search volume leads to a slower growth due to slower feeding rate.</p>
+</section><section id="feeding-level" class="level3"><h3 class="anchored" data-anchor-id="feeding-level">Feeding level</h3>
+<p>In mizer we assume that the feeding rate follows a <a href="https://en.wikipedia.org/wiki/Functional_response">Holling type II feeding curve</a>. This means that feeding rate is increasing linearly with prey density at low prey density but then the increase slows down towards a maximum at high prey density due to the satiation of the predator. A predator will not be able to utilise food at a faster rate than its maximum intake rate. Of course in practice it will not feed at the maximum intake rate because of limited availability of prey. We describe this by the <em>feeding level</em> which is the proportion of its maximum intake rate at which the predator is actually taking in prey.</p>
+<p>In our simple model this feeding level is constant across all fish body sizes (this is rarely the case in more realistic models, as you will see later).</p>
+<div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotFeedingLevel.html">plotFeedingLevel</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotFeedingLevel.html">plotFeedingLevel</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-19_58c2cccf2f6e540b337cbbf01f8b0553">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Original</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Modified</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In the model with the reduced search volume the feeding level is lower, as one would expect.</p>
+<p>The feeding level will depend on the maximum intake, search rate and food availability. The maximum intake rate scales with body size with the exponent <span class="math inline">n = 3/4</span> and is determined by the coefficient <span class="math inline">h</span>. So the maximum intake rate at size <span class="math inline">h(w)</span> is modelled as <span class="math inline">h(w) = h w^n</span>. Again, if we want to modify the maximum intake rate we usually change the coefficient <span class="math inline">h</span>. We will do that in later tutorials. The current value of the coefficient <span class="math inline">h</span> is</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-20_ae464c3f8a05531d1539b8b4590afdd4">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">$</span><span class="va">h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+</div>
+<p>and is measured in gram of food per <span class="math inline">\text{gram}^{-n}</span> of predator weight per year (remember, maximum consumption scales with fish weight to the power of <span class="math inline">n</span>).</p>
+</section></section><section id="mortality" class="level2"><h2 class="anchored" data-anchor-id="mortality">Mortality</h2>
+<section id="predation-mortality" class="level3"><h3 class="anchored" data-anchor-id="predation-mortality">Predation mortality</h3>
+<p>Of course, feeding of the predator is only one aspect of predation. The other is the death of the prey. Feeding and mortality are coupled. Increased feeding and growth of one class of individuals will necessitate increased death of another. There is no free lunch.</p>
+<p>Once we have specified the predation parameters, these parameters determine both the growth of predators but also the mortality rate of prey. So we don’t have to introduce new parameters for death from predation. Of course with a one-species model we cannot easily demonstrate this predation. We will explore predation more thoroughly in future tutorials.</p>
+</section><section id="background-and-external-mortality" class="level3"><h3 class="anchored" data-anchor-id="background-and-external-mortality">Background and external mortality</h3>
+<p>In more realistic multi-species models, mortality also includes a baseline, size-independent mortality. This is also often called background mortality and it accounts for processes that are not related to predation, for example disease. This background mortality in mizer is assumed to depend on the maximum body size of a species, as you will see later.</p>
+<p>In addition, mizer allows you to include other sources of <a href="https://sizespectrum.org/mizer/reference/setExtMort.html">external mortality</a>. This could be predation from animals that we have not included in our model, like sea birds or mammals, death from old age (senescent death) and so on.</p>
+</section><section id="fishing-mortality" class="level3"><h3 class="anchored" data-anchor-id="fishing-mortality">Fishing mortality</h3>
+<p>The cause of mortality that is most under our control is mortality from fishing. Mizer allows the simulation of mixed fisheries, utilising several different gears (or metiers or fleets) catching several different species. The parameters describing the fishing gears are stored in a <code>gear_params</code> data frame. If a particular gear can catch a particular species, there will be a corresponding row in the <code>gear_params</code> data frame specifying the catchability of that species for that gear as well as the size-selectivity of the gear for that species. We discuss in more detail how fishing is set up in mizer in Part 3 of this course when we study the consequences of changes in fishing policy.</p>
+<p>Here we only look at what fishing gear is set up by default in our simple single-species model:</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-21_f08a9e41a2a22a890cb713463c5ca1d7">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["species"],"name":[1],"type":["chr"],"align":["left"]},{"label":["gear"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sel_func"],"name":[3],"type":["chr"],"align":["left"]},{"label":["knife_edge_size"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["catchability"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Target species","2":"knife_edge_gear","3":"knife_edge","4":"25.11886","5":"1","_rn_":"Target species, knife_edge_gear"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>We see that there is only one gear, called “knife_edge_gear” targeting our one species, called “Target species”. The size-selectivity is described by a knife_edge function with a <code>knife_edge_size</code> of about 25 grams. This means that all fish greater than about 25 grams will be exposed to the same fishing mortality while smaller fish will experience no fishing mortality. Mizer can of course also deal with more general selectivity curves.</p>
+<p>We also need to specify the fishing effort, which will be multiplied by the catchability and the selectivity to get the annual instantaneous fishing mortality rate. For illustration we will set the effort to 1 and plot the resulting fishing mortality.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-22_b5acc3e4f1a6cb3457788f2d3d9cf8f5">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_fishing</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/initial_effort.html">initial_effort</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotFMort.html">plotFMort</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The reason why the function that we have used to set the effort is called <code><a href="https://sizespectrum.org/mizer/reference/initial_effort.html">initial_effort()</a></code> is that later when we run simulations of the fisheries mizer allows us to specify how the fishing effort changes over time. For now let us just look at what the new steady state size spectrum of our species looks like when it is exposed to the constant fishing effort, compared to the unfished steady state.</p>
+<div class="cell" data-hash="predation-growth-and-mortality_cache/html/unnamed-chunk-23_8dce376ab5dc609cfaa5e9be4f56fa39">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_fishing</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"No Fishing"</span>,</span>
+<span>             <span class="va">params_fishing</span>, name2 <span class="op">=</span> <span class="st">"Knife-edge"</span>,</span>
+<span>             power <span class="op">=</span> <span class="fl">2</span>, wlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="predation-growth-and-mortality_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The difference may not seem to be very big, but note that we are using a logarithmic scale on the y axis. At large sizes the biomass densities differ almost by a factor of 30.</p>
+</section></section><section id="summary-and-recap" class="level2"><h2 class="anchored" data-anchor-id="summary-and-recap">Summary and recap</h2>
+<p>1) In a mizer model the growth curve is not fixed but instead the growth rate of an individual changes as the prey abundance changes. This makes it important to understand how fish choose their prey.</p>
+<p>2) A size spectrum model reacts differently to low prey abundance than a predator-prey model. In a size spectrum model when the growth rate of a predator slows down due to lack of prey, the abundance of predators of that size increases.</p>
+<p>3) A fish is assumed to have a feeding preference for prey in a range of sizes at a certain fraction of its own size. So as the fish grows up, its preference shifts to larger sizes, an effect known as ontogenetic diet shift.</p>
+<p>4) The search rate of a species determines the rate at which it can find food and thus influences its growth rate. In mizer this search rate is an allometric rate with exponent <span class="math inline">q</span> which by default is set as <span class="math inline">q=2-\lambda+n</span> so that at least in the larval stage the growth rate scales with exponent <span class="math inline">n = 3/4</span>.</p>
+<p>5) Fish have a maximum intake rate that scales with body size with exponent <span class="math inline">n = 3/4</span>. Due to scarcity of prey they will only feed at a proportion of their maximum intake rate. This proportion is called the feeding level.</p>
+<p>6) Species size spectra depend strongly on mortality rates and in a realistic model this mortality rate will depend on the abundance of predators. We will explore this in greater detail in the next tutorials. Here we just looked at the effect of fishing mortality on the size spectrum.</p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/mizer\.course\.sizespectrum\.org");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script><script src="https://giscus.app/client.js" data-repo="sizespectrum/mizerCourse" data-repo-id="R_kgDOK0vNNg" data-category="Comments" data-category-id="DIC_kwDOK0vNNs4CbfmH" data-mapping="title" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../understand/single-species-spectra.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Single species spectra</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../understand/species-interactions.html" class="pagination-link">
+        <span class="nav-page-text">Species interactions</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
