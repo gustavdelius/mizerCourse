@@ -46,9 +46,7 @@ And in many other references listed in the sizespectrum.org [publications](https
 
 ## Example code
 
-These tutorials contain a lot of working R code, because learning R coding for mizer is best done by looking at example code. The content of these tutorials is also contained in the corresponding tutorial worksheet in this week's worksheet repository. That makes it easy for you to re-run the code yourself. After a while we hope that you will start experimenting with making modifications to the code. This is further encouraged by the exercises that you will find dotted throughout the tutorials. The tutorial worksheets contain more information on how to work through those exercises.
-
-TODO: Explain how to download the worksheets
+These tutorials contain a lot of working R code, because learning R coding for mizer is best done by looking at example code. The best way of working through these tutorials is to copy over the code you meet in the tutorial over to an R script or R notebook file and then to execute it from there. Initially that will just reproduce the results you see in the tutorial, but after a while we hope that you will start experimenting with making modifications to the code. This is further encouraged by the exercises that you will find dotted throughout the tutorials. Those exercises will encourage you to use code from earlier in the tutorial and to adapt it to the exercise task.
 
 To analyse and plot the data we will be making use of the [tidyverse](https://www.tidyverse.org/) package, in particular [dplyr](https://dplyr.tidyverse.org/) and [ggplot2](https://ggplot2.tidyverse.org/). If you are not familiar with these, you can learn what is needed just by studying the example code in this tutorial. Before we can use a package we need to load it in from the package library with the `library()` function:
 
@@ -78,9 +76,13 @@ install.packages(c("mizer", "tidyverse", "plotly", "remotes", "usethis",
 
 ## The data
 
-So let's see if we can find Sheldon's pattern ourselves. First we load the data.
-
-```{r }
+So let's see if we can find Sheldon's pattern ourselves. First we download the data from the internet.
+```{r}
+download.file("https://github.com/gustavdelius/mizerCourseNew/raw/master/understand/size-data.rds",
+              destfile = "size-data.rds")
+```
+Then we load it into our R session.
+```{r}
 size_data <- readRDS("size-data.rds")
 str(size_data)
 ```
@@ -88,7 +90,7 @@ str(size_data)
 ::: {.callout-note collapse="true"}
 ### Expand for R details
 
-The `readRDS()` function loads the file "size-data.rds" which contains the data frame with the size data. We assign this data frame to the variable `size_data` for use below and then, to get an impression of what is in the data frame, we use the `str()` function.
+The code is mostly self-explanatory. The `download.file()` function fetches the file from the given URL and saves it in a file "size-data.rds" in your current working directory. The `readRDS()` function then loads the file, which contains the data frame with the size data. We assign this data frame to the variable `size_data` for use below. Note that the assignment operator in R is `<-` rather than `=` as in some other programming languages. To get an impression of what is in the data frame, we use the `str()` function that generally displays a summary of the structure of an R object.
 :::
 
 The data consists of measurements of the length in centimetres of `r nrow(size_data)` fish of various species. The species included are
@@ -190,7 +192,7 @@ p2
 
 The heights are now slightly more even among the bins, because the largest bin is so wide.
 
-It is very important that you break up your reading of the tutorials with some hands-on work that builds on what you have just learned. Therefore you will find exercises throughout the tutorials. You have now reached the first exercise. You will find that it can be accomplished using the R functions you have already learned about. You can do your work in the worksheet that accompanies this tutorial. TODO: remind how to download.
+It is very important that you break up your reading of the tutorials with some hands-on work that builds on what you have just learned. Therefore you will find exercises throughout the tutorials. You have now reached the first exercise. You will find that it can be accomplished using the R functions you have already learned about. If you have been running the code from this tutorial in your own R session then you are well set up for doing the exercise.
 
 
 ::: {.callout-caution collapse="false"}
