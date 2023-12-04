@@ -4,7 +4,7 @@
 
 In this hands-on online course you will learn about the principles of size based multi-species fisheries modelling and the implementation of these principles in the R package mizer. You will build a mizer model for the Celtic sea from scratch and will also be encouraged to build a model for your own area of interest. You will then run various scenarios to explore how the ecosystem reacts to changes in fishing or other stressors.
 
-The course material was adapted from two previous three-week courses in [August 2022](https://course.mizer.sizespectrum.org/) and in [November 2022](https://mizer.course.nov22.sizespectrum.org/).
+The course material was adapted from two previous three-week courses in [August 2022](https://mizer.course.aug22.sizespectrum.org) and in [November 2022](https://mizer.course.nov22.sizespectrum.org/).
 
 
 ## Tutorials
