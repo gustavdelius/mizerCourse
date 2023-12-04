@@ -312,4 +312,8 @@ The effect of these dynamics is that if the number of fish consuming the resourc
 
 ## Recap of Part 1
 
-You have reached the end of Part 1 of the mizer course. You have learned to understand plots of size spectra and how the size-spectra are shaped by the interplay between growth and mortality. You have seen that both growth and mortality are emergent effects in mizer, both being caused by predation and thus dependent on the abundance of predator and prey. You appreciate that size-spectrum dynamics is very different from usual predator-prey dynamics, because the abundance of prey affects the growth rate of the predator rather than its abundance. You have seen the interesting trophic cascades that result from the size-based interaction between predator and prey. Finally you learned that stock-recruitment relationships are also emergent phenomena in mizer. This was a lot to take in. You will probably want to come back to some of these ideas while you learn how to build mizer models in Part 2 of the course.
+Congratulations. You have reached the end of Part 1 of the mizer course. 
+
+You have learned to understand plots of size spectra and how the size-spectra are shaped by the interplay between growth and mortality. You have seen that both growth and mortality are emergent effects in mizer, both being caused by predation and thus dependent on the abundance of predator and prey. You appreciate that size-spectrum dynamics is very different from usual predator-prey dynamics, because the abundance of prey affects the growth rate of the predator rather than its abundance. You have seen the interesting trophic cascades that result from the size-based interaction between predator and prey. Finally you learned that stock-recruitment relationships are also emergent phenomena in mizer. 
+
+This was a lot to take in. You will probably want to come back to some of these ideas while you learn how to build mizer models in Part 2 of the course.
