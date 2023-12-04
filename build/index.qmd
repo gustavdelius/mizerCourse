@@ -1,10 +1,8 @@
 ---
-title: "Section 2: Build mizer models"
+title: "Part 2: Build mizer models"
 ---
 
-Now that we have a good understanding of the basic principles behind sized based models, in this section we will start developing our own multi-species models. Our goal at the end of this section is to have a basic set of steady state parameters for our own model. In this section we will only focus on model properties at steady state or equilibrium conditions and will not yet explore temporal dynamics.
-
-You are welcome to use your own model system in this section, assuming you have the data. Alternatively, we will focus on a Celtic Sea. The  Celtic  Seas  is  characterized  by  a  diversity  of  habitats,  such  as  an extensive  slope,  canyons,  ridges,  and seamounts. The commercial fisheries in the Celtic Sea target a large number of stocks. We will only focus on 17 species and confine our modelling for  ICES (International Council for Exploration of the Seas) areas 7b,c,e-k. For those participants who will focus on the Celtic Sea model, our goal at the end of the week is for each participant to develop their own model parameterisation. We will then collect these alternative parameter sets and use them as a model ensemble next week.
+Now that you have a good understanding of the basic principles behind sized based models, in this part of the course you will start developing our own multi-species model. You are welcome to use your own model system in this section, assuming you have the data. Alternatively, you can follow our example and focus on a model for the Celtic Sea. 
 
 The material is split into 4 tutorials:
 
@@ -19,7 +17,3 @@ The material is split into 4 tutorials:
     
 3.  [**Refine your model: landings data**](refine-landings.qmd)\
     Finally we will tune the model parameters to make the model predictions for the catches agree with landings data, in particular the size distribution of the landings. We will again be using the `tuneParams()` gadget.
-    
-To get your worksheet repository for this week, follow this link:
-
-<https://classroom.github.com/a/gS1LgX3B>

@@ -4,8 +4,6 @@ title: "Finding species parameters"
 
 In this tutorial we will discuss how to find the species-level information that goes into a mizer model. Perfect knowledge of the correct parameter values is impossible and judgement calls have to be made. We will invite you to make your own choices for the parameter values with which you will then build your first mizer model in the next tutorial.
 
-As always we start with installing and loading the latest version of mizerExperimental and of the tidyverse.
-
 ```{r}
 #| message: false
 library(mizer)
@@ -13,21 +11,23 @@ library(mizerExperimental)
 library(tidyverse)
 ```
 
-In this tutorial we will also use functions from the [rfishbase](https://docs.ropensci.org/rfishbase/) package which we will use to extract parameters from the huge [FishBase](https://www.fishbase.se) data base. The following code will install it if necessary so that later we can use specific functions from the package.
+In this tutorial we will also use functions from the [rfishbase](https://docs.ropensci.org/rfishbase/) package which we will use to extract parameters from the huge [FishBase](https://www.fishbase.se) data base. 
 
 ```{r message=FALSE}
-if(!require(rfishbase)){
-    install.packages("rfishbase")
-}
+library(rfishbase)
 ```
 
 ## Selecting model species
 
 How do we decide which species to include in the model? There are many ways to approach this and no clearly set rules. Of course you want to include species that you are interested in, but then also perhaps some other important species in the ecosystem. You could select key ecosystem fish species that are commonly observed in scientific monitoring surveys, and which live and reproduce in the ecosystem (and ignore migratory species, which can be abundant briefly but don't have a big role in the ecosystem overall).
 
-If you only have information on a very small number of species, mizer has a powerful framework that allows you to explicitly model only your focus species and represent the rest of the ecosystem with 'background' species. The sizes and abundances of these 'background' species are assumed to follow the power law, so that the total community biomass approximately represents the Sheldon spectrum. This is only mentioned here for your information, as we will not go into these details in this section.
+It is a good idea to start with only a small number of key species. You can always add more species to an existing model at a later stage when the species become important to your modelling.
 
 One good approach is to build on the efforts of others. There may already be a multi-species model in existence for your ecosystem and initially you could keep some of the choices made for that model. That is what we do in this tutorial. We want to build a model for the Celtic Sea. We build on a mizer model described in [Spence et al. (2021)](https://doi.org/10.1111/faf.12543). The model parameters are given in the [supplementary material](https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Ffaf.12543&file=faf12543-sup-0002-material.pdf) of that paper. James Martindale had the species parameters in a file and shared that with us. Let's load that and print the list of parameter names.
+```{r}
+download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/species_params_spence_et_al.rds",
+              destfile = "species_params_spence_et_al.rds")
+```
 
 ```{r}
 sp_spence <- readRDS("species_params_spence_et_al.rds")
@@ -42,9 +42,9 @@ sp_spence$species
 
 We see that Spence et.al. chose to model 17 fish species. This may not be the choice you would have made. For example they chose not to include any crustaceans. If Nephrops, lobsters or crabs play an important role in your fishery, you may want to add them. Feel free to add other species. But of course increasing the number of species increases the amount of work that you have to put into choosing species parameters.
 
-You may wonder why we don't simply stick with their model. Why do we want to build a model from scratch if one is already in existence? One answer is that we do not agree with all the choices made. For example the published model produces size spectra that are incompatible with observations. But even if you have no reason to doubt someone else's model, you should still go through all the parameter choices yourself. In this spirit, we would also like to ask you to not follow all the choices we make in this tutorial but instead make choices following your own judgement.
+You may wonder why we don't simply stick with their model. Why do we want to build a model from scratch if one is already in existence? One answer is that we do not agree with all the choices made. For example the published model produces size spectra that are no in agreement with the observed size distribution in the landings. But even if you have no reason to doubt someone else's model, you should still go through all the parameter choices yourself. In this spirit, we would also like to ask you to not follow all the choices we make in this tutorial but instead make choices following your own judgement. It will be interesting for you to see how much the model behaviour changes due to your own parameter choices.
 
-The species parameters go into a data frame that must have one row for each species and should have one column named `species` which contains the name by which you like to refer to this species. These species names will be used in plot legends for example, so do not make them too long. We will just stick with the names chosen by Spence et.al. So let's start to create our species parameter data frame by just selecting the `species` column from the data frame of Spence et.al.
+The species parameters go into a data frame that must have one row for each species and should have a column named `species` that contains the name by which you like to refer to this species. These species names will be used in plot legends for example, so do not make them too long. We will just stick with the names chosen by Spence et.al. So let's start to create our species parameter data frame by just selecting the `species` column from the data frame of Spence et.al.
 
 ```{r}
 sp <- select(sp_spence, species)
@@ -226,13 +226,6 @@ sp <- sp |>
 comment(sp$l_mat) <- "Median of `Lm` over all observations on the 'maturity' table on FishBase that had both `Lm` and `tm`."
 comment(sp$age_mat) <- "Median of `tm` over all observations on the 'maturity' table on FishBase that had both `Lm` and `tm`."
 comment(sp$w_mat) <- "Calculated from `l_mat` using weight-length parameters `a` and `b`."
-```
-
-In the current version of mizer we still need to add the resulting `h` column to the species parameter data frame ourselves. In the next version the following step will not be necessary:
-
-```{r}
-sp$h <- get_h_default(sp)
-comment(sp$h) <- "Calculated from `age_mat` and `w_mat` using `get_h_default()`."
 ```
 
 ### Predation kernel

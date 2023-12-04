@@ -39,7 +39,7 @@ R packages extend the functionality of R. mizer itself is such an R package. The
 ```{r}
 #| eval: false
 install.packages(c("mizer", "tidyverse", "plotly", "remotes", "usethis",
-                   "rmarkdown", "rstudioapi"))
+                   "rfishbase", "rmarkdown", "rstudioapi"))
 ```
 
 The mizerExperimental package is for code that is still experimental and thus changes frequently. Therefore it is hosted in a [GitHub repository](https://github.com/sizespectrum/mizerExperimental). You install it with

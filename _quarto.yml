@@ -3,7 +3,8 @@ project:
   output-dir: docs
   render: 
     - "*.qmd"
-    - "!build/"
+    - "!build/create*"
+    - "!build/refine*"
     - "!use/"
 
 toc: true
@@ -74,3 +75,9 @@ website:
           href: understand/species-interactions.qmd
         - text: Dynamics of size spectra
           href: understand/dynamics-of-spectra.qmd
+      - section: "Part 2: Build"
+        contents:
+        - text: Introduction
+          href: build/index.qmd
+        - text: Find species parameters
+          href: build/find-species-parameters.qmd
