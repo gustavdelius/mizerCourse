@@ -1,10 +1,18 @@
 project:
   type: website
   output-dir: docs
-  render: 
-    - "*.qmd"
-    - "!build/refine*"
-    - "!use/"
+  render:
+    - index.qmd
+    - prepare/install-tools.qmd
+    - understand/index.qmd
+    - understand/observed-size-spectra.qmd
+    - understand/single-species-spectra.qmd
+    - understand/predation-growth-and-mortality.qmd
+    - understand/species-interactions.qmd
+    - understand/dynamics-of-spectra.qmd
+    - build/index.qmd
+    - build/find-species-parameters.qmd
+    - build/create-first-model.qmd
 
 toc: true
 toc-depth: 3
