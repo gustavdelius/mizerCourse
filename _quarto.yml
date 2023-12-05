@@ -3,7 +3,6 @@ project:
   output-dir: docs
   render: 
     - "*.qmd"
-    - "!build/create*"
     - "!build/refine*"
     - "!use/"
 
@@ -81,3 +80,5 @@ website:
           href: build/index.qmd
         - text: Find species parameters
           href: build/find-species-parameters.qmd
+        - text: Create first model
+          href: build/create-first-model.qmd

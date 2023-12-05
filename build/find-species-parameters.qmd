@@ -24,7 +24,7 @@ How do we decide which species to include in the model? There are many ways to a
 It is a good idea to start with only a small number of key species. You can always add more species to an existing model at a later stage when the species become important to your modelling.
 
 One good approach is to build on the efforts of others. There may already be a multi-species model in existence for your ecosystem and initially you could keep some of the choices made for that model. That is what we do in this tutorial. We want to build a model for the Celtic Sea. We build on a mizer model described in [Spence et al. (2021)](https://doi.org/10.1111/faf.12543). The model parameters are given in the [supplementary material](https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Ffaf.12543&file=faf12543-sup-0002-material.pdf) of that paper. James Martindale had the species parameters in a file and shared that with us. Let's load that and print the list of parameter names.
-```{r}
+```{r eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/species_params_spence_et_al.rds",
               destfile = "species_params_spence_et_al.rds")
 ```
@@ -101,17 +101,16 @@ sp$latin_name <- c("Clupea harengus", # Herring
                    "Capros aper") # Boarfish
 ```
 
-## Summary of species parameters
+## Important species parameters
 
 The following picture gives a summary of the most important species parameters. The colour of the labels indicates whether a parameter, needs to be provided (red), should be provided if possible (blue), or can be left at mizer's default values (black).
 
 ![](/images/parameterSketch.png)
 
-At this point it might be useful to go back and re-watch the second half of [Ken Andersen's introductory lecture](../prepare/index.qmd#watch-video-introducing-mizer) which explains species parameters used in mizer. It is great how mizer can start building a model with only very few species parameters! For most other parameters, if values are not supplied by the user, mizer will fill them with default values using size-based theory or species averages.
+At this point it might be useful to go back and re-watch the second half of [Ken Andersen's introductory lecture](../understand/index.qmd#video-introduction) which explains species parameters used in mizer. It is great how mizer can start building a model with only very few species parameters! For most other parameters, if values are not supplied by the user, mizer will fill them with default values using size-based theory or species averages.
 
 If you don't like defaults you can change them all. You can find the complete list of species parameters used in mizer in the help page of `species_params()`. Advanced users can also overrule the way mizer uses allometric scaling relations. You can read about all the details in the help page for `setParams()`.
 
-## Parameters you should provide
 
 ### Asymptotic size
 
@@ -253,7 +252,13 @@ If you do not know the biomass of a species, all is not lost. You can then assum
 
 For our Celtic Sea model we will use the [ICES stock assessment reports](https://standardgraphs.ices.dk/stockList.aspx) by averaging the spawning stock biomass over a 10-year period (2012 - 2021). We decided to convert these biomasses to grams per square metre, which is the same as tonnes per square kilometre. Mizer is agnostic about the choice of area over which you want to measure biomasses. You just need to be consistent (see section [Units in mizer](https://sizespectrum.org/mizer/reference/setParams.html#units-in-mizer) in the mizer documentation).
 
-TODO: We will post code to extract these average spawning stock biomasses from the ICES database shortly. For now we just load the results from a file. The biomass estimates go into a `biomass_observed` column in the species parameter data frame.
+TODO: We will post code to extract these average spawning stock biomasses from the ICES database shortly. For now we just load the results from a file. 
+```{r eval=FALSE}
+download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/celtic_sea_ssb.rds",
+              destfile = "celtic_sea_ssb.rds")
+```
+
+The biomass estimates go into a `biomass_observed` column in the species parameter data frame.
 
 ```{r}
 sp$biomass_observed <- readRDS("celtic_sea_ssb.rds")
@@ -269,19 +274,18 @@ comment(sp$biomass_cutoff) <- "Set to `w_mat` because `biomass_observed` represe
 
 ## Exercise
 
-This mizer school gives us a chance to explore how sensitive the mizer model predictions will be to different choices of model parameters. If every participant tries to make their choices as different from ours as they can while being able to argue that their choice is at least as justifiable as ours then we are going to end up with a wide range of models all describing the same situation. Next week then we can collect all these models into a model ensemble.
+You can help us to explore how sensitive the mizer model predictions will be to different choices of model parameters. If you try to make your own choices for the species parameter and then use them when building your own model and then use that model in part 3 of the course when we explore model predictions, you will get different predictions. It will be interesting to see how much the predictions differ.
 
-So perhaps you want to pick different length-weight relationship parameters from fishbase or perhaps you have your own. Perhaps instead of maximum length you want to pick maximum weight from FishBase. Perhaps instead of taking the median over all observations of maturity size and maturity age on FishBase you first want to throw out some dubious ones. Or perhaps use a mean rather than a median. Or perhaps you want to directly pick values from studies particularly relevant to the Celtic Sea. Perhaps you know which values were used in the stock assessments for a species and can use those. Use your expertise and your intuition. Please comment your choices with explanations in this worksheet and/or comments on the columns of the species parameter data frame.
+So perhaps you want to pick different length-weight relationship parameters from fishbase or perhaps you have your own. Perhaps instead of maximum length you want to pick maximum weight from FishBase. Perhaps instead of taking the median over all observations of maturity size and maturity age on FishBase you first want to throw out some dubious ones. Or perhaps use a mean rather than a median. Or perhaps you want to directly pick values from studies particularly relevant to the Celtic Sea. Perhaps you know which values were used in the stock assessments for a species and can use those. Use your expertise and your intuition. 
 
 Don't worry too much about the predation kernel parameters because we will return to those in the fourth tutorial of this section where we will look at the predator diets.
 
 When you are happy with the species parameters, save them with
 
 ```{r}
-saveRDS(sp, "celticx_species_params.rds")
+saveRDS(sp, "celtic_species_params.rds")
 ```
 
-Also save this worksheet and commit both to your worksheet repository and push to GitHub.
 
 ## Default parameters
 
@@ -322,13 +326,17 @@ If you want to change the default values for any of these parameters for any of 
 By default, mizer assumes that all species can interact with each other equally and that predation is determined solely by size. To change this assumption we need to provide a species interaction matrix. This matrix can include three different aspects (or a combination of all of them):
 
 1.  **Spatial and temporal overlap of species in a large ecosystem**. This way the interaction matrix is set based on species co-occurrences in various fisheries surveys or observations. In other words we observe how often a pair of species is found in same surveys. This is how species interactions are set up in the model by [Spence et.al.(2021)](https://onlinelibrary.wiley.com/doi/10.1111/faf.12543) and we will use their interaction matrix for our model:
+```{r eval=FALSE}
+download.file("https://raw.githubusercontent.com/gustavdelius/mizerCourse/master/build/celtic_interaction.csv",
+              destfile = "celtic_interaction.csv")
+```
 
 ```{r}
-celtic_interaction <-  read.csv("celtic_interaction.csv")
+celtic_interaction <-  read.csv("celtic_interaction.csv", row.names = 1)
 celtic_interaction
 ```
 
-We use `rownames = 1` to let `read.csv` know that the first column in the spreadsheet in "celtic_interaction.csv", which contains the predator names, should be used as the names of the rows of the interaction matrix.
+We use `row.names = 1` to let `read.csv` know that the first column in the spreadsheet in "celtic_interaction.csv", which contains the predator names, should be used as the names of the rows of the interaction matrix.
 
 2.  **Species diet preferences** **or trophic groups**. Sometimes we know that certain species do not eat other species. For example, some species are strictly bentivorous or herbivorous and they never eat any other fish, not even their larvae. In other cases we might have good evidence for specific diet preferences, although ideally such evidence should come from food selection experiments and these are very rare and maybe too specific to certain conditions. It is important to know that diet contents do not necessarily reflect preferences, but realised feeding. A species might prefer to eat bananas, but if nothing else is available it will eat other fish. The species interaction matrix, if reflecting diet preferences, should reflect preferred diets, not realised diets.
 
@@ -344,7 +352,11 @@ In mizer you can implement an arbitrary number of different gears, each with its
 
 You provide the information about the gears in a data frame similar to the species parameter data frame. However the gear parameter data frame has one row for each gear-species combination. The data frame needs to have a column `gear` for the name of the gear and a column `species` for the name of the species. There are then further columns holding the information about how that gear selects that species. For details see the help page of `gear_params()`.
 
-For our initial model we have set up a simple gear parameter data frame describing only a single gear that we call "Commercial". It targets all species in our model. The choice of parameters is again inspired by the paper by \[Spence et al.(2021)\](https://onlinelibrary.wiley.com/doi/10.1111/faf.12543)
+For our initial model we have set up a simple gear parameter data frame describing only a single gear that we call "Commercial". It targets all species in our model. The choice of parameters is again inspired by the paper by [Spence et al.(2021)](https://onlinelibrary.wiley.com/doi/10.1111/faf.12543)
+```{r eval=FALSE}
+download.file("https://raw.githubusercontent.com/gustavdelius/mizerCourse/master/build/celtic_gear_params.csv",
+              destfile = "celtic_gear_params.csv")
+```
 
 ```{r}
 celtic_gear_params <- read.csv("celtic_gear_params.csv")
