@@ -13,6 +13,8 @@ project:
     - build/index.qmd
     - build/find-species-parameters.qmd
     - build/create-first-model.qmd
+    - build/refine.qmd
+    - build/landings.qmd
 
 toc: true
 toc-depth: 3
@@ -88,5 +90,9 @@ website:
           href: build/index.qmd
         - text: Find species parameters
           href: build/find-species-parameters.qmd
-        - text: Create first model
+        - text: Create your first model
           href: build/create-first-model.qmd
+        - text: Refine your model
+          href: build/refine.qmd
+        - text: Match landings data
+          href: build/landings.qmd
