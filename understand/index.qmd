@@ -2,14 +2,14 @@
 title: "Part 1: Understand size-spectrum modelling"
 ---
 
-Your goal in this first week of the course is to gain a thorough understanding of size spectra and their dynamics. This means that at the end of the week you will understand the parameters that shape the size spectra and how size spectra respond to changes. You will have a feel for how size-spectrum dynamics is different from usual single-species age-based dynamics.
+Your goal in this first part of the course is to gain a thorough understanding of size spectra and their dynamics. This means that at the end of the week you will understand the parameters that shape the size spectra and how size spectra respond to changes. You will have a feel for how size-spectrum dynamics is different from usual single-species age-based dynamics.
 
 It is worth expending effort on building this understanding in this first part of the course, because it will enable you to build more reliable models in the second part and to appropriately explore the model predictions in the third part.
 
 
 ## Tutorials
 
-The material for this week is split into 5 tutorials:
+The material for this part is split into 5 tutorials:
 
 1.  [**Observed size spectra**](observed-size-spectra.qmd)\
     Because many of the physiological rates in fish (like growth, mortality, metabolism, reproduction) depend on the size of the individuals, a mizer model needs to keep track of the size distributions of the populations, the so-called size spectra. To get a feel for size spectra, in this first tutorial you will take observational data and make plots of size spectra. There is confusion in the size spectrum literature because there are different ways to represent the size spectra and this tutorial will introduce these, so that you can cut through the confusion.

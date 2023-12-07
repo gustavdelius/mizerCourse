@@ -137,6 +137,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="https://sizespectrum.org/mizer" class="sidebar-item-text sidebar-link"><i class="bi bi-house-door-fill" role="img">
+</i> 
+ <span class="menu-text">Back to mizer home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
@@ -241,6 +248,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part 3: Use</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/fishing-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore fishing scenarios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/change-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change resource</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/further-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore further scenarios</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -301,9 +343,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note the <code>ref</code> argument to <code>install_github()</code>. It specifies which particular version of the code you want to install. This makes sure that the version you install will behave as expected in this course. Unlike the mizer package, the mizerExperimental package does not promise that newer versions remain backwards compatible to earlier versions. So if you want reproducible code it will be best to install a fixed version.</p>
 </section><section id="checking-your-installation" class="level2"><h2 class="anchored" data-anchor-id="checking-your-installation">Checking your installation</h2>
 <p>To check that everything works, copy and paste and then run the following code:</p>
-<div class="cell" data-hash="install-tools_cache/html/unnamed-chunk-3_a57703514bf00f38aa7f35cd8f13bd75">
+<div class="cell" data-hash="install-tools_cache/html/unnamed-chunk-3_558e911d297e02034bd2f89d41b65b8b">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric_version.html">getRversion</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"4.0"</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"Your version of R is too old."</span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"mizer"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"2.4.1"</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"Your version of mizer is too old."</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"mizer"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"2.5.0"</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"Your version of mizer is too old."</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"mizerExperimental"</span><span class="op">)</span> <span class="op">!=</span> <span class="st">"2.4.0.9004"</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"You are using a different version of MizerExperimental. Please reinstall with the command given above."</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"1.3.0"</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"Your version of tidyverse is very old. While this may not create a problem, updating it is nevertheless advised."</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizer/">mizer</a></span><span class="op">)</span></span>
@@ -318,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You will find a comment section at the bottom of each course webpage. Please use it a lot to share your questions, thoughts and experiences as you go through the course. As with all computer-related things, unexpected problems are likely to crop up. Be sure to post about them in the Comments section.</p>
 <p>When you post a comment you will be asked to log in to GitHub. You will probably already have an account on GitHub. If not, please create one for yourself. GitHub is the most common way for researchers to share their research code and the source material for this course is also hosted there, as is the <a href="https://github.com/sizespectrum/mizer/">mizer package</a> itself. So it is a good idea to have an account there anyway.</p>
 <p>You can use <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">Markdown syntax</a> in your post. The comments are threaded discussions.</p>
-<p>The comments you post on this course website will also appear in the <a href="https://github.com/sizespectrum/mizerCourse_Nov22/discussions/categories/comments">Comments</a> section of the GitHub discussions for the course repository. Even after posting a comment you can go and edit the post on GitHub and it will be updated on this website as well.</p>
+<p>The comments you post on this course website will also appear in the <a href="https://github.com/sizespectrum/mizerCourse/discussions/categories/comments">Comments</a> section of the GitHub discussions for the course repository. Even after posting a comment you can go and edit the post on GitHub and it will be updated on this website as well.</p>
 <p>Instead of posting a comment, you can also report issues by clicking on the “Report an issue” link that you find at the bottom of the right side-bar. That will create an entry in the GitHub issue tracker.</p>
 <p>If you have a correction to a page or want to suggest an edit, use the “Edit this page” link. Don’t worry: we will need to approve your edits before they go live, so you can feel free to edit as much as you like.</p>
 <p>You will find the “Edit this page” and “Report an issue” links on every tutorial page and you will find a comments section on every page of the course website. Never hesitate to use them.</p>

@@ -40,7 +40,7 @@ There are many density-dependent effects that mizer does not capture explicitly,
 
 There are several quantities that were introduced in that earlier tutorial that we would like to recall now:
 
--   The rate $E_R$ at which a species invests energy into reproduction. We discussed how this depends on the species parameters in a section of the tutorial on [single species spectra](../understand/single-species-spectra.qmd#investment-into-reproduction) in the first week of the course. In standard fisheries models the energy invested is assumed to be proportional to the spawning stock biomass. In mizer the energy invested also depends on how much food is available for the spawning stock. But nevertheless you won't go wrong too much if in your head you think of $E_R$ as being proportional to the spawning stock biomass.
+-   The rate $E_R$ at which a species invests energy into reproduction. We discussed how this depends on the species parameters in a section of the tutorial on [single species spectra](../understand/single-species-spectra.qmd#investment-into-reproduction) in Part 1 of the course. In standard fisheries models the energy invested is assumed to be proportional to the spawning stock biomass. In mizer the energy invested also depends on how much food is available for the spawning stock. But nevertheless you won't go wrong too much if in your head you think of $E_R$ as being proportional to the spawning stock biomass.
 
 -   The parameter **`erepro`** that describes the efficiency with which the energy that a species invests into reproduction is converted to eggs. Multiplying $E_R$ by `erepro` and by the conversion factor from biomass to number of eggs gives the quantity that we called $R_{di}$: the rate of egg production. We also sometimes refer to $R_{di}$ as the *"density-independent reproduction rate"*. The efficiency `erepro` can be quite small because a lot of the energy expended on reproduction goes not into the production of eggs but into associated processes, like for example migration to the spawning grounds.
 
@@ -48,7 +48,7 @@ There are several quantities that were introduced in that earlier tutorial that 
 
 -   The parameter **`R_max`** that gives the maximum rate at which individuals can join the smallest size class, no matter how much energy the species invests.
 
-These concepts are nicely illustrated by the following figure that you saw [earlier](understand/dynamics-of-spectra.qmd#density-dependence-in-reproduction):
+These concepts are nicely illustrated by the following figure that you saw [earlier](../understand/dynamics-of-spectra.qmd#density-dependence-in-reproduction):
 
 ```{r}
 #| echo: false

@@ -1,19 +1,9 @@
 ---
-title: "Week 3: Use mizer models"
+title: "Part 3: Use mizer models"
 ---
 
-Now that you have built and examined your model at steady state, we will use it to explore changing conditions and temporal dynamics.
+Now that you have built your model, you can use it to explore the effects of changes in fishing and changes in the environment on the fish community and the fisheries yield. 
 
-### Lecture
-
-This week's contributor is Julia Blanchard. Her lecture provides a broad overview of the different ways in which mizer is being used to help understand the consequences of change in aquatic ecosystems. There are a lot of ways! The material describes how you can set model simulations to study change, some of which are explored in this week's tutorials.
-
-```{r}
-#| echo: false
-vembedr::embed_url("https://youtu.be/Z8FW7t4xrtU") |>
-   vembedr::use_align("center") |>
-   vembedr::use_rounded(10)
-```
 
 ### Tutorials
 
@@ -31,4 +21,13 @@ Using examples, the tutorials are designed to help you develop your own model si
 4.  [**Explore further scenarios**](further-scenarios.qmd)\
     This tutorial provides extra material, prepared by Julia Blanchard using another system (Patagonian toothfish fishery) as an example. Here you can learn on how to set time series of fishing changes and more.
 
-This week you can continue to work in the worksheet repository you created last week at <https://classroom.github.com/a/gS1LgX3B>
+### Video overview
+
+The following video by Julia Blanchard provides a broad overview of the different ways in which mizer is being used to help understand the consequences of change in aquatic ecosystems. There are a lot of ways!
+
+```{r}
+#| echo: false
+vembedr::embed_url("https://youtu.be/Z8FW7t4xrtU") |>
+   vembedr::use_align("center") |>
+   vembedr::use_rounded(10)
+```

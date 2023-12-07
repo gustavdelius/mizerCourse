@@ -17,7 +17,7 @@ The course has three parts, each consisting of several tutorials.
 -   **[Part 2: Build](build/index.qmd)**\
     You will build your own multi-species mizer model for the Celtic sea, following our example. You can also create a model for your own area of interest.
 
--   **Part 3: Use**\
+-   **[Part 3: Use](use/index.qmd)**\
     You will explore the effects of changes in fishing and changes in resource dynamics on the fish community and the fisheries yield. You will run your own model scenarios.
 
 There are exercises dotted throughout the tutorials.
@@ -27,7 +27,7 @@ To get started, [install the tools](prepare/install-tools.qmd) you need and then
 
 ------------------------------------------------------------------------
 
-This course was developed by Gustav Delius at the [University of York](https://york.ac.uk) as part of the [Pyramids of Life](https://pyramidsoflife.york.ac.uk/), funded by [UK Research and Innovation](https://www.ukri.org/) via the [Sustainable Management of Marine Resources](https://www.smmr.org.uk/) fund. It builds on an earlier collaboration with [Asta Audzijonyte](https://discover.utas.edu.au/Asta.Audzijonyte) as a part of the [Sustainable inland fisheries project](https://sif.lt/), funded by the European Regional Development Fund.
+This course was developed by Gustav Delius at the [University of York](https://york.ac.uk) as part of the [Pyramids of Life](https://pyramidsoflife.york.ac.uk/), funded by [UK Research and Innovation](https://www.ukri.org/) via the [Sustainable Management of Marine Resources](https://www.smmr.org.uk/) fund. It builds on an earlier collaboration with [Asta Audzijonyte](https://discover.utas.edu.au/Asta.Audzijonyte) as a part of the [Sustainable inland fisheries project](https://sif.lt/), funded by the European Regional Development Fund. Many thanks to Ken Andersen and Julia Blanchard for contributing videos.
 
 ::: {layout-ncol="2"}
 ![](images/smmr-blue.png)
