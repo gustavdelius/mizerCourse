@@ -170,7 +170,7 @@ Let us change the preferred predator prey mass ratio from 100 to 1000. As usual,
 
 ```{r message=FALSE}
 params_pk <- params
-species_params(params_pk)$beta <- 1000
+given_species_params(params_pk)$beta <- 1000
 ```
 
 Let's make a plot to see that the predation kernel has indeed changed.
@@ -227,7 +227,7 @@ We change that to 1000 and find the new steady state.
 
 ```{r message=FALSE}
 params_new_gamma <- params
-species_params(params_new_gamma)$gamma <- 1000
+given_species_params(params_new_gamma)$gamma <- 1000
 params_new_gamma <- steadySingleSpecies(params_new_gamma)
 ```
 

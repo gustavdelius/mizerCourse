@@ -1,630 +1,630 @@
-species,length,catch,dl
-Blue whiting,2,2,1
-Blue whiting,3,2,1
-Blue whiting,4,2,1
-Blue whiting,5,2,1
-Blue whiting,6,2,1
-Blue whiting,7,2,1
-Blue whiting,8,2,1
-Blue whiting,9,2,1
-Blue whiting,10,2,1
-Blue whiting,11,2,1
-Blue whiting,12,1,1
-Blue whiting,13,2,1
-Blue whiting,15,4,1
-Blue whiting,16,4,1
-Blue whiting,17,4,1
-Blue whiting,18,4,1
-Blue whiting,19,9,1
-Blue whiting,20,10,1
-Blue whiting,21,21,1
-Blue whiting,22,31,1
-Blue whiting,23,36,1
-Blue whiting,24,39,1
-Blue whiting,25,42,1
-Blue whiting,26,44,1
-Blue whiting,27,45,1
-Blue whiting,28,45,1
-Blue whiting,29,41,1
-Blue whiting,30,40,1
-Blue whiting,31,40,1
-Blue whiting,32,41,1
-Blue whiting,33,29,1
-Blue whiting,34,32,1
-Blue whiting,35,28,1
-Blue whiting,36,20,1
-Blue whiting,37,17,1
-Blue whiting,38,11,1
-Blue whiting,39,10,1
-Blue whiting,40,5,1
-Blue whiting,41,2,1
-Blue whiting,42,2,1
-Blue whiting,45,2,1
-Cod,14,1,1
-Cod,20,1,1
-Cod,21,1,1
-Cod,22,1,1
-Cod,23,1,1
-Cod,24,1,1
-Cod,25,2,1
-Cod,26,1,1
-Cod,27,1,1
-Cod,28,1,1
-Cod,29,3,1
-Cod,30,8,1
-Cod,31,7,1
-Cod,32,17,1
-Cod,33,24,1
-Cod,34,39,1
-Cod,35,69,1
-Cod,36,88,1
-Cod,37,105,1
-Cod,38,110,1
-Cod,39,116,1
-Cod,40,130,1
-Cod,41,143,1
-Cod,42,156,1
-Cod,43,143,1
-Cod,44,150,1
-Cod,45,173,1
-Cod,46,171,1
-Cod,47,175,1
-Cod,48,180,1
-Cod,49,188,1
-Cod,50,187,1
-Cod,51,193,1
-Cod,52,198,1
-Cod,53,192,1
-Cod,54,194,1
-Cod,55,189,1
-Cod,56,183,1
-Cod,57,201,1
-Cod,58,180,1
-Cod,59,185,1
-Cod,60,175,1
-Cod,61,162,1
-Cod,62,166,1
-Cod,63,156,1
-Cod,64,158,1
-Cod,65,150,1
-Cod,66,147,1
-Cod,67,141,1
-Cod,68,132,1
-Cod,69,135,1
-Cod,70,138,1
-Cod,71,146,1
-Cod,72,133,1
-Cod,73,118,1
-Cod,74,127,1
-Cod,75,134,1
-Cod,76,123,1
-Cod,77,108,1
-Cod,78,117,1
-Cod,79,120,1
-Cod,80,106,1
-Cod,81,88,1
-Cod,82,105,1
-Cod,83,114,1
-Cod,84,102,1
-Cod,85,92,1
-Cod,86,103,1
-Cod,87,90,1
-Cod,88,87,1
-Cod,89,79,1
-Cod,90,85,1
-Cod,91,81,1
-Cod,92,105,1
-Cod,93,82,1
-Cod,94,98,1
-Cod,95,84,1
-Cod,96,84,1
-Cod,97,78,1
-Cod,98,73,1
-Cod,99,87,1
-Cod,100,62,1
-Cod,101,51,1
-Cod,102,45,1
-Cod,103,47,1
-Cod,104,35,1
-Cod,105,37,1
-Cod,106,25,1
-Cod,107,20,1
-Cod,108,16,1
-Cod,109,4,1
-Cod,110,11,1
-Cod,111,4,1
-Cod,112,13,1
-Cod,113,1,1
-Cod,114,3,1
-Cod,115,1,1
-Cod,116,1,1
-Cod,118,1,1
-Cod,119,1,1
-Cod,120,1,1
-Cod,160,1,1
-Common Dab,17,2,1
-Common Dab,18,2,1
-Common Dab,19,4,1
-Common Dab,20,12,1
-Common Dab,21,12,1
-Common Dab,22,17,1
-Common Dab,23,20,1
-Common Dab,24,23,1
-Common Dab,25,28,1
-Common Dab,26,30,1
-Common Dab,27,30,1
-Common Dab,28,30,1
-Common Dab,29,30,1
-Common Dab,30,30,1
-Common Dab,31,24,1
-Common Dab,32,18,1
-Common Dab,33,19,1
-Common Dab,34,13,1
-Common Dab,35,5,1
-Common Dab,36,3,1
-Common Dab,37,4,1
-Common Dab,38,2,1
-Common Dab,39,2,1
-European Hake,14,4,1
-European Hake,18,4,1
-European Hake,26,4,1
-European Hake,27,4,1
-European Hake,28,21,1
-European Hake,29,25,1
-European Hake,30,25,1
-European Hake,31,37,1
-European Hake,32,64,1
-European Hake,33,53,1
-European Hake,34,80,1
-European Hake,35,88,1
-European Hake,36,123,1
-European Hake,37,130,1
-European Hake,38,160,1
-European Hake,39,179,1
-European Hake,40,175,1
-European Hake,41,229,1
-European Hake,42,234,1
-European Hake,43,263,1
-European Hake,44,263,1
-European Hake,45,276,1
-European Hake,46,274,1
-European Hake,47,273,1
-European Hake,48,273,1
-European Hake,49,281,1
-European Hake,50,288,1
-European Hake,51,275,1
-European Hake,52,299,1
-European Hake,53,300,1
-European Hake,54,294,1
-European Hake,55,300,1
-European Hake,56,299,1
-European Hake,57,297,1
-European Hake,58,313,1
-European Hake,59,290,1
-European Hake,60,317,1
-European Hake,61,323,1
-European Hake,62,309,1
-European Hake,63,331,1
-European Hake,64,308,1
-European Hake,65,321,1
-European Hake,66,315,1
-European Hake,67,321,1
-European Hake,68,331,1
-European Hake,69,305,1
-European Hake,70,305,1
-European Hake,71,315,1
-European Hake,72,300,1
-European Hake,73,302,1
-European Hake,74,303,1
-European Hake,75,290,1
-European Hake,76,286,1
-European Hake,77,297,1
-European Hake,78,284,1
-European Hake,79,277,1
-European Hake,80,274,1
-European Hake,81,282,1
-European Hake,82,274,1
-European Hake,83,265,1
-European Hake,84,281,1
-European Hake,85,282,1
-European Hake,86,267,1
-European Hake,87,257,1
-European Hake,88,266,1
-European Hake,89,250,1
-European Hake,90,265,1
-European Hake,91,252,1
-European Hake,92,251,1
-European Hake,93,238,1
-European Hake,94,236,1
-European Hake,95,208,1
-European Hake,96,225,1
-European Hake,97,203,1
-European Hake,98,222,1
-European Hake,99,205,1
-European Hake,100,187,1
-European Hake,101,163,1
-European Hake,102,156,1
-European Hake,103,122,1
-European Hake,104,128,1
-European Hake,105,111,1
-European Hake,106,111,1
-European Hake,107,56,1
-European Hake,108,96,1
-European Hake,109,40,1
-European Hake,110,33,1
-European Hake,111,22,1
-European Hake,112,26,1
-European Hake,113,10,1
-European Hake,114,11,1
-European Hake,115,12,1
-European Hake,117,8,1
-European Hake,119,2,1
-European Hake,123,5,1
-Haddock,22,4,1
-Haddock,24,2,1
-Haddock,25,10,1
-Haddock,26,16,1
-Haddock,27,19,1
-Haddock,28,28,1
-Haddock,29,45,1
-Haddock,30,65,1
-Haddock,31,83,1
-Haddock,32,111,1
-Haddock,33,140,1
-Haddock,34,156,1
-Haddock,35,173,1
-Haddock,36,191,1
-Haddock,37,191,1
-Haddock,38,204,1
-Haddock,39,213,1
-Haddock,40,217,1
-Haddock,41,218,1
-Haddock,42,224,1
-Haddock,43,228,1
-Haddock,44,241,1
-Haddock,45,243,1
-Haddock,46,249,1
-Haddock,47,251,1
-Haddock,48,260,1
-Haddock,49,267,1
-Haddock,50,255,1
-Haddock,51,251,1
-Haddock,52,257,1
-Haddock,53,260,1
-Haddock,54,244,1
-Haddock,55,241,1
-Haddock,56,233,1
-Haddock,57,227,1
-Haddock,58,201,1
-Haddock,59,195,1
-Haddock,60,185,1
-Haddock,61,174,1
-Haddock,62,170,1
-Haddock,63,153,1
-Haddock,64,142,1
-Haddock,65,123,1
-Haddock,66,105,1
-Haddock,67,100,1
-Haddock,68,92,1
-Haddock,69,82,1
-Haddock,70,62,1
-Haddock,71,55,1
-Haddock,72,60,1
-Haddock,73,30,1
-Haddock,74,39,1
-Haddock,75,28,1
-Haddock,76,12,1
-Haddock,77,17,1
-Haddock,78,9,1
-Haddock,79,4,1
-Haddock,80,2,1
-Haddock,81,4,1
-Haddock,82,2,1
-Haddock,84,2,1
-Haddock,86,1,1
-Haddock,87,1,1
-Haddock,89,1,1
-Herring,6,1,1
-Herring,13,1,1
-Herring,16,3,1
-Herring,17,6,1
-Herring,18,11,1
-Herring,19,13,1
-Herring,20,17,1
-Herring,21,32,1
-Herring,22,32,1
-Herring,23,35,1
-Herring,24,35,1
-Herring,25,35,1
-Herring,26,33,1
-Herring,27,34,1
-Herring,28,36,1
-Herring,29,25,1
-Herring,30,21,1
-Herring,31,16,1
-Herring,32,18,1
-Herring,34,1,1
-Horse Mackerel,7,1,1
-Horse Mackerel,8,1,1
-Horse Mackerel,9,1,1
-Horse Mackerel,10,1,1
-Horse Mackerel,11,1,1
-Horse Mackerel,12,1,1
-Horse Mackerel,13,1,1
-Horse Mackerel,14,3,1
-Horse Mackerel,15,3,1
-Horse Mackerel,16,3,1
-Horse Mackerel,17,3,1
-Horse Mackerel,18,5,1
-Horse Mackerel,19,17,1
-Horse Mackerel,20,20,1
-Horse Mackerel,21,20,1
-Horse Mackerel,22,21,1
-Horse Mackerel,23,23,1
-Horse Mackerel,24,23,1
-Horse Mackerel,25,25,1
-Horse Mackerel,26,27,1
-Horse Mackerel,27,28,1
-Horse Mackerel,28,27,1
-Horse Mackerel,29,19,1
-Horse Mackerel,30,25,1
-Horse Mackerel,31,25,1
-Horse Mackerel,32,19,1
-Horse Mackerel,33,20,1
-Horse Mackerel,34,19,1
-Horse Mackerel,35,19,1
-Horse Mackerel,36,17,1
-Horse Mackerel,37,14,1
-Horse Mackerel,38,9,1
-Horse Mackerel,39,12,1
-Horse Mackerel,40,7,1
-Horse Mackerel,41,1,1
-Horse Mackerel,42,5,1
-Monkfish,17,4,1
-Monkfish,18,4,1
-Monkfish,21,8,1
-Monkfish,22,12,1
-Monkfish,23,8,1
-Monkfish,24,4,1
-Monkfish,25,17,1
-Monkfish,26,12,1
-Monkfish,27,24,1
-Monkfish,28,35,1
-Monkfish,29,42,1
-Monkfish,30,46,1
-Monkfish,31,50,1
-Monkfish,32,50,1
-Monkfish,33,50,1
-Monkfish,34,50,1
-Monkfish,35,50,1
-Monkfish,36,50,1
-Monkfish,37,50,1
-Monkfish,38,50,1
-Monkfish,39,50,1
-Monkfish,40,50,1
-Monkfish,41,50,1
-Monkfish,42,50,1
-Monkfish,43,50,1
-Monkfish,44,50,1
-Monkfish,45,50,1
-Monkfish,46,50,1
-Monkfish,47,50,1
-Monkfish,48,50,1
-Monkfish,49,50,1
-Monkfish,50,50,1
-Monkfish,51,50,1
-Monkfish,52,50,1
-Monkfish,53,50,1
-Monkfish,54,50,1
-Monkfish,55,50,1
-Monkfish,56,50,1
-Monkfish,57,50,1
-Monkfish,58,50,1
-Monkfish,59,50,1
-Monkfish,60,50,1
-Monkfish,61,50,1
-Monkfish,62,50,1
-Monkfish,63,50,1
-Monkfish,64,50,1
-Monkfish,65,50,1
-Monkfish,66,50,1
-Monkfish,67,47,1
-Monkfish,68,47,1
-Monkfish,69,50,1
-Monkfish,70,50,1
-Monkfish,71,50,1
-Monkfish,72,46,1
-Monkfish,73,50,1
-Monkfish,74,46,1
-Monkfish,75,50,1
-Monkfish,76,47,1
-Monkfish,77,47,1
-Monkfish,78,46,1
-Monkfish,79,47,1
-Monkfish,80,40,1
-Monkfish,81,46,1
-Monkfish,82,47,1
-Monkfish,83,47,1
-Monkfish,84,42,1
-Monkfish,85,46,1
-Monkfish,86,36,1
-Monkfish,87,37,1
-Monkfish,88,32,1
-Monkfish,89,40,1
-Monkfish,90,35,1
-Monkfish,91,25,1
-Monkfish,92,31,1
-Monkfish,93,36,1
-Monkfish,94,20,1
-Monkfish,95,36,1
-Monkfish,96,32,1
-Monkfish,97,32,1
-Monkfish,98,29,1
-Monkfish,99,35,1
-Monkfish,100,25,1
-Monkfish,101,23,1
-Monkfish,102,13,1
-Monkfish,103,8,1
-Monkfish,104,23,1
-Monkfish,105,23,1
-Monkfish,106,16,1
-Monkfish,107,8,1
-Monkfish,108,8,1
-Monkfish,109,21,1
-Monkfish,110,11,1
-Monkfish,111,9,1
-Monkfish,112,8,1
-Monkfish,113,12,1
-Monkfish,114,4,1
-Monkfish,115,11,1
-Monkfish,116,8,1
-Monkfish,118,7,1
-Monkfish,120,15,1
-Monkfish,125,8,1
-Plaice,19,2,1
-Plaice,20,1,1
-Plaice,21,4,1
-Plaice,22,13,1
-Plaice,23,22,1
-Plaice,24,37,1
-Plaice,25,85,1
-Plaice,26,137,1
-Plaice,27,177,1
-Plaice,28,215,1
-Plaice,29,223,1
-Plaice,30,235,1
-Plaice,31,241,1
-Plaice,32,248,1
-Plaice,33,253,1
-Plaice,34,253,1
-Plaice,35,254,1
-Plaice,36,254,1
-Plaice,37,249,1
-Plaice,38,251,1
-Plaice,39,242,1
-Plaice,40,241,1
-Plaice,41,237,1
-Plaice,42,218,1
-Plaice,43,212,1
-Plaice,44,200,1
-Plaice,45,191,1
-Plaice,46,172,1
-Plaice,47,165,1
-Plaice,48,161,1
-Plaice,49,145,1
-Plaice,50,128,1
-Plaice,51,104,1
-Plaice,52,99,1
-Plaice,53,88,1
-Plaice,54,71,1
-Plaice,55,50,1
-Plaice,56,40,1
-Plaice,57,36,1
-Plaice,58,34,1
-Plaice,59,19,1
-Plaice,60,20,1
-Plaice,61,13,1
-Plaice,62,7,1
-Plaice,63,4,1
-Plaice,64,6,1
-Plaice,65,7,1
-Plaice,67,1,1
-Sole,20,5,1
-Sole,21,13,1
-Sole,22,38,1
-Sole,23,95,1
-Sole,24,144,1
-Sole,25,184,1
-Sole,26,217,1
-Sole,27,228,1
-Sole,28,234,1
-Sole,29,239,1
-Sole,30,243,1
-Sole,31,243,1
-Sole,32,245,1
-Sole,33,247,1
-Sole,34,245,1
-Sole,35,246,1
-Sole,36,244,1
-Sole,37,238,1
-Sole,38,237,1
-Sole,39,235,1
-Sole,40,224,1
-Sole,41,221,1
-Sole,42,208,1
-Sole,43,201,1
-Sole,44,166,1
-Sole,45,141,1
-Sole,46,138,1
-Sole,47,122,1
-Sole,48,84,1
-Sole,49,75,1
-Sole,50,63,1
-Sole,51,34,1
-Sole,52,29,1
-Sole,53,9,1
-Sole,54,9,1
-Sole,55,4,1
-Sole,56,5,1
-Sole,57,1,1
-Sole,58,3,1
-Sole,59,2,1
-Sprat,7,1,1
-Sprat,8,5,1
-Sprat,9,4,1
-Sprat,10,11,1
-Sprat,11,4,1
-Sprat,12,12,1
-Sprat,13,6,1
-Sprat,14,15,1
-Sprat,15,2,1
-Sprat,16,6,1
-Sprat,17,2,1
-Whiting,18,1,1
-Whiting,21,5,1
-Whiting,23,5,1
-Whiting,24,14,1
-Whiting,25,20,1
-Whiting,26,55,1
-Whiting,27,89,1
-Whiting,28,111,1
-Whiting,29,119,1
-Whiting,30,150,1
-Whiting,31,169,1
-Whiting,32,183,1
-Whiting,33,203,1
-Whiting,34,218,1
-Whiting,35,225,1
-Whiting,36,233,1
-Whiting,37,236,1
-Whiting,38,250,1
-Whiting,39,249,1
-Whiting,40,250,1
-Whiting,41,252,1
-Whiting,42,247,1
-Whiting,43,252,1
-Whiting,44,252,1
-Whiting,45,246,1
-Whiting,46,238,1
-Whiting,47,245,1
-Whiting,48,233,1
-Whiting,49,219,1
-Whiting,50,215,1
-Whiting,51,206,1
-Whiting,52,187,1
-Whiting,53,182,1
-Whiting,54,171,1
-Whiting,55,143,1
-Whiting,56,137,1
-Whiting,57,128,1
-Whiting,58,99,1
-Whiting,59,99,1
-Whiting,60,69,1
-Whiting,61,52,1
-Whiting,62,39,1
-Whiting,63,23,1
-Whiting,64,12,1
-Whiting,65,14,1
-Whiting,66,10,1
-Whiting,67,1,1
-Whiting,69,2,1
+species,gear,length,catch,dl
+Blue whiting,Commercial,2,2,1
+Blue whiting,Commercial,3,2,1
+Blue whiting,Commercial,4,2,1
+Blue whiting,Commercial,5,2,1
+Blue whiting,Commercial,6,2,1
+Blue whiting,Commercial,7,2,1
+Blue whiting,Commercial,8,2,1
+Blue whiting,Commercial,9,2,1
+Blue whiting,Commercial,10,2,1
+Blue whiting,Commercial,11,2,1
+Blue whiting,Commercial,12,1,1
+Blue whiting,Commercial,13,2,1
+Blue whiting,Commercial,15,4,1
+Blue whiting,Commercial,16,4,1
+Blue whiting,Commercial,17,4,1
+Blue whiting,Commercial,18,4,1
+Blue whiting,Commercial,19,9,1
+Blue whiting,Commercial,20,10,1
+Blue whiting,Commercial,21,21,1
+Blue whiting,Commercial,22,31,1
+Blue whiting,Commercial,23,36,1
+Blue whiting,Commercial,24,39,1
+Blue whiting,Commercial,25,42,1
+Blue whiting,Commercial,26,44,1
+Blue whiting,Commercial,27,45,1
+Blue whiting,Commercial,28,45,1
+Blue whiting,Commercial,29,41,1
+Blue whiting,Commercial,30,40,1
+Blue whiting,Commercial,31,40,1
+Blue whiting,Commercial,32,41,1
+Blue whiting,Commercial,33,29,1
+Blue whiting,Commercial,34,32,1
+Blue whiting,Commercial,35,28,1
+Blue whiting,Commercial,36,20,1
+Blue whiting,Commercial,37,17,1
+Blue whiting,Commercial,38,11,1
+Blue whiting,Commercial,39,10,1
+Blue whiting,Commercial,40,5,1
+Blue whiting,Commercial,41,2,1
+Blue whiting,Commercial,42,2,1
+Blue whiting,Commercial,45,2,1
+Cod,Commercial,14,1,1
+Cod,Commercial,20,1,1
+Cod,Commercial,21,1,1
+Cod,Commercial,22,1,1
+Cod,Commercial,23,1,1
+Cod,Commercial,24,1,1
+Cod,Commercial,25,2,1
+Cod,Commercial,26,1,1
+Cod,Commercial,27,1,1
+Cod,Commercial,28,1,1
+Cod,Commercial,29,3,1
+Cod,Commercial,30,8,1
+Cod,Commercial,31,7,1
+Cod,Commercial,32,17,1
+Cod,Commercial,33,24,1
+Cod,Commercial,34,39,1
+Cod,Commercial,35,69,1
+Cod,Commercial,36,88,1
+Cod,Commercial,37,105,1
+Cod,Commercial,38,110,1
+Cod,Commercial,39,116,1
+Cod,Commercial,40,130,1
+Cod,Commercial,41,143,1
+Cod,Commercial,42,156,1
+Cod,Commercial,43,143,1
+Cod,Commercial,44,150,1
+Cod,Commercial,45,173,1
+Cod,Commercial,46,171,1
+Cod,Commercial,47,175,1
+Cod,Commercial,48,180,1
+Cod,Commercial,49,188,1
+Cod,Commercial,50,187,1
+Cod,Commercial,51,193,1
+Cod,Commercial,52,198,1
+Cod,Commercial,53,192,1
+Cod,Commercial,54,194,1
+Cod,Commercial,55,189,1
+Cod,Commercial,56,183,1
+Cod,Commercial,57,201,1
+Cod,Commercial,58,180,1
+Cod,Commercial,59,185,1
+Cod,Commercial,60,175,1
+Cod,Commercial,61,162,1
+Cod,Commercial,62,166,1
+Cod,Commercial,63,156,1
+Cod,Commercial,64,158,1
+Cod,Commercial,65,150,1
+Cod,Commercial,66,147,1
+Cod,Commercial,67,141,1
+Cod,Commercial,68,132,1
+Cod,Commercial,69,135,1
+Cod,Commercial,70,138,1
+Cod,Commercial,71,146,1
+Cod,Commercial,72,133,1
+Cod,Commercial,73,118,1
+Cod,Commercial,74,127,1
+Cod,Commercial,75,134,1
+Cod,Commercial,76,123,1
+Cod,Commercial,77,108,1
+Cod,Commercial,78,117,1
+Cod,Commercial,79,120,1
+Cod,Commercial,80,106,1
+Cod,Commercial,81,88,1
+Cod,Commercial,82,105,1
+Cod,Commercial,83,114,1
+Cod,Commercial,84,102,1
+Cod,Commercial,85,92,1
+Cod,Commercial,86,103,1
+Cod,Commercial,87,90,1
+Cod,Commercial,88,87,1
+Cod,Commercial,89,79,1
+Cod,Commercial,90,85,1
+Cod,Commercial,91,81,1
+Cod,Commercial,92,105,1
+Cod,Commercial,93,82,1
+Cod,Commercial,94,98,1
+Cod,Commercial,95,84,1
+Cod,Commercial,96,84,1
+Cod,Commercial,97,78,1
+Cod,Commercial,98,73,1
+Cod,Commercial,99,87,1
+Cod,Commercial,100,62,1
+Cod,Commercial,101,51,1
+Cod,Commercial,102,45,1
+Cod,Commercial,103,47,1
+Cod,Commercial,104,35,1
+Cod,Commercial,105,37,1
+Cod,Commercial,106,25,1
+Cod,Commercial,107,20,1
+Cod,Commercial,108,16,1
+Cod,Commercial,109,4,1
+Cod,Commercial,110,11,1
+Cod,Commercial,111,4,1
+Cod,Commercial,112,13,1
+Cod,Commercial,113,1,1
+Cod,Commercial,114,3,1
+Cod,Commercial,115,1,1
+Cod,Commercial,116,1,1
+Cod,Commercial,118,1,1
+Cod,Commercial,119,1,1
+Cod,Commercial,120,1,1
+Cod,Commercial,160,1,1
+Common Dab,Commercial,17,2,1
+Common Dab,Commercial,18,2,1
+Common Dab,Commercial,19,4,1
+Common Dab,Commercial,20,12,1
+Common Dab,Commercial,21,12,1
+Common Dab,Commercial,22,17,1
+Common Dab,Commercial,23,20,1
+Common Dab,Commercial,24,23,1
+Common Dab,Commercial,25,28,1
+Common Dab,Commercial,26,30,1
+Common Dab,Commercial,27,30,1
+Common Dab,Commercial,28,30,1
+Common Dab,Commercial,29,30,1
+Common Dab,Commercial,30,30,1
+Common Dab,Commercial,31,24,1
+Common Dab,Commercial,32,18,1
+Common Dab,Commercial,33,19,1
+Common Dab,Commercial,34,13,1
+Common Dab,Commercial,35,5,1
+Common Dab,Commercial,36,3,1
+Common Dab,Commercial,37,4,1
+Common Dab,Commercial,38,2,1
+Common Dab,Commercial,39,2,1
+European Hake,Commercial,14,4,1
+European Hake,Commercial,18,4,1
+European Hake,Commercial,26,4,1
+European Hake,Commercial,27,4,1
+European Hake,Commercial,28,21,1
+European Hake,Commercial,29,25,1
+European Hake,Commercial,30,25,1
+European Hake,Commercial,31,37,1
+European Hake,Commercial,32,64,1
+European Hake,Commercial,33,53,1
+European Hake,Commercial,34,80,1
+European Hake,Commercial,35,88,1
+European Hake,Commercial,36,123,1
+European Hake,Commercial,37,130,1
+European Hake,Commercial,38,160,1
+European Hake,Commercial,39,179,1
+European Hake,Commercial,40,175,1
+European Hake,Commercial,41,229,1
+European Hake,Commercial,42,234,1
+European Hake,Commercial,43,263,1
+European Hake,Commercial,44,263,1
+European Hake,Commercial,45,276,1
+European Hake,Commercial,46,274,1
+European Hake,Commercial,47,273,1
+European Hake,Commercial,48,273,1
+European Hake,Commercial,49,281,1
+European Hake,Commercial,50,288,1
+European Hake,Commercial,51,275,1
+European Hake,Commercial,52,299,1
+European Hake,Commercial,53,300,1
+European Hake,Commercial,54,294,1
+European Hake,Commercial,55,300,1
+European Hake,Commercial,56,299,1
+European Hake,Commercial,57,297,1
+European Hake,Commercial,58,313,1
+European Hake,Commercial,59,290,1
+European Hake,Commercial,60,317,1
+European Hake,Commercial,61,323,1
+European Hake,Commercial,62,309,1
+European Hake,Commercial,63,331,1
+European Hake,Commercial,64,308,1
+European Hake,Commercial,65,321,1
+European Hake,Commercial,66,315,1
+European Hake,Commercial,67,321,1
+European Hake,Commercial,68,331,1
+European Hake,Commercial,69,305,1
+European Hake,Commercial,70,305,1
+European Hake,Commercial,71,315,1
+European Hake,Commercial,72,300,1
+European Hake,Commercial,73,302,1
+European Hake,Commercial,74,303,1
+European Hake,Commercial,75,290,1
+European Hake,Commercial,76,286,1
+European Hake,Commercial,77,297,1
+European Hake,Commercial,78,284,1
+European Hake,Commercial,79,277,1
+European Hake,Commercial,80,274,1
+European Hake,Commercial,81,282,1
+European Hake,Commercial,82,274,1
+European Hake,Commercial,83,265,1
+European Hake,Commercial,84,281,1
+European Hake,Commercial,85,282,1
+European Hake,Commercial,86,267,1
+European Hake,Commercial,87,257,1
+European Hake,Commercial,88,266,1
+European Hake,Commercial,89,250,1
+European Hake,Commercial,90,265,1
+European Hake,Commercial,91,252,1
+European Hake,Commercial,92,251,1
+European Hake,Commercial,93,238,1
+European Hake,Commercial,94,236,1
+European Hake,Commercial,95,208,1
+European Hake,Commercial,96,225,1
+European Hake,Commercial,97,203,1
+European Hake,Commercial,98,222,1
+European Hake,Commercial,99,205,1
+European Hake,Commercial,100,187,1
+European Hake,Commercial,101,163,1
+European Hake,Commercial,102,156,1
+European Hake,Commercial,103,122,1
+European Hake,Commercial,104,128,1
+European Hake,Commercial,105,111,1
+European Hake,Commercial,106,111,1
+European Hake,Commercial,107,56,1
+European Hake,Commercial,108,96,1
+European Hake,Commercial,109,40,1
+European Hake,Commercial,110,33,1
+European Hake,Commercial,111,22,1
+European Hake,Commercial,112,26,1
+European Hake,Commercial,113,10,1
+European Hake,Commercial,114,11,1
+European Hake,Commercial,115,12,1
+European Hake,Commercial,117,8,1
+European Hake,Commercial,119,2,1
+European Hake,Commercial,123,5,1
+Haddock,Commercial,22,4,1
+Haddock,Commercial,24,2,1
+Haddock,Commercial,25,10,1
+Haddock,Commercial,26,16,1
+Haddock,Commercial,27,19,1
+Haddock,Commercial,28,28,1
+Haddock,Commercial,29,45,1
+Haddock,Commercial,30,65,1
+Haddock,Commercial,31,83,1
+Haddock,Commercial,32,111,1
+Haddock,Commercial,33,140,1
+Haddock,Commercial,34,156,1
+Haddock,Commercial,35,173,1
+Haddock,Commercial,36,191,1
+Haddock,Commercial,37,191,1
+Haddock,Commercial,38,204,1
+Haddock,Commercial,39,213,1
+Haddock,Commercial,40,217,1
+Haddock,Commercial,41,218,1
+Haddock,Commercial,42,224,1
+Haddock,Commercial,43,228,1
+Haddock,Commercial,44,241,1
+Haddock,Commercial,45,243,1
+Haddock,Commercial,46,249,1
+Haddock,Commercial,47,251,1
+Haddock,Commercial,48,260,1
+Haddock,Commercial,49,267,1
+Haddock,Commercial,50,255,1
+Haddock,Commercial,51,251,1
+Haddock,Commercial,52,257,1
+Haddock,Commercial,53,260,1
+Haddock,Commercial,54,244,1
+Haddock,Commercial,55,241,1
+Haddock,Commercial,56,233,1
+Haddock,Commercial,57,227,1
+Haddock,Commercial,58,201,1
+Haddock,Commercial,59,195,1
+Haddock,Commercial,60,185,1
+Haddock,Commercial,61,174,1
+Haddock,Commercial,62,170,1
+Haddock,Commercial,63,153,1
+Haddock,Commercial,64,142,1
+Haddock,Commercial,65,123,1
+Haddock,Commercial,66,105,1
+Haddock,Commercial,67,100,1
+Haddock,Commercial,68,92,1
+Haddock,Commercial,69,82,1
+Haddock,Commercial,70,62,1
+Haddock,Commercial,71,55,1
+Haddock,Commercial,72,60,1
+Haddock,Commercial,73,30,1
+Haddock,Commercial,74,39,1
+Haddock,Commercial,75,28,1
+Haddock,Commercial,76,12,1
+Haddock,Commercial,77,17,1
+Haddock,Commercial,78,9,1
+Haddock,Commercial,79,4,1
+Haddock,Commercial,80,2,1
+Haddock,Commercial,81,4,1
+Haddock,Commercial,82,2,1
+Haddock,Commercial,84,2,1
+Haddock,Commercial,86,1,1
+Haddock,Commercial,87,1,1
+Haddock,Commercial,89,1,1
+Herring,Commercial,6,1,1
+Herring,Commercial,13,1,1
+Herring,Commercial,16,3,1
+Herring,Commercial,17,6,1
+Herring,Commercial,18,11,1
+Herring,Commercial,19,13,1
+Herring,Commercial,20,17,1
+Herring,Commercial,21,32,1
+Herring,Commercial,22,32,1
+Herring,Commercial,23,35,1
+Herring,Commercial,24,35,1
+Herring,Commercial,25,35,1
+Herring,Commercial,26,33,1
+Herring,Commercial,27,34,1
+Herring,Commercial,28,36,1
+Herring,Commercial,29,25,1
+Herring,Commercial,30,21,1
+Herring,Commercial,31,16,1
+Herring,Commercial,32,18,1
+Herring,Commercial,34,1,1
+Horse Mackerel,Commercial,7,1,1
+Horse Mackerel,Commercial,8,1,1
+Horse Mackerel,Commercial,9,1,1
+Horse Mackerel,Commercial,10,1,1
+Horse Mackerel,Commercial,11,1,1
+Horse Mackerel,Commercial,12,1,1
+Horse Mackerel,Commercial,13,1,1
+Horse Mackerel,Commercial,14,3,1
+Horse Mackerel,Commercial,15,3,1
+Horse Mackerel,Commercial,16,3,1
+Horse Mackerel,Commercial,17,3,1
+Horse Mackerel,Commercial,18,5,1
+Horse Mackerel,Commercial,19,17,1
+Horse Mackerel,Commercial,20,20,1
+Horse Mackerel,Commercial,21,20,1
+Horse Mackerel,Commercial,22,21,1
+Horse Mackerel,Commercial,23,23,1
+Horse Mackerel,Commercial,24,23,1
+Horse Mackerel,Commercial,25,25,1
+Horse Mackerel,Commercial,26,27,1
+Horse Mackerel,Commercial,27,28,1
+Horse Mackerel,Commercial,28,27,1
+Horse Mackerel,Commercial,29,19,1
+Horse Mackerel,Commercial,30,25,1
+Horse Mackerel,Commercial,31,25,1
+Horse Mackerel,Commercial,32,19,1
+Horse Mackerel,Commercial,33,20,1
+Horse Mackerel,Commercial,34,19,1
+Horse Mackerel,Commercial,35,19,1
+Horse Mackerel,Commercial,36,17,1
+Horse Mackerel,Commercial,37,14,1
+Horse Mackerel,Commercial,38,9,1
+Horse Mackerel,Commercial,39,12,1
+Horse Mackerel,Commercial,40,7,1
+Horse Mackerel,Commercial,41,1,1
+Horse Mackerel,Commercial,42,5,1
+Monkfish,Commercial,17,4,1
+Monkfish,Commercial,18,4,1
+Monkfish,Commercial,21,8,1
+Monkfish,Commercial,22,12,1
+Monkfish,Commercial,23,8,1
+Monkfish,Commercial,24,4,1
+Monkfish,Commercial,25,17,1
+Monkfish,Commercial,26,12,1
+Monkfish,Commercial,27,24,1
+Monkfish,Commercial,28,35,1
+Monkfish,Commercial,29,42,1
+Monkfish,Commercial,30,46,1
+Monkfish,Commercial,31,50,1
+Monkfish,Commercial,32,50,1
+Monkfish,Commercial,33,50,1
+Monkfish,Commercial,34,50,1
+Monkfish,Commercial,35,50,1
+Monkfish,Commercial,36,50,1
+Monkfish,Commercial,37,50,1
+Monkfish,Commercial,38,50,1
+Monkfish,Commercial,39,50,1
+Monkfish,Commercial,40,50,1
+Monkfish,Commercial,41,50,1
+Monkfish,Commercial,42,50,1
+Monkfish,Commercial,43,50,1
+Monkfish,Commercial,44,50,1
+Monkfish,Commercial,45,50,1
+Monkfish,Commercial,46,50,1
+Monkfish,Commercial,47,50,1
+Monkfish,Commercial,48,50,1
+Monkfish,Commercial,49,50,1
+Monkfish,Commercial,50,50,1
+Monkfish,Commercial,51,50,1
+Monkfish,Commercial,52,50,1
+Monkfish,Commercial,53,50,1
+Monkfish,Commercial,54,50,1
+Monkfish,Commercial,55,50,1
+Monkfish,Commercial,56,50,1
+Monkfish,Commercial,57,50,1
+Monkfish,Commercial,58,50,1
+Monkfish,Commercial,59,50,1
+Monkfish,Commercial,60,50,1
+Monkfish,Commercial,61,50,1
+Monkfish,Commercial,62,50,1
+Monkfish,Commercial,63,50,1
+Monkfish,Commercial,64,50,1
+Monkfish,Commercial,65,50,1
+Monkfish,Commercial,66,50,1
+Monkfish,Commercial,67,47,1
+Monkfish,Commercial,68,47,1
+Monkfish,Commercial,69,50,1
+Monkfish,Commercial,70,50,1
+Monkfish,Commercial,71,50,1
+Monkfish,Commercial,72,46,1
+Monkfish,Commercial,73,50,1
+Monkfish,Commercial,74,46,1
+Monkfish,Commercial,75,50,1
+Monkfish,Commercial,76,47,1
+Monkfish,Commercial,77,47,1
+Monkfish,Commercial,78,46,1
+Monkfish,Commercial,79,47,1
+Monkfish,Commercial,80,40,1
+Monkfish,Commercial,81,46,1
+Monkfish,Commercial,82,47,1
+Monkfish,Commercial,83,47,1
+Monkfish,Commercial,84,42,1
+Monkfish,Commercial,85,46,1
+Monkfish,Commercial,86,36,1
+Monkfish,Commercial,87,37,1
+Monkfish,Commercial,88,32,1
+Monkfish,Commercial,89,40,1
+Monkfish,Commercial,90,35,1
+Monkfish,Commercial,91,25,1
+Monkfish,Commercial,92,31,1
+Monkfish,Commercial,93,36,1
+Monkfish,Commercial,94,20,1
+Monkfish,Commercial,95,36,1
+Monkfish,Commercial,96,32,1
+Monkfish,Commercial,97,32,1
+Monkfish,Commercial,98,29,1
+Monkfish,Commercial,99,35,1
+Monkfish,Commercial,100,25,1
+Monkfish,Commercial,101,23,1
+Monkfish,Commercial,102,13,1
+Monkfish,Commercial,103,8,1
+Monkfish,Commercial,104,23,1
+Monkfish,Commercial,105,23,1
+Monkfish,Commercial,106,16,1
+Monkfish,Commercial,107,8,1
+Monkfish,Commercial,108,8,1
+Monkfish,Commercial,109,21,1
+Monkfish,Commercial,110,11,1
+Monkfish,Commercial,111,9,1
+Monkfish,Commercial,112,8,1
+Monkfish,Commercial,113,12,1
+Monkfish,Commercial,114,4,1
+Monkfish,Commercial,115,11,1
+Monkfish,Commercial,116,8,1
+Monkfish,Commercial,118,7,1
+Monkfish,Commercial,120,15,1
+Monkfish,Commercial,125,8,1
+Plaice,Commercial,19,2,1
+Plaice,Commercial,20,1,1
+Plaice,Commercial,21,4,1
+Plaice,Commercial,22,13,1
+Plaice,Commercial,23,22,1
+Plaice,Commercial,24,37,1
+Plaice,Commercial,25,85,1
+Plaice,Commercial,26,137,1
+Plaice,Commercial,27,177,1
+Plaice,Commercial,28,215,1
+Plaice,Commercial,29,223,1
+Plaice,Commercial,30,235,1
+Plaice,Commercial,31,241,1
+Plaice,Commercial,32,248,1
+Plaice,Commercial,33,253,1
+Plaice,Commercial,34,253,1
+Plaice,Commercial,35,254,1
+Plaice,Commercial,36,254,1
+Plaice,Commercial,37,249,1
+Plaice,Commercial,38,251,1
+Plaice,Commercial,39,242,1
+Plaice,Commercial,40,241,1
+Plaice,Commercial,41,237,1
+Plaice,Commercial,42,218,1
+Plaice,Commercial,43,212,1
+Plaice,Commercial,44,200,1
+Plaice,Commercial,45,191,1
+Plaice,Commercial,46,172,1
+Plaice,Commercial,47,165,1
+Plaice,Commercial,48,161,1
+Plaice,Commercial,49,145,1
+Plaice,Commercial,50,128,1
+Plaice,Commercial,51,104,1
+Plaice,Commercial,52,99,1
+Plaice,Commercial,53,88,1
+Plaice,Commercial,54,71,1
+Plaice,Commercial,55,50,1
+Plaice,Commercial,56,40,1
+Plaice,Commercial,57,36,1
+Plaice,Commercial,58,34,1
+Plaice,Commercial,59,19,1
+Plaice,Commercial,60,20,1
+Plaice,Commercial,61,13,1
+Plaice,Commercial,62,7,1
+Plaice,Commercial,63,4,1
+Plaice,Commercial,64,6,1
+Plaice,Commercial,65,7,1
+Plaice,Commercial,67,1,1
+Sole,Commercial,20,5,1
+Sole,Commercial,21,13,1
+Sole,Commercial,22,38,1
+Sole,Commercial,23,95,1
+Sole,Commercial,24,144,1
+Sole,Commercial,25,184,1
+Sole,Commercial,26,217,1
+Sole,Commercial,27,228,1
+Sole,Commercial,28,234,1
+Sole,Commercial,29,239,1
+Sole,Commercial,30,243,1
+Sole,Commercial,31,243,1
+Sole,Commercial,32,245,1
+Sole,Commercial,33,247,1
+Sole,Commercial,34,245,1
+Sole,Commercial,35,246,1
+Sole,Commercial,36,244,1
+Sole,Commercial,37,238,1
+Sole,Commercial,38,237,1
+Sole,Commercial,39,235,1
+Sole,Commercial,40,224,1
+Sole,Commercial,41,221,1
+Sole,Commercial,42,208,1
+Sole,Commercial,43,201,1
+Sole,Commercial,44,166,1
+Sole,Commercial,45,141,1
+Sole,Commercial,46,138,1
+Sole,Commercial,47,122,1
+Sole,Commercial,48,84,1
+Sole,Commercial,49,75,1
+Sole,Commercial,50,63,1
+Sole,Commercial,51,34,1
+Sole,Commercial,52,29,1
+Sole,Commercial,53,9,1
+Sole,Commercial,54,9,1
+Sole,Commercial,55,4,1
+Sole,Commercial,56,5,1
+Sole,Commercial,57,1,1
+Sole,Commercial,58,3,1
+Sole,Commercial,59,2,1
+Sprat,Commercial,7,1,1
+Sprat,Commercial,8,5,1
+Sprat,Commercial,9,4,1
+Sprat,Commercial,10,11,1
+Sprat,Commercial,11,4,1
+Sprat,Commercial,12,12,1
+Sprat,Commercial,13,6,1
+Sprat,Commercial,14,15,1
+Sprat,Commercial,15,2,1
+Sprat,Commercial,16,6,1
+Sprat,Commercial,17,2,1
+Whiting,Commercial,18,1,1
+Whiting,Commercial,21,5,1
+Whiting,Commercial,23,5,1
+Whiting,Commercial,24,14,1
+Whiting,Commercial,25,20,1
+Whiting,Commercial,26,55,1
+Whiting,Commercial,27,89,1
+Whiting,Commercial,28,111,1
+Whiting,Commercial,29,119,1
+Whiting,Commercial,30,150,1
+Whiting,Commercial,31,169,1
+Whiting,Commercial,32,183,1
+Whiting,Commercial,33,203,1
+Whiting,Commercial,34,218,1
+Whiting,Commercial,35,225,1
+Whiting,Commercial,36,233,1
+Whiting,Commercial,37,236,1
+Whiting,Commercial,38,250,1
+Whiting,Commercial,39,249,1
+Whiting,Commercial,40,250,1
+Whiting,Commercial,41,252,1
+Whiting,Commercial,42,247,1
+Whiting,Commercial,43,252,1
+Whiting,Commercial,44,252,1
+Whiting,Commercial,45,246,1
+Whiting,Commercial,46,238,1
+Whiting,Commercial,47,245,1
+Whiting,Commercial,48,233,1
+Whiting,Commercial,49,219,1
+Whiting,Commercial,50,215,1
+Whiting,Commercial,51,206,1
+Whiting,Commercial,52,187,1
+Whiting,Commercial,53,182,1
+Whiting,Commercial,54,171,1
+Whiting,Commercial,55,143,1
+Whiting,Commercial,56,137,1
+Whiting,Commercial,57,128,1
+Whiting,Commercial,58,99,1
+Whiting,Commercial,59,99,1
+Whiting,Commercial,60,69,1
+Whiting,Commercial,61,52,1
+Whiting,Commercial,62,39,1
+Whiting,Commercial,63,23,1
+Whiting,Commercial,64,12,1
+Whiting,Commercial,65,14,1
+Whiting,Commercial,66,10,1
+Whiting,Commercial,67,1,1
+Whiting,Commercial,69,2,1

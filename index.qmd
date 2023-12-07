@@ -14,7 +14,7 @@ The course has three parts, each consisting of several tutorials.
 -   **[Part 1: Understand](understand/index.qmd)**\
     You will gain an understanding of size spectra and their dynamics by exploring simple example systems hands-on with mizer.
 
--   **Part 2: Build**\
+-   **[Part 2: Build](build/index.qmd)**\
     You will build your own multi-species mizer model for the Celtic sea, following our example. You can also create a model for your own area of interest.
 
 -   **Part 3: Use**\
