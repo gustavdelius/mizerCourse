@@ -1,5 +1,5 @@
 ---
-title: "Refine model: Landings"
+title: "Match landings datas"
 ---
 
 We will now continue to refine our model by matching it to observed landings.
@@ -13,10 +13,10 @@ library(mizerExperimental)
 library(tidyverse)
 ```
 
-We load the model we created in the [previous tutorial](refine-diet.qmd).
+We load the model we created in the [previous tutorial](refine.qmd).
 
 ```{r}
-cel_model <- readParams("cel_model_diet.rds")
+cel_model <- readParams("cel_model_refined.rds")
 ```
 
 
@@ -29,12 +29,16 @@ catch_lengths <- read.csv("catch.csv")
 head(catch_lengths)
 ```
 
-For each species we have numbers of individuals observed in 1cm wide length bins (the `dl` column indicates the width of each bin).
+For each species we have numbers of individuals observed in 1cm wide length bins (the `dl` column indicates the width of each bin). If you get an error message saying that the `catch.csv` file can not be found: you will find the code for downloading it in the [earlier tutorial](build/find-species-parameters.qmd#asymptotic-size) when estimating asymptotic sizes.
 
-In addition to this information about the size distribution of the catches we have the total biomass of the annual commercial landings for each species, i.e., the fisheries yield. Like the spawning stock biomass estimates we used in the tutorial on [finding species parameters](find-species-parameters.qmd), we obtained the values for the yield in tonnes per square kilometre (or, equivalently, grams per square metre) from the 2021 [ICES stock assessment database](https://stecf.jrc.ec.europa.eu/dd/fdi) by dividing the total yield of the assessed stock by the area of the assessment region in square kilometres and taking the geometric mean over the time period from 2012 to 2021. Here we just load them in from a file we prepared and store them in a `yield_observed` column in the species parameter dataframe of our model:
+In addition to this information about the size distribution of the catches we have the total biomass of the annual commercial landings for each species, i.e., the fisheries yield. Like the spawning stock biomass estimates we used in the tutorial on [finding first parameters](find-species-parameters.qmd), we obtained the values for the yield in tonnes per square kilometre (or, equivalently, grams per square metre) from the 2021 [ICES stock assessment database](https://stecf.jrc.ec.europa.eu/dd/fdi) by dividing the total yield of the assessed stock by the area of the assessment region in square kilometres and taking the geometric mean over the time period from 2012 to 2021. Here we just load them in from a file we prepared and store them in a `yield_observed` column in the species parameter dataframe of our model:
+```{r eval=FALSE}
+download.file("https://github.com/sizespectrum/mizerCourse/raw/main/build/celtic_yields.rds",
+              destfile = "celtic_yields.rds")
+```
 
 ```{r}
-species_params(cel_model)$yield_observed <- readRDS("celtic_yields.rds")
+gear_params(cel_model)$yield_observed <- readRDS("celtic_yields.rds")
 ```
 
 We can now use `plotYieldVsSpecies()` to make a plot that for each species compares the observed yield to the yield currently achieved in the steady state of our model.
@@ -104,4 +108,9 @@ The `tuneParams()` gadget has a lot of useful panels and allows you to play with
 
 ## Exercise: Use tuneParams gadget to refine your model
 
-In our video we only started refining the model by adjusting some parameters for a few species. We ask you to do something similar but for more species in order to refine the model you have built in the previous tutorial. But don't spend too much time on this until we have improved the fit of the model to diet data.
+In our video we only started refining the model by adjusting some parameters for a few species. We ask you to do something similar but for more species in order to refine the model you have built in the previous tutorial. Share your observations in the comment section below.
+
+```{r}
+saveParams(cel_model, file = "cel_model_landings.rds")
+```
+

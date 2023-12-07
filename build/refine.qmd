@@ -1,5 +1,5 @@
 ---
-title: "Refine your model: shiny gadget"
+title: "Refine your model"
 ---
 
 ## Introduction
@@ -102,7 +102,7 @@ Now feel free to experiment with the `tuneParams()` gadget a bit. We will howeve
 
 When you are done, save your model for use in the next tutorial:
 ```{r eval=FALSE}
-saveParams(cel_model, "cel_model_diet.rds")
+saveParams(cel_model, "cel_model_refined.rds")
 ```
 
 <!-- Next we will use the gadget to refine our model using diet data. -->

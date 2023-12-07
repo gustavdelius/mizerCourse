@@ -15,6 +15,7 @@ project:
     - build/create-first-model.qmd
     - build/refine.qmd
     - build/landings.qmd
+    - build/tune-resilience.qmd
 
 toc: true
 toc-depth: 3
@@ -88,7 +89,7 @@ website:
         contents:
         - text: Introduction
           href: build/index.qmd
-        - text: Find species parameters
+        - text: Find first parameters
           href: build/find-species-parameters.qmd
         - text: Create your first model
           href: build/create-first-model.qmd
@@ -96,3 +97,5 @@ website:
           href: build/refine.qmd
         - text: Match landings data
           href: build/landings.qmd
+        - text: Tune resilience
+          href: build/tune-resilience.qmd
