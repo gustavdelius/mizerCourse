@@ -18,9 +18,13 @@ library(tidyverse)
 ```
 
 Then we load the model and explore its various properties.
+```{r eval=FALSE}
+download.file("https://github.com/sizespectrum/mizerCourse/raw/main/use/toothfish_model.rds",
+              destfile = "toothfish_model.rds")
+```
 
 ```{r,message=FALSE}
-params <- readParams("toothfish/toothfish_model.rds")
+params <- readParams("toothfish_model.rds")
 ```
 
 We look at the growth curves,
@@ -106,9 +110,13 @@ The abundance of some (but not all) of the smaller to medium sizes of prey are a
 ## Fishing through time: past time series
 
 Mizer can also be used to carry out projections with changes in fishing effort. We will start by reading in a time series of catch and effort. We will read in the effort data for this fishery. Note: these are not the correct effort values, they are only for illustration in this example. Then we plot effort and catch through time.
+```{r eval=FALSE}
+download.file("https://github.com/sizespectrum/mizerCourse/raw/main/use/longline.rds",
+              destfile = "longline.rds")
+```
 
 ```{r, code_folding=TRUE}
-dat <- readRDS("toothfish/longline.rds")
+dat <- readRDS("longline.rds")
 plot_dat <- melt(dat, "Year")
 
 ggplot(plot_dat, aes(x = Year, y = value)) +
@@ -281,7 +289,9 @@ Let's take a look at the relative exploitation status of the stocks using the pr
 ```{r}
 # plot change in biomass under each scenario relative to unfished values
 # get saved values from steady state without fishing that we generated earlier 
-sim0 <- readRDS("toothfish/sim0.rds")
+# download.file("https://github.com/sizespectrum/mizerCourse_Nov22/raw/main/use/toothfish/sim0.rds",
+#               destfile = "sim0.rds")
+sim0 <- readRDS("sim0.rds")
 # get the unfished biomasses
 B_unfished <- getBiomass(sim0)[1, ]
 #scen 1

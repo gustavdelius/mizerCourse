@@ -57,7 +57,7 @@ Note the `ref` argument to `install_github()`. It specifies which particular ver
 To check that everything works, copy and paste and then run the following code:
 ```{r}
 if (getRversion() < "4.0") warning("Your version of R is too old.")
-if (packageVersion("mizer") < "2.4.1") warning("Your version of mizer is too old.")
+if (packageVersion("mizer") < "2.5.0") warning("Your version of mizer is too old.")
 if (packageVersion("mizerExperimental") != "2.4.0.9004") warning("You are using a different version of MizerExperimental. Please reinstall with the command given above.")
 if (packageVersion("tidyverse") < "1.3.0") warning("Your version of tidyverse is very old. While this may not create a problem, updating it is nevertheless advised.")
 library(mizer)

@@ -138,6 +138,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="https://sizespectrum.org/mizer" class="sidebar-item-text sidebar-link"><i class="bi bi-house-door-fill" role="img">
+</i> 
+ <span class="menu-text">Back to mizer home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
@@ -242,6 +249,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part 3: Use</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/fishing-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore fishing scenarios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/change-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change resource</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/further-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore further scenarios</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -294,8 +336,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>For each species we have numbers of individuals observed in 1cm wide length bins (the <code>dl</code> column indicates the width of each bin). If you get an error message saying that the <code>catch.csv</code> file can not be found: you will find the code for downloading it in the <a href="build/collect-parameters.qmd#asymptotic-size">earlier tutorial</a> when estimating asymptotic sizes.</p>
-<p>In addition to this information about the size distribution of the catches we have the total biomass of the annual commercial landings for each species, i.e., the fisheries yield. Like the spawning stock biomass estimates we used in the tutorial on <a href="../build/collect-parameters.html">finding first parameters</a>, we obtained the values for the yield in tonnes per square kilometre (or, equivalently, grams per square metre) from the 2021 <a href="https://stecf.jrc.ec.europa.eu/dd/fdi">ICES stock assessment database</a> by dividing the total yield of the assessed stock by the area of the assessment region in square kilometres and taking the geometric mean over the time period from 2012 to 2021. Here we just load them in from a file we prepared and store them in a <code>yield_observed</code> column in the species parameter dataframe of our model:</p>
+<p>For each species we have numbers of individuals observed in 1cm wide length bins (the <code>dl</code> column indicates the width of each bin). If you get an error message saying that the <code>catch.csv</code> file can not be found: you will find the code for downloading it in the <a href="../build/collect-parameters.html#asymptotic-size">earlier tutorial</a> when estimating asymptotic sizes.</p>
+<p>In addition to this information about the size distribution of the catches we have the total biomass of the annual commercial landings for each species, i.e., the fisheries yield. Like the spawning stock biomass estimates we used in the tutorial on <a href="../build/collect-parameters.html">collecting parameters</a>, we obtained the values for the yield in tonnes per square kilometre (or, equivalently, grams per square metre) from the 2021 <a href="https://stecf.jrc.ec.europa.eu/dd/fdi">ICES stock assessment database</a> by dividing the total yield of the assessed stock by the area of the assessment region in square kilometres and taking the geometric mean over the time period from 2012 to 2021. Here we just load them in from a file we prepared and store them in a <code>yield_observed</code> column in the species parameter dataframe of our model:</p>
 <div class="cell" data-hash="landings_cache/html/unnamed-chunk-4_9624e2d04c8225aac23904b913497f2e">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/sizespectrum/mizerCourse/raw/main/build/celtic_yields.rds"</span>,</span>
 <span>              destfile <span class="op">=</span> <span class="st">"celtic_yields.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

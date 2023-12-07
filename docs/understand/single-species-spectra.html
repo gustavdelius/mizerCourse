@@ -153,6 +153,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="https://sizespectrum.org/mizer" class="sidebar-item-text sidebar-link"><i class="bi bi-house-door-fill" role="img">
+</i> 
+ <span class="menu-text">Back to mizer home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
@@ -257,6 +264,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part 3: Use</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/fishing-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore fishing scenarios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/change-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change resource</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/further-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore further scenarios</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -310,8 +352,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="single-species-model" class="level2"><h2 class="anchored" data-anchor-id="single-species-model">Single-species model</h2>
-<p>In this and the next tutorial we want to keep the size-spectrum aspects of the mizer model separate from the multi-species aspects, so that we do not have to think about too many things at once. So we will explore a model where a single species lives in a non-dynamical background community that we will set to a Sheldon power-law abundance. Only in the fourth tutorial of this week exploring <a href="../understand/species-interactions.html">species interactions</a> will we start to consider the interesting multi-species phenomena that arise in mizer models.</p>
-<p>In this tutorial we will only be interested in the shape of the size spectrum, i.e., in how the total number of individuals is distributed over the different sizes. We are not yet interested in the overall abundance of the species. The overall abundance would be influenced by the total rate of reproduction and recruitment for the species. This in turn would be influenced by the size spectrum, because that determines how many of the individuals are mature. This dynamic feedback will of course become important when we build real-world models in week 2 and use them in week 3. But for now we have enough on our plate without thinking also about this.</p>
+<p>In this and the next tutorial we want to keep the size-spectrum aspects of the mizer model separate from the multi-species aspects, so that we do not have to think about too many things at once. So we will explore a model where a single species lives in a non-dynamical background community that we will set to a Sheldon power-law abundance. Only in the fourth tutorial, exploring <a href="../understand/species-interactions.html">species interactions</a>, will we start to consider the interesting multi-species phenomena that arise in mizer models.</p>
+<p>In this tutorial we will only be interested in the shape of the size spectrum, i.e., in how the total number of individuals is distributed over the different sizes. We are not yet interested in the overall abundance of the species. The overall abundance would be influenced by the total rate of reproduction and recruitment for the species. This in turn would be influenced by the size spectrum, because that determines how many of the individuals are mature. This dynamic feedback will of course become important when we build real-world models in Part 2 and use them in Part 3. But for now we have enough on our plate without thinking also about this.</p>
 <p>Mizer collects all the parameters describing a size-spectrum model into one object of class <code>MizerParams</code>. You do not need to set up this object by hand because there are several wrapper functions in mizer that create the object for you for various types of models, and also many functions for changing specific parameters in a model. We will use the <code><a href="https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html">newSingleSpeciesParams()</a></code> function to set up a model describing a single fish species living in an ecosystem whose community size spectrum is given by a power-law.</p>
 <p>The <code><a href="https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html">newSingleSpeciesParams()</a></code> function has many arguments that allow you to specify parameters for the fish species as well as for the community, but all these arguments have default values, so we can simply call the function without specifying those arguments. We will only specify the power-law exponent <code>lambda</code> of the background community. Note that in mizer the size spectrum exponent refers to the number density and is therefore expected to be around 2.</p>
 <div class="cell" data-hash="single-species-spectra_cache/html/unnamed-chunk-2_71dfe2feab32ef79c6eb232dd8499e54">

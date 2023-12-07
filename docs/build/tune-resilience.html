@@ -60,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../use/index.html" rel="next">
 <link href="../build/landings.html" rel="prev">
 <link href="../images/favicon-16x16.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
@@ -149,6 +150,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://sizespectrum.org/mizer" class="sidebar-item-text sidebar-link"><i class="bi bi-house-door-fill" role="img">
+</i> 
+ <span class="menu-text">Back to mizer home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
@@ -254,6 +262,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part 3: Use</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/fishing-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore fishing scenarios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/change-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change resource</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/further-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore further scenarios</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -325,12 +368,12 @@ Stock-recruitment relationships
 </div>
 <p>There are several quantities that were introduced in that earlier tutorial that we would like to recall now:</p>
 <ul>
-<li><p>The rate <span class="math inline">E_R</span> at which a species invests energy into reproduction. We discussed how this depends on the species parameters in a section of the tutorial on <a href="../understand/single-species-spectra.html#investment-into-reproduction">single species spectra</a> in the first week of the course. In standard fisheries models the energy invested is assumed to be proportional to the spawning stock biomass. In mizer the energy invested also depends on how much food is available for the spawning stock. But nevertheless you won’t go wrong too much if in your head you think of <span class="math inline">E_R</span> as being proportional to the spawning stock biomass.</p></li>
+<li><p>The rate <span class="math inline">E_R</span> at which a species invests energy into reproduction. We discussed how this depends on the species parameters in a section of the tutorial on <a href="../understand/single-species-spectra.html#investment-into-reproduction">single species spectra</a> in Part 1 of the course. In standard fisheries models the energy invested is assumed to be proportional to the spawning stock biomass. In mizer the energy invested also depends on how much food is available for the spawning stock. But nevertheless you won’t go wrong too much if in your head you think of <span class="math inline">E_R</span> as being proportional to the spawning stock biomass.</p></li>
 <li><p>The parameter <strong><code>erepro</code></strong> that describes the efficiency with which the energy that a species invests into reproduction is converted to eggs. Multiplying <span class="math inline">E_R</span> by <code>erepro</code> and by the conversion factor from biomass to number of eggs gives the quantity that we called <span class="math inline">R_{di}</span>: the rate of egg production. We also sometimes refer to <span class="math inline">R_{di}</span> as the <em>“density-independent reproduction rate”</em>. The efficiency <code>erepro</code> can be quite small because a lot of the energy expended on reproduction goes not into the production of eggs but into associated processes, like for example migration to the spawning grounds.</p></li>
 <li><p>The rate <span class="math inline">R_{dd}</span> at which new individuals can enter the smallest size class in the model (usually this represents the hatching of eggs). This depends in a non-linear way on the rate <span class="math inline">R_{di}</span> of egg production and therefore also non-linearly on the rate at <span class="math inline">E_R</span> at which the species invests energy into reproduction. We therefore sometimes refer to this as the <em>“density-dependent reproduction rate”</em>.</p></li>
 <li><p>The parameter <strong><code>R_max</code></strong> that gives the maximum rate at which individuals can join the smallest size class, no matter how much energy the species invests.</p></li>
 </ul>
-<p>These concepts are nicely illustrated by the following figure that you saw <a href="understand/dynamics-of-spectra.qmd#density-dependence-in-reproduction">earlier</a>:</p>
+<p>These concepts are nicely illustrated by the following figure that you saw <a href="../understand/dynamics-of-spectra.html#density-dependence-in-reproduction">earlier</a>:</p>
 <div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-4_76a3df428f1b31f9bdf0c29f26187a3c">
 <div class="cell-output-display">
 <p><img src="tune-resilience_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
@@ -783,6 +826,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../use/index.html" class="pagination-link">
+        <span class="nav-page-text">Introduction</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

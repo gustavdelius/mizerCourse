@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.433">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>mizer course</title>
+<title>mizer course - Part 3: Use mizer models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +19,25 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./prepare/install-tools.html" rel="next">
-<link href="./images/favicon-16x16.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../use/fishing-scenarios.html" rel="next">
+<link href="../build/tune-resilience.html" rel="prev">
+<link href="../images/favicon-16x16.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -60,51 +56,37 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="">
+}</script><link href="../site_libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="mizer course - Part 3: Use mizer models">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://mizer.course.sizespectrum.org/images/mizer-01.png">
 <meta property="og:site-name" content="mizer course">
-<meta property="og:image:height" content="715">
-<meta property="og:image:width" content="1918">
-<meta name="twitter:title" content="">
+<meta name="twitter:title" content="mizer course - Part 3: Use mizer models">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://mizer.course.sizespectrum.org/images/mizer-01.png">
 <meta name="twitter:creator" content="gustavdelius">
 <meta name="twitter:site" content="@mizer_model">
-<meta name="twitter:image-height" content="715">
-<meta name="twitter:image-width" content="1918">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
-
 <body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../use/index.html">Part 3: Use</a></li><li class="breadcrumb-item"><a href="../use/index.html">Introduction</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">mizer course</a> 
+      <a href="../">mizer course</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -114,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="https://sizespectrum.org/mizer" class="sidebar-item-text sidebar-link"><i class="bi bi-house-door-fill" role="img">
 </i> 
@@ -123,13 +105,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./prepare/install-tools.html" class="sidebar-item-text sidebar-link">
+  <a href="../prepare/install-tools.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Install tools</span></a>
   </div>
 </li>
@@ -141,45 +123,45 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./understand/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../understand/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./understand/observed-size-spectra.html" class="sidebar-item-text sidebar-link">
+  <a href="../understand/observed-size-spectra.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Observed size spectra</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./understand/single-species-spectra.html" class="sidebar-item-text sidebar-link">
+  <a href="../understand/single-species-spectra.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Single species spectra</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./understand/predation-growth-and-mortality.html" class="sidebar-item-text sidebar-link">
+  <a href="../understand/predation-growth-and-mortality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Predation, growth and mortality</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./understand/species-interactions.html" class="sidebar-item-text sidebar-link">
+  <a href="../understand/species-interactions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Species interactions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./understand/dynamics-of-spectra.html" class="sidebar-item-text sidebar-link">
+  <a href="../understand/dynamics-of-spectra.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dynamics of size spectra</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
@@ -188,45 +170,45 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./build/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../build/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./build/collect-parameters.html" class="sidebar-item-text sidebar-link">
+  <a href="../build/collect-parameters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collect parameters</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./build/create-first-model.html" class="sidebar-item-text sidebar-link">
+  <a href="../build/create-first-model.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Create your first model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./build/refine.html" class="sidebar-item-text sidebar-link">
+  <a href="../build/refine.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Refine your model</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./build/landings.html" class="sidebar-item-text sidebar-link">
+  <a href="../build/landings.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Match landings data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./build/tune-resilience.html" class="sidebar-item-text sidebar-link">
+  <a href="../build/tune-resilience.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tune resilience</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
@@ -235,92 +217,85 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./use/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../use/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./use/fishing-scenarios.html" class="sidebar-item-text sidebar-link">
+  <a href="../use/fishing-scenarios.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explore fishing scenarios</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./use/change-resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../use/change-resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Change resource</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./use/further-scenarios.html" class="sidebar-item-text sidebar-link">
+  <a href="../use/further-scenarios.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explore further scenarios</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#online-course" id="toc-online-course" class="nav-link active" data-scroll-target="#online-course">Online course</a>
-  <ul class="collapse">
-  <li><a href="#tutorials" id="toc-tutorials" class="nav-link" data-scroll-target="#tutorials">Tutorials</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/gustavdelius/mizerCourse/edit/master/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/gustavdelius/mizerCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<li><a href="#tutorials" id="toc-tutorials" class="nav-link active" data-scroll-target="#tutorials">Tutorials</a></li>
+  <li><a href="#video-overview" id="toc-video-overview" class="nav-link" data-scroll-target="#video-overview">Video overview</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/gustavdelius/mizerCourse/edit/master/use/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/gustavdelius/mizerCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-
-<p><img src="images/mizer-01.png" class="preview-image img-fluid"></p>
-<section id="online-course" class="level1">
-<h1>Online course</h1>
-<p>In this hands-on online course you will learn about the principles of size based multi-species fisheries modelling and the implementation of these principles in the R package mizer. You will build a mizer model for the Celtic sea from scratch and will also be encouraged to build a model for your own area of interest. You will then run various scenarios to explore how the ecosystem reacts to changes in fishing or other stressors.</p>
-<p>The course material was adapted from two previous three-week courses in <a href="https://mizer.course.aug22.sizespectrum.org">August 2022</a> and in <a href="https://mizer.course.nov22.sizespectrum.org/">November 2022</a>.</p>
-<section id="tutorials" class="level2">
-<h2 class="anchored" data-anchor-id="tutorials">Tutorials</h2>
-<p>The course has three parts, each consisting of several tutorials.</p>
-<ul>
-<li><p><strong><a href="./understand/index.html">Part 1: Understand</a></strong><br>
-You will gain an understanding of size spectra and their dynamics by exploring simple example systems hands-on with mizer.</p></li>
-<li><p><strong><a href="./build/index.html">Part 2: Build</a></strong><br>
-You will build your own multi-species mizer model for the Celtic sea, following our example. You can also create a model for your own area of interest.</p></li>
-<li><p><strong><a href="./use/index.html">Part 3: Use</a></strong><br>
-You will explore the effects of changes in fishing and changes in resource dynamics on the fish community and the fisheries yield. You will run your own model scenarios.</p></li>
-</ul>
-<p>There are exercises dotted throughout the tutorials.</p>
-<p>To get started, <a href="./prepare/install-tools.html">install the tools</a> you need and then go to <a href="./understand/index.html">Part 1</a> to learn about size spectra and their dynamics.</p>
-<hr>
-<p>This course was developed by Gustav Delius at the <a href="https://york.ac.uk">University of York</a> as part of the <a href="https://pyramidsoflife.york.ac.uk/">Pyramids of Life</a>, funded by <a href="https://www.ukri.org/">UK Research and Innovation</a> via the <a href="https://www.smmr.org.uk/">Sustainable Management of Marine Resources</a> fund. It builds on an earlier collaboration with <a href="https://discover.utas.edu.au/Asta.Audzijonyte">Asta Audzijonyte</a> as a part of the <a href="https://sif.lt/">Sustainable inland fisheries project</a>, funded by the European Regional Development Fund. Many thanks to Ken Andersen and Julia Blanchard for contributing videos.</p>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="images/smmr-blue.png" class="img-fluid"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="images/UOY-Logo.png" class="img-fluid"></p>
-</div>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Part 3: Use mizer models</h1>
 </div>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>Now that you have built your model, you can use it to explore the effects of changes in fishing and changes in the environment on the fish community and the fisheries yield.</p>
+<section id="tutorials" class="level3"><h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
+<p>Using examples, the tutorials are designed to help you develop your own model simulation experiments:</p>
+<ol type="1">
+<li><p><a href="tune-resilience"><strong>Tune the resilience to fishing</strong></a> First, we will explore how sensitive your model is to the effects of fishing. We will show how the reproduction levels influence the resilience of the species. We make adjustments to the reproduction levels to produce realistic responses to fishing intensity.</p></li>
+<li><p><a href="../use/fishing-scenarios.html"><strong>Simulate fishing scenarios</strong></a><br>
+Once the resilience to fishing is tuned, we can assess how the model responds to changes in fishing through time. This step involves looking closer at the fishing parameters in mizer and setting up different fishing scenarios.</p></li>
+<li><p><a href="../use/change-resources.html"><strong>Change resources</strong></a><br>
+Next we will look at the resource spectrum and how changes in three main resource parameters can affect our ecosystem. We will also show an example of how to use external data on resource time series to force the mizer model.</p></li>
+<li><p><a href="../use/further-scenarios.html"><strong>Explore further scenarios</strong></a><br>
+This tutorial provides extra material, prepared by Julia Blanchard using another system (Patagonian toothfish fishery) as an example. Here you can learn on how to set time series of fishing changes and more.</p></li>
+</ol></section><section id="video-overview" class="level3"><h3 class="anchored" data-anchor-id="video-overview">Video overview</h3>
+<p>The following video by Julia Blanchard provides a broad overview of the different ways in which mizer is being used to help understand the consequences of change in aquatic ecosystems. There are a lot of ways!</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-1_2da21073ccba00ce7b849bf5c644ec9d">
+<div class="cell-output-display">
+<div class="vembedr" align="center">
+<div class="vembedr-rounded" style="border-radius: 10px;">
+<iframe src="https://www.youtube.com/embed/Z8FW7t4xrtU" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -566,15 +541,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
 });
-</script>
-<script src="https://giscus.app/client.js" data-repo="gustavdelius/mizerCourse" data-repo-id="R_kgDOK0vNNg" data-category="Comments" data-category-id="DIC_kwDOK0vNNs4CbfmH" data-mapping="title" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><script src="https://giscus.app/client.js" data-repo="gustavdelius/mizerCourse" data-repo-id="R_kgDOK0vNNg" data-category="Comments" data-category-id="DIC_kwDOK0vNNs4CbfmH" data-mapping="title" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../build/tune-resilience.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tune resilience</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./prepare/install-tools.html" class="pagination-link">
-        <span class="nav-page-text">Install tools</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../use/fishing-scenarios.html" class="pagination-link">
+        <span class="nav-page-text">Explore fishing scenarios</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

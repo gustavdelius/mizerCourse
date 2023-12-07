@@ -16,6 +16,7 @@ project:
     - build/refine.qmd
     - build/landings.qmd
     - build/tune-resilience.qmd
+    - use/*
 
 toc: true
 toc-depth: 3
@@ -67,6 +68,9 @@ website:
     style: "docked"
     search: true
     contents:
+      - icon: house-door-fill
+        text: Back to mizer home
+        href: https://sizespectrum.org/mizer
       - text: Introduction
         href: index.qmd
       - text: Install tools
@@ -99,3 +103,13 @@ website:
           href: build/landings.qmd
         - text: Tune resilience
           href: build/tune-resilience.qmd
+      - section: "Part 3: Use"
+        contents:
+        - text: Introduction
+          href: use/index.qmd
+        - text: Explore fishing scenarios
+          href: use/fishing-scenarios.qmd
+        - text: Change resource
+          href: use/change-resources.qmd
+        - text: Explore further scenarios
+          href: use/further-scenarios.qmd

@@ -139,6 +139,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="https://sizespectrum.org/mizer" class="sidebar-item-text sidebar-link"><i class="bi bi-house-door-fill" role="img">
+</i> 
+ <span class="menu-text">Back to mizer home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
@@ -243,6 +250,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part 3: Use</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/fishing-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore fishing scenarios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/change-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change resource</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../use/further-scenarios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explore further scenarios</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -296,8 +338,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="trait-based-model" class="level2"><h2 class="anchored" data-anchor-id="trait-based-model">Trait-based model</h2>
-<p>In this first week we aim for understanding, not realism. So in this tutorial we investigate the tangled web of interactions in an idealised multi-species system. We choose a trait-based model in which the species making up the community differ from each other only in a single trait: their asymptotic body size (sometimes it is also called maximum body size).</p>
-<p>We use the <code><a href="https://sizespectrum.org/mizer/reference/newTraitParams.html">newTraitParams()</a></code> function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the <code><a href="https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html">newSingleSpeciesParams()</a></code> function, the <code><a href="https://sizespectrum.org/mizer/reference/newTraitParams.html">newTraitParams()</a></code> function does not set the initial spectra to their steady state values. We thus need to run the result through the <code><a href="https://sizespectrum.org/mizer/reference/steady.html">steady()</a></code> function (we’ll discuss that function more next week). We assign the resulting MizerParams object to the variable <code>mp</code>.</p>
+<p>In this first part of the course we aim for understanding, not realism. So in this tutorial we investigate the tangled web of interactions in an idealised multi-species system. We choose a trait-based model in which the species making up the community differ from each other only in a single trait: their asymptotic body size (sometimes it is also called maximum body size).</p>
+<p>We use the <code><a href="https://sizespectrum.org/mizer/reference/newTraitParams.html">newTraitParams()</a></code> function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the <code><a href="https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html">newSingleSpeciesParams()</a></code> function, the <code><a href="https://sizespectrum.org/mizer/reference/newTraitParams.html">newTraitParams()</a></code> function does not set the initial spectra to their steady state values. We thus need to run the result through the <code><a href="https://sizespectrum.org/mizer/reference/steady.html">steady()</a></code> function. We assign the resulting MizerParams object to the variable <code>mp</code>.</p>
 <div class="cell" data-hash="species-interactions_cache/html/unnamed-chunk-2_1d29d864db02f525fd102fc6e07a28de">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/newTraitParams.html">newTraitParams</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steady.html">steady</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

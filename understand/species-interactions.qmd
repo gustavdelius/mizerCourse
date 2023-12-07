@@ -13,9 +13,9 @@ library(tidyverse)
 
 ## Trait-based model
 
-In this first week we aim for understanding, not realism. So in this tutorial we investigate the tangled web of interactions in an idealised multi-species system. We choose a trait-based model in which the species making up the community differ from each other only in a single trait: their asymptotic body size (sometimes it is also called maximum body size).
+In this first part of the course we aim for understanding, not realism. So in this tutorial we investigate the tangled web of interactions in an idealised multi-species system. We choose a trait-based model in which the species making up the community differ from each other only in a single trait: their asymptotic body size (sometimes it is also called maximum body size).
 
-We use the `newTraitParams()` function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the `newSingleSpeciesParams()` function, the `newTraitParams()` function does not set the initial spectra to their steady state values. We thus need to run the result through the `steady()` function (we'll discuss that function more next week). We assign the resulting MizerParams object to the variable `mp`.
+We use the `newTraitParams()` function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the `newSingleSpeciesParams()` function, the `newTraitParams()` function does not set the initial spectra to their steady state values. We thus need to run the result through the `steady()` function. We assign the resulting MizerParams object to the variable `mp`.
 
 ```{r message=FALSE}
 mp <- newTraitParams() |> steady()
