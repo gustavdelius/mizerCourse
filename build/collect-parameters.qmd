@@ -189,7 +189,7 @@ Now it is time again to add comments to remind us of the origin of our parameter
 ```{r}
 comment(sp$a) <- "Taken from the `a` column in the 'estimates' table on FishBase on 07/12/2023."
 comment(sp$a) <- "Taken from the `b` column in the 'estimates' table on FishBase on 07/12/2023."
-comment(sp$l_max) <- "See https://mizer.course.nov22.sizespectrum.org/build/find-species-parameters.html#asymptotic-size "
+comment(sp$l_max) <- "See https://mizer.course.sizespectrum.org/build/collect-parameters.html#asymptotic-size "
 comment(sp$w_max) <- "Calculated from `l_max` using weight-length parameters `a` and `b`."
 ```
 

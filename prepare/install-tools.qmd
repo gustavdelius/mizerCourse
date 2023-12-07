@@ -74,7 +74,7 @@ When you post a comment you will be asked to log in to GitHub. You will probably
 
 You can use [Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) in your post. The comments are threaded discussions.
 
-The comments you post on this course website will also appear in the [Comments](https://github.com/sizespectrum/mizerCourse_Nov22/discussions/categories/comments) section of the GitHub discussions for the course repository. Even after posting a comment you can go and edit the post on GitHub and it will be updated on this website as well.
+The comments you post on this course website will also appear in the [Comments](https://github.com/sizespectrum/mizerCourse/discussions/categories/comments) section of the GitHub discussions for the course repository. Even after posting a comment you can go and edit the post on GitHub and it will be updated on this website as well.
 
 Instead of posting a comment, you can also report issues by clicking on the "Report an issue" link that you find at the bottom of the right side-bar. That will create an entry in the GitHub issue tracker.
 

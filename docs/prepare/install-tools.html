@@ -194,6 +194,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Part 2: Build</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../build/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../build/collect-parameters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collect parameters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../build/create-first-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create your first model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../build/refine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Refine your model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../build/landings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Match landings data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../build/tune-resilience.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tune resilience</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
@@ -242,9 +289,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script async="" src="https://fast.wistia.net/assets/external/E-v1.js">
 </script></section><section id="r-packages" class="level2"><h2 class="anchored" data-anchor-id="r-packages">R Packages</h2>
 <p>R packages extend the functionality of R. mizer itself is such an R package. There is a central repository for R packages called CRAN which hosts all of the packages needed for this course, except for the mizerExperimental package. To install them on your computer just start RStudio and then in the console issue the command</p>
-<div class="cell" data-hash="install-tools_cache/html/unnamed-chunk-1_5ce445d5827d3f64d64b0d3a8b2a9f5f">
+<div class="cell" data-hash="install-tools_cache/html/unnamed-chunk-1_cfae2a18fdab66bf4b86911842918234">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mizer"</span>, <span class="st">"tidyverse"</span>, <span class="st">"plotly"</span>, <span class="st">"remotes"</span>, <span class="st">"usethis"</span>,</span>
-<span>                   <span class="st">"rmarkdown"</span>, <span class="st">"rstudioapi"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>                   <span class="st">"rfishbase"</span>, <span class="st">"rmarkdown"</span>, <span class="st">"rstudioapi"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The mizerExperimental package is for code that is still experimental and thus changes frequently. Therefore it is hosted in a <a href="https://github.com/sizespectrum/mizerExperimental">GitHub repository</a>. You install it with</p>
 <div class="cell" data-hash="install-tools_cache/html/unnamed-chunk-2_6d93806d37a13f139a86507372a4eafe">

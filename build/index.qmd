@@ -6,7 +6,7 @@ Now that you have a good understanding of the basic principles behind sized base
 
 The material is split into 5 tutorials:
 
-1.  [**Collect parameters**](find-species-parameters.qmd)\
+1.  [**Collect parameters**](collect-parameters.qmd)\
     Here we will explore the main model parameters that should be provided by the user to start building a multi-species model. We will also look at assumptions and defaults that mizer uses to fill non-essential parameter values. Your task will be to collect essential parameters from FishBase or other sources. 
 
 2.  [**Create your first model**](create-first-model.qmd)\

@@ -11,7 +11,7 @@ project:
     - understand/species-interactions.qmd
     - understand/dynamics-of-spectra.qmd
     - build/index.qmd
-    - build/find-species-parameters.qmd
+    - build/collect-parameters.qmd
     - build/create-first-model.qmd
     - build/refine.qmd
     - build/landings.qmd
@@ -90,7 +90,7 @@ website:
         - text: Introduction
           href: build/index.qmd
         - text: Collect parameters
-          href: build/find-species-parameters.qmd
+          href: build/collect-parameters.qmd
         - text: Create your first model
           href: build/create-first-model.qmd
         - text: Refine your model

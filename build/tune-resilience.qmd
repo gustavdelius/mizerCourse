@@ -11,12 +11,12 @@ library(mizerExperimental)
 library(tidyverse)
 ```
 
-We load the latest version of the model. Note that your latest version of the model will differ from ours, so the plots you obtain by following this tutorial will differ from those displayed on this webpage. By noting these differences you will get a first feel for how sensitive a mizer model is to the choice of parameters. You can download the model that produced the results on this page with
+Note that your latest version of the model will differ from ours, so the plots you obtain by following this tutorial will differ from those displayed on this webpage. By noting these differences you will get a first feel for how sensitive a mizer model is to the choice of parameters. You can download the model that produced the results on this page with
 ```{r eval=FALSE}
 download.file("https://github.com/sizespectrum/mizerCourse/raw/main/build/cel_model_landings.rds",
               destfile = "cel_model_landings.rds")
 ```
-
+We load the model into the variable `cel_model`.
 ```{r}
 cel_model <- readParams("../build/cel_model_landings.rds")
 ```
@@ -26,7 +26,7 @@ cel_model <- readParams("../build/cel_model_landings.rds")
 
 In this tutorial we will look at an aspect of the model that has a big impact on the resilience of species to perturbations: the reproduction dynamics. In the tutorial on [dynamics of size spectra](../understand/dynamics-of-spectra.html#reproduction-level) in Part 1 we briefly looked at how density dependence of reproduction can influence how species react to changes in mortality, such as from fishing. It might be good if you go back to that tutorial and remind yourself.
 
-When we built our model in previous tutorials we were not concerned about the parameters that specify the reproduction dynamics. We were only concerned with setting the resulting reproduction rate for each species to the levels that produced the observed species biomass. But because the parameters for the reproduction dynamics will affect how resilient species are, we will choose appropriate values for them in this tutorial.
+When we built our model in previous tutorials we were not concerned about the parameters that specify the reproduction dynamics. We were only concerned with setting the resulting reproduction rate for each species to the levels that produced the observed species biomasses. But because the parameters for the reproduction dynamics will affect how resilient species are, we will choose appropriate values for them in this tutorial.
 
 ::: callout-important
 ### Stock-recruitment relationships
@@ -131,13 +131,13 @@ We use the `setBevertonHolt()` function to set the values for `erepro`. That fun
 If we try to set the value for `erepro` very low, the `setBevertonHolt()` function will issue a warning:
 
 ```{r}
-cel_model <- setBevertonHolt(cel_model, erepro = 0.001)
+cel_model <- setBevertonHolt(cel_model, erepro = 0.0001)
 ```
 
-Because we want all species to have the same value, we choose a value that is larger than those required. So we choose `erepro = 0.1`.
+Because we want all species to have the same value, we choose a value that is larger than those required. So we choose `erepro = 0.001`.
 
 ```{r}
-cel_model <- setBevertonHolt(cel_model, erepro = 0.1)
+cel_model <- setBevertonHolt(cel_model, erepro = 0.001)
 species_params(cel_model) |> select(erepro, R_max)
 ```
 
@@ -246,9 +246,9 @@ plotYieldVsF(cel_model, species = "Whiting",
 If you run the above code yourself in your worksheet, you will notice that for some fishing mortalities, `plotYieldCurve()` gives a warning that convergence was not reached within the 99 years for which we ran the projection. This means that we stopped the simulation before the species had settled into a new stable state for that fishing level and thus the result for this specific fishing level is only approximate. But approximate values are good enough for our purpose. Usually we find that it is the more extreme values of F where we do not get convergence.
 :::
 
-## Exercise:
+## Exercise
 
-We leave it to you now to look at the yield curves of other species and to compare the F~MSY~ values with those from ICES advice. You can find links to the relevant ICES reports in Table A1 at the end of the [Fisheries overview for the Celtic Seas ecoregion](https://ices-library.figshare.com/articles/_/18639782). You can use worksheet 5 in your worksheet repository for that purpose.
+We leave it to you now to look at the yield curves of other species and to compare the F~MSY~ values with those from ICES advice. You can find links to the relevant ICES reports in Table A1 at the end of the [Fisheries overview for the Celtic Seas ecoregion](https://ices-library.figshare.com/articles/_/18639782). 
 
 ## Summary
 

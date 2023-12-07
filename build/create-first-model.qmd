@@ -27,7 +27,7 @@ Now the creation of the mizer model is an 8-step process.
 
 ## Step 0: Collect parameters
 
-We did this in the [previous tutorial](find-species-parameters.qmd). We now have a species parameter data frame, a species interaction matrix (optional) and a gear paramter data frame. So here we only need to read in those files.
+We did this in the [previous tutorial](collect-parameters.qmd). We now have a species parameter data frame, a species interaction matrix (optional) and a gear paramter data frame. So here we only need to read in those files.
 
 ```{r}
 celtic_species_params <- readRDS("celtic_species_params.rds")
@@ -35,7 +35,7 @@ celtic_gear_params <- read.csv("celtic_gear_params.csv")
 celtic_interaction <- read.csv("celtic_interaction.csv", row.names = 1)
 ```
 
-When you repeat this work in RStudio, you can check that the data was read in correctly by clicking on `celtic_species_params`, `celtic_gear_params` and `celtic_interaction` in the "Environment" tab. That will open the data frames in your editor window for you to inspect. If you do not have the data files yet, the commands for downloading them were contained in the [previous tutorial](find-species-parameters.qmd).
+When you repeat this work in RStudio, you can check that the data was read in correctly by clicking on `celtic_species_params`, `celtic_gear_params` and `celtic_interaction` in the "Environment" tab. That will open the data frames in your editor window for you to inspect. If you do not have the data files yet, the commands for downloading them were contained in the [previous tutorial](collect-parameters.qmd).
 
 ## Step 1: Create MizerParams object
 
