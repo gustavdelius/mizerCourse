@@ -4,8 +4,6 @@ title: "Match landings datas"
 
 We will now continue to refine our model by matching it to observed landings.
 
-As always, we start by updating and loading packages.
-
 ```{r}
 #| message: false
 library(mizer)
@@ -110,7 +108,7 @@ The `tuneParams()` gadget has a lot of useful panels and allows you to play with
 
 In our video we only started refining the model by adjusting some parameters for a few species. We ask you to do something similar but for more species in order to refine the model you have built in the previous tutorial. Share your observations in the comment section below.
 
-```{r}
+```{r eval=FALSE}
 saveParams(cel_model, file = "cel_model_landings.rds")
 ```
 

@@ -2,11 +2,7 @@
 title: "Tune resilience"
 ---
 
-## Introduction
-
-In the previous week we tuned our model parameters so that the steady state of the model agrees with observed growth rates, average observed biomasses and with observed catches. We did not yet tune how sensitively our model reacts to changes away from its steady state. In particular, we did not tune how resilient the species are to fishing. We will do that in this tutorial.
-
-As always, we start by updating and loading packages
+In the previous tutorials we tuned our model parameters so that the steady state of the model agrees with observed growth rates, average observed biomasses and average observed catches. We did not yet tune how sensitively our model reacts to changes away from its steady state. In particular, we did not tune how resilient the species are to fishing. We will do that in this tutorial.
 
 ```{r}
 #| message: false
@@ -15,17 +11,22 @@ library(mizerExperimental)
 library(tidyverse)
 ```
 
-and load the latest version of our model:
+We load the latest version of the model. Note that your latest version of the model will differ from ours, so the plots you obtain by following this tutorial will differ from those displayed on this webpage. By noting these differences you will get a first feel for how sensitive a mizer model is to the choice of parameters. You can download the model that produced the results on this page with
+```{r eval=FALSE}
+download.file("https://github.com/sizespectrum/mizerCourse/raw/main/build/cel_model_landings.rds",
+              destfile = "cel_model_landings.rds")
+```
 
 ```{r}
 cel_model <- readParams("../build/cel_model_landings.rds")
 ```
 
+
 ## Reproduction dynamics
 
-In this tutorial we are going to look at an aspect of the model that has a big impact on the resilience of species to perturbations: the reproduction dynamics. In the tutorial on [dynamics of size spectra](../understand/dynamics-of-spectra.html#reproduction-level) in week 1 we briefly looked at how density dependence of reproduction can influence how species react to changes in mortality, such as from fishing. It might be good if you go back to that tutorial and remind yourself.
+In this tutorial we will look at an aspect of the model that has a big impact on the resilience of species to perturbations: the reproduction dynamics. In the tutorial on [dynamics of size spectra](../understand/dynamics-of-spectra.html#reproduction-level) in Part 1 we briefly looked at how density dependence of reproduction can influence how species react to changes in mortality, such as from fishing. It might be good if you go back to that tutorial and remind yourself.
 
-When we built our models in week 2 we were not concerned about the parameters that specify the reproduction dynamics. We were only concerned with setting the resulting reproduction rate for each species to the levels that produced the observed species biomass. But because the parameters for the reproduction dynamics will affect how resilient species are, we will choose appropriate values for them in this tutorial.
+When we built our model in previous tutorials we were not concerned about the parameters that specify the reproduction dynamics. We were only concerned with setting the resulting reproduction rate for each species to the levels that produced the observed species biomass. But because the parameters for the reproduction dynamics will affect how resilient species are, we will choose appropriate values for them in this tutorial.
 
 ::: callout-important
 ### Stock-recruitment relationships
@@ -47,20 +48,21 @@ There are several quantities that were introduced in that earlier tutorial that 
 
 -   The parameter **`R_max`** that gives the maximum rate at which individuals can join the smallest size class, no matter how much energy the species invests.
 
-These concepts are nicely illustrated by the following figure that you saw earlier:
+These concepts are nicely illustrated by the following figure that you saw [earlier](understand/dynamics-of-spectra.qmd#density-dependence-in-reproduction):
 
 ```{r}
 #| echo: false
-erepro <- 4
+E_R <- seq(0, 20, by = 0.5)
+
+erepro <- 0.4
 R_max <- 1
-E_R <- seq(0, 2, by = 0.05)
 R_di = erepro * E_R
 R_dd <- R_di * R_max / (R_di + R_max)
 df <- melt(data.frame(E_R, R_dd, R_di, R_max), id.vars = "E_R")
 df <- df[df$value < 1.6, ]
 df$dd <- "Low"
 
-erepro <- 1.5
+erepro <- 0.15
 R_max <- 3/2
 R_di = erepro * E_R
 R_dd <- R_di * R_max / (R_di + R_max)
@@ -70,14 +72,14 @@ df2$dd <- "High"
 
 ggplot(rbind(df, df2)) +
     geom_line(aes(x = E_R, y = value, linetype = variable,
-                  colour = dd, size = dd)) +
-    geom_point(aes(x = 5/4, y = 5/6), size = 2) +
+                  colour = dd, linewidth = dd)) +
+    geom_point(aes(x = 50/4, y = 5/6), size = 2) +
     labs(linetype = "", size = "R_max", colour = "R_max") +
     scale_y_continuous(name = "Reproduction rate [individuals/year]",
                        breaks = c(5/6), labels = c("R_dd")) +
     scale_x_continuous(name = "Energy invested [g/year]",
-                       breaks = c(5/4), labels = c("E_R")) +
-    scale_size_manual(values = c(1, 0.5)) +
+                       breaks = c(50/4), labels = c("E_R")) +
+    scale_discrete_manual("linewidth", values = c(1, 0.5)) +
     scale_colour_manual(values = c("black", "blue")) +
     scale_linetype_manual(values = c("solid", "dashed", "dotted"))
 ```
@@ -94,9 +96,7 @@ We like to work with the reproduction level because it is a number between 0 and
 
 We will need to tune the reproduction level of each species to make sure that their response to fishing is reasonable. How do we know what is reasonable? It is not a straightforward question.
 
-https://ices-library.figshare.com/articles/report/Celtic_Seas_ecoregion_Fisheries_overview_including_mixed-fisheries_considerations/18639782
-
-For our Celtic Sea model we will use the F~MSY~ values from the ICES fisheries advice. So we will try to set the reproduction levels so that so that the species give the maximum sustainable yield at the published F~MSY~ values. However what would you do if such values from fisheries advice are not available?
+For our Celtic Sea model we will use the F~MSY~ values from the [ICES fisheries advice](https://ices-library.figshare.com/articles/report/Celtic_Seas_ecoregion_Fisheries_overview_including_mixed-fisheries_considerations/18639782). We will try to set the reproduction levels so that so that the species give the maximum sustainable yield at the published F~MSY~ values. However what would you do if such values from fisheries advice are not available?
 
 You could start by consulting general fisheries models. You can read about the principles of basic fisheries surplus production models in this excellent book by Malcolm Haddon "[Using R for Modelling and Quantitative Methods in Fisheries](https://haddonm.github.io/URMQMF/surplus-production-models.html)".
 
@@ -131,13 +131,13 @@ We use the `setBevertonHolt()` function to set the values for `erepro`. That fun
 If we try to set the value for `erepro` very low, the `setBevertonHolt()` function will issue a warning:
 
 ```{r}
-cel_model <- setBevertonHolt(cel_model, erepro = 0.0001)
+cel_model <- setBevertonHolt(cel_model, erepro = 0.001)
 ```
 
-Because we want all species to have the same value, we choose a value that is larger than those required. So we choose `erepro = 0.001`.
+Because we want all species to have the same value, we choose a value that is larger than those required. So we choose `erepro = 0.1`.
 
 ```{r}
-cel_model <- setBevertonHolt(cel_model, erepro = 0.001)
+cel_model <- setBevertonHolt(cel_model, erepro = 0.1)
 species_params(cel_model) |> select(erepro, R_max)
 ```
 

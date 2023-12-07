@@ -35,7 +35,7 @@ celtic_gear_params <- read.csv("celtic_gear_params.csv")
 celtic_interaction <- read.csv("celtic_interaction.csv", row.names = 1)
 ```
 
-When you repeat this work, you can check that the data was read in correctly by clicking on `celtic_species_params`, `celtic_gear_params` and `celtic_interaction` in the "Environment" tab. That will open the data frames in your editor window for you to inspect. If you do not have the data files yet, the commands for downloading them were contained in the [previous tutorial](find-species-parameters.qmd).
+When you repeat this work in RStudio, you can check that the data was read in correctly by clicking on `celtic_species_params`, `celtic_gear_params` and `celtic_interaction` in the "Environment" tab. That will open the data frames in your editor window for you to inspect. If you do not have the data files yet, the commands for downloading them were contained in the [previous tutorial](find-species-parameters.qmd).
 
 ## Step 1: Create MizerParams object
 
@@ -66,7 +66,7 @@ cel_model <-
                 description = "See https://mizer.course.sizespectrum.org/build")
 ```
 
-You can get that metadata back later with `getMetadata(cel_model)`.
+You can get that metadata back later with `getMetadata()`.
 
 ## Step 2: Project to steady state
 
@@ -133,7 +133,7 @@ cel_model4 <- matchBiomasses(cel_model3)
 plotBiomassVsSpecies(cel_model4)
 ```
 
-Now the circles and squares lie exactly on top of each other. This is expected, because we simply changed the relative biomasses of species in the model. The size spectrum plot also look more healthy now, although the size spectrum of Herring looks surprisingly high. I wonder whether we mis-estimated its observed biomass.
+Now the circles and squares lie exactly on top of each other. This is expected, because we simply changed the relative biomasses of species in the model. The size spectrum plot also look more healthy now.
 
 ```{r}
 plotlySpectra(cel_model4, power = 2)
@@ -241,9 +241,12 @@ Of course there are still things wrong with this model. We will improve the mode
 
 ## Exercise
 
-Now use your species parameter data frame that you assembled in the exercise in the previous tutorial. Use the worksheet for this tutorial "worksheet-2-create-first-model.Rmd" to go through the 8 steps that we went through above to build your own mizer model based on your species parameters.
+Go through the 8 steps that we went through above to build your own mizer model based on your own species parameters.
 
 There are ways how the above method can fail. If that happens, there are various ways to rescue the situation. But rather than discussing such eventualities in the abstract, we will wait to see if you run into concrete difficulties. If you do, please save your code and email gustav.delius\@gmail.com. We will then use your example to discuss the solutions.
+
+When you are done, save your model with the `saveParams()` function for future use.
+
 
 ## Summary
 

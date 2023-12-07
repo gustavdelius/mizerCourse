@@ -89,7 +89,7 @@ website:
         contents:
         - text: Introduction
           href: build/index.qmd
-        - text: Find first parameters
+        - text: Collect parameters
           href: build/find-species-parameters.qmd
         - text: Create your first model
           href: build/create-first-model.qmd

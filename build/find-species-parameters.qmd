@@ -1,5 +1,5 @@
 ---
-title: "Find first parameters"
+title: "Collect parameters"
 ---
 
 In this tutorial we will discuss how to find the species-level information that goes into a mizer model. Perfect knowledge of the correct parameter values is impossible and judgement calls have to be made. We will invite you to make your own choices for the parameter values with which you will then build your first mizer model in the next tutorial.
