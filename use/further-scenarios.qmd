@@ -6,16 +6,14 @@ title: "Explore further scenarios"
 
 This final tutorial gives some examples from another mizer model, tuned to a different system and used to explore different questions. It is always useful to see alternative ways of using mizer and get examples of code to setup different analyses. This tutorial is contributed by Julia Blanchard. Here we will explore an example model of longline fishery that consists of targeting a single species, Patagonian toothfish.
 
-## A look at the model
-
-As usual, we need to have some packages installed.
-
 ```{r}
 #| message: false
 library(mizer)
 library(mizerExperimental)
 library(tidyverse)
 ```
+
+## A look at the model
 
 Then we load the model and explore its various properties.
 ```{r eval=FALSE}
