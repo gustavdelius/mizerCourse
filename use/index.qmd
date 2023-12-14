@@ -9,16 +9,13 @@ Now that you have built your model, you can use it to explore the effects of cha
 
 Using examples, the tutorials are designed to help you develop your own model simulation experiments:
 
-1.  [**Tune the resilience to fishing**](tune-resilience)
-    First, we will explore how sensitive your model is to the effects of fishing. We will show how the reproduction levels influence the resilience of the species. We make adjustments to the reproduction levels to produce realistic responses to fishing intensity.
+1.  [**Simulate fishing scenarios**](fishing-scenarios.qmd)\
+    We assess how the system responds to changes in fishing through time. This step involves looking closer at the fishing parameters in mizer and setting up different fishing scenarios.
 
-2.  [**Simulate fishing scenarios**](fishing-scenarios.qmd)\
-    Once the resilience to fishing is tuned, we can assess how the model responds to changes in fishing through time. This step involves looking closer at the fishing parameters in mizer and setting up different fishing scenarios.
+2.  [**Change resources**](change-resources.qmd)\
+    Next we look at the resource spectrum and how changes in three main resource parameters can affect our ecosystem. We will also show an example of how to use external data on resource time series to force the mizer model.
 
-3.  [**Change resources**](change-resources.qmd)\
-    Next we will look at the resource spectrum and how changes in three main resource parameters can affect our ecosystem. We will also show an example of how to use external data on resource time series to force the mizer model.
-
-4.  [**Explore further scenarios**](further-scenarios.qmd)\
+3.  [**Explore further scenarios**](further-scenarios.qmd)\
     This tutorial provides extra material, prepared by Julia Blanchard using another system (Patagonian toothfish fishery) as an example. Here you can learn on how to set time series of fishing changes and more.
 
 ### Video overview
