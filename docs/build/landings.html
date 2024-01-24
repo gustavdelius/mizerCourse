@@ -95,13 +95,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="mizer course - Match landings datas">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://mizer.course.sizespectrum.org/build/landings_files/figure-html/unnamed-chunk-6-1.png">
+<meta property="og:image" content="https://mizer.course.sizespectrum.org/build/landings_files/figure-html/unnamed-chunk-7-1.png">
 <meta property="og:site-name" content="mizer course">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
 <meta name="twitter:title" content="mizer course - Match landings datas">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://mizer.course.sizespectrum.org/build/landings_files/figure-html/unnamed-chunk-6-1.png">
+<meta name="twitter:image" content="https://mizer.course.sizespectrum.org/build/landings_files/figure-html/unnamed-chunk-7-1.png">
 <meta name="twitter:creator" content="gustavdelius">
 <meta name="twitter:site" content="@mizer_model">
 <meta name="twitter:image-height" content="960">
@@ -324,8 +324,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="landings-data" class="level2"><h2 class="anchored" data-anchor-id="landings-data">Landings data</h2>
 <p>We will load data on the size distribution of catches. Such data is often collected in data-poor fisheries, so it will be useful to see how we can use such data for model calibration. This specific dataset was sourced from Scientific, Technical and Economic Committee for Fisheries <a href="https://stecf.jrc.ec.europa.eu/dd/fdi">(STECF)</a> and was restricted to England and Wales.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-3_20f96f917256628ab73f96a0c69c6e3c">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">catch_lengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"catch.csv"</span><span class="op">)</span></span>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-3_f88f980564f87fd9f934797580d1f93a">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/gustavdelius/mizerCourse/raw/master/build/catch.csv"</span>,</span>
+<span>              destfile <span class="op">=</span> <span class="st">"catch.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-4_3eb5f56a6bc939cd9f53d13fb15e9589">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">catch_lengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"catch.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">catch_lengths</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -338,34 +342,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>For each species we have numbers of individuals observed in 1cm wide length bins (the <code>dl</code> column indicates the width of each bin). If you get an error message saying that the <code>catch.csv</code> file can not be found: you will find the code for downloading it in the <a href="../build/collect-parameters.html#asymptotic-size">earlier tutorial</a> when estimating asymptotic sizes.</p>
 <p>In addition to this information about the size distribution of the catches we have the total biomass of the annual commercial landings for each species, i.e., the fisheries yield. Like the spawning stock biomass estimates we used in the tutorial on <a href="../build/collect-parameters.html">collecting parameters</a>, we obtained the values for the yield in tonnes per square kilometre (or, equivalently, grams per square metre) from the 2021 <a href="https://stecf.jrc.ec.europa.eu/dd/fdi">ICES stock assessment database</a> by dividing the total yield of the assessed stock by the area of the assessment region in square kilometres and taking the geometric mean over the time period from 2012 to 2021. Here we just load them in from a file we prepared and store them in a <code>yield_observed</code> column in the species parameter dataframe of our model:</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-4_9624e2d04c8225aac23904b913497f2e">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/sizespectrum/mizerCourse/raw/main/build/celtic_yields.rds"</span>,</span>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-5_640b38b55bc6e2893bfec4e5832e2be1">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/sizespectrum/mizerCourse/raw/main/build/celtic_yields.rds"</span>,</span>
 <span>              destfile <span class="op">=</span> <span class="st">"celtic_yields.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-5_7f3fa9e2ee11534a2ea15bacb04bbce7">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">$</span><span class="va">yield_observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"celtic_yields.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-6_65e9a353675b13bff5faee87b3b00169">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">$</span><span class="va">yield_observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"celtic_yields.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now use <code><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSpecies.html">plotYieldVsSpecies()</a></code> to make a plot that for each species compares the observed yield to the yield currently achieved in the steady state of our model.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-6_58a819946a612d12144869bd8b9b8ccc">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSpecies.html">plotYieldVsSpecies</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-7_a9817c5f16e2d01d99ce10f12f290e29">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSpecies.html">plotYieldVsSpecies</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="landings_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="landings_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We’ll have to do something about those yield values in the model. But first let’s have a look at the size distribution of the catches.</p>
 </section><section id="exploring-catch-size-distributions" class="level2"><h2 class="anchored" data-anchor-id="exploring-catch-size-distributions">Exploring catch size distributions</h2>
 <p>The <code><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize()</a></code> function lets us see how well our modelled and the observed catch size distributions agree. Let’s take a look at the case of cod:</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-7_34f4524f9dac3ff81af0bd4223bf99d9">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-8_6ba0f801a5103af31ea0b849b99114ff">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
 <span>                x_var <span class="op">=</span> <span class="st">"Length"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="landings_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="landings_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We see that the red curve (model) and the blue curve (observations) match surprisingly well. This means that the selectivity parameters for cod are already chosen quite well in our model. However the match could be made even better by steepening the selectivity curve.</p>
 <p>Let us look at the current gear parameter data frame:</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-8_1cf6e05ec50660ed73ae8b7d7d493d31">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Let's look at our gear params first </span></span>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-9_82a0e208fa80ce9bbc94c93a5f1e13c7">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Let's look at our gear params first </span></span>
 <span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -377,8 +381,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We notice that the row names are made up of the species name and the gear name, separated by a comma. So we can change the selectivity parameters specifically for cod with</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-9_dfa2669d858dbbcef53aacce3078342c">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Modify the l50 and l25 for cod</span></span>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-10_d72f3b0b040b93fafa1f8d38fd0d6eb9">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Modify the l50 and l25 for cod</span></span>
 <span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"Cod, Commercial"</span>, <span class="st">"l50"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">44</span></span>
 <span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"Cod, Commercial"</span>, <span class="st">"l25"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">39.5</span></span>
 <span></span>
@@ -386,20 +390,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
 <span>                x_var <span class="op">=</span> <span class="st">"Length"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="landings_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="landings_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>This looks better. We should have no scruples adjusting the gear selectivity parameters using our mizer model because they are hard to estimate outside a model.</p>
 <p>Now that we have changed fishing selectivity we need to find a new steady state. It is important to run <code><a href="https://sizespectrum.org/mizer/reference/steady.html">steady()</a></code> frequently, while making small changes to the model parameters. If we accumulate too many changes, finding a new steady state might be harder.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-10_3dcd3e47048119bcf58ea5a7c997ce7e">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steady.html">steady</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-11_73f91d7a3d25b7843ab4704a0a60eda0">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steady.html">steady</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You probably wondered how I knew what the right values for the <code>l50</code> and <code>l25</code> parameter were for cod. The answer is that I used trial and error with the help of the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code>. We’ll do some more of that in the following video. We pass the catch length data into the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> function via the <code>catch</code> argument:</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-11_e500243957432e8b4040d1f0fc70f497">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams</a></span><span class="op">(</span><span class="va">cel_model</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-12_feed7a70d6dcfffc856e32dd3a93ff7a">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams</a></span><span class="op">(</span><span class="va">cel_model</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note how we assign the return value from the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> function back to the <code>cel_model</code> variable. That way we capture the changes that we make in the gadget.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-12_fb2a85a963304621c881ad6d70495ade">
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-13_0d64d375cd60fd5feed0c260352c2170">
 <div class="cell-output-display">
 <div class="vembedr" align="center">
 <div class="vembedr-rounded" style="border-radius: 10px;">
@@ -411,8 +415,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> gadget has a lot of useful panels and allows you to play with the parameters interactively. But most of these plots are also available as separate plot functions in mizer or in mizerExperimental.</p>
 </section><section id="exercise-use-tuneparams-gadget-to-refine-your-model" class="level2"><h2 class="anchored" data-anchor-id="exercise-use-tuneparams-gadget-to-refine-your-model">Exercise: Use tuneParams gadget to refine your model</h2>
 <p>In our video we only started refining the model by adjusting some parameters for a few species. We ask you to do something similar but for more species in order to refine the model you have built in the previous tutorial. Share your observations in the comment section below.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-13_c40f80e5a604a9248b379a34fb411dc6">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/saveParams.html">saveParams</a></span><span class="op">(</span><span class="va">cel_model</span>, file <span class="op">=</span> <span class="st">"cel_model_landings.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="landings_cache/html/unnamed-chunk-14_8c813143915b7cd25fee0a0ac378c224">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/saveParams.html">saveParams</a></span><span class="op">(</span><span class="va">cel_model</span>, file <span class="op">=</span> <span class="st">"cel_model_landings.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

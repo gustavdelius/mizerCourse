@@ -23,6 +23,11 @@ cel_model <- readParams("cel_model_refined.rds")
 We will load data on the size distribution of catches. Such data is often collected in data-poor fisheries, so it will be useful to see how we can use such data for model calibration. This specific dataset was sourced from Scientific, Technical and Economic Committee for Fisheries [(STECF)](https://stecf.jrc.ec.europa.eu/dd/fdi) and was restricted to England and Wales.
 
 ```{r}
+download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/catch.csv",
+              destfile = "catch.csv")
+```
+
+```{r}
 catch_lengths <- read.csv("catch.csv")
 head(catch_lengths)
 ```
