@@ -120,7 +120,7 @@ The best way to estimate this parameter is probably to look at what the largest 
 
 We have a data frame with observations of sizes of caught fish and can look through it for the largest sized fish of each species. 
 ```{r eval=FALSE}
-download.file("https://raw.githubusercontent.com/sizespectrum/mizerCourse/main/build/catch.csv",
+download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/catch.csv",
               destfile = "catch.csv")
 ```
 <!-- TODO: give origin of the data. -->

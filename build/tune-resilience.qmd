@@ -13,7 +13,7 @@ library(tidyverse)
 
 Note that your latest version of the model will differ from ours, so the plots you obtain by following this tutorial will differ from those displayed on this webpage. By noting these differences you will get a first feel for how sensitive a mizer model is to the choice of parameters. You can download the model that produced the results on this page with
 ```{r eval=FALSE}
-download.file("https://github.com/sizespectrum/mizerCourse/raw/main/build/cel_model_landings.rds",
+download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/cel_model_landings.rds",
               destfile = "cel_model_landings.rds")
 ```
 We load the model into the variable `cel_model`.

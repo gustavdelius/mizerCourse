@@ -453,8 +453,8 @@ Joining with `by = join_by(Class, ClassNum)`</code></pre>
 <p>The asymptotic size <code>w_max</code> is the size (in grams) at which all individuals of the species invest 100% of their energy income into reproduction and hence all growth stops. Due to variation between individuals, some individuals may stop growing earlier. So the <code>w_max</code> parameter in mizer is not the asymptotic size of an average individual but the maximum asymptotic size.</p>
 <p>The best way to estimate this parameter is probably to look at what the largest fish is that has been caught in your study area. You may of course be fishing so hard that none of the fish grow to their asymptotic size and then the size of the largest caught fish would be an underestimate of the asymptotic size. But our estimate does not have to be perfect.</p>
 <p>We have a data frame with observations of sizes of caught fish and can look through it for the largest sized fish of each species.</p>
-<div class="cell" data-hash="collect-parameters_cache/html/unnamed-chunk-12_1046091c870ffaecdf49a4ca7ec3881d">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/sizespectrum/mizerCourse/main/build/catch.csv"</span>,</span>
+<div class="cell" data-hash="collect-parameters_cache/html/unnamed-chunk-12_1146ba7983f702e82c31b63683b40ca7">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/gustavdelius/mizerCourse/raw/master/build/catch.csv"</span>,</span>
 <span>              destfile <span class="op">=</span> <span class="st">"catch.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- TODO: give origin of the data. -->

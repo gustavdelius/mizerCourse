@@ -36,10 +36,10 @@ For each species we have numbers of individuals observed in 1cm wide length bins
 
 In addition to this information about the size distribution of the catches we have the total biomass of the annual commercial landings for each species, i.e., the fisheries yield. Like the spawning stock biomass estimates we used in the tutorial on [collecting parameters](collect-parameters.qmd), we obtained the values for the yield in tonnes per square kilometre (or, equivalently, grams per square metre) from the 2021 [ICES stock assessment database](https://stecf.jrc.ec.europa.eu/dd/fdi) by dividing the total yield of the assessed stock by the area of the assessment region in square kilometres and taking the geometric mean over the time period from 2012 to 2021. Here we just load them in from a file we prepared and store them in a `yield_observed` column in the species parameter dataframe of our model:
 ```{r eval=FALSE}
-download.file("https://github.com/sizespectrum/mizerCourse/raw/main/build/celtic_yields.rds",
+download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/celtic_yields.rds",
               destfile = "celtic_yields.rds")
 ```
-
+https://github.com/gustavdelius/mizerCourse/raw/master/build/
 ```{r}
 gear_params(cel_model)$yield_observed <- readRDS("celtic_yields.rds")
 ```
