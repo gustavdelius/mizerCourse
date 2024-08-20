@@ -73,7 +73,7 @@ df2$dd <- "High"
 ggplot(rbind(df, df2)) +
     geom_line(aes(x = E_R, y = value, linetype = variable,
                   colour = dd, linewidth = dd)) +
-    geom_point(aes(x = 50/4, y = 5/6), size = 2) +
+    annotate("point", x = 50/4, y = 5/6, size = 2) +
     labs(linetype = "", size = "R_max", colour = "R_max") +
     scale_y_continuous(name = "Reproduction rate [individuals/year]",
                        breaks = c(5/6), labels = c("R_dd")) +
