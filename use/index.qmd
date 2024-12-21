@@ -22,9 +22,4 @@ Using examples, the tutorials are designed to help you develop your own model si
 
 The following video by Julia Blanchard provides a broad overview of the different ways in which mizer is being used to help understand the consequences of change in aquatic ecosystems. There are a lot of ways!
 
-```{r}
-#| echo: false
-vembedr::embed_url("https://youtu.be/Z8FW7t4xrtU") |>
-   vembedr::use_align("center") |>
-   vembedr::use_rounded(10)
-```
+{{< video https://youtu.be/Z8FW7t4xrtU >}}

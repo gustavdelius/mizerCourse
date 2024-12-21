@@ -1,0 +1,36 @@
+project:
+  type: book
+  output-dir: docs/book
+
+format:
+  pdf:
+    documentclass: scrreport
+
+book:
+  title: "mizer course"
+  site-url: "https://mizer.course.sizespectrum.org"
+  chapters:
+    - index.qmd
+    - prepare/install-tools.qmd
+    - part: "Understand"
+      chapters:
+      - understand/index.qmd
+      - understand/observed-size-spectra.qmd
+      - understand/single-species-spectra.qmd
+      - understand/predation-growth-and-mortality.qmd
+      - understand/species-interactions.qmd
+      - understand/dynamics-of-spectra.qmd
+    - part: "Build"
+      chapters:
+      - build/index.qmd
+      - build/collect-parameters.qmd
+      - build/create-first-model.qmd
+      - build/refine.qmd
+      - build/landings.qmd
+      - build/tune-resilience.qmd
+    - part: "Use"
+      chapters:
+      - use/index.qmd
+      - use/fishing-scenarios.qmd
+      - use/change-resources.qmd
+      - use/further-scenarios.qmd

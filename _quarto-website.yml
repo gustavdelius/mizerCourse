@@ -1,0 +1,108 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - prepare/install-tools.qmd
+    - understand/index.qmd
+    - understand/observed-size-spectra.qmd
+    - understand/single-species-spectra.qmd
+    - understand/predation-growth-and-mortality.qmd
+    - understand/species-interactions.qmd
+    - understand/dynamics-of-spectra.qmd
+    - build/index.qmd
+    - build/collect-parameters.qmd
+    - build/create-first-model.qmd
+    - build/refine.qmd
+    - build/landings.qmd
+    - build/tune-resilience.qmd
+    - use/*
+
+format:
+  html:
+    theme: cerulean
+    css: styles.css
+    html-math-method: katex
+    code-fold: false
+    code-link: true
+    code-copy: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    anchor-sections: true
+    link-external-newwindow: true
+    df-print: paged
+
+website:
+  title: "mizer course"
+  site-url: "https://mizer.course.sizespectrum.org"
+  favicon: images/favicon-16x16.png
+  repo-url: https://github.com/gustavdelius/mizerCourse
+  repo-branch: master
+  repo-actions: [edit, issue]
+  twitter-card:
+    site: "@mizer_model"
+    creator: "gustavdelius"
+  open-graph: true
+  comments:
+    giscus:
+      repo: gustavdelius/mizerCourse
+      category: Comments
+      reactions-enabled: false
+      input-position: bottom
+      repo-id: R_kgDOK0vNNg
+      category-id: DIC_kwDOK0vNNs4CbfmH
+      loading: lazy
+      mapping: title
+  search:
+    location: navbar
+    type: textbox
+  page-navigation: true
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - icon: house-door-fill
+        text: Back to mizer home
+        href: https://sizespectrum.org/mizer
+      - text: Introduction
+        href: index.qmd
+      - text: Install tools
+        href: prepare/install-tools.qmd
+      - section: "Part 1: Understand"
+        contents:
+        - text: Introduction
+          href: understand/index.qmd
+        - text: Observed size spectra
+          href: understand/observed-size-spectra.qmd
+        - text: Single species spectra
+          href: understand/single-species-spectra.qmd
+        - text: Predation, growth and mortality
+          href: understand/predation-growth-and-mortality.qmd
+        - text: Species interactions
+          href: understand/species-interactions.qmd
+        - text: Dynamics of size spectra
+          href: understand/dynamics-of-spectra.qmd
+      - section: "Part 2: Build"
+        contents:
+        - text: Introduction
+          href: build/index.qmd
+        - text: Collect parameters
+          href: build/collect-parameters.qmd
+        - text: Create your first model
+          href: build/create-first-model.qmd
+        - text: Refine your model
+          href: build/refine.qmd
+        - text: Match landings data
+          href: build/landings.qmd
+        - text: Tune resilience
+          href: build/tune-resilience.qmd
+      - section: "Part 3: Use"
+        contents:
+        - text: Introduction
+          href: use/index.qmd
+        - text: Explore fishing scenarios
+          href: use/fishing-scenarios.qmd
+        - text: Change resource
+          href: use/change-resources.qmd
+        - text: Explore further scenarios
+          href: use/further-scenarios.qmd

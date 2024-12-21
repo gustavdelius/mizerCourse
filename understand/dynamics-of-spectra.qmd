@@ -139,7 +139,7 @@ Given that reproduction has such an important impact on the response of species 
 We already discussed the [investment into reproduction](single-species-spectra.html#investment-into-reproduction) in an earlier tutorial. As mature individuals grow, they invest an increasing proportion of their income into reproduction and at their asymptotic size they would be investing all income into reproduction. Summing up all these investments from mature individuals of a particular species gives the total rate $E_R$ at which that species invests energy into reproduction. This total rate of investment is multiplied by a reproduction efficiency factor `erepro`, divided by a factor of 2 to take into account that only females reproduce, and then divided by the egg weight `w_min` to convert it into the rate at which eggs are produced. The equation is:
 
 $$
-R_{di} = \frac{\rm{erepro}}{2 w_{min}} E_R.
+R_{di} = \frac{\text{erepro}}{2 w_{min}} E_R.
 $$
 
 This is calculated in mizer with `getRDI()`:

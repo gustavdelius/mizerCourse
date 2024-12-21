@@ -26,15 +26,9 @@ The material for this part is split into 5 tutorials:
 5.  [**Dynamics of spectra**](dynamics-of-spectra.qmd)\
     In previous tutorials we have concentrated on the steady state of the mizer model, where for each size class and each species, the rate at which individuals grow into the size class balances the rate at which individuals grow out of the size class or die, thus keeping the size spectrum constant. In this tutorial we explore the dynamic that takes place when this balance is changed.
 
-
 ## Video Introduction
 
 In this video, [Ken Andersen](https://ken.haste.dk/) introduces many of the concepts that we will be discussing in this course. However, don't feel that you have to take it all in at once. We will come back to these topics (and others) during the course where we hope to make them concrete by working hands-on with mizer.
 
-```{r}
-#| echo: false
-vembedr::embed_url("https://youtu.be/_AeywguOA0o") |>
-    vembedr::use_align("center") |>
-    vembedr::use_rounded(10)
-```
+{{< video https://youtu.be/_AeywguOA0o >}}
 

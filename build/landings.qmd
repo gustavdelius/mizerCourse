@@ -100,12 +100,7 @@ cel_model <- tuneParams(cel_model, catch = catch_lengths)
 
 Note how we assign the return value from the `tuneParams()` function back to the `cel_model` variable. That way we capture the changes that we make in the gadget.
 
-```{r}
-#| echo: false
-vembedr::embed_url("https://youtu.be/hg4M6-G0-L4") |>
-    vembedr::use_align("center") |>
-    vembedr::use_rounded(10)
-```
+{{< video https://youtu.be/hg4M6-G0-L4 >}}
 
 The `tuneParams()` gadget has a lot of useful panels and allows you to play with the parameters interactively. But most of these plots are also available as separate plot functions in mizer or in mizerExperimental.
 
