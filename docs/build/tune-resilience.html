@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.6.42">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>mizer course - Tune resilience</title>
+<title>Tune resilience – mizer course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -68,16 +68,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-e8cfc4167d25a7c15f858dbe122f1a04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -86,12 +91,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -104,15 +110,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     fleqn: false
    });
 }}});
-  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
-<link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="mizer course - Tune resilience">
+  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Tune resilience – mizer course">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://mizer.course.sizespectrum.org/build/tune-resilience_files/figure-html/unnamed-chunk-4-1.png">
-<meta property="og:site-name" content="mizer course">
+<meta property="og:site_name" content="mizer course">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
-<meta name="twitter:title" content="mizer course - Tune resilience">
+<meta name="twitter:title" content="Tune resilience – mizer course">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://mizer.course.sizespectrum.org/build/tune-resilience_files/figure-html/unnamed-chunk-4-1.png">
 <meta name="twitter:creator" content="gustavdelius">
@@ -125,19 +156,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../build/index.html">Part 2: Build</a></li><li class="breadcrumb-item"><a href="../build/tune-resilience.html">Tune resilience</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../build/index.html">Part 2: Build</a></li><li class="breadcrumb-item"><a href="../build/tune-resilience.html">Tune resilience</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">mizer course</a> 
     </div>
@@ -170,9 +201,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Part 1: Understand</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -217,9 +248,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Part 2: Build</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -264,9 +295,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Part 3: Use</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -299,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
@@ -316,10 +347,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
   <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/gustavdelius/mizerCourse/edit/master/build/tune-resilience.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/gustavdelius/mizerCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/mizerCourse/edit/master/build/tune-resilience.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gustavdelius/mizerCourse/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../build/index.html">Part 2: Build</a></li><li class="breadcrumb-item"><a href="../build/tune-resilience.html">Tune resilience</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Tune resilience</h1>
 </div>
 
@@ -333,19 +364,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header><p>In the previous tutorials we tuned our model parameters so that the steady state of the model agrees with observed growth rates, average observed biomasses and average observed catches. We did not yet tune how sensitively our model reacts to changes away from its steady state. In particular, we did not tune how resilient the species are to fishing. We will do that in this tutorial.</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-1_4d60531dd329957ec42bda96e7693d5b">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizer/">mizer</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizerExperimental">mizerExperimental</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that your latest version of the model will differ from ours, so the plots you obtain by following this tutorial will differ from those displayed on this webpage. By noting these differences you will get a first feel for how sensitive a mizer model is to the choice of parameters. You can download the model that produced the results on this page with</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-2_55bbabaf832a10f5391f208dbf913872">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/gustavdelius/mizerCourse/raw/master/build/cel_model_landings.rds"</span>,</span>
 <span>              destfile <span class="op">=</span> <span class="st">"cel_model_landings.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We load the model into the variable <code>cel_model</code>.</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-3_83eb07e0b258166988cfcc9b1cb41f95">
+<div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/saveParams.html">readParams</a></span><span class="op">(</span><span class="st">"../build/cel_model_landings.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="reproduction-dynamics" class="level2"><h2 class="anchored" data-anchor-id="reproduction-dynamics">Reproduction dynamics</h2>
@@ -374,9 +406,12 @@ Stock-recruitment relationships
 <li><p>The parameter <strong><code>R_max</code></strong> that gives the maximum rate at which individuals can join the smallest size class, no matter how much energy the species invests.</p></li>
 </ul>
 <p>These concepts are nicely illustrated by the following figure that you saw <a href="../understand/dynamics-of-spectra.html#density-dependence-in-reproduction">earlier</a>:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-4_76a3df428f1b31f9bdf0c29f26187a3c">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="tune-resilience_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="tune-resilience_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The black dot in the diagram represents the steady-state values for <span class="math inline">E_R</span> and <span class="math inline">R_{dd}</span>. The solid curves represents how the density-dependent reproduction rate <span class="math inline">R_{dd}</span> depends on the rate <span class="math inline">E_R</span>. Both the solid blue line and the solid black line go through the black dot, which means that they result in the same steady-state reproduction. They differ by the choice of the maximum reproduction rate <code>R_max</code> (the height of the dotted line) and the reproductive efficiency <code>erepro</code> (the slope of the dashed line representing <span class="math inline">R_{di}</span>).</p>
@@ -396,7 +431,7 @@ Stock-recruitment relationships
 <p><img src="../images/ReferencePointCurves.png" class="img-fluid"></p>
 </section><section id="constant-reproductive-efficiency" class="level2"><h2 class="anchored" data-anchor-id="constant-reproductive-efficiency">Constant reproductive efficiency</h2>
 <p>The reproduction parameters in our model are currently rather random:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-5_afcecc484d37fb6d191a30bf5dca198e">
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getReproductionLevel.html">getReproductionLevel</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Herring          Sprat            Cod        Haddock        Whiting 
@@ -413,18 +448,17 @@ Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim
 <p>We need to decide what reproduction parameters we should set to start our tuning. We will follow the approach of <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/faf.12171">Jacobsen et al.&nbsp;2016</a> and initially set the reproductive efficiency <code>erepro</code> to the same value for all species.</p>
 <p>We use the <code><a href="https://sizespectrum.org/mizer/reference/setBevertonHolt.html">setBevertonHolt()</a></code> function to set the values for <code>erepro</code>. That function automatically also adjusts the values for <code>R_max</code> to keep the steady state reproduction rate <span class="math inline">R_{dd}</span> the same, as we discussed above.</p>
 <p>If we try to set the value for <code>erepro</code> very low, the <code><a href="https://sizespectrum.org/mizer/reference/setBevertonHolt.html">setBevertonHolt()</a></code> function will issue a warning:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-6_b0114893026ffd3c38e58e9d74443048">
+<div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/setBevertonHolt.html">setBevertonHolt</a></span><span class="op">(</span><span class="va">cel_model</span>, erepro <span class="op">=</span> <span class="fl">0.0001</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in setBevertonHolt(cel_model, erepro = 1e-04): For the following species `erepro` has been increased to the smallest possible value: erepro[Herring] = 0.000647; erepro[Sprat] = 0.000814; erepro[Blue whiting] = 0.000265; erepro[Norway Pout] = 0.000704; erepro[Poor Cod] = 0.000359; erepro[Horse Mackerel] = 0.000303; erepro[Common Dab] = 0.000173; erepro[Megrim] = 0.000218; erepro[Boarfish] = 0.00076</code></pre>
 </div>
 </div>
 <p>Because we want all species to have the same value, we choose a value that is larger than those required. So we choose <code>erepro = 0.001</code>.</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-7_a7bc4e6b0f9e78665ec732f47aa44f3a">
+<div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/setBevertonHolt.html">setBevertonHolt</a></span><span class="op">(</span><span class="va">cel_model</span>, erepro <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">erepro</span>, <span class="va">R_max</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["erepro"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["R_max"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"0.001","2":"0.3369135240","_rn_":"Herring"},{"1":"0.001","2":"0.9592472746","_rn_":"Sprat"},{"1":"0.001","2":"0.0000653820","_rn_":"Cod"},{"1":"0.001","2":"0.0003347841","_rn_":"Haddock"},{"1":"0.001","2":"0.0005564558","_rn_":"Whiting"},{"1":"0.001","2":"0.2309752956","_rn_":"Blue whiting"},{"1":"0.001","2":"0.2055672725","_rn_":"Norway Pout"},{"1":"0.001","2":"0.0017380261","_rn_":"Poor Cod"},{"1":"0.001","2":"0.0016200795","_rn_":"European Hake"},{"1":"0.001","2":"0.0001134333","_rn_":"Monkfish"},{"1":"0.001","2":"0.0898418890","_rn_":"Horse Mackerel"},{"1":"0.001","2":"0.0139503716","_rn_":"Mackerel"},{"1":"0.001","2":"0.0013293500","_rn_":"Common Dab"},{"1":"0.001","2":"0.0002653793","_rn_":"Plaice"},{"1":"0.001","2":"0.0075371245","_rn_":"Megrim"},{"1":"0.001","2":"0.0002506685","_rn_":"Sole"},{"1":"0.001","2":"0.1340020866","_rn_":"Boarfish"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -433,7 +467,7 @@ Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim
 </div>
 </div>
 <p>Let’s see what reproduction levels this gives:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-8_ef9151269f18db44d7b586a1764044e5">
+<div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getReproductionLevel.html">getReproductionLevel</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Herring          Sprat            Cod        Haddock        Whiting 
@@ -448,7 +482,7 @@ Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim
 </div>
 <p>It is quite typical that large slow-growing species have a higher reproduction level than smaller fast-growing species.</p>
 <p>Remember: the reproduction level is the ratio between <code>RDD</code> and <code>R_max</code> and can vary between 0 and 1. It tells us how close the actual reproduction (after applying density dependence) is to the theoretical maximum, set by <code>R_max</code>. So instead of using the <code><a href="https://sizespectrum.org/mizer/reference/getReproductionLevel.html">getReproductionLevel()</a></code> function we could also have done the calculation ourselves:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-9_6dda73da4ddc4dc3d2d4d207f619bb28">
+<div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getRDD.html">getRDD</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">$</span><span class="va">R_max</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Herring          Sprat            Cod        Haddock        Whiting 
@@ -462,7 +496,7 @@ Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim
 </div>
 </div>
 <p>We can also look how close the density dependent reproduction rate RDD is to the density independent reproduction rate RDI:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-10_8de2b69d813aba3ed38927493bde53c0">
+<div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getRDI.html">getRDI</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/getRDD.html">getRDD</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Herring          Sprat            Cod        Haddock        Whiting 
@@ -480,24 +514,30 @@ Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim
 <p>We now want to adjust the reproduction levels so that the resilience of the species in our model matches expectations.</p>
 <section id="exploring-yield-curves" class="level3"><h3 class="anchored" data-anchor-id="exploring-yield-curves">Exploring yield curves</h3>
 <p>To measure the resilience of our species to fishing, we will change the fishing mortality for one species at a time and check how their yields change in response. We keep the fishing mortality for the other species fixed. For our selected species we run through a range of fishing mortalities. For each fishing mortality we run the projection until the system has settled down to a new steady state. Then we calculates the yield in that steady state. After doing that for all fishing mortalities we can plot all the results in a graph showing yield on the y axis versus fishing mortality F on the x axis. The <code><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsF.html">plotYieldVsF()</a></code> function does all that for us. Here we plot the yield curve for haddock:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-11_6166b84f86adbecbe1656f10c87b56f2">
+<div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsF.html">plotYieldVsF</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Haddock"</span>, </span>
 <span>             F_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="tune-resilience_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="tune-resilience_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We refer to the yield achieved in the steady state as the <em>sustainable yield</em> (SY) because it can be sustained indefinitely. The sustainable yield for this species has a maximum (MSY) at a fishing mortality of about 0.3. We refer to this value as F<sub>MSY</sub>. This is close enough to the value of 0.35 that is given for F<sub>MSY</sub> in <a href="https://figshare.com/articles/report/Haddock_Melanogrammus_aeglefinus_in_divisions_7_b_k_southern_Celtic_Seas_and_English_Channel_/19447961">the ICES advice for our haddock stock</a>.</p>
 <p>Next we look at hake, for which <a href="https://figshare.com/articles/report/Hake_Merluccius_merluccius_in_subareas_4_6_and_7_and_in_divisions_3_a_8_a_b_and_8_d_Northern_stock_Greater_North_Sea_Celtic_Seas_and_the_northern_Bay_of_Biscay_/18635171/1">the ICES advice</a> gives a value for F<sub>MSY</sub> of only 0.26.</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-12_52116a5e64f97443f40570018c994018">
+<div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsF.html">plotYieldVsF</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"European Hake"</span>, </span>
 <span>             F_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="tune-resilience_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="tune-resilience_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We read off that for hake the current value of F<sub>MSY</sub> in the model is too high. In other words, it is not sensitive enough to fishing. We have probably put on too much extra density dependence on the reproduction. Let us look at the reproduction level we have currently chosen:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-13_173561148f71ce2c7e76c2e87043a43f">
+<div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getReproductionLevel.html">getReproductionLevel</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"European Hake"</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>European Hake 
@@ -505,7 +545,7 @@ Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim
 </div>
 </div>
 <p>Let us see what the yield curve would look like when we only include the density depencence in recruitment that is automatically included in the mizer model and do not add anything extra. So we set the reproduction level to 0.</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-14_ef0da4260cbca77147cca28052dd9364">
+<div class="cell">
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># First we save current reproduction level into a vector </span></span>
 <span><span class="va">rep_level</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/getReproductionLevel.html">getReproductionLevel</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span>
 <span><span class="co"># then we replace our species' reproduction level with a new value </span></span>
@@ -518,19 +558,25 @@ Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim
 <span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsF.html">plotYieldVsF</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"European Hake"</span>, </span>
 <span>               F_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="tune-resilience_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="tune-resilience_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The F<sub>MSY</sub> is now closer to the one in the ICES advice. Next we look at whiting where <a href="https://ices-library.figshare.com/articles/report/Whiting_Merlangius_merlangus_in_divisions_7_b_c_and_7_e_k_southern_Celtic_Seas_and_western_English_Channel_/18633200">the ICES advice</a> suggests a quite high F<sub>MSY</sub> of 0.52.</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-15_d47620729772a6a493d06e8bdb3481c4">
+<div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsF.html">plotYieldVsF</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Whiting"</span>, </span>
 <span>             F_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.8</span>, <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="tune-resilience_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="tune-resilience_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>So in this case the model F<sub>MSY</sub> is lower than the ICES one, so whiting in the model is less resilient to fishing than ICES estimated. To make whiting more resilient in the model we can put more density dependence on the reproduction. Let’s put the reproduction level very close to 1, which means that the reproduction rate is almost totally independent of the investment into reproduction.</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-16_f42fb0a0f9f313ccb465e50773716825">
+<div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rep_level</span><span class="op">[</span><span class="st">"Whiting"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0.999</span></span>
 <span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/setBevertonHolt.html">setBevertonHolt</a></span><span class="op">(</span><span class="va">cel_model</span>, </span>
 <span>                             reproduction_level <span class="op">=</span> <span class="va">rep_level</span><span class="op">)</span></span>
@@ -538,16 +584,22 @@ Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim
 <span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsF.html">plotYieldVsF</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Whiting"</span>, </span>
 <span>               F_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.8</span>, <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="tune-resilience_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="tune-resilience_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We see that even with this extreme choice the F<sub>MSY</sub> in the model is smaller than the one estimated by ICES. This shows the limitation with the approach of trying to make the predictions from the mizer model agree with the predictions by ICES which uses single-species models. At some point we will need to start trusting the multi-species model. Ideally we would tune the mizer model to actual observational data rather than to the output of single-species stock assessment models. We should use mizer as the actual stock assessment model. Unfortunately, this will require more development because currently mizer is not yet stochastic, so can not model the flucutations in the real-world data. But stay tuned …</p>
 <p>One minor point: if you are wondering why the above yield curve is not smooth but has that kink around F=0.45. That is just because the simulation did not run long enough to really capture the final steady state. The projection stops when the dynamics has settled down to within some tolerance. If we decrease the tolerance we get more precise values for the steady state yield:</p>
-<div class="cell" data-hash="tune-resilience_cache/html/unnamed-chunk-17_1cda96adc8723ffb92fb546e14fd6ed4">
+<div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsF.html">plotYieldVsF</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Whiting"</span>, </span>
 <span>               F_range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.8</span>, <span class="fl">0.02</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.0001</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="tune-resilience_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="tune-resilience_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -608,18 +660,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -651,11 +692,53 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/mizer\.course\.sizespectrum\.org");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -665,8 +748,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -678,7 +770,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -722,6 +936,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -747,6 +962,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -804,29 +1045,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/mizer\.course\.sizespectrum\.org");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script><script src="https://giscus.app/client.js" data-repo="gustavdelius/mizerCourse" data-repo-id="R_kgDOK0vNNg" data-category="Comments" data-category-id="DIC_kwDOK0vNNs4CbfmH" data-mapping="title" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../build/landings.html" class="pagination-link">
+</script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../build/landings.html" class="pagination-link" aria-label="Match landings data">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Match landings data</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../use/index.html" class="pagination-link">
+      <a href="../use/index.html" class="pagination-link" aria-label="Introduction">
         <span class="nav-page-text">Introduction</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -835,4 +1062,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/mizerCourse/edit/master/build/tune-resilience.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gustavdelius/mizerCourse/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

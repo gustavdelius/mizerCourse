@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.6.42">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>mizer course - Match landings datas</title>
+<title>Match landings datas – mizer course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -68,16 +68,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-e8cfc4167d25a7c15f858dbe122f1a04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -86,20 +91,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link href="../site_libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
-<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+}</script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="mizer course - Match landings datas">
+<meta property="og:title" content="Match landings datas – mizer course">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://mizer.course.sizespectrum.org/build/landings_files/figure-html/unnamed-chunk-7-1.png">
-<meta property="og:site-name" content="mizer course">
+<meta property="og:site_name" content="mizer course">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
-<meta name="twitter:title" content="mizer course - Match landings datas">
+<meta name="twitter:title" content="Match landings datas – mizer course">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://mizer.course.sizespectrum.org/build/landings_files/figure-html/unnamed-chunk-7-1.png">
 <meta name="twitter:creator" content="gustavdelius">
@@ -112,19 +117,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../build/index.html">Part 2: Build</a></li><li class="breadcrumb-item"><a href="../build/landings.html">Match landings data</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../build/index.html">Part 2: Build</a></li><li class="breadcrumb-item"><a href="../build/landings.html">Match landings data</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">mizer course</a> 
     </div>
@@ -157,9 +162,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Part 1: Understand</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -204,9 +209,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Part 2: Build</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -251,9 +256,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Part 3: Use</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -286,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
@@ -295,10 +300,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#landings-data" id="toc-landings-data" class="nav-link active" data-scroll-target="#landings-data">Landings data</a></li>
   <li><a href="#exploring-catch-size-distributions" id="toc-exploring-catch-size-distributions" class="nav-link" data-scroll-target="#exploring-catch-size-distributions">Exploring catch size distributions</a></li>
   <li><a href="#exercise-use-tuneparams-gadget-to-refine-your-model" id="toc-exercise-use-tuneparams-gadget-to-refine-your-model" class="nav-link" data-scroll-target="#exercise-use-tuneparams-gadget-to-refine-your-model">Exercise: Use tuneParams gadget to refine your model</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/gustavdelius/mizerCourse/edit/master/build/landings.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/gustavdelius/mizerCourse/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/mizerCourse/edit/master/build/landings.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gustavdelius/mizerCourse/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../build/index.html">Part 2: Build</a></li><li class="breadcrumb-item"><a href="../build/landings.html">Match landings data</a></li></ol></nav><div class="quarto-title">
 <h1 class="title">Match landings datas</h1>
 </div>
 
@@ -312,27 +317,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header><p>We will now continue to refine our model by matching it to observed landings.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-1_523b633a6482b3a4a06463fea40f8855">
+<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizer/">mizer</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizerExperimental">mizerExperimental</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We load the model we created in the <a href="../build/refine.html">previous tutorial</a>.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-2_818c3354bdf85a4d80aedad977e56a06">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/saveParams.html">readParams</a></span><span class="op">(</span><span class="st">"cel_model_refined.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="landings-data" class="level2"><h2 class="anchored" data-anchor-id="landings-data">Landings data</h2>
 <p>We will load data on the size distribution of catches. Such data is often collected in data-poor fisheries, so it will be useful to see how we can use such data for model calibration. This specific dataset was sourced from Scientific, Technical and Economic Committee for Fisheries <a href="https://stecf.jrc.ec.europa.eu/dd/fdi">(STECF)</a> and was restricted to England and Wales.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-3_f88f980564f87fd9f934797580d1f93a">
+<div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/gustavdelius/mizerCourse/raw/master/build/catch.csv"</span>,</span>
 <span>              destfile <span class="op">=</span> <span class="st">"catch.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-4_3eb5f56a6bc939cd9f53d13fb15e9589">
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">catch_lengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"catch.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">catch_lengths</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["species"],"name":[1],"type":["chr"],"align":["left"]},{"label":["gear"],"name":[2],"type":["chr"],"align":["left"]},{"label":["length"],"name":[3],"type":["int"],"align":["right"]},{"label":["catch"],"name":[4],"type":["int"],"align":["right"]},{"label":["dl"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"Blue whiting","2":"Commercial","3":"2","4":"2","5":"1","_rn_":"1"},{"1":"Blue whiting","2":"Commercial","3":"3","4":"2","5":"1","_rn_":"2"},{"1":"Blue whiting","2":"Commercial","3":"4","4":"2","5":"1","_rn_":"3"},{"1":"Blue whiting","2":"Commercial","3":"5","4":"2","5":"1","_rn_":"4"},{"1":"Blue whiting","2":"Commercial","3":"6","4":"2","5":"1","_rn_":"5"},{"1":"Blue whiting","2":"Commercial","3":"7","4":"2","5":"1","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -342,38 +347,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>For each species we have numbers of individuals observed in 1cm wide length bins (the <code>dl</code> column indicates the width of each bin). If you get an error message saying that the <code>catch.csv</code> file can not be found: you will find the code for downloading it in the <a href="../build/collect-parameters.html#asymptotic-size">earlier tutorial</a> when estimating asymptotic sizes.</p>
 <p>In addition to this information about the size distribution of the catches we have the total biomass of the annual commercial landings for each species, i.e., the fisheries yield. Like the spawning stock biomass estimates we used in the tutorial on <a href="../build/collect-parameters.html">collecting parameters</a>, we obtained the values for the yield in tonnes per square kilometre (or, equivalently, grams per square metre) from the 2021 <a href="https://stecf.jrc.ec.europa.eu/dd/fdi">ICES stock assessment database</a> by dividing the total yield of the assessed stock by the area of the assessment region in square kilometres and taking the geometric mean over the time period from 2012 to 2021. Here we just load them in from a file we prepared and store them in a <code>yield_observed</code> column in the species parameter dataframe of our model:</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-5_0758f0eb38df9bcfba213c4458085740">
+<div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/gustavdelius/mizerCourse/raw/master/build/celtic_yields.rds"</span>,</span>
 <span>              destfile <span class="op">=</span> <span class="st">"celtic_yields.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>https://github.com/gustavdelius/mizerCourse/raw/master/build/</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-6_65e9a353675b13bff5faee87b3b00169">
+<div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">$</span><span class="va">yield_observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"celtic_yields.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now use <code><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSpecies.html">plotYieldVsSpecies()</a></code> to make a plot that for each species compares the observed yield to the yield currently achieved in the steady state of our model.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-7_a9817c5f16e2d01d99ce10f12f290e29">
+<div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSpecies.html">plotYieldVsSpecies</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="landings_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="landings_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We’ll have to do something about those yield values in the model. But first let’s have a look at the size distribution of the catches.</p>
 </section><section id="exploring-catch-size-distributions" class="level2"><h2 class="anchored" data-anchor-id="exploring-catch-size-distributions">Exploring catch size distributions</h2>
 <p>The <code><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize()</a></code> function lets us see how well our modelled and the observed catch size distributions agree. Let’s take a look at the case of cod:</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-8_6ba0f801a5103af31ea0b849b99114ff">
+<div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
 <span>                x_var <span class="op">=</span> <span class="st">"Length"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="landings_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="landings_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We see that the red curve (model) and the blue curve (observations) match surprisingly well. This means that the selectivity parameters for cod are already chosen quite well in our model. However the match could be made even better by steepening the selectivity curve.</p>
 <p>Let us look at the current gear parameter data frame:</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-9_82a0e208fa80ce9bbc94c93a5f1e13c7">
+<div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Let's look at our gear params first </span></span>
 <span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["species"],"name":[1],"type":["chr"],"align":["left"]},{"label":["gear"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sel_func"],"name":[3],"type":["chr"],"align":["left"]},{"label":["l50"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["l25"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["catchability"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["yield_observed"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"Herring","2":"Commercial","3":"sigmoid_length","4":"23.1","5":"19.6","6":"0.536","7":"0.320388729","_rn_":"Herring, Commercial"},{"1":"Sprat","2":"Commercial","3":"sigmoid_length","4":"9.4","5":"8.0","6":"0.514","7":"0.230526559","_rn_":"Sprat, Commercial"},{"1":"Cod","2":"Commercial","3":"sigmoid_length","4":"47.9","5":"40.7","6":"0.466","7":"0.007294439","_rn_":"Cod, Commercial"},{"1":"Haddock","2":"Commercial","3":"sigmoid_length","4":"27.8","5":"23.6","6":"0.148","7":"0.024193552","_rn_":"Haddock, Commercial"},{"1":"Whiting","2":"Commercial","3":"sigmoid_length","4":"20.1","5":"17.1","6":"0.484","7":"0.022498142","_rn_":"Whiting, Commercial"},{"1":"Blue whiting","2":"Commercial","3":"sigmoid_length","4":"14.8","5":"12.6","6":"0.053","7":"0.302633803","_rn_":"Blue whiting, Commercial"},{"1":"Norway Pout","2":"Commercial","3":"sigmoid_length","4":"13.2","5":"11.2","6":"0.080","7":"0.164348466","_rn_":"Norway Pout, Commercial"},{"1":"Poor Cod","2":"Commercial","3":"sigmoid_length","4":"14.0","5":"11.9","6":"0.011","7":"NA","_rn_":"Poor Cod, Commercial"},{"1":"European Hake","2":"Commercial","3":"sigmoid_length","4":"34.5","5":"29.4","6":"0.787","7":"0.064185856","_rn_":"European Hake, Commercial"},{"1":"Monkfish","2":"Commercial","3":"sigmoid_length","4":"32.1","5":"27.3","6":"0.319","7":"0.028118482","_rn_":"Monkfish, Commercial"},{"1":"Horse Mackerel","2":"Commercial","3":"sigmoid_length","4":"15.4","5":"13.1","6":"0.296","7":"0.190506004","_rn_":"Horse Mackerel, Commercial"},{"1":"Mackerel","2":"Commercial","3":"sigmoid_length","4":"26.8","5":"22.8","6":"0.564","7":"0.284863160","_rn_":"Mackerel, Commercial"},{"1":"Common Dab","2":"Commercial","3":"sigmoid_length","4":"9.1","5":"7.8","6":"0.682","7":"NA","_rn_":"Common Dab, Commercial"},{"1":"Plaice","2":"Commercial","3":"sigmoid_length","4":"22.3","5":"18.9","6":"0.611","7":"0.016677124","_rn_":"Plaice, Commercial"},{"1":"Megrim","2":"Commercial","3":"sigmoid_length","4":"25.9","5":"22.0","6":"0.688","7":"0.016083246","_rn_":"Megrim, Commercial"},{"1":"Sole","2":"Commercial","3":"sigmoid_length","4":"18.1","5":"15.4","6":"0.189","7":"0.015892663","_rn_":"Sole, Commercial"},{"1":"Boarfish","2":"Commercial","3":"sigmoid_length","4":"8.3","5":"7.0","6":"0.128","7":"0.017202819","_rn_":"Boarfish, Commercial"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -382,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We notice that the row names are made up of the species name and the gear name, separated by a comma. So we can change the selectivity parameters specifically for cod with</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-10_d72f3b0b040b93fafa1f8d38fd0d6eb9">
+<div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Modify the l50 and l25 for cod</span></span>
 <span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"Cod, Commercial"</span>, <span class="st">"l50"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">44</span></span>
 <span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"Cod, Commercial"</span>, <span class="st">"l25"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">39.5</span></span>
@@ -391,32 +401,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
 <span>                x_var <span class="op">=</span> <span class="st">"Length"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="landings_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure"><p><img src="landings_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This looks better. We should have no scruples adjusting the gear selectivity parameters using our mizer model because they are hard to estimate outside a model.</p>
 <p>Now that we have changed fishing selectivity we need to find a new steady state. It is important to run <code><a href="https://sizespectrum.org/mizer/reference/steady.html">steady()</a></code> frequently, while making small changes to the model parameters. If we accumulate too many changes, finding a new steady state might be harder.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-11_73f91d7a3d25b7843ab4704a0a60eda0">
+<div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steady.html">steady</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You probably wondered how I knew what the right values for the <code>l50</code> and <code>l25</code> parameter were for cod. The answer is that I used trial and error with the help of the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code>. We’ll do some more of that in the following video. We pass the catch length data into the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> function via the <code>catch</code> argument:</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-12_feed7a70d6dcfffc856e32dd3a93ff7a">
+<div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams</a></span><span class="op">(</span><span class="va">cel_model</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note how we assign the return value from the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> function back to the <code>cel_model</code> variable. That way we capture the changes that we make in the gadget.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-13_0d64d375cd60fd5feed0c260352c2170">
-<div class="cell-output-display">
-<div class="vembedr" align="center">
-<div class="vembedr-rounded" style="border-radius: 10px;">
-<iframe src="https://www.youtube.com/embed/hg4M6-G0-L4" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
-</div>
-</div>
-</div>
-</div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/hg4M6-G0-L4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>The <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> gadget has a lot of useful panels and allows you to play with the parameters interactively. But most of these plots are also available as separate plot functions in mizer or in mizerExperimental.</p>
 </section><section id="exercise-use-tuneparams-gadget-to-refine-your-model" class="level2"><h2 class="anchored" data-anchor-id="exercise-use-tuneparams-gadget-to-refine-your-model">Exercise: Use tuneParams gadget to refine your model</h2>
 <p>In our video we only started refining the model by adjusting some parameters for a few species. We ask you to do something similar but for more species in order to refine the model you have built in the previous tutorial. Share your observations in the comment section below.</p>
-<div class="cell" data-hash="landings_cache/html/unnamed-chunk-14_8c813143915b7cd25fee0a0ac378c224">
+<div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/saveParams.html">saveParams</a></span><span class="op">(</span><span class="va">cel_model</span>, file <span class="op">=</span> <span class="st">"cel_model_landings.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
@@ -456,18 +461,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -499,11 +493,53 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/mizer\.course\.sizespectrum\.org");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -513,8 +549,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -526,7 +571,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -570,6 +737,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -595,6 +763,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -652,29 +846,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/mizer\.course\.sizespectrum\.org");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script><script src="https://giscus.app/client.js" data-repo="gustavdelius/mizerCourse" data-repo-id="R_kgDOK0vNNg" data-category="Comments" data-category-id="DIC_kwDOK0vNNs4CbfmH" data-mapping="title" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../build/refine.html" class="pagination-link">
+</script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../build/refine.html" class="pagination-link" aria-label="Refine your model">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Refine your model</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../build/tune-resilience.html" class="pagination-link">
+      <a href="../build/tune-resilience.html" class="pagination-link" aria-label="Tune resilience">
         <span class="nav-page-text">Tune resilience</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -683,4 +863,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/mizerCourse/edit/master/build/landings.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gustavdelius/mizerCourse/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
