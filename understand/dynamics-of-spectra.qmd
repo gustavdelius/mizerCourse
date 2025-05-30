@@ -120,7 +120,7 @@ mp <- newTraitParams() |> steady()
 # We make a copy of the model
 mp_lessRes <- mp
 # and set the resource interaction to 0.8 for species 8 to 11
-species_params(mp_lessRes)$interaction_resource[8:11] <- 0.8
+given_species_params(mp_lessRes)$interaction_resource[8:11] <- 0.8
 
 # We simulate the dynamics for 30 years, saving only every 2nd year
 sim_lessRes <- project(mp_lessRes, t_max = 30, t_save = 2)
@@ -248,7 +248,7 @@ They overlap perfectly. However the reproduction level does have an effect on ho
 # We make a copy of the model
 mp_lessRes9 <- mp9
 # and set the resource interaction to 0.8 for species 8 to 11
-species_params(mp_lessRes9)$interaction_resource[8:11] <- 0.8
+given_species_params(mp_lessRes9)$interaction_resource[8:11] <- 0.8
 
 sim_lessRes9 <- project(mp_lessRes9, t_max = 30, t_save = 2)
 
