@@ -298,7 +298,7 @@ Of course in a real model, the growth rate would not so exactly follow a power l
 ::: {.callout-caution collapse="false"}
 ### Exercise 3
 
-Use the methods you have just seen to make a log-log plot of the mortality rate. You can get the mortality rate with the `getMort()` function. While adjusting the code to this new task, you need to take into account that the name of the size-dimension of the array returned by `getMort()` is `"w_prey"` instead of `"w"`.
+Use the methods you have just seen to make a log-log plot of the mortality rate. You can get the mortality rate with the `getMort()` function.
 
 Then fit a linear model to determine the slope and and intercept and thus the allometric exponent $r$ and the coefficient $\mu_0$ for the mortality rate $$\mu(w) = \mu_0 w^r.$$
 
@@ -308,14 +308,14 @@ Then fit a linear model to determine the slope and and intercept and thus the al
 ```{r}
 mort_rate_frame <- melt(getMort(params))
 p <- ggplot(mort_rate_frame) +
-    geom_line(aes(x = w_prey, y = value)) +
+    geom_line(aes(x = w, y = value)) +
     scale_x_log10(name = "Weight [g]") +
     scale_y_log10(name = "Mortality rate [1/year]")
 p
 ```
 
 ```{r}
-mm <- lm(log(mort_rate_frame$value) ~ log(mort_rate_frame$w_prey))
+mm <- lm(log(mort_rate_frame$value) ~ log(mort_rate_frame$w))
 mm
 ```
 To get the coefficient $\mu_0$ for the mortality rate we need to exponentiate the intercept
