@@ -2,20 +2,28 @@
 title: "Part 3: Use mizer models"
 ---
 
-Now that you have built your model, you can use it to explore the effects of changes in fishing and changes in the environment on the fish community and the fisheries yield. 
+Now that you have built your model, you can use it to explore the effects of changes in fishing and changes in the environment on the fish community and the fisheries yield. In this part of the course we will mostly use the old North Sea model that comes with mizer.
 
 
 ### Tutorials
 
 Using examples, the tutorials are designed to help you develop your own model simulation experiments:
 
-1.  [**Simulate fishing scenarios**](fishing-scenarios.qmd)\
-    We assess how the system responds to changes in fishing through time. This step involves looking closer at the fishing parameters in mizer and setting up different fishing scenarios.
+1.  [**Run a simulation**](running a simulation.qmd)\
+    We take a detailed look at how the
+    `project()` function works and the different ways in which effort and time can
+    be set up.
 
-2.  [**Change resources**](change-resources.qmd)\
-    Next we look at the resource spectrum and how changes in three main resource parameters can affect our ecosystem. We will also show an example of how to use external data on resource time series to force the mizer model.
+2.  [**Explore the simulation results**](exploring_the_simulation_results.qmd)\
+    How can we explore the results of the simulation? In this tutorial we
+    introduce a range of summaries, plots and indicators that can be easily produced
+    using functions included in mizer.
 
-3.  [**Explore further scenarios**](further-scenarios.qmd)\
+3.  [**A simulation of the North Sea**](a_multispecies_model_of_the_north_sea.qmd)\
+    In this section we try to pull everything together with an extended example of a
+    multispecies model for the North Sea
+
+4.  [**Explore further scenarios**](further-scenarios.qmd)\
     This tutorial provides extra material, prepared by Julia Blanchard using another system (Patagonian toothfish fishery) as an example. Here you can learn on how to set time series of fishing changes and more.
 
 ### Video overview
