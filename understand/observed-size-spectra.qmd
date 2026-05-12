@@ -72,17 +72,21 @@ The `library()` function loads the named package from your package library. The 
 install.packages(c("mizer", "tidyverse", "plotly", "remotes", "usethis",
                    "rmarkdown", "rstudioapi"))
 ```
+
 The message that the `library(tidyverse)` command displays is showing you that it has loaded several other packages that together make up the tidyverse. It also warns you that the "dplyr" package overwrites two functions that already existed in the "stats" package, which is no problem for us.
 :::
 
 ## The data
 
 So let's see if we can find Sheldon's pattern ourselves. First we download the data from the internet.
+
 ```{r eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourseNew/raw/master/understand/size-data.rds",
               destfile = "size-data.rds")
 ```
+
 Then we load it into our R session.
+
 ```{r}
 size_data <- readRDS("size-data.rds")
 str(size_data)
@@ -217,6 +221,7 @@ Then you can use the earlier code for producing the histogram, only replacing `b
 ::: {.callout-note collapse="true"}
 #### Show me the solution
 We assume that you have run all the earlier code in the tutorial without problems. Then the following new code will produce the desired plot.
+
 ```{r}
 log_breaks_22 <- seq(from = 0, to = 11, by = 1/2)
 log_breaks_22
@@ -236,6 +241,7 @@ histogram_22 <- ggplot(size_data) +
      scale_y_log10()
 histogram_22
 ```
+
 :::
 
 :::
@@ -370,6 +376,7 @@ Create the plot of the number density using the 22 logarithmically sized bins fr
 ::: {.callout-caution collapse="true"}
 #### Give me hints
 First create a new data frame `data_with_bins_22` where you assign one of your 22 bins to each observation. You can use the same code as for `data_with_bins` but using your own `bin_breaks_22` vector. 
+
 ```{r}
 
 data_with_bins_22 <- 'copy, paste and adopt code from above'
@@ -382,9 +389,11 @@ binned_numbers_22 <- 'copy, paste and adopt code from above'
 ```
 
 You can then use the same code for plotting the graph that we used above, just using your new data frame. If you used the same column names in your data frame then the change you need to make to the plotting code is minimal.
+
 ```{r}
 p_number_density_22 <- 'copy, paste and adapt code from above'
 ```
+
 :::
 
 ::: {.callout-caution collapse="true"}
@@ -395,7 +404,9 @@ data_with_bins_22 <- size_data |>
     mutate(bin = cut(weight, breaks = bin_breaks_22, right = FALSE,
                      labels = FALSE))
 ```
+
 Note how we only needed to change the `breaks` argument to `cut()`.
+
 ```{r}
 binned_numbers_22 <- data_with_bins_22 |> 
     group_by(bin) |> 
@@ -406,7 +417,9 @@ binned_numbers_22 <- data_with_bins_22 |>
            bin_midpoint = exp((log(bin_start) + log(bin_end)) / 2),
            Number_density = Number / bin_width)
 ```
+
 In the above we just needed to change the dataset we are using and the bin breaks.
+
 ```{r}
 p_number_density_22 <- ggplot(binned_numbers_22) +
     geom_line(aes(x = bin_midpoint, y = Number_density)) +
@@ -415,6 +428,7 @@ p_number_density_22 <- ggplot(binned_numbers_22) +
     scale_y_log10()
 p_number_density_22
 ```
+
 Note how the plotting code is the same except that we specified that it should use our new dataframe `binned_numbers_22`.
 :::
 :::
@@ -584,6 +598,7 @@ We have done something similar in the section on [Fitting a power law](#fitting-
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
+
 ```{r}
 lm(log(Biomass_density_log_w) ~ log(bin_midpoint), data = binned_data)
 ```

@@ -48,6 +48,7 @@ The mizerExperimental package is for code that is still experimental and thus ch
 #| eval: false
 remotes::install_github("sizespectrum/mizerExperimental", ref = "2f7d4ca")
 ```
+
 This may give you a list of other packages that you have already installed that have newer versions available and ask you to specify which ones you want to update. For the purpose of this course it probably will not be important, so if you like you can skip the updates for now.
 
 Note the `ref` argument to `install_github()`. It specifies which particular version of the code you want to install. This makes sure that the version you install will behave as expected in this course. Unlike the mizer package, the mizerExperimental package does not promise that newer versions remain backwards compatible to earlier versions. So if you want reproducible code it will be best to install a fixed version.
@@ -55,6 +56,7 @@ Note the `ref` argument to `install_github()`. It specifies which particular ver
 ## Checking your installation
 
 To check that everything works, copy and paste and then run the following code:
+
 ```{r}
 if (getRversion() < "4.0") warning("Your version of R is too old.")
 if (packageVersion("mizer") < "2.5.0") warning("Your version of mizer is too old.")
@@ -64,6 +66,7 @@ library(mizer)
 library(mizerExperimental)
 plotDeath(NS_params)
 ```
+
 If you do not get any "Warning" or "Error", then everything is fine. If you experience problems, see below.
 
 ## Issues and Discussions

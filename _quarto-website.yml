@@ -20,7 +20,9 @@ project:
 
 format:
   html:
-    theme: cerulean
+    theme:
+      light: cerulean
+      dark: darkly
     css: styles.css
     html-math-method: katex
     code-fold: false
@@ -56,14 +58,80 @@ website:
   search:
     location: navbar
     type: textbox
+  navbar:
+    title: mizer
+    logo-href: https://sizespectrum.org/mizer
+    search: true
+    left:
+      - text: Get started
+        href: https://sizespectrum.org/mizer/articles/mizer.html
+      - text: Articles
+        menu:
+          - text: Model types
+          - text: The General Mizer Size-spectrum Model
+            href: https://sizespectrum.org/mizer/articles/model_description.html
+          - text: The Single-Species Model
+            href: https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html
+          - text: The Community Model
+            href: https://sizespectrum.org/mizer/articles/community_model.html
+          - text: The Trait-Based Model
+            href: https://sizespectrum.org/mizer/articles/trait_model.html
+          - text: The Multi Species Model
+            href: https://sizespectrum.org/mizer/articles/multispecies_model.html
+          - text: Tutorials
+          - text: Running a Simulation
+            href: https://sizespectrum.org/mizer/articles/running_a_simulation.html
+          - text: Exploring the Simulation Results
+            href: https://sizespectrum.org/mizer/articles/exploring_the_simulation_results.html
+          - text: A Multi-Species Model of the North Sea
+            href: https://sizespectrum.org/mizer/articles/a_multispecies_model_of_the_north_sea.html
+          - text: 'Cheatsheet: Analysis and Plotting'
+            href: https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html
+          - text: Extending mizer
+          - text: Extending mizer
+            href: https://sizespectrum.org/mizer/articles/extending-mizer.html
+          - text: Using mizer extension packages
+            href: https://sizespectrum.org/mizer/articles/using-extension-packages.html
+          - text: Creating a mizer extension package
+            href: https://sizespectrum.org/mizer/articles/creating-extension-packages.html
+          - text: Technical articles
+          - text: Incorporating predation diffusion
+            href: https://sizespectrum.org/mizer/articles/predation_diffusion.html
+          - text: Cohort dynamics and diffusion
+            href: https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html
+          - text: The Numerical Scheme used in Mizer
+            href: https://sizespectrum.org/mizer/articles/numerical_details.html
+          - text: Fast Fourier Transform for Rates
+            href: https://sizespectrum.org/mizer/articles/fft.html
+          - text: Analytic Test
+            href: https://sizespectrum.org/mizer/articles/analytic_test.html
+          - text: More articles...
+            href: https://sizespectrum.org/mizer/articles/index.html
+      - text: Reference
+        href: https://sizespectrum.org/mizer/reference/index.html
+      - text: Course
+        href: https://mizer.course.sizespectrum.org
+      - text: Changelog
+        href: https://sizespectrum.org/mizer/news/index.html
+      - text: Publications
+        href: https://sizespectrum.org/mizer/articles/publications.html
+    right:
+      - icon: robot
+        text: Ask AI
+        href: https://notebooklm.google.com/notebook/6aa51f75-d1a8-4140-9180-84532ef5f821
+      - text: Blog
+        href: https://blog.mizer.sizespectrum.org
+      - icon: twitter
+        href: https://twitter.com/mizer_model
+        aria-label: Twitter
+      - icon: github
+        href: https://github.com/sizespectrum/mizer/
+        aria-label: GitHub
   page-navigation: true
   sidebar:
     style: "docked"
     search: true
     contents:
-      - icon: house-door-fill
-        text: Back to mizer home
-        href: https://sizespectrum.org/mizer
       - text: Introduction
         href: index.qmd
       - text: Install tools

@@ -80,12 +80,14 @@ The lack of food and the resulting slow-down in growth leads to a severe drop in
 One may think that the drop in abundance is at sizes where the predator encounters fewer prey than before and thus has lower growth rate. This is what classic predator-prey thinking would suggest: low prey abundance leads to low predator abundance. Size spectrum dynamics is different. To drive this point home we will display the growth rate plots and the spectrum plots directly above each other
 
 ::: {layout-nrow="2"}
+
 ```{r}
 #| fig-show: hold
 #| fig-height: 2
 growth_rates_plot
 spectra_plot
 ```
+
 :::
 
 We see that where the growth starts slowing down, the abundance actually increases. This is because a decrease in the growth rate leads to a pile-up of individuals. You know this phenomenon from traffic jams. Where the speed of the cars decreases on a motorway, their density increases. Then when the speed increases again on the other side of the traffic jam, the density of cars drops and you wonder what caused the traffic jam in the first place. We see the same phenomenon in size spectrum dynamics. We see from the graphs above: it is where the growth rate starts growing faster again that the density goes down.
@@ -105,6 +107,7 @@ Make a single plot, similar to the one above, comparing the steady state biomass
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
+
 ```{r}
 params_overfed <- params
 initialNResource(params_overfed)[size_range] <- 
@@ -293,9 +296,11 @@ In addition, mizer allows you to include other sources of [external mortality](h
 The cause of mortality that is most under our control is mortality from fishing. Mizer allows the simulation of mixed fisheries, utilising several different gears (or metiers or fleets) catching several different species. The parameters describing the fishing gears are stored in a `gear_params` data frame. If a particular gear can catch a particular species, there will be a corresponding row in the `gear_params` data frame specifying the catchability of that species for that gear as well as the size-selectivity of the gear for that species. We discuss in more detail how fishing is set up in mizer in Part 3 of this course when we study the consequences of changes in fishing policy. 
 
 Here we only look at what fishing gear is set up by default in our simple single-species model:
+
 ```{r}
 gear_params(params)
 ```
+
 We see that there is only one gear, called "knife_edge_gear" targeting our one species, called "Target species". The size-selectivity is described by a knife_edge function with a `knife_edge_size` of about 25 grams. This means that all fish greater than about 25 grams will be exposed to the same fishing mortality while smaller fish will experience no fishing mortality. Mizer can of course also deal with more general selectivity curves.
 
 We also need to specify the fishing effort, which will be multiplied by the catchability and the selectivity to get the annual instantaneous fishing mortality rate. For illustration we will set the effort to 1 and plot the resulting fishing mortality.

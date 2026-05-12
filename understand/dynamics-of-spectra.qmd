@@ -267,6 +267,7 @@ Go back to the example with fishing on individuals above 1kg from the section on
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
+
 ```{r message=FALSE}
 # We make a copy of the trait-based model
 mp_fishing <- mp

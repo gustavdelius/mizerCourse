@@ -1,1 +1,11 @@
-/* css styles */
+/* BEGIN mizer shared navbar */
+[data-bs-theme="light"] .navbar,
+.navbar[data-bs-theme="dark"] {
+  background: linear-gradient(#50b3eb, #2fa4e7 60%, #2c9ad9) !important;
+  --bs-navbar-color: rgba(255, 255, 255, 0.8);
+  --bs-navbar-hover-color: #fff;
+  --bs-navbar-active-color: #fff;
+  --bs-navbar-brand-color: rgba(255, 255, 255, 0.9);
+  --bs-navbar-brand-hover-color: #fff;
+}
+/* END mizer shared navbar */

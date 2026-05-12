@@ -34,11 +34,14 @@ sim <- project(NS_params, effort = effort_array, dt = 0.1, t_save = 1)
 ```
 
 ## Accessing the simulation results
+```{r internal, include=FALSE}
+dimN <- dim(N(sim))[1]
+```
 
 The projected species abundances at size through time can be obtained with 
 `N(sim)`.  This returns a three-dimensional array (time x species x size). Consequently,
 this array can get very big so inspecting it can be difficult. In the example we
-have just run, the time dimension of `n` has `r dim(N(sim))[1]` rows
+have just run, the time dimension of `n` has `r dimN` rows
 (one for the initial population and then one for each of the saved time steps).
 There are also 12 species each with 100 sizes. We can check this by running the
 `dim()` function and looking at the dimensions of the `n` array:
@@ -62,20 +65,26 @@ output is only saved every year.
 
 Often we are particularly interested in the results at the final time-step.
 These we can access with
+
 ```{r results='hide'}
 finalN(sim)
 ```
+
 which is a two dimensional array (species x size).
 
 The projected resource abundances can be accesses similarly with
+
 ```{r results='hide'}
 NResource(sim)
 ```
+
 This returns a two-dimensional array (time x size). And if we are only
 interested in the final time step
+
 ```{r results='hide'}
 finalNResource(sim)
 ```
+
 returns a vector with one entry for each size class.
 
 ## Summary functions{#sec:summaries}

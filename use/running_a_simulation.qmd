@@ -133,6 +133,7 @@ to 0).
 We will use a MizerParams object with four gears.
 This example MizerParams object is called `NS_params` and is shipped with the mizer package.
 Let's have a look at its summary:
+
 ```{r}
 summary(NS_params)
 ```
@@ -169,9 +170,11 @@ the species `w_mat` parameter.
 
 The effort through time can be inspected with `getEffort()` (we use the `head()`
 function to just show the first few lines).
+
 ```{r label=show_effort}
 head(getEffort(sim))
 ```
+
 The `effort` slot shows the effort by time and gear. In this example, we
 specified the `effort` argument as a single numeric of value 1. As you can see
 this results in the same effort being used for all gears for all time steps.
@@ -251,6 +254,7 @@ linearly from 1 to 0, whilst the effort of the otter trawl decreases linearly
 from 1 to 0.5.
 
 First we create the empty `effort` array:
+
 ```{r label=set_empty_effort_array}
 gear_names <- c("Industrial","Pelagic","Beam","Otter")
 times <- seq(from = 1, to = 10, by = 1)
@@ -268,9 +272,11 @@ effort_array[,"Otter"] <- seq(from = 1, to = 0.5, length = length(times))
 ```
 
 The first few rows of the effort array are shown as an illustration:
+
 ```{r label=show_effort_array}
 head(effort_array)
 ```
+
 The first row gives the effort between times 1 and 2, the second between times 2
 and 3, and so on. The time 10 row in the array is not actually used, except to
 set the final time for the simulation.
@@ -283,9 +289,7 @@ head(sim@effort)
 ```
 
 As you can see, it can be quite fiddly to set up a complicated effort array so
-it may be easier to prepare it in advance as a .csv file and read it in, similar
-to how we read in the interaction matrix in 
-[the section with an examples of making a MizerParams object.](multispecies_model.qmd#sec:params_example) We
+it may be easier to prepare it in advance as a .csv file and read it in. We
 give an example of this in 
 [the section on the North Sea model.](a_multispecies_model_of_the_north_sea.qmd)
 

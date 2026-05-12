@@ -24,6 +24,7 @@ How do we decide which species to include in the model? There are many ways to a
 It is a good idea to start with only a small number of key species. You can always add more species to an existing model at a later stage when the species become important to your modelling.
 
 One good approach is to build on the efforts of others. There may already be a multi-species model in existence for your ecosystem and initially you could keep some of the choices made for that model. That is what we do in this tutorial. We want to build a model for the Celtic Sea. We build on a mizer model described in [Spence et al. (2021)](https://doi.org/10.1111/faf.12543). The model parameters are given in the [supplementary material](https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Ffaf.12543&file=faf12543-sup-0002-material.pdf) of that paper. James Martindale had the species parameters in a file and shared that with us. Let's load that and print the list of parameter names.
+
 ```{r eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/species_params_spence_et_al.rds",
               destfile = "species_params_spence_et_al.rds")
@@ -119,10 +120,12 @@ The asymptotic size `w_max` is the size (in grams) at which all individuals of t
 The best way to estimate this parameter is probably to look at what the largest fish is that has been caught in your study area. You may of course be fishing so hard that none of the fish grow to their asymptotic size and then the size of the largest caught fish would be an underestimate of the asymptotic size. But our estimate does not have to be perfect.
 
 We have a data frame with observations of sizes of caught fish and can look through it for the largest sized fish of each species. 
+
 ```{r eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/catch.csv",
               destfile = "catch.csv")
 ```
+
 <!-- TODO: give origin of the data. -->
 
 ```{r}
@@ -170,6 +173,7 @@ For many species the length-weight conversion coefficients $a$ and $b$ can be fo
 length_weight <- estimate(sp$latin_name, fields = c("Species", "a", "b"))
 length_weight
 ```
+
 Note that fishbase is continuously updated and the values you get for the length-weight conversion coefficients will change over time. The values above are already different from the ones in November 2022 when this course was first written.
 
 We can now add all this information to our species parameter data frame and use it to calculate the column we actually need, namely `w_max`.
@@ -263,6 +267,7 @@ For the Celtic Sea model we can use [ICES stock assessment reports](https://stan
 One problem with using stock-assessment estimates is that they are usually given for the entire area that the stock exists in. This area is not usually identical with the Celtic Sea area that we are interested in. The assumption we have made here that the stock is uniformly distributed over its entire area is most certainly not justified. It would be better to make use of research trawl and landings data filtered down to the Celtic Sea area, in effect repeating stock-assessment but using the mizer model instead of a single-species stock-assessment model. We are working on developing such an approach.
 
 Let us load in the estimates of spawning stock biomass that we obtained from the ICES reports by simply scaling them down to tonnes per square kilometre.
+
 ```{r eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/celtic_sea_ssb.rds",
               destfile = "celtic_sea_ssb.rds")
@@ -337,6 +342,7 @@ If you want to change the default values for any of these parameters for any of 
 By default, mizer assumes that all species can interact with each other equally and that predation is determined solely by size. To change this assumption we need to provide a species interaction matrix. This matrix can include three different aspects (or a combination of all of them):
 
 1.  **Spatial and temporal overlap of species in a large ecosystem**. This way the interaction matrix is set based on species co-occurrences in various fisheries surveys or observations. In other words we observe how often a pair of species is found in same surveys. This is how species interactions are set up in the model by [Spence et.al.(2021)](https://onlinelibrary.wiley.com/doi/10.1111/faf.12543) and we will use their interaction matrix for our model:
+
 ```{r eval=FALSE}
 download.file("https://raw.githubusercontent.com/gustavdelius/mizerCourse/master/build/celtic_interaction.csv",
               destfile = "celtic_interaction.csv")
@@ -364,6 +370,7 @@ In mizer you can implement an arbitrary number of different gears, each with its
 You provide the information about the gears in a data frame similar to the species parameter data frame. However the gear parameter data frame has one row for each gear-species combination. The data frame needs to have a column `gear` for the name of the gear and a column `species` for the name of the species. There are then further columns holding the information about how that gear selects that species. For details see the help page of `gear_params()`.
 
 For our initial model we have set up a simple gear parameter data frame describing only a single gear that we call "Commercial". It targets all species in our model. The choice of parameters is again inspired by the paper by [Spence et al.(2021)](https://onlinelibrary.wiley.com/doi/10.1111/faf.12543)
+
 ```{r eval=FALSE}
 download.file("https://raw.githubusercontent.com/gustavdelius/mizerCourse/master/build/celtic_gear_params.csv",
               destfile = "celtic_gear_params.csv")

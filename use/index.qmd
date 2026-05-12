@@ -9,7 +9,7 @@ Now that you have built your model, you can use it to explore the effects of cha
 
 Using examples, the tutorials are designed to help you develop your own model simulation experiments:
 
-1.  [**Run a simulation**](running a simulation.qmd)\
+1.  [**Run a simulation**](running_a_simulation.qmd)\
     We take a detailed look at how the
     `project()` function works and the different ways in which effort and time can
     be set up.

@@ -92,9 +92,11 @@ Now, check what the diets of other species look like by making a plot for each s
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
+
 ```{r}
 plotDiet(mp)
 ```
+
 :::
 :::
 
@@ -249,6 +251,7 @@ Project the `mp_fishing` model to its steady state and then make a plot comparin
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
+
 ```{r}
 mp_fishing_steady <- projectToSteady(mp_fishing_sss)
 
@@ -257,6 +260,7 @@ plotSpectra2(mp, name1 = "No fishing",
              power = 2,
              wlim = c(1e-2, NA), ylim = c(1e-6, NA))
 ```
+
 There is a clear trophic cascade.
 :::
 :::
