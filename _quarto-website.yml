@@ -36,6 +36,7 @@ format:
 
 website:
   title: "mizer course"
+  llms-txt: true
   site-url: "https://mizer.course.sizespectrum.org"
   favicon: images/favicon-16x16.png
   repo-url: https://github.com/gustavdelius/mizerCourse
