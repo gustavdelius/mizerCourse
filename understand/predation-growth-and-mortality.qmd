@@ -43,18 +43,11 @@ Let's make a plot to check that this did what we intended:
 plotSpectra(params_starved, power = 2, species = FALSE)
 ```
 
-The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model. We will use the method that we saw at the end of the previous tutorial in the section "[Two curves in one plot](single-species-spectra.qmd#two-curves-in-one-plot)".
+The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model using `plot()` and `addPlot()`.
 
 ```{r}
-gf_original <- melt(getEGrowth(params))
-gf_original$Model <- "Original"
-gf_starved <- melt(getEGrowth(params_starved))
-gf_starved$Model <- "Less prey"
-gf <- rbind(gf_original, gf_starved)
-growth_rates_plot <- ggplot(gf, aes(x = w, y = value, linetype = Model)) +
-    geom_line() +
-    scale_x_log10("Weight [g]") +
-    ylab("Growth rate [g/year]")
+growth_rates_plot <- plot(getEGrowth(params))
+growth_rates_plot <- addPlot(growth_rates_plot, getEGrowth(params_starved))
 growth_rates_plot
 ```
 

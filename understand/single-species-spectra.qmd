@@ -211,7 +211,7 @@ p_biomass_cdf
 
 Mizer likes to work with arrays instead of data frames. Our variables `n`, `biomass`, `cumulative_biomass` and `cdf` are all arrays. I hope you noticed the magic how R can do calculations with all entries of an array in one go.
 
-ggplot2 on the other hand likes to work with data frames instead of arrays. The function `melt()` allows us to convert the mizer arrays into data frames suitable for `ggplot()`. You will see this discussed again later.
+ggplot2 on the other hand likes to work with data frames instead of arrays. The function `melt()` allows us to convert the mizer arrays into data frames suitable for `ggplot()`. Most mizer arrays that are returned by mizer functions have a `plot()` method, so you don't need to use `melt()` for those. But for derived arrays like `cdf` that are not direct mizer outputs, you still need `melt()` if you want to use `ggplot()`.
 :::
 
 This plot shows us for example that 50% of the individuals are smaller than 12.5g and only a very small percentage is larger than 75g.
@@ -322,7 +322,7 @@ We have seen that for juvenile fish the growth rate and the death rate are both 
 
 I won't do the maths here with you (and you probably don't want me to anyway), but we can see that the result makes sense. It tells us that the number density drops off faster with size if the mortality rate coefficient $\mu_0$ is higher or if the growth rate coefficient $g_0$ is smaller, which is what we would expect.
 
-We can also check this claim numerically. Let's look at the spectrum of individuals up to 10 grams. By now we know how to do this. We first convert the number density matrix `n` into a dataframe and then filter out all observations that do not have $w\leq 10$. The resulting data frame we pass to `ggplot()` and ask it to plot a line on log-log axes.
+We can also check this claim numerically. Let's look at the spectrum of individuals in log-log axes.
 
 ```{r}
 plot(n, log_x = TRUE, log_y = TRUE)
