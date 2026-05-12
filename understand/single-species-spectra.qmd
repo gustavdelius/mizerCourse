@@ -61,11 +61,13 @@ Create a MizerParams object describing a single species in a power-law backgroun
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
+
 ```{r}
 params21 <- newSingleSpeciesParams(lambda = 2.1)
 plot21 <- plotSpectra(params21, power = 0)
 plot21
 ```
+
 :::
 
 :::
@@ -78,7 +80,7 @@ While the `plotSpectra()` function gives us a plot of the number density, it wou
 n <- initialN(params)
 ```
 
-As you can see in the "Environment" pane in RStudio, `n` is a matrix with 1 row and 101 columns.
+As you can see in the "Environment" pane in RStudio, `n` is an array of class 'ArraySpeciesBySize' with 1 row and 101 columns.
 
 ![](../images/n_env.png)
 
@@ -116,18 +118,22 @@ Determine the total number of fish in the model with sizes between 10 grams and 
 ::: {.callout-caution collapse="true"}
 #### Give me a hint
 You have seen above how you can get the numbers in a single size bin. To get the numbers in each of a range of size bins you can use syntax like
+
 ```{r}
 numbers[1, 61:65]
 ```
+
 You can pass a vector of numbers like this to the `sum()` function to add the numbers together.
 :::
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
 The size bins covering the range from 10 to 20 grams are the bins 81 to 86 inclusive.
+
 ```{r}
 sum(numbers[1, 81:86])
 ```
+
 :::
 :::
 
@@ -237,7 +243,7 @@ Let us check that in our model the physiological rates are indeed power laws, at
 growth_rate <- getEGrowth(params)
 ```
 
-You can again see in the "Environment" pane that this is a matrix with one row for the one species and 101 columns for the 101 size classes. So for example the growth rate at size 1 gram is
+You can again see in the "Environment" pane that this is an array with one row for the one species and 101 columns for the 101 size classes. So for example the growth rate at size 1 gram is
 
 ```{r}
 growth_rate[1, 61]
@@ -249,44 +255,29 @@ growth_rate[1, 61]
 growth_rate[1, 61] / 365
 ```
 
-We would like to make a log-log plot of the growth rate against size to check that it gives a straight line. We will use `ggplot()` for that purpose. `ggplot()` likes to work with data frames instead of named matrices, so we first convert the matrix into a data frame with the `melt()` function.
+We would like to make a log-log plot of the growth rate against size to check that it gives a straight line. We can do that with
 
 ```{r}
-growth_rate_frame <- melt(growth_rate)
+plot(growth_rate, log_x = TRUE, log_y = TRUE)
 ```
 
-You can see in the "Environment" pane that the new variable that we called `growth_rate_frame` is a data frame with 101 observations of 3 variables. The 101 observations correspond to the 101 size classes. The 3 variables have names
-
-```{r}
-names(growth_rate_frame)
-```
-
-They are the species `sp`, the size `w`, and the `value` which contains the growth_rate. This data frame we can pass to `ggplot()`.
-
-```{r}
-p <- ggplot(growth_rate_frame) +
-    geom_line(aes(x = w, y = value)) +
-    scale_x_log10(name = "Weight [g]") +
-    scale_y_log10(name = "Growth rate [g/year]")
-p
-```
-
-Note how we linked the x axis to the `w` variable and the y axis to the `value` variable and specified that both axes should be on a logarithmic scale.
+The reason `plot` knew how to label the axes and what to put in the legend is that `getEGrowth()` returned the growth rate as an `ArraySpeciesBySize`, which has that information included as attributes.
 
 We see that at least up to a size of a few grams the line is straight. Let's isolate the growth rate for those smaller sizes
 
 ```{r}
-g_small_fish <- filter(growth_rate_frame, w <= 10)
+w_small_fish <- w(params)[w(params) <= 10]
+g_small_fish <- growth_rate[w(params) <= 10]
 ```
 
 and fit a linear model
 
 ```{r}
-lm(log(g_small_fish$value) ~ log(g_small_fish$w))
+lm(log(g_small_fish) ~ log(w_small_fish))
 ```
 
 ```{r include=FALSE}
-gm <- lm(log(g_small_fish$value) ~ log(g_small_fish$w))
+gm <- lm(log(g_small_fish) ~ log(w_small_fish))
 log_g0 <- round(gm$coefficients[[1]], digits = 3)
 g0 <- exp(gm$coefficients[[1]])
 ```
@@ -306,19 +297,17 @@ Then fit a linear model to determine the slope and and intercept and thus the al
 #### Show me the solution
 
 ```{r}
-mort_rate_frame <- melt(getMort(params))
-p <- ggplot(mort_rate_frame) +
-    geom_line(aes(x = w, y = value)) +
-    scale_x_log10(name = "Weight [g]") +
-    scale_y_log10(name = "Mortality rate [1/year]")
-p
+mort_rate <- getMort(params)
+plot(mort_rate, log_x = TRUE, log_y = TRUE)
 ```
 
 ```{r}
-mm <- lm(log(mort_rate_frame$value) ~ log(mort_rate_frame$w))
+mm <- lm(log(mort_rate[1, ]) ~ log(w(params)))
 mm
 ```
+
 To get the coefficient $\mu_0$ for the mortality rate we need to exponentiate the intercept
+
 ```{r}
 m0 <- exp(coef(mm)[[1]])
 m0
@@ -336,23 +325,18 @@ I won't do the maths here with you (and you probably don't want me to anyway), b
 We can also check this claim numerically. Let's look at the spectrum of individuals up to 10 grams. By now we know how to do this. We first convert the number density matrix `n` into a dataframe and then filter out all observations that do not have $w\leq 10$. The resulting data frame we pass to `ggplot()` and ask it to plot a line on log-log axes.
 
 ```{r}
-nf <- melt(n) %>% 
-  filter(w <= 10)
-
-ggplot(nf) +
-  geom_line(aes(x = w, y = value)) +
-  scale_x_log10(name = "Weight [g]") +
-  scale_y_log10(name = "Number density [1/g]")
+plot(n, log_x = TRUE, log_y = TRUE)
 ```
 
 That confirms what we had seen earlier, that for fish less than 10 grams the number density is a power law. To determine the exponent of the power law we need the slope of that straight line in the log-log plot, and the easiest way to do that is to fit a linear model to the log variables:
 
 ```{r}
-lm(log(nf$value) ~ log(nf$w))
+n_small_fish <- n[w(params) <= 10]
+lm(log(n_small_fish) ~ log(w_small_fish))
 ```
 
 ```{r include=FALSE}
-jm <- lm(log(nf$value) ~ log(nf$w))
+jm <- lm(log(n_small_fish) ~ log(w_small_fish))
 jexp <- round(jm$coefficients[[2]], digits = 3)
 ```
 
@@ -376,17 +360,10 @@ The increase of abundance that we see at around the maturity size of our species
 
 ### Investment into reproduction
 
-Let us look at a plot of the proportion of the available energy that is invested into reproduction as a function of the size. This is the product of the proportion of individuals that are mature (obtained with the function `maturity()` and the proportion of their energy income that a mature fish invests into reproduction (obtained with the function `repro_prop()`.
+Let us look at a plot of the proportion $\psi(w)$ of the available energy that is invested into reproduction as a function of the size $w$. This is the product of the proportion of individuals that are mature (obtained with the function `maturity()` and the proportion of their energy income that a mature fish invests into reproduction (obtained with the function `repro_prop()`.
 
 ```{r}
-reprod_proportion <- maturity(params) * repro_prop(params)
-# Convert the array to a data frame for ggplot
-psi <- melt(reprod_proportion)
-
-p <- ggplot(psi) +
-    geom_line(aes(x = w, y = value)) +
-    labs(x = "Weight [g]",
-         y = "Proportion invested into reproduction")
+p <- plot(psi(params), log_x = FALSE)
 p
 ```
 
@@ -410,7 +387,7 @@ As you can see, there are a lot of other species parameters, some of which we wi
 select(species_params(params), w_mat, w_mat25, w_max, m)
 ```
 
-And with this knowledge of parameter we can improve the plot for clarity and add a vertical line at 25% and 50% maturation weight
+And with this knowledge of parameters we can improve the plot for clarity and add a vertical line at 25% and 50% maturation weight
 
 ```{r}
 p + geom_vline(xintercept = species_params(params)$w_mat, lty = 2) +
@@ -436,42 +413,19 @@ select(species_params(params_changed_maturity), w_mat, w_mat25, w_max, m)
 Now the maturity curve has changed, which we can verify by plotting it
 
 ```{r}
-psi_changed_maturity <- melt(maturity(params_changed_maturity) * 
-                                 repro_prop(params_changed_maturity))
-
-ggplot(psi_changed_maturity) +
-    geom_line(aes(x = w, y = value)) +
+pc <- plot(psi(params_changed_maturity), log_x = FALSE) +
     geom_vline(xintercept = species_params(params_changed_maturity)$w_mat, 
                lty = 2) +
     geom_vline(xintercept = species_params(params_changed_maturity)$w_mat25, 
-               lty = 2, col = "grey") + 
-    labs(x = "Weight [g]",
-         y = "Proportion invested into reproduction")
+               lty = 2, col = "grey")
+pc
 ```
 
-### Two curves in one plot
-
-At this point let's take a little break and learn how to draw two curves in the same graph. How can we see the old maturity curve and the new maturity curve in the same plot? First we add an extra column to each dataframe describing it
-
-```{r}
-psi$type <- "original"
-psi_changed_maturity$type <- "changed"
-```
-
-Then we bind the two data frames together
+With the `addPlot()` function we can add the new curve to the plot of the old curve
+for a quick comparison.
 
 ```{r}
-psi_combined <- rbind(psi, psi_changed_maturity)
-```
-
-and send that combined data frame first to `ggplot()`. We also run the plot through `plotly::ggplotly()` to make it interactive, but that is of course entirely optional. 
-
-```{r}
-p <- ggplot(psi_combined) +
-    geom_line(aes(x = w, y = value, colour = type)) +
-    labs(x = "Weight [g]",
-         y = "Proportion invested into reproduction")
-plotly::ggplotly(p)
+addPlot(p, psi(params_changed_maturity))
 ```
 
 This change in the maturity curve of course implies a change in the growth rates.
@@ -483,17 +437,12 @@ Make a plot showing the growth rates of the original model and of the model with
 
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
+
 ```{r}
-growth_rate_frame$type <- "original"
-modified_growth_frame <- melt(getEGrowth(params_changed_maturity))
-modified_growth_frame$type <- "changed"
-growth_combined <- rbind(growth_rate_frame, modified_growth_frame)
-p <- ggplot(growth_combined) +
-    geom_line(aes(x = w, y = value, colour = type)) +
-    labs(x = "Weight [g]",
-         y = "Growth rate [g/year]")
-plotly::ggplotly(p)
+p <- plot(getEGrowth(params), log_x = FALSE)
+addPlot(p, getEGrowth(params_changed_maturity))
 ```
+
 :::
 
 :::
