@@ -68,7 +68,7 @@ plotBiomassVsSpecies(cel_model)
 So we also do
 
 ```{r message=FALSE, warning=FALSE}
-cel_model <- cel_model |> matchGrowth() |> steady()
+cel_model <- cel_model |> matchBiomasses() |> steady()
 ```
 
 This is what the feeding levels look like now:

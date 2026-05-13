@@ -165,7 +165,15 @@ This latest plot seems to indicate that most of the biomass of the species is co
 
 So for example, we might want to consider the prey biomass available to two different predators of our species, one small and one large. Assume that the smaller predator feeds on prey in the size range from 1g to 2g. The other predator, which we assume is 10 times larger, feeds on prey in the size range from 10g to 20g. These feeding intervals have the same width on the logarithmic weight axis. Therefore we should look at the plot of the biomass density in log weight to see that the larger predator has a lot more prey biomass from our species available to it than the smaller one. This is in spite of the fact that the plot of biomass density in weight tells us that the biomass density is lower at 10g than at 1g.
 
-It may have been a bit confusing that we displayed the same size spectrum in three different ways. But it is important to be aware of this because in the literature you will see all different conventions being used, so if you see a plot of a size spectrum you always need to ask yourself exactly which density is being shown.
+There is another way to represent the size distribution. When we talk about size spectra, we always have the representation in terms of densities in mind. You may already be familiar with the concept of a densities from probability theory, where you can describe a probability distribution in terms of its probability density function. But perhaps you also know that there is an alternative description of the probability distribution in terms of the cumulative distribution function (CDF). We can similarly describe the size distribution by a cumulative abundance distribution function, which gives the proportion of fish that are smaller than a given size:
+
+```{r}
+plotCDF(params, power = 0, resource = FALSE)
+```
+
+This plot shows very clearly that most fish are larvae.
+
+It may have been a bit confusing that we displayed the same size spectrum in four different ways. But it is important to be aware of this because in the literature you will see all different conventions being used, so if you see a plot of a size spectrum you always need to ask yourself exactly which density is being shown.
 
 ## Biomass
 
@@ -206,21 +214,18 @@ p_biomass_cdf <- ggplot(melt(cdf), aes(x = w, y = value)) +
 p_biomass_cdf
 ```
 
-::: {.callout-note collapse="true"}
-### Expand for R details
-
-Mizer likes to work with arrays instead of data frames. Our variables `n`, `biomass`, `cumulative_biomass` and `cdf` are all arrays. I hope you noticed the magic how R can do calculations with all entries of an array in one go.
-
-ggplot2 on the other hand likes to work with data frames instead of arrays. The function `melt()` allows us to convert the mizer arrays into data frames suitable for `ggplot()`. Most mizer arrays that are returned by mizer functions have a `plot()` method, so you don't need to use `melt()` for those. But for derived arrays like `cdf` that are not direct mizer outputs, you still need `melt()` if you want to use `ggplot()`.
-:::
-
-This plot shows us for example that 50% of the individuals are smaller than 12.5g and only a very small percentage is larger than 75g.
-
-The biomass density is the slope of this graph. We can also plot the cumulative biomass distribution function on a logarithmic weight axis:
+Let us also look at the cumulative biomass distribution:
 
 ```{r}
-p_biomass_cdf +
-    scale_x_log10()
+plotCDF(params, log_x = FALSE, resource = FALSE)
+```
+
+This plot shows us for example that 50% of the individuals are smaller than 12.5g and only a very small percentage is larger than 75g. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but most of the biomass comes from large fish. So we need to always be very clear about which quantity we are considering.
+
+We can also plot the cumulative biomass distribution function on a logarithmic weight axis:
+
+```{r}
+plotCDF(params, resource = FALSE)
 ```
 
 This graph contains exactly the same information as the previous graph, just showing more detail at smaller sizes and less detail at larger sizes. We can see for example that about 20% of the total biomass is from individuals smaller than 1g, which was difficult to see in the previous graph. The slope of this graph is the biomass density in log weight.

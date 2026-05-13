@@ -31,6 +31,7 @@ book:
     - part: "Use"
       chapters:
       - use/index.qmd
-      - use/fishing-scenarios.qmd
-      - use/change-resources.qmd
+      - use/running_a_simulation.qmd
+      - use/exploring_the_simulation_results.qmd
+      - use/a_multispecies_model_of_the_north_sea.qmd
       - use/further-scenarios.qmd

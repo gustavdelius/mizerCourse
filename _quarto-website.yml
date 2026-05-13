@@ -16,7 +16,11 @@ project:
     - build/refine.qmd
     - build/landings.qmd
     - build/tune-resilience.qmd
-    - use/*
+    - use/index.qmd
+    - use/running_a_simulation.qmd
+    - use/exploring_the_simulation_results.qmd
+    - use/a_multispecies_model_of_the_north_sea.qmd
+    - use/further-scenarios.qmd
 
 format:
   html:
@@ -65,27 +69,21 @@ website:
     search: true
     left:
       - text: Get started
-        href: https://sizespectrum.org/mizer/articles/mizer.html
+        href: https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html
+      - text: Course
+        href: https://mizer.course.sizespectrum.org
       - text: Articles
         menu:
           - text: Model types
-          - text: The General Mizer Size-spectrum Model
-            href: https://sizespectrum.org/mizer/articles/model_description.html
-          - text: The Single-Species Model
-            href: https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html
           - text: The Community Model
             href: https://sizespectrum.org/mizer/articles/community_model.html
           - text: The Trait-Based Model
             href: https://sizespectrum.org/mizer/articles/trait_model.html
           - text: The Multi Species Model
             href: https://sizespectrum.org/mizer/articles/multispecies_model.html
-          - text: Tutorials
-          - text: Running a Simulation
-            href: https://sizespectrum.org/mizer/articles/running_a_simulation.html
-          - text: Exploring the Simulation Results
-            href: https://sizespectrum.org/mizer/articles/exploring_the_simulation_results.html
-          - text: A Multi-Species Model of the North Sea
-            href: https://sizespectrum.org/mizer/articles/a_multispecies_model_of_the_north_sea.html
+          - text: The General Mizer Size-spectrum Model
+            href: https://sizespectrum.org/mizer/articles/model_description.html
+          - text: Cheat sheets
           - text: 'Cheatsheet: Analysis and Plotting'
             href: https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html
           - text: Extending mizer
@@ -110,8 +108,6 @@ website:
             href: https://sizespectrum.org/mizer/articles/index.html
       - text: Reference
         href: https://sizespectrum.org/mizer/reference/index.html
-      - text: Course
-        href: https://mizer.course.sizespectrum.org
       - text: Changelog
         href: https://sizespectrum.org/mizer/news/index.html
       - text: Publications
@@ -169,9 +165,11 @@ website:
         contents:
         - text: Introduction
           href: use/index.qmd
-        - text: Explore fishing scenarios
-          href: use/fishing-scenarios.qmd
-        - text: Change resource
-          href: use/change-resources.qmd
+        - text: Run a simulation
+          href: use/running_a_simulation.qmd
+        - text: Explore the results
+          href: use/exploring_the_simulation_results.qmd
+        - text: A simulation of the North Sea
+          href: use/a_multispecies_model_of_the_north_sea.qmd
         - text: Explore further scenarios
           href: use/further-scenarios.qmd
