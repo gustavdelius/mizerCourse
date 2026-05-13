@@ -1,0 +1,22 @@
+# Part 2: Build mizer models
+
+Now that you have a good understanding of the basic principles behind sized based models, in this part of the course you will start developing our own multi-species model. You are welcome to use your own model system in this section, assuming you have the data. Alternatively, you can follow our example and focus on a model for the Celtic Sea.
+
+The material is split into 5 tutorials:
+
+1.  [**Collect parameters**](../build/collect-parameters.llms.md)  
+    Here we will explore the main model parameters that should be provided by the user to start building a multi-species model. We will also look at assumptions and defaults that mizer uses to fill non-essential parameter values. Your task will be to collect essential parameters from FishBase or other sources.
+
+2.  [**Create your first model**](../build/create-first-model.llms.md)  
+    Now that you have some model parameters, you can build the first model. In this part we will focus on achieving the correct species abundances and growth rates.
+
+3.  [**Refine your model**](../build/refine.llms.md)  
+    In this tutorial we will introduce the `tuneParams()` shiny gadget which makes it much easier to make changes to model parameters and observe their effects on the system. We will use it to adjust the resource abundance.
+
+4.  [**Match landings data**](../build/landings.llms.md)  
+    We will tune the model parameters to make the model predictions for the catches agree with landings data, in particular the size distribution of the landings. We will again be using the `tuneParams()` gadget.
+
+5.  [**Tune the resilience to fishing**](../build/tune-resilience.llms.md)  
+    We will explore how sensitive your model is to the effects of fishing. We will show how the reproduction levels influence the resilience of the species. We make adjustments to the reproduction levels to produce realistic responses to fishing intensity.
+
+There are many ways to keep improving a mizer model using a wide array of fisheries data and in this course we are only touching on a small number of easier methods. We are working on developing methods for parameter estimation in mizer, Please get in touch with Gustav Delius (gustav.delius@york.ac.uk) if you are interested in this.

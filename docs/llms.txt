@@ -1,0 +1,23 @@
+# mizer course
+
+## Pages
+
+- [Explore further scenarios](https://mizer.course.sizespectrum.org/use/further-scenarios.llms.md)
+- [Explore the simulation results](https://mizer.course.sizespectrum.org/use/exploring_the_simulation_results.llms.md)
+- [Part 3: Use mizer models](https://mizer.course.sizespectrum.org/use/index.llms.md)
+- [Match landings datas](https://mizer.course.sizespectrum.org/build/landings.llms.md)
+- [Create first model](https://mizer.course.sizespectrum.org/build/create-first-model.llms.md)
+- [Part 2: Build mizer models](https://mizer.course.sizespectrum.org/build/index.llms.md)
+- [Species interactions](https://mizer.course.sizespectrum.org/understand/species-interactions.llms.md)
+- [Single species spectra](https://mizer.course.sizespectrum.org/understand/single-species-spectra.llms.md)
+- [Part 1: Understand size-spectrum modelling](https://mizer.course.sizespectrum.org/understand/index.llms.md)
+- [index](https://mizer.course.sizespectrum.org/index.llms.md)
+- [Install tools](https://mizer.course.sizespectrum.org/prepare/install-tools.llms.md)
+- [Observed size spectra](https://mizer.course.sizespectrum.org/understand/observed-size-spectra.llms.md)
+- [Predation, growth and mortality](https://mizer.course.sizespectrum.org/understand/predation-growth-and-mortality.llms.md)
+- [Dynamics of size spectra](https://mizer.course.sizespectrum.org/understand/dynamics-of-spectra.llms.md)
+- [Collect parameters](https://mizer.course.sizespectrum.org/build/collect-parameters.llms.md)
+- [Refine your model](https://mizer.course.sizespectrum.org/build/refine.llms.md)
+- [Tune resilience](https://mizer.course.sizespectrum.org/build/tune-resilience.llms.md)
+- [Run a simulation](https://mizer.course.sizespectrum.org/use/running_a_simulation.llms.md)
+- [A simulation of the North Sea](https://mizer.course.sizespectrum.org/use/a_multispecies_model_of_the_north_sea.llms.md)

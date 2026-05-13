@@ -168,7 +168,7 @@ So for example, we might want to consider the prey biomass available to two diff
 There is another way to represent the size distribution. When we talk about size spectra, we always have the representation in terms of densities in mind. You may already be familiar with the concept of a densities from probability theory, where you can describe a probability distribution in terms of its probability density function. But perhaps you also know that there is an alternative description of the probability distribution in terms of the cumulative distribution function (CDF). We can similarly describe the size distribution by a cumulative abundance distribution function, which gives the proportion of fish that are smaller than a given size:
 
 ```{r}
-plotCDF(params, power = 0, resource = FALSE)
+plotCDF(params, power = 0)
 ```
 
 This plot shows very clearly that most fish are larvae.
@@ -217,7 +217,7 @@ p_biomass_cdf
 Let us also look at the cumulative biomass distribution:
 
 ```{r}
-plotCDF(params, log_x = FALSE, resource = FALSE)
+plotCDF(params, log_x = FALSE)
 ```
 
 This plot shows us for example that 50% of the individuals are smaller than 12.5g and only a very small percentage is larger than 75g. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but most of the biomass comes from large fish. So we need to always be very clear about which quantity we are considering.
@@ -225,7 +225,7 @@ This plot shows us for example that 50% of the individuals are smaller than 12.5
 We can also plot the cumulative biomass distribution function on a logarithmic weight axis:
 
 ```{r}
-plotCDF(params, resource = FALSE)
+plotCDF(params)
 ```
 
 This graph contains exactly the same information as the previous graph, just showing more detail at smaller sizes and less detail at larger sizes. We can see for example that about 20% of the total biomass is from individuals smaller than 1g, which was difficult to see in the previous graph. The slope of this graph is the biomass density in log weight.
