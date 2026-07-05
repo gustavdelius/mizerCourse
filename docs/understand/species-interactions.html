@@ -109,7 +109,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="../site_libs/plotly-binding-4.12.0/plotly.js"></script><script src="../site_libs/typedarray-0.1/typedarray.min.js"></script><script src="../site_libs/jquery-3.5.1/jquery.min.js"></script><link href="../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="../site_libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="../site_libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><link rel="stylesheet" href="../styles.css">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><script>
+(function() {
+  function setup() {
+    var toggle = document.getElementById("nav-menu-articles");
+    if (!toggle) return;
+
+    var menu = document.querySelector('[aria-labelledby="nav-menu-articles"]');
+    if (!menu) return;
+
+    var indexHref = null;
+    var links = menu.querySelectorAll("a.dropdown-item");
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute("href");
+      if (href && /articles\/index\.html$/.test(href)) {
+        indexHref = href;
+        break;
+      }
+    }
+    if (!indexHref) return;
+
+    toggle.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.location.href = indexHref;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setup);
+  } else {
+    setup();
+  }
+})();
+</script><link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Species interactions – mizer course">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://mizer.course.sizespectrum.org/understand/species-interactions_files/figure-html/species-interactions-3-1.png">
@@ -303,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
 <li class="nav-item">
-    <a class="nav-link" href="https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html"> 
+    <a class="nav-link" href="https://sizespectrum.org/mizer/articles/mizer.html"> 
 <span class="menu-text">Get started</span></a>
   </li>  
   <li class="nav-item">
@@ -316,6 +348,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">
 <li class="dropdown-header">Model types</li>
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html">
+ <span class="dropdown-text">The Single-Species Model</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/community_model.html">
  <span class="dropdown-text">The Community Model</span></a>
@@ -333,6 +369,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">The General Mizer Size-spectrum Model</span></a>
   </li>  
         <li class="dropdown-header">Cheat sheets</li>
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-model-setup-and-calibration.html">
+ <span class="dropdown-text">Cheatsheet: Model Setup and Calibration</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-changing-parameters.html">
+ <span class="dropdown-text">Cheatsheet: Changing Model Parameters</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-fishing.html">
+ <span class="dropdown-text">Cheatsheet: Fishing</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html">
  <span class="dropdown-text">Cheatsheet: Analysis and Plotting</span></a>
@@ -352,16 +400,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li class="dropdown-header">Technical articles</li>
         <li>
-    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/predation_diffusion.html">
- <span class="dropdown-text">Incorporating predation diffusion</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html">
  <span class="dropdown-text">Cohort dynamics and diffusion</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/numerical_details.html">
  <span class="dropdown-text">The Numerical Scheme used in Mizer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/default_parameters.html">
+ <span class="dropdown-text">Calculation of Default Parameter Values</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/fft.html">

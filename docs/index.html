@@ -75,6 +75,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+(function() {
+  function setup() {
+    var toggle = document.getElementById("nav-menu-articles");
+    if (!toggle) return;
+
+    var menu = document.querySelector('[aria-labelledby="nav-menu-articles"]');
+    if (!menu) return;
+
+    var indexHref = null;
+    var links = menu.querySelectorAll("a.dropdown-item");
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute("href");
+      if (href && /articles\/index\.html$/.test(href)) {
+        indexHref = href;
+        break;
+      }
+    }
+    if (!indexHref) return;
+
+    toggle.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.location.href = indexHref;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setup);
+  } else {
+    setup();
+  }
+})();
+</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -274,7 +307,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html"> 
+    <a class="nav-link" href="https://sizespectrum.org/mizer/articles/mizer.html"> 
 <span class="menu-text">Get started</span></a>
   </li>  
   <li class="nav-item">
@@ -287,6 +320,10 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
         <li class="dropdown-header">Model types</li>
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html">
+ <span class="dropdown-text">The Single-Species Model</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/community_model.html">
  <span class="dropdown-text">The Community Model</span></a>
@@ -304,6 +341,18 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">The General Mizer Size-spectrum Model</span></a>
   </li>  
         <li class="dropdown-header">Cheat sheets</li>
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-model-setup-and-calibration.html">
+ <span class="dropdown-text">Cheatsheet: Model Setup and Calibration</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-changing-parameters.html">
+ <span class="dropdown-text">Cheatsheet: Changing Model Parameters</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-fishing.html">
+ <span class="dropdown-text">Cheatsheet: Fishing</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html">
  <span class="dropdown-text">Cheatsheet: Analysis and Plotting</span></a>
@@ -323,16 +372,16 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li class="dropdown-header">Technical articles</li>
         <li>
-    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/predation_diffusion.html">
- <span class="dropdown-text">Incorporating predation diffusion</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html">
  <span class="dropdown-text">Cohort dynamics and diffusion</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/numerical_details.html">
  <span class="dropdown-text">The Numerical Scheme used in Mizer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/default_parameters.html">
+ <span class="dropdown-text">Calculation of Default Parameter Values</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/fft.html">

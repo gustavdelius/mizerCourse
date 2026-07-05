@@ -28,6 +28,40 @@ format:
       light: cerulean
       dark: darkly
     css: styles.css
+    header-includes: |
+      <script>
+      (function() {
+        function setup() {
+          var toggle = document.getElementById("nav-menu-articles");
+          if (!toggle) return;
+
+          var menu = document.querySelector('[aria-labelledby="nav-menu-articles"]');
+          if (!menu) return;
+
+          var indexHref = null;
+          var links = menu.querySelectorAll("a.dropdown-item");
+          for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute("href");
+            if (href && /articles\/index\.html$/.test(href)) {
+              indexHref = href;
+              break;
+            }
+          }
+          if (!indexHref) return;
+
+          toggle.addEventListener("click", function(e) {
+            e.preventDefault();
+            window.location.href = indexHref;
+          });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", setup);
+        } else {
+          setup();
+        }
+      })();
+      </script>
     html-math-method: katex
     code-fold: false
     code-link: true
@@ -69,12 +103,14 @@ website:
     search: true
     left:
       - text: Get started
-        href: https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html
+        href: https://sizespectrum.org/mizer/articles/mizer.html
       - text: Course
         href: https://mizer.course.sizespectrum.org
       - text: Articles
         menu:
           - text: Model types
+          - text: The Single-Species Model
+            href: https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html
           - text: The Community Model
             href: https://sizespectrum.org/mizer/articles/community_model.html
           - text: The Trait-Based Model
@@ -84,6 +120,12 @@ website:
           - text: The General Mizer Size-spectrum Model
             href: https://sizespectrum.org/mizer/articles/model_description.html
           - text: Cheat sheets
+          - text: 'Cheatsheet: Model Setup and Calibration'
+            href: https://sizespectrum.org/mizer/articles/cheatsheet-model-setup-and-calibration.html
+          - text: 'Cheatsheet: Changing Model Parameters'
+            href: https://sizespectrum.org/mizer/articles/cheatsheet-changing-parameters.html
+          - text: 'Cheatsheet: Fishing'
+            href: https://sizespectrum.org/mizer/articles/cheatsheet-fishing.html
           - text: 'Cheatsheet: Analysis and Plotting'
             href: https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html
           - text: Extending mizer
@@ -94,12 +136,12 @@ website:
           - text: Creating a mizer extension package
             href: https://sizespectrum.org/mizer/articles/creating-extension-packages.html
           - text: Technical articles
-          - text: Incorporating predation diffusion
-            href: https://sizespectrum.org/mizer/articles/predation_diffusion.html
           - text: Cohort dynamics and diffusion
             href: https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html
           - text: The Numerical Scheme used in Mizer
             href: https://sizespectrum.org/mizer/articles/numerical_details.html
+          - text: Calculation of Default Parameter Values
+            href: https://sizespectrum.org/mizer/articles/default_parameters.html
           - text: Fast Fourier Transform for Rates
             href: https://sizespectrum.org/mizer/articles/fft.html
           - text: Analytic Test

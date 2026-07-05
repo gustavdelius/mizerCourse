@@ -106,7 +106,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><link rel="stylesheet" href="../styles.css">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><script>
+(function() {
+  function setup() {
+    var toggle = document.getElementById("nav-menu-articles");
+    if (!toggle) return;
+
+    var menu = document.querySelector('[aria-labelledby="nav-menu-articles"]');
+    if (!menu) return;
+
+    var indexHref = null;
+    var links = menu.querySelectorAll("a.dropdown-item");
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute("href");
+      if (href && /articles\/index\.html$/.test(href)) {
+        indexHref = href;
+        break;
+      }
+    }
+    if (!indexHref) return;
+
+    toggle.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.location.href = indexHref;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setup);
+  } else {
+    setup();
+  }
+})();
+</script><link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Match landings datas – mizer course">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://mizer.course.sizespectrum.org/build/landings_files/figure-html/landings-7-1.png">
@@ -300,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
 <li class="nav-item">
-    <a class="nav-link" href="https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html"> 
+    <a class="nav-link" href="https://sizespectrum.org/mizer/articles/mizer.html"> 
 <span class="menu-text">Get started</span></a>
   </li>  
   <li class="nav-item">
@@ -313,6 +345,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">
 <li class="dropdown-header">Model types</li>
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html">
+ <span class="dropdown-text">The Single-Species Model</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/community_model.html">
  <span class="dropdown-text">The Community Model</span></a>
@@ -330,6 +366,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">The General Mizer Size-spectrum Model</span></a>
   </li>  
         <li class="dropdown-header">Cheat sheets</li>
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-model-setup-and-calibration.html">
+ <span class="dropdown-text">Cheatsheet: Model Setup and Calibration</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-changing-parameters.html">
+ <span class="dropdown-text">Cheatsheet: Changing Model Parameters</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-fishing.html">
+ <span class="dropdown-text">Cheatsheet: Fishing</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html">
  <span class="dropdown-text">Cheatsheet: Analysis and Plotting</span></a>
@@ -349,16 +397,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li class="dropdown-header">Technical articles</li>
         <li>
-    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/predation_diffusion.html">
- <span class="dropdown-text">Incorporating predation diffusion</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html">
  <span class="dropdown-text">Cohort dynamics and diffusion</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/numerical_details.html">
  <span class="dropdown-text">The Numerical Scheme used in Mizer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/default_parameters.html">
+ <span class="dropdown-text">Calculation of Default Parameter Values</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/fft.html">
@@ -617,7 +665,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We load the model we created in the <a href="../build/refine.html">previous tutorial</a>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/saveParams.html">readParams</a></span><span class="op">(</span><span class="st">"cel_model_refined.rds"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/saveParams.html">readParams</a></span><span class="op">(</span><span class="st">"cel_model_refined.rds"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="landings-data" class="level2"><h2 class="anchored" data-anchor-id="landings-data">Landings data</h2>
 <p>We will load data on the size distribution of catches. Such data is often collected in data-poor fisheries, so it will be useful to see how we can use such data for model calibration. This specific dataset was sourced from Scientific, Technical and Economic Committee for Fisheries <a href="https://stecf.jrc.ec.europa.eu/dd/fdi">(STECF)</a> and was restricted to England and Wales.</p>
@@ -644,11 +692,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>https://github.com/gustavdelius/mizerCourse/raw/master/build/</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">$</span><span class="va">yield_observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"celtic_yields.rds"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">$</span><span class="va">yield_observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"celtic_yields.rds"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We can now use <code><a href="https://rdrr.io/pkg/mizerExperimental/man/plotYieldVsSpecies.html">plotYieldVsSpecies()</a></code> to make a plot that for each species compares the observed yield to the yield currently achieved in the steady state of our model.</p>
+<p>We can now use <code><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSpecies.html">plotYieldVsSpecies()</a></code> to make a plot that for each species compares the observed yield to the yield currently achieved in the steady state of our model.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizerExperimental/man/plotYieldVsSpecies.html">plotYieldVsSpecies</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSpecies.html">plotYieldVsSpecies</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="landings_files/figure-html/landings-7-1.png" class="img-fluid figure-img" width="672"></p>
@@ -658,9 +706,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We’ll have to do something about those yield values in the model. But first let’s have a look at the size distribution of the catches.</p>
 </section><section id="exploring-catch-size-distributions" class="level2"><h2 class="anchored" data-anchor-id="exploring-catch-size-distributions">Exploring catch size distributions</h2>
-<p>The <code><a href="https://rdrr.io/pkg/mizerExperimental/man/plotYieldVsSize.html">plotYieldVsSize()</a></code> function lets us see how well our modelled and the observed catch size distributions agree. Let’s take a look at the case of cod:</p>
+<p>The <code><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize()</a></code> function lets us see how well our modelled and the observed catch size distributions agree. Let’s take a look at the case of cod:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizerExperimental/man/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
 <span>                x_var <span class="op">=</span> <span class="st">"Length"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
@@ -673,16 +721,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let us look at the current gear parameter data frame:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Let's look at our gear params first </span></span>
-<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We notice that the row names are made up of the species name and the gear name, separated by a comma. So we can change the selectivity parameters specifically for cod with</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Modify the l50 and l25 for cod</span></span>
-<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"Cod, Commercial"</span>, <span class="st">"l50"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">44</span></span>
-<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"Cod, Commercial"</span>, <span class="st">"l25"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">39.5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"Cod, Commercial"</span>, <span class="st">"l50"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">44</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span><span class="op">[</span><span class="st">"Cod, Commercial"</span>, <span class="st">"l25"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">39.5</span></span>
 <span></span>
 <span><span class="co">#check the match between model and observed catch size distributions</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizerExperimental/man/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html">plotYieldVsSize</a></span><span class="op">(</span><span class="va">cel_model</span>, species <span class="op">=</span> <span class="st">"Cod"</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span>, </span>
 <span>                x_var <span class="op">=</span> <span class="st">"Length"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
@@ -692,21 +740,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>This looks better. We should have no scruples adjusting the gear selectivity parameters using our mizer model because they are hard to estimate outside a model.</p>
-<p>Now that we have changed fishing selectivity we need to find a new steady state. It is important to run <code><a href="https://sizespectrum.org/mizer/reference/steady.html">steady()</a></code> frequently, while making small changes to the model parameters. If we accumulate too many changes, finding a new steady state might be harder.</p>
+<p>Now that we have changed fishing selectivity we need to find a new steady state. It is important to run <code><a href="https://rdrr.io/pkg/mizer/man/steady.html">steady()</a></code> frequently, while making small changes to the model parameters. If we accumulate too many changes, finding a new steady state might be harder.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steady.html">steady</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/steady.html">steady</a></span><span class="op">(</span><span class="va">cel_model</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>You probably wondered how I knew what the right values for the <code>l50</code> and <code>l25</code> parameter were for cod. The answer is that I used trial and error with the help of the <code><a href="https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html">tuneParams()</a></code>. We’ll do some more of that in the following video. We pass the catch length data into the <code><a href="https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html">tuneParams()</a></code> function via the <code>catch</code> argument:</p>
+<p>You probably wondered how I knew what the right values for the <code>l50</code> and <code>l25</code> parameter were for cod. The answer is that I used trial and error with the help of the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code>. We’ll do some more of that in the following video. We pass the catch length data into the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> function via the <code>catch</code> argument:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html">tuneParams</a></span><span class="op">(</span><span class="va">cel_model</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cel_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams</a></span><span class="op">(</span><span class="va">cel_model</span>, catch <span class="op">=</span> <span class="va">catch_lengths</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Note how we assign the return value from the <code><a href="https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html">tuneParams()</a></code> function back to the <code>cel_model</code> variable. That way we capture the changes that we make in the gadget.</p>
+<p>Note how we assign the return value from the <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> function back to the <code>cel_model</code> variable. That way we capture the changes that we make in the gadget.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/hg4M6-G0-L4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>The <code><a href="https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html">tuneParams()</a></code> gadget has a lot of useful panels and allows you to play with the parameters interactively. But most of these plots are also available as separate plot functions in mizer or in mizerExperimental.</p>
+<p>The <code><a href="https://sizespectrum.org/mizerExperimental/reference/tuneParams.html">tuneParams()</a></code> gadget has a lot of useful panels and allows you to play with the parameters interactively. But most of these plots are also available as separate plot functions in mizer or in mizerExperimental.</p>
 </section><section id="exercise-use-tuneparams-gadget-to-refine-your-model" class="level2"><h2 class="anchored" data-anchor-id="exercise-use-tuneparams-gadget-to-refine-your-model">Exercise: Use tuneParams gadget to refine your model</h2>
 <p>In our video we only started refining the model by adjusting some parameters for a few species. We ask you to do something similar but for more species in order to refine the model you have built in the previous tutorial. Share your observations in the comment section below.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/saveParams.html">saveParams</a></span><span class="op">(</span><span class="va">cel_model</span>, file <span class="op">=</span> <span class="st">"cel_model_landings.rds"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/saveParams.html">saveParams</a></span><span class="op">(</span><span class="va">cel_model</span>, file <span class="op">=</span> <span class="st">"cel_model_landings.rds"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 

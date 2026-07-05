@@ -1,11 +1,125 @@
+/* BEGIN mizer shared typography */
+/* Match mizer's pkgdown site: it never sets a root font-size at all (so it
+   renders at the browser's own default, normally 16px) and hardcodes the
+   body font-size to 18px via the bootswatch cerulean theme. Quarto's
+   compiled theme instead hardcodes :root to 11pt and body to 0.9rem, both as
+   plain (non-variable) declarations later in the compiled bootstrap CSS, so
+   merely resetting --bs-root-font-size has no effect - these rules need to
+   be overridden directly, here, after that compiled stylesheet. */
+:root {
+  font-size: initial;
+}
+body {
+  font-size: 18px;
+}
+
+/* Keep the same font family in dark mode as in light mode. Quarto's
+   "darkly" theme otherwise swaps in Lato, which mizer's site never does. */
+[data-bs-theme="dark"] {
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-body-font-family: var(--bs-font-sans-serif);
+}
+/* END mizer shared typography */
+
 /* BEGIN mizer shared navbar */
-[data-bs-theme="light"] .navbar,
-.navbar[data-bs-theme="dark"] {
+/* Constrain the navbar content to Bootstrap's standard .container
+   max-widths (like pkgdown's navbar) instead of stretching edge to edge. */
+.navbar .navbar-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 576px) {
+  .navbar .navbar-container { max-width: 540px; }
+}
+@media (min-width: 768px) {
+  .navbar .navbar-container { max-width: 720px; }
+}
+@media (min-width: 992px) {
+  .navbar .navbar-container { max-width: 960px; }
+}
+@media (min-width: 1200px) {
+  .navbar .navbar-container { max-width: 1140px; }
+}
+@media (min-width: 1400px) {
+  .navbar .navbar-container { max-width: 1320px; }
+}
+
+.navbar {
   background: linear-gradient(#50b3eb, #2fa4e7 60%, #2c9ad9) !important;
-  --bs-navbar-color: rgba(255, 255, 255, 0.8);
-  --bs-navbar-hover-color: #fff;
-  --bs-navbar-active-color: #fff;
-  --bs-navbar-brand-color: rgba(255, 255, 255, 0.9);
-  --bs-navbar-brand-hover-color: #fff;
+  --bs-navbar-color: rgba(255, 255, 255, 0.85);
+  --bs-navbar-hover-color: #ffffff;
+  --bs-navbar-active-color: #ffffff;
+  --bs-navbar-brand-color: #ffffff;
+  --bs-navbar-brand-hover-color: #ffffff;
+}
+
+/* Match mizer's navbar height. mizer's pkgdown navbar resets line-height to
+   "initial" (the font's natural ~1.15), which nav-links inherit; Quarto
+   instead leaves Bootstrap's body line-height of 1.5 in effect, making every
+   nav-link - and so the whole bar - a few pixels taller. */
+.navbar {
+  line-height: initial;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand,
+.navbar .quarto-color-scheme-toggle {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus,
+.navbar .quarto-color-scheme-toggle:hover {
+  color: #ffffff !important;
+}
+
+/* Navbar dropdown menu styling */
+.navbar .dropdown-menu {
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+}
+
+/* Dropdown section headers with dividers like pkgdown */
+.navbar .dropdown-menu .dropdown-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6c757d;
+  padding: 0.5rem 1rem 0.25rem 1rem;
+  margin-top: 0.35rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.navbar .dropdown-menu .dropdown-header:first-child {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0.25rem;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+  font-size: 0.9rem;
+  padding: 0.35rem 1rem;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu .dropdown-item:focus {
+  background-color: #e9ecef;
+}
+
+/* On wider screens, open navbar dropdowns on hover */
+@media (min-width: 992px) {
+  .navbar .nav-item.dropdown:hover > .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
+  .navbar .nav-item.dropdown > .dropdown-toggle {
+    cursor: pointer;
+  }
 }
 /* END mizer shared navbar */

@@ -106,7 +106,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script><link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script><script>
+(function() {
+  function setup() {
+    var toggle = document.getElementById("nav-menu-articles");
+    if (!toggle) return;
+
+    var menu = document.querySelector('[aria-labelledby="nav-menu-articles"]');
+    if (!menu) return;
+
+    var indexHref = null;
+    var links = menu.querySelectorAll("a.dropdown-item");
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute("href");
+      if (href && /articles\/index\.html$/.test(href)) {
+        indexHref = href;
+        break;
+      }
+    }
+    if (!indexHref) return;
+
+    toggle.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.location.href = indexHref;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setup);
+  } else {
+    setup();
+  }
+})();
+</script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
  for (var i = 0; i < mathElements.length; i++) {
@@ -339,7 +371,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
 <li class="nav-item">
-    <a class="nav-link" href="https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html"> 
+    <a class="nav-link" href="https://sizespectrum.org/mizer/articles/mizer.html"> 
 <span class="menu-text">Get started</span></a>
   </li>  
   <li class="nav-item">
@@ -352,6 +384,10 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">
 <li class="dropdown-header">Model types</li>
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/single_species_size-spectrum_dynamics.html">
+ <span class="dropdown-text">The Single-Species Model</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/community_model.html">
  <span class="dropdown-text">The Community Model</span></a>
@@ -369,6 +405,18 @@ window.Quarto = {
  <span class="dropdown-text">The General Mizer Size-spectrum Model</span></a>
   </li>  
         <li class="dropdown-header">Cheat sheets</li>
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-model-setup-and-calibration.html">
+ <span class="dropdown-text">Cheatsheet: Model Setup and Calibration</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-changing-parameters.html">
+ <span class="dropdown-text">Cheatsheet: Changing Model Parameters</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-fishing.html">
+ <span class="dropdown-text">Cheatsheet: Fishing</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html">
  <span class="dropdown-text">Cheatsheet: Analysis and Plotting</span></a>
@@ -388,16 +436,16 @@ window.Quarto = {
   </li>  
         <li class="dropdown-header">Technical articles</li>
         <li>
-    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/predation_diffusion.html">
- <span class="dropdown-text">Incorporating predation diffusion</span></a>
-  </li>  
-        <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html">
  <span class="dropdown-text">Cohort dynamics and diffusion</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/numerical_details.html">
  <span class="dropdown-text">The Numerical Scheme used in Mizer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/default_parameters.html">
+ <span class="dropdown-text">Calculation of Default Parameter Values</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://sizespectrum.org/mizer/articles/fft.html">
@@ -674,7 +722,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizer/">mizer</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sizespectrum.org/mizerExperimental">mizerExperimental</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/newSingleSpeciesParams.html">newSingleSpeciesParams</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">2.05</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html">newSingleSpeciesParams</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">2.05</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="growth" class="level2"><h2 class="anchored" data-anchor-id="growth">Growth</h2>
 <section id="effect-of-prey-availability" class="level3"><h3 class="anchored" data-anchor-id="effect-of-prey-availability">Effect of prey availability</h3>
@@ -686,16 +734,16 @@ window.Quarto = {
 <span></span>
 <span><span class="co"># Create logical vector identifying the size bins we want to change. </span></span>
 <span><span class="co"># Here `w_full(params)` returns a vector with all size bins in the model</span></span>
-<span><span class="va">size_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/w.html">w_full</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">3</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/w.html">w_full</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">2</span></span>
+<span><span class="va">size_range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/w.html">w_full</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">3</span> <span class="op">&amp;</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/w.html">w_full</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">^</span><span class="op">-</span><span class="fl">2</span></span>
 <span></span>
 <span><span class="co"># Divide the abundances in those size bins by 10</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">/</span> <span class="fl">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
+<span>    <span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">/</span> <span class="fl">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s make a plot to check that this did what we intended:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># The `species = FALSE` means that we will only plot the background</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotSpectra.html">plotSpectra</a></span><span class="op">(</span><span class="va">params_starved</span>, power <span class="op">=</span> <span class="fl">2</span>, species <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotSpectra.html">plotSpectra</a></span><span class="op">(</span><span class="va">params_starved</span>, power <span class="op">=</span> <span class="fl">2</span>, species <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-3-1.png" class="img-fluid figure-img" width="672"></p>
@@ -703,9 +751,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model using <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> and <code><a href="https://rdrr.io/pkg/mizer/man/addPlot.html">addPlot()</a></code>.</p>
+<p>The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model using <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> and <code><a href="https://sizespectrum.org/mizer/reference/addPlot.html">addPlot()</a></code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">growth_rates_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plot2.html">plot2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/getEGrowth.html">getEGrowth</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/getEGrowth.html">getEGrowth</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">growth_rates_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/plot2.html">plot2</a></span><span class="op">(</span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getEGrowth.html">getEGrowth</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span>, <span class="fu"><a href="https://sizespectrum.org/mizer/reference/getEGrowth.html">getEGrowth</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span>,</span>
 <span>                           name1 <span class="op">=</span> <span class="st">"Original"</span>, name2 <span class="op">=</span> <span class="st">"Less prey"</span>, log <span class="op">=</span> <span class="st">"xy"</span><span class="op">)</span></span>
 <span><span class="va">growth_rates_plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -718,11 +766,11 @@ window.Quarto = {
 <p>The slow-down occurs at a size that is about a factor of 100 larger than the size at which food is reduced. Why this is we will discuss in the next section.</p>
 <p>The dip in the growth rate may not seem very significant in the above plot, but it has a dramatic effect on the steady state size distribution of our species. We know from the previous tutorial that we can set the abundances in the single-species model to the steady state value with</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_starved</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_starved</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We can now visualise the difference in the size spectra with the <code><a href="https://rdrr.io/pkg/mizer/man/plotSpectra2.html">plotSpectra2()</a></code> function:</p>
+<p>We can now visualise the difference in the size spectra with the <code><a href="https://sizespectrum.org/mizer/reference/plotSpectra2.html">plotSpectra2()</a></code> function:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">spectra_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"Original"</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">spectra_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"Original"</span>,</span>
 <span>                             <span class="va">params_starved</span>, name2 <span class="op">=</span> <span class="st">"Less prey"</span>,</span>
 <span>                             power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">spectra_plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -801,12 +849,12 @@ Important
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_overfed</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_overfed</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">*</span> <span class="fl">10</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_overfed</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
+<span>    <span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">[</span><span class="va">size_range</span><span class="op">]</span> <span class="op">*</span> <span class="fl">10</span></span>
 <span></span>
-<span><span class="va">params_overfed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_overfed</span><span class="op">)</span></span>
+<span><span class="va">params_overfed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_overfed</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"Original"</span>,</span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"Original"</span>,</span>
 <span>             <span class="va">params_overfed</span>, name2 <span class="op">=</span> <span class="st">"More prey"</span>,</span>
 <span>             power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -839,9 +887,9 @@ Important
 </ul>
 <p>Of these four factors, we have already been discussing the density of prey. In the next section we will discuss the ability to filter out or catch prey of particular sizes, which we model via the predation kernel. In the section after that we will discuss the search volume and then in the following section the maximum consumption rate.</p>
 <section id="the-predation-kernel" class="level3"><h3 class="anchored" data-anchor-id="the-predation-kernel">The predation kernel</h3>
-<p>Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function <code><a href="https://rdrr.io/pkg/mizer/man/setPredKernel.html">getPredKernel()</a></code>.</p>
+<p>Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function <code><a href="https://sizespectrum.org/mizer/reference/setPredKernel.html">getPredKernel()</a></code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pred_kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/setPredKernel.html">getPredKernel</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pred_kernel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/setPredKernel.html">getPredKernel</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This is a large three-dimensional array (predator species x predator size x prey size). We extract the kernel of a predator of size 10g (using that we remember that this is in size class 81)</p>
 <div class="cell">
@@ -882,7 +930,7 @@ Important
 </div>
 <p>We see that the predator of size 10g likes to feed on prey that is about the size of 0.1g, which is about 100 times smaller than itself. But it also feeds on other sizes, just with reduced preference. The preferred predator/prey size ratio is determined by the species parameter <code>beta</code> and the width of the feeding kernel, i.e., how fussy the predator is regarding their prey size, is determined by the species parameter <code>sigma</code>. <code>beta</code> is the <em>preferred</em> predator prey mass ratio or PPMR. Larger PPMR values mean that the predator prefers to feed on a relatively smaller prey (larger ratio). In our model these have the values</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span>, <span class="va">beta</span>, <span class="va">sigma</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span>, <span class="va">beta</span>, <span class="va">sigma</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -894,11 +942,11 @@ Important
 <p>Let us change the preferred predator prey mass ratio from 100 to 1000. As usual, we first create a copy of the parameter object, then we make the change in that copy.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_pk</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/species_params.html">given_species_params</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span><span class="op">$</span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">given_species_params</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span><span class="op">$</span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s make a plot to see that the predation kernel has indeed changed.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/setPredKernel.html">getPredKernel</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span><span class="op">[</span>, <span class="fl">81</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/setPredKernel.html">getPredKernel</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span><span class="op">[</span>, <span class="fl">81</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/reshape2/man/melt.html">melt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">w_prey</span>, y <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -917,11 +965,11 @@ Important
 <p>If we now again reduce the prey in the size range from 1mg to 10mg as before, we now expect this to produce a peak in the biomass spectrum somewhere between 1g and 10g. Let’s check.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Put reduced resource abundance values into params_pk </span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/initialNResource-set.html">initialNResource</a></span><span class="op">(</span><span class="va">params_starved</span><span class="op">)</span></span>
 <span><span class="co"># Find the new steady state, because conditions have changed.</span></span>
-<span><span class="va">params_pk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span></span>
+<span><span class="va">params_pk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_pk</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params_starved</span>, name1 <span class="op">=</span> <span class="st">"beta = 100"</span>,</span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params_starved</span>, name1 <span class="op">=</span> <span class="st">"beta = 100"</span>,</span>
 <span>             <span class="va">params_pk</span>, name2 <span class="op">=</span> <span class="st">"beta = 1000"</span>,</span>
 <span>             power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -969,7 +1017,7 @@ Important
 <p>This is one of many powerful aspects about strong theoretical basis behind size based models. We can of course disagree with this assumption if we have evidence and data, but at least there is a basic assumption to base the discussion on.</p>
 <p>Most people using mizer rarely modify the default assumptions about the body scaling exponents and focus on more on the coefficients. So let us see what effect changing the coefficient <span class="math inline">\gamma_0</span> in the search volume rate has. Its current value in our model is</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">$</span><span class="va">gamma</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">$</span><span class="va">gamma</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Target species 
       2066.004 </code></pre>
@@ -978,14 +1026,14 @@ Important
 <p>We change that to 1000 and find the new steady state.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_new_gamma</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/species_params.html">given_species_params</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span><span class="op">$</span><span class="va">gamma</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">params_new_gamma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">given_species_params</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span><span class="op">$</span><span class="va">gamma</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">params_new_gamma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can see the effect in the growth curve of our species.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gf_original</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotGrowthCurves.html">plotGrowthCurves</a></span><span class="op">(</span><span class="va">params</span>, return_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gf_original</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotGrowthCurves.html">plotGrowthCurves</a></span><span class="op">(</span><span class="va">params</span>, return_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">gf_original</span><span class="op">$</span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="st">"Original"</span></span>
-<span><span class="va">gf_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotGrowthCurves.html">plotGrowthCurves</a></span><span class="op">(</span><span class="va">params_new_gamma</span>, return_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">gf_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotGrowthCurves.html">plotGrowthCurves</a></span><span class="op">(</span><span class="va">params_new_gamma</span>, return_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">gf_new</span><span class="op">$</span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="st">"Reduced search volume"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">gf_original</span>, <span class="va">gf_new</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Age</span>, y <span class="op">=</span> <span class="va">`Size [g]`</span>, colour <span class="op">=</span> <span class="va">Model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1001,8 +1049,8 @@ Important
 </section><section id="feeding-level" class="level3"><h3 class="anchored" data-anchor-id="feeding-level">Feeding level</h3>
 <p>In mizer we assume that the feeding rate follows a <a href="https://en.wikipedia.org/wiki/Functional_response">Holling type II feeding curve</a>. This means that feeding rate is increasing linearly with prey density at low prey density but then the increase slows down towards a maximum at high prey density due to the satiation of the predator. A predator will not be able to utilise food at a faster rate than its maximum intake rate. Of course in practice it will not feed at the maximum intake rate because of limited availability of prey. We describe this by the <em>feeding level</em> which is the proportion of its maximum intake rate at which the predator is actually taking in prey.</p>
 <p>In our simple model this feeding level is constant across all fish body sizes (this is rarely the case in more realistic models, as you will see later).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotFeedingLevel.html">plotFeedingLevel</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotFeedingLevel.html">plotFeedingLevel</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotFeedingLevel.html">plotFeedingLevel</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotFeedingLevel.html">plotFeedingLevel</a></span><span class="op">(</span><span class="va">params_new_gamma</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
@@ -1022,7 +1070,7 @@ Important
 <p>In the model with the reduced search volume the feeding level is lower, as one would expect.</p>
 <p>The feeding level will depend on the maximum intake, search rate and food availability. The maximum intake rate scales with body size with the exponent <span class="math inline">n = 3/4</span> and is determined by the coefficient <span class="math inline">h</span>. So the maximum intake rate at size <span class="math inline">h(w)</span> is modelled as <span class="math inline">h(w) = h w^n</span>. Again, if we want to modify the maximum intake rate we usually change the coefficient <span class="math inline">h</span>. We will do that in later tutorials. The current value of the coefficient <span class="math inline">h</span> is</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">$</span><span class="va">h</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/species_params.html">species_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span><span class="op">$</span><span class="va">h</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Target species 
             30 </code></pre>
@@ -1040,14 +1088,14 @@ Important
 <p>The cause of mortality that is most under our control is mortality from fishing. Mizer allows the simulation of mixed fisheries, utilising several different gears (or metiers or fleets) catching several different species. The parameters describing the fishing gears are stored in a <code>gear_params</code> data frame. If a particular gear can catch a particular species, there will be a corresponding row in the <code>gear_params</code> data frame specifying the catchability of that species for that gear as well as the size-selectivity of the gear for that species. We discuss in more detail how fishing is set up in mizer in Part 3 of this course when we study the consequences of changes in fishing policy.</p>
 <p>Here we only look at what fishing gear is set up by default in our simple single-species model:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We see that there is only one gear, called “knife_edge_gear” targeting our one species, called “Target species”. The size-selectivity is described by a knife_edge function with a <code>knife_edge_size</code> of about 25 grams. This means that all fish greater than about 25 grams will be exposed to the same fishing mortality while smaller fish will experience no fishing mortality. Mizer can of course also deal with more general selectivity curves.</p>
 <p>We also need to specify the fishing effort, which will be multiplied by the catchability and the selectivity to get the annual instantaneous fishing mortality rate. For illustration we will set the effort to 1 and plot the resulting fishing mortality.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_fishing</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/initial_effort.html">initial_effort</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotFMort.html">plotFMort</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/initial_effort.html">initial_effort</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotFMort.html">plotFMort</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-22-1.png" class="img-fluid figure-img" width="672"></p>
@@ -1055,11 +1103,11 @@ Important
 </div>
 </div>
 </div>
-<p>The reason why the function that we have used to set the effort is called <code><a href="https://rdrr.io/pkg/mizer/man/initial_effort.html">initial_effort()</a></code> is that later when we run simulations of the fisheries mizer allows us to specify how the fishing effort changes over time. For now let us just look at what the new steady state size spectrum of our species looks like when it is exposed to the constant fishing effort, compared to the unfished steady state.</p>
+<p>The reason why the function that we have used to set the effort is called <code><a href="https://sizespectrum.org/mizer/reference/initial_effort.html">initial_effort()</a></code> is that later when we run simulations of the fisheries mizer allows us to specify how the fishing effort changes over time. For now let us just look at what the new steady state size spectrum of our species looks like when it is exposed to the constant fishing effort, compared to the unfished steady state.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_fishing</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mizer/man/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_fishing</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_fishing</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mizer/man/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"No Fishing"</span>,</span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotSpectra2.html">plotSpectra2</a></span><span class="op">(</span><span class="va">params</span>, name1 <span class="op">=</span> <span class="st">"No Fishing"</span>,</span>
 <span>             <span class="va">params_fishing</span>, name2 <span class="op">=</span> <span class="st">"Knife-edge"</span>,</span>
 <span>             power <span class="op">=</span> <span class="fl">2</span>, wlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">

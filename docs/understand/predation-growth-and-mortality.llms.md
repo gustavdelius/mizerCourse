@@ -41,7 +41,7 @@ plotSpectra(params_starved, power = 2, species = FALSE)
 
 ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-3-1.png)
 
-The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model using [`plot()`](https://rdrr.io/r/graphics/plot.default.html) and [`addPlot()`](https://rdrr.io/pkg/mizer/man/addPlot.html).
+The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model using [`plot()`](https://rdrr.io/r/graphics/plot.default.html) and [`addPlot()`](https://sizespectrum.org/mizer/reference/addPlot.html).
 
 ``` downlit
 growth_rates_plot <- plot2(getEGrowth(params), getEGrowth(params_starved),
@@ -59,7 +59,7 @@ The dip in the growth rate may not seem very significant in the above plot, but 
 params_starved <- steadySingleSpecies(params_starved)
 ```
 
-We can now visualise the difference in the size spectra with the [`plotSpectra2()`](https://rdrr.io/pkg/mizer/man/plotSpectra2.html) function:
+We can now visualise the difference in the size spectra with the [`plotSpectra2()`](https://sizespectrum.org/mizer/reference/plotSpectra2.html) function:
 
 ``` downlit
 spectra_plot <- plotSpectra2(params, name1 = "Original",
@@ -133,7 +133,7 @@ Of these four factors, we have already been discussing the density of prey. In t
 
 ### The predation kernel
 
-Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function [`getPredKernel()`](https://rdrr.io/pkg/mizer/man/setPredKernel.html).
+Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function [`getPredKernel()`](https://sizespectrum.org/mizer/reference/setPredKernel.html).
 
 ``` downlit
 pred_kernel <- getPredKernel(params)
@@ -324,7 +324,7 @@ plotFMort(params_fishing)
 
 ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-22-1.png)
 
-The reason why the function that we have used to set the effort is called [`initial_effort()`](https://rdrr.io/pkg/mizer/man/initial_effort.html) is that later when we run simulations of the fisheries mizer allows us to specify how the fishing effort changes over time. For now let us just look at what the new steady state size spectrum of our species looks like when it is exposed to the constant fishing effort, compared to the unfished steady state.
+The reason why the function that we have used to set the effort is called [`initial_effort()`](https://sizespectrum.org/mizer/reference/initial_effort.html) is that later when we run simulations of the fisheries mizer allows us to specify how the fishing effort changes over time. For now let us just look at what the new steady state size spectrum of our species looks like when it is exposed to the constant fishing effort, compared to the unfished steady state.
 
 ``` downlit
 params_fishing <- steadySingleSpecies(params_fishing)
