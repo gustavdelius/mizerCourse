@@ -64,49 +64,19 @@ Here we show a simple demonstration of using a summary function using the `sim` 
 
 ``` downlit
 ssb <- getSSB(sim)
-dim(ssb)
+plot(ssb)
 ```
 
-    [1] 10 12
+![](exploring_the_simulation_results_files/figure-html/getSSB_demo-1.png)
 
-``` downlit
-head(ssb)
-```
-
-    Spawning stock biomass (6 times x 12 species) [g] 
-      Sprat: min=1.14e+11 mean=1.44e+11 max=2.11e+11
-      Sandeel: min=1.74e+12 mean=2.82e+12 max=5.38e+12
-      N.pout: min=1.1e+11 mean=1.37e+11 max=1.83e+11
-      Herring: min=3.51e+11 mean=4.81e+11 max=6.04e+11
-      Dab: min=4.88e+09 mean=5.58e+09 max=6.89e+09
-      Whiting: min=7.71e+10 mean=8.97e+10 max=1.14e+11
-      Sole: min=4.54e+10 mean=5.26e+10 max=6.36e+10
-      Gurnard: min=5.4e+09 mean=6.98e+09 max=9.1e+09
-      Plaice: min=2.33e+11 mean=2.67e+11 max=3.03e+11
-      Haddock: min=1.18e+11 mean=1.39e+11 max=1.59e+11
-      Cod: min=2.9e+11 mean=3.6e+11 max=5.32e+11
-      Saithe: min=1.98e+11 mean=2.55e+11 max=3.28e+11
-
-As mentioned above, we can specify the size range for the `getsummaryBiomass()` and `getN()` functions. For example, here we calculate the total biomass of each species but only include individuals that are larger than 10 g and smaller than 1000 g.
+As mentioned above, we can specify the size range for the `getBiomass()` and `getN()` functions. For example, here we calculate the total biomass of each species but only include individuals that are larger than 10 g and smaller than 1000 g.
 
 ``` downlit
 biomass <- getBiomass(sim, min_w = 10, max_w = 1000)
-head(biomass)
+plot(biomass)
 ```
 
-    Biomass (6 times x 12 species) [g] 
-      Sprat: min=1.44e+11 mean=1.76e+11 max=2.44e+11
-      Sandeel: min=1.1e+12 mean=2.18e+12 max=4.59e+12
-      N.pout: min=1.67e+11 mean=1.96e+11 max=2.39e+11
-      Herring: min=1.18e+12 mean=1.32e+12 max=1.54e+12
-      Dab: min=6.29e+09 mean=7.13e+09 max=8.37e+09
-      Whiting: min=1.27e+11 mean=1.39e+11 max=1.62e+11
-      Sole: min=1.12e+11 mean=1.18e+11 max=1.27e+11
-      Gurnard: min=1.91e+10 mean=2.22e+10 max=2.48e+10
-      Plaice: min=6.62e+11 mean=7.12e+11 max=7.66e+11
-      Haddock: min=3.23e+11 mean=3.41e+11 max=3.73e+11
-      Cod: min=4.52e+10 mean=5.35e+10 max=6.29e+10
-      Saithe: min=1.39e+11 mean=1.81e+11 max=2.16e+11
+![](exploring_the_simulation_results_files/figure-html/getBiomass_demo-1.png)
 
 ## Functions for calculating indicators
 
@@ -139,7 +109,9 @@ head(slope)
 
 ## Plotting the results
 
-R is very powerful when it comes to exploring data through plots. Two useful packages for plotting are `ggplot2` and `plotly`. These use data.frames for input data whereas many of the mizer functions return arrays or matrices. Fortunately it is straightforward to turn arrays and matrices into data.frames using the `melt()` function from the `reshape2` package that mizer makes available to you. Although `mizer` does include some dedicated plots, it is definitely worth your time getting to grips with these other plotting packages. This will make it possible for you to make your own plots.
+R is very powerful when it comes to exploring data through plots. Two useful packages for plotting are `ggplot2` and `plotly`. These use data.frames for input data whereas many of the mizer functions return arrays or matrices. Fortunately it is straightforward to turn arrays and matrices into data.frames using [`as.data.frame()`](https://rdrr.io/r/base/as.data.frame.html).
+
+However, most of the time you will not need to use `ggplot2` or `plotly` directly but can use the plot methods included in mizer.
 
 Included in `mizer` are several dedicated plots that use `MizerSim` objects as inputs (see [the plots help page.](https://sizespectrum.org/mizer/reference/plotting_functions.html)). As well as displaying the plots, these functions all return objects of type `ggplot` from the `ggplot2` package, meaning that they can be further modified by the user (e.g. by changing the plotting theme). See the help page of the individual plot functions for more details. The generic [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method has also been overloaded for `MizerSim` objects. This produces several plots in the same window to provide a snapshot of the results of the simulation.
 
@@ -170,5 +142,7 @@ plot(sim)
 ```
 
 ![](exploring_the_simulation_results_files/figure-html/demo_summary_plot-1.png)
+
+There is much more to be said about analysing and plotting simulation results. Take a look at the [Cheatsheet: Analysis and Plotting](https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html).
 
 The next section describes how to use what we have learned to [model the North Sea.](../use/a_multispecies_model_of_the_north_sea.llms.md)

@@ -54,7 +54,7 @@ plotSpectra2(mp_lessRes_steady, name1 = "less resource",
              ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
-![](dynamics-of-spectra_files/figure-html/unnamed-chunk-2-1.png)
+![](dynamics-of-spectra_files/figure-html/dynamics-of-spectra-2-1.png)
 
 But we can also save and then display the spectra of all the species at intermediate times. This is what the [`project()`](https://sizespectrum.org/mizer/reference/project.html) function does. It projects the current state forward in time and saves the result of that simulation in a larger object, a MizerSim object, which contains the resulting time series of size spectra. Let’s use it to project forward by 24 years.
 
@@ -105,7 +105,7 @@ The biomass time series can be plotted with [`plotBiomass()`](https://sizespectr
 plotBiomass(sim_lessRes)
 ```
 
-![](dynamics-of-spectra_files/figure-html/unnamed-chunk-8-1.png)
+![](dynamics-of-spectra_files/figure-html/dynamics-of-spectra-8-1.png)
 
 Mizer provides many more functions to analyse the results of a simulation, some of which you will learn about later in this course.
 
@@ -176,7 +176,7 @@ Rather than looking at the formula, let’s look at a figure:
     Ignoring unknown labels:
     • size : "R_max"
 
-![](dynamics-of-spectra_files/figure-html/unnamed-chunk-11-1.png)
+![](dynamics-of-spectra_files/figure-html/dynamics-of-spectra-11-1.png)
 
 This figure shows two graphs of R\_{dd} (solid lines), one for higher R\_{max} (black) and one for lower R\_{max} (blue). The values of R\_{max} are indicated by the dotted lines. The dashed lines show the density-independent rate R\_{di}. Both graphs are for the same amount E_R of energy invested into reproduction.
 
@@ -234,7 +234,7 @@ plotSpectra2(mp, name1 = "reproduction_level = 0.25",
              total = TRUE, power = 2, ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
-![](dynamics-of-spectra_files/figure-html/unnamed-chunk-15-1.png)
+![](dynamics-of-spectra_files/figure-html/dynamics-of-spectra-15-1.png)
 
 They overlap perfectly. However the reproduction level does have an effect on how sensitive the system is to changes. As an example, let us look at the dynamics that is triggered by the reduction in interaction with the resource by species 8 through 11.
 

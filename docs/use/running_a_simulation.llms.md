@@ -62,9 +62,9 @@ summary(NS_params)
 ```
 
     An object of class "MizerParams" 
-    mizer version: 2.5.4.9126
+    mizer version: 3.0.0.9003
     Created: 2021-09-03 20:29:38
-    Modified: 2026-05-09 08:16:12
+    Modified: 2026-06-24 13:50:03
     Consumer size spectrum:
         minimum size:   0.001
         maximum size:   39851.3
@@ -74,19 +74,21 @@ summary(NS_params)
         maximum size:   9.82091
         no. size bins:  179 (226 size bins in total)
     Species details:
-       species   w_max w_mat w_min  f0   beta sigma
-    1    Sprat    33.0    13 0.001 0.6  51076   0.8
-    2  Sandeel    36.0     4 0.001 0.6 398849   1.9
-    3   N.pout   100.0    23 0.001 0.6     22   1.5
-    4  Herring   334.0    99 0.001 0.6 280540   3.2
-    5      Dab   324.0    21 0.001 0.6    191   1.9
-    6  Whiting  1192.0    75 0.001 0.6     22   1.5
-    7     Sole   866.0    78 0.001 0.6    381   1.9
-    8  Gurnard   668.0    39 0.001 0.6    283   1.8
-    9   Plaice  2976.0   105 0.001 0.6    113   1.6
-    10 Haddock  4316.5   165 0.001 0.6    558   2.1
-    11     Cod 39851.3  1606 0.001 0.6     66   1.3
-    12  Saithe 39658.6  1076 0.001 0.6     40   1.1
+    An object of class "species_params" containing parameters for 12 species:
+     species   w_inf w_mat w_min
+       Sprat    33.0    13 0.001
+     Sandeel    36.0     4 0.001
+      N.pout   100.0    23 0.001
+     Herring   334.0    99 0.001
+         Dab   324.0    21 0.001
+     Whiting  1192.0    75 0.001
+        Sole   866.0    78 0.001
+     Gurnard   668.0    39 0.001
+      Plaice  2976.0   105 0.001
+     Haddock  4316.5   165 0.001
+         Cod 39851.3  1606 0.001
+      Saithe 39658.6  1076 0.001
+    With 3 other parameters: f0, beta, sigma 
 
     Fishing gear details:
     Gear          Effort  Target species 
@@ -130,12 +132,6 @@ head(getEffort(sim))
        5          1       1    1     1
 
 The `effort` slot shows the effort by time and gear. In this example, we specified the `effort` argument as a single numeric of value 1. As you can see this results in the same effort being used for all gears for all time steps.
-
-A [`summary()`](https://rdrr.io/r/base/summary.html) method is also available for objects of type `MizerSim`. This is essentially the same as the summary for `MizerParams` objects, but includes information on the simulation time parameters.
-
-``` downlit
-summary(sim)
-```
 
 If we decrease `t_save` but keep `t_max` the same then we can see that the time dimension of the `effort` array changes accordingly. This will also be true of the simulation results returned by `N()` and `NResource()`. Here we reduce `t_save` to 0.5, meaning that the effort and abundance information is stored at t = 1.0, 1.5, 2.0 etc.
 

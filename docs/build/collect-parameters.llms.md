@@ -79,6 +79,10 @@ While common names are convenient for presentation, they are ambiguous. We can u
 herring_latin <- common_to_sci("Herring")
 ```
 
+    duckdb is keeping downloaded extensions in a temporary directory:
+    ℹ /tmp/Rtmp5dwiVb/duckdb/extensions
+    This is removed when the R session ends, so extensions are re-downloaded each session.
+    ℹ To keep them, point `options(duckdb.extension_directory =)` or the `DUCKDB_EXTENSION_DIRECTORY` environment variable at a permanent path.
     Joining with `by = join_by(Subfamily, GenCode, FamCode)`
     Joining with `by = join_by(FamCode)`
     Joining with `by = join_by(Order, Ordnum, Class, ClassNum)`
@@ -130,9 +134,9 @@ If you don’t like defaults you can change them all. You can find the complete 
 
 ### Asymptotic size
 
-The asymptotic size `w_max` is the size (in grams) at which all individuals of the species invest 100% of their energy income into reproduction and hence all growth stops. Due to variation between individuals, some individuals may stop growing earlier. So the `w_max` parameter in mizer is not the asymptotic size of an average individual but the maximum asymptotic size.
+The required size parameter in mizer is `w_inf`, the von Bertalanffy asymptotic size (in grams). This is the size that an average individual of the species would approach if it kept growing according to its von Bertalanffy growth curve. Mizer uses `w_inf` to set sensible defaults for several other size parameters, including the maturity size `w_mat`, the size `w_repro_max` at which a mature individual invests all its energy into reproduction, and the computational upper boundary of the size grid `w_max` (which defaults to `1.5 * w_inf`). Note that `w_inf` is not a hard limit on size: because individuals vary and because of diffusion in the growth process, some individuals will grow larger than `w_inf`.
 
-The best way to estimate this parameter is probably to look at what the largest fish is that has been caught in your study area. You may of course be fishing so hard that none of the fish grow to their asymptotic size and then the size of the largest caught fish would be an underestimate of the asymptotic size. But our estimate does not have to be perfect.
+A practical way to estimate `w_inf` is to look at the largest fish that has been caught in your study area. This will tend to slightly overestimate the asymptotic size of an average individual, and if you are fishing very hard it could instead be an underestimate, but our estimate does not have to be perfect.
 
 We have a data frame with observations of sizes of caught fish and can look through it for the largest sized fish of each species.
 
@@ -202,13 +206,13 @@ length_weight
 
 Note that fishbase is continuously updated and the values you get for the length-weight conversion coefficients will change over time. The values above are already different from the ones in November 2022 when this course was first written.
 
-We can now add all this information to our species parameter data frame and use it to calculate the column we actually need, namely `w_max`.
+We can now add all this information to our species parameter data frame and use it to calculate the column we actually need, namely `w_inf`.
 
 ``` downlit
 sp <- sp |>
     left_join(length_weight, by = c("latin_name" = "Species")) |>
     left_join(max_size) |>
-    mutate(w_max = a * l_max ^ b)
+    mutate(w_inf = a * l_max ^ b)
 ```
 
     Joining with `by = join_by(species)`
@@ -225,7 +229,7 @@ Now it is time again to add comments to remind us of the origin of our parameter
 comment(sp$a) <- "Taken from the `a` column in the 'estimates' table on FishBase on 07/12/2023."
 comment(sp$a) <- "Taken from the `b` column in the 'estimates' table on FishBase on 07/12/2023."
 comment(sp$l_max) <- "See https://mizer.course.sizespectrum.org/build/collect-parameters.html#asymptotic-size "
-comment(sp$w_max) <- "Calculated from `l_max` using weight-length parameters `a` and `b`."
+comment(sp$w_inf) <- "Calculated from `l_max` using weight-length parameters `a` and `b`."
 ```
 
 ### Growth parameters
@@ -365,7 +369,7 @@ There are many other parameters that are used to describe species properties, bu
 
 3.  The species **metabolic rate** is set from the metabolic rate constant `ks` and its body size scaling exponent `p`. If no value is provided, the coefficient `ks` is set so that at maturation size metabolic expenditure requires a critical feeding level of `fc = 0.2`. Maintenance expenditure can also include activity related energetic costs, using species activity coefficient `k` which scales linearly with body size (exponent of 1). By default this value is set to 0.
 
-4.  The **external mortality rate** (also called background or baseline mortality) is by default set to a size-independent constant `z0`. If no values are provided mizer assumes that species with small maximum body sizes have much higher baseline mortality rate. For example, a species with `w_max` = 35 g will have `z0` = 0.18, a species with `w_max` = 150g will have `z0` = 0.11 and a species with `w_max` = 14kg will have `z0` = 0.025.
+4.  The **external mortality rate** (also called background or baseline mortality) is by default set to a size-independent constant `z0`. If no values are provided mizer assumes that species with small asymptotic body sizes have much higher baseline mortality rate. For example, a species with `w_inf` = 35 g will have `z0` = 0.18, a species with `w_inf` = 150g will have `z0` = 0.11 and a species with `w_inf` = 14kg will have `z0` = 0.025.
 
 5.  We already discussed the parameters involved in setting the [investment into reproduction](..understand/single-species-spectra.hqmd#investment-into-reproduction) previously. The reproduction investment exponent `m` determines the scaling of the investment into reproduction for mature individuals. By default `m` = 1 which means that after maturation the rate at which individual fish invests energy into reproduction scales linearly with size (if you want more information, you can find it [here](https://sizespectrum.org/mizer/reference/setReproduction.html#investment-into-reproduction)). This default can be changed to another value if different scaling is preferred (e.g. in case you might want to explore [hyper-allometric reproduction investment options](https://www.pnas.org/doi/abs/10.1073/pnas.2100695118)). The steepness of population level energy allocation to reproduction is determined by `w_mat25`, the size at which 25% of individuals are mature.
 
@@ -431,7 +435,7 @@ The `catchability` column specifies how vulnerable the species are to commercial
 
 1\) The species parameters are specified in a data frame with one row for each species and one column for each species parameter.
 
-2\) Only a `species` name and the maximum size `w_max` of each species is strictly required. But for a realistic model you should try to also provide estimates of the maturity size `w_mat`, the maturity age `age_mat`, the preferred predator prey mass ratio `beta` and the observed biomasses `biomass_observed`.
+2\) Only a `species` name and the asymptotic size `w_inf` of each species is strictly required. But for a realistic model you should try to also provide estimates of the maturity size `w_mat`, the maturity age `age_mat`, the preferred predator prey mass ratio `beta` and the observed biomasses `biomass_observed`.
 
 3\) We briefly explained how mizer chooses defaults for many other parameters, often using allometric scaling assumptions.
 

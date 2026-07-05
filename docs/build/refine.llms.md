@@ -32,9 +32,9 @@ There is another plot that shows us that our model currently has too little reso
 plotFeedingLevel(cel_model)
 ```
 
-![](refine_files/figure-html/unnamed-chunk-4-1.png)
+![](refine_files/figure-html/refine-4-1.png)
 
-Recall from the [section on the feeding level](../understand/predation-growth-and-mortality.llms.md#feeding-level) in Part 1 of the course that the feeding level is the ratio between the maximum intake rate and the actual intake rate, so can never exceed 1. The closer it is to 1 the more satiated the fish is and the less of the encountered prey it will consume. The reason the feeding levels in the above plot is higher at larger sizes than at smaller sizes is that at larger sizes the fish start feeding on other fish while at smaller sizes they have to rely on the resource, and the resource is not as abundant as it should be.
+Recall from the [section on the feeding level](../understand/predation-growth-and-mortality.llms.md#feeding-level) in Part 1 of the course that the feeding level is the ratio between the actual intake rate and the maximum intake rate, so can never exceed 1. The closer it is to 1 the more satiated the fish is and the less of the encountered prey it will consume. The reason the feeding levels in the above plot is higher at larger sizes than at smaller sizes is that at larger sizes the fish start feeding on other fish while at smaller sizes they have to rely on the resource, and the resource is not as abundant as it should be.
 
 We will now want to increase the abundance of resource, both to get the community abundance more in line with Sheldon’s observation and to give the fish a more constant feeding level throughout their life. We will first start doing this the tedious way in code and then introduce the [`tuneParams()`](https://sizespectrum.org/mizerExperimental/reference/tuneParams.html) shiny gadget to do it with point and click.
 
@@ -64,7 +64,7 @@ This has now messed up the biomasses in the model:
 plotBiomassVsSpecies(cel_model)
 ```
 
-![](refine_files/figure-html/unnamed-chunk-8-1.png)
+![](refine_files/figure-html/refine-8-1.png)
 
 So we also do
 
@@ -78,7 +78,7 @@ This is what the feeding levels look like now:
 plotFeedingLevel(cel_model)
 ```
 
-![](refine_files/figure-html/unnamed-chunk-10-1.png)
+![](refine_files/figure-html/refine-10-1.png)
 
 A little bit better but clearly not enough. So we need to do it again. But you will already have gotten the sense that this is going to be tedious: making the change, running to steady state, plotting the result, trying again ….
 

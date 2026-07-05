@@ -63,7 +63,7 @@ library(mizerExperimental)
 
     The following objects are masked from 'package:mizer':
 
-        plotlySpectraRelative, plotSpectra2, plotSpectraRelative
+        markBackground, removeBackgroundSpecies
 
 ``` downlit
 plotDeath(NS_params)

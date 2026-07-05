@@ -43,26 +43,26 @@ https://github.com/gustavdelius/mizerCourse/raw/master/build/
 gear_params(cel_model)$yield_observed <- readRDS("celtic_yields.rds")
 ```
 
-We can now use [`plotYieldVsSpecies()`](https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSpecies.html) to make a plot that for each species compares the observed yield to the yield currently achieved in the steady state of our model.
+We can now use [`plotYieldVsSpecies()`](https://rdrr.io/pkg/mizerExperimental/man/plotYieldVsSpecies.html) to make a plot that for each species compares the observed yield to the yield currently achieved in the steady state of our model.
 
 ``` downlit
 plotYieldVsSpecies(cel_model)
 ```
 
-![](landings_files/figure-html/unnamed-chunk-7-1.png)
+![](landings_files/figure-html/landings-7-1.png)
 
 We’ll have to do something about those yield values in the model. But first let’s have a look at the size distribution of the catches.
 
 ## Exploring catch size distributions
 
-The [`plotYieldVsSize()`](https://sizespectrum.org/mizerExperimental/reference/plotYieldVsSize.html) function lets us see how well our modelled and the observed catch size distributions agree. Let’s take a look at the case of cod:
+The [`plotYieldVsSize()`](https://rdrr.io/pkg/mizerExperimental/man/plotYieldVsSize.html) function lets us see how well our modelled and the observed catch size distributions agree. Let’s take a look at the case of cod:
 
 ``` downlit
 plotYieldVsSize(cel_model, species = "Cod", catch = catch_lengths, 
                 x_var = "Length")
 ```
 
-![](landings_files/figure-html/unnamed-chunk-8-1.png)
+![](landings_files/figure-html/landings-8-1.png)
 
 We see that the red curve (model) and the blue curve (observations) match surprisingly well. This means that the selectivity parameters for cod are already chosen quite well in our model. However the match could be made even better by steepening the selectivity curve.
 
@@ -85,7 +85,7 @@ plotYieldVsSize(cel_model, species = "Cod", catch = catch_lengths,
                 x_var = "Length")
 ```
 
-![](landings_files/figure-html/unnamed-chunk-10-1.png)
+![](landings_files/figure-html/landings-10-1.png)
 
 This looks better. We should have no scruples adjusting the gear selectivity parameters using our mizer model because they are hard to estimate outside a model.
 
@@ -95,19 +95,19 @@ Now that we have changed fishing selectivity we need to find a new steady state.
 cel_model <- steady(cel_model)
 ```
 
-You probably wondered how I knew what the right values for the `l50` and `l25` parameter were for cod. The answer is that I used trial and error with the help of the [`tuneParams()`](https://sizespectrum.org/mizerExperimental/reference/tuneParams.html). We’ll do some more of that in the following video. We pass the catch length data into the [`tuneParams()`](https://sizespectrum.org/mizerExperimental/reference/tuneParams.html) function via the `catch` argument:
+You probably wondered how I knew what the right values for the `l50` and `l25` parameter were for cod. The answer is that I used trial and error with the help of the [`tuneParams()`](https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html). We’ll do some more of that in the following video. We pass the catch length data into the [`tuneParams()`](https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html) function via the `catch` argument:
 
 ``` downlit
 cel_model <- tuneParams(cel_model, catch = catch_lengths)
 ```
 
-Note how we assign the return value from the [`tuneParams()`](https://sizespectrum.org/mizerExperimental/reference/tuneParams.html) function back to the `cel_model` variable. That way we capture the changes that we make in the gadget.
+Note how we assign the return value from the [`tuneParams()`](https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html) function back to the `cel_model` variable. That way we capture the changes that we make in the gadget.
 
 # An error occurred.
 
 Unable to execute JavaScript.
 
-The [`tuneParams()`](https://sizespectrum.org/mizerExperimental/reference/tuneParams.html) gadget has a lot of useful panels and allows you to play with the parameters interactively. But most of these plots are also available as separate plot functions in mizer or in mizerExperimental.
+The [`tuneParams()`](https://rdrr.io/pkg/mizerExperimental/man/tuneParams.html) gadget has a lot of useful panels and allows you to play with the parameters interactively. But most of these plots are also available as separate plot functions in mizer or in mizerExperimental.
 
 ## Exercise: Use tuneParams gadget to refine your model
 

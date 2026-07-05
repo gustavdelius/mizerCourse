@@ -24,7 +24,7 @@ Let us look at the biomass density in log weight.
 plotSpectra(mp, power = 2, total = TRUE)
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-3-1.png)
+![](species-interactions_files/figure-html/species-interactions-3-1.png)
 
 We see 11 species spectra and a resource spectrum. The resource spectrum starts at a smaller size than the fish spectra, in order to provide food also for the smallest individuals (larvae) of the fish spectra. Each species spectrum has a shape of the type we expect, given what we have seen in the tutorial on [single species spectra](../understand/single-species-spectra.llms.md). The spectra of the different species all look essentially the same, except for being shifted along the size axis. This is because in this trait-based model the species differ only through their asymptotic size. This regularity will of course not be present in a real-world ecosystem, but it makes it easier for us to build an intuition about the effects of species interactions.
 
@@ -64,7 +64,7 @@ In the absence of other information, our simple trait-based model just assumes t
 plotDeath(mp, species = "8", proportion = FALSE)
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-6-1.png)
+![](species-interactions_files/figure-html/species-interactions-6-1.png)
 
 The [`plotDeath()`](https://sizespectrum.org/mizerExperimental/reference/plotDeath.html) function is extremely useful when building your own model. It is important to know where the majority of mortality on your species and its various sizes come from.
 
@@ -76,7 +76,7 @@ Now that we have investigated who eats species 8, we also want to know who is ea
 plotDiet(mp, species = "8")
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-7-1.png)
+![](species-interactions_files/figure-html/species-interactions-7-1.png)
 
 The diet looks quite reasonable. Small individuals of species 8 initially feed entirely on the resource (plankton and other small things). From about the size of 1g (which is roughly 4-5 cm) they start eating also larvae of other fish.
 
@@ -98,7 +98,7 @@ It is very important to explore diets of species in your model, so, like the [`p
 > > plotDiet(mp)
 > > ```
 > >
-> > ![](species-interactions_files/figure-html/unnamed-chunk-8-1.png)
+> > ![](species-interactions_files/figure-html/species-interactions-8-1.png)
 
 ## Interaction matrix
 
@@ -148,11 +148,11 @@ plotDeath(mp, species = 2)
 plotDeath(mp_modified, species = 2)
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-11-1.png)
+![](species-interactions_files/figure-html/species-interactions-11-1.png)
 
 Original
 
-![](species-interactions_files/figure-html/unnamed-chunk-11-2.png)
+![](species-interactions_files/figure-html/species-interactions-11-2.png)
 
 Modified
 
@@ -165,11 +165,11 @@ plotDiet(mp, species = 11)
 plotDiet(mp_modified, species = 11)
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-12-1.png)
+![](species-interactions_files/figure-html/species-interactions-12-1.png)
 
 Original
 
-![](species-interactions_files/figure-html/unnamed-chunk-12-2.png)
+![](species-interactions_files/figure-html/species-interactions-12-2.png)
 
 Modified
 
@@ -183,7 +183,8 @@ The interaction coefficients between the fish species as consumers and the resou
 species_params(mp)$interaction_resource
 ```
 
-     [1] 1 1 1 1 1 1 1 1 1 1 1
+     1  2  3  4  5  6  7  8  9 10 11 
+     1  1  1  1  1  1  1  1  1  1  1 
 
 We see that the default value for all these interaction coefficients is also 1.
 
@@ -198,7 +199,8 @@ given_species_params(mp_lessRes)$interaction_resource[8:11] <- 0.8
 species_params(mp_lessRes)$interaction_resource
 ```
 
-     [1] 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.8 0.8 0.8
+      1   2   3   4   5   6   7   8   9  10  11 
+    1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.8 0.8 0.8 
 
 Now we can look at the diet of for example species 9 and compare it with the previous model
 
@@ -207,11 +209,11 @@ plotDiet(mp, species = 9)
 plotDiet(mp_lessRes, species = 9)
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-15-1.png)
+![](species-interactions_files/figure-html/species-interactions-15-1.png)
 
 Original
 
-![](species-interactions_files/figure-html/unnamed-chunk-15-2.png)
+![](species-interactions_files/figure-html/species-interactions-15-2.png)
 
 Modified
 
@@ -227,7 +229,7 @@ and then ploting the spectra
 plotSpectra(mp_lessRes_sss, power = 2)
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-17-1.png)
+![](species-interactions_files/figure-html/species-interactions-17-1.png)
 
 We can see the drastic reduction in the abundances of species 8 to 11.
 
@@ -253,7 +255,7 @@ plotSpectra2(mp_lessRes_steady, name1 = "less resource",
              total = TRUE, power = 2, ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-19-1.png)
+![](species-interactions_files/figure-html/species-interactions-19-1.png)
 
 There is much to see in this graph. We can see how the reduction in the abundance of large individuals leads to undulations in fish and resource size spectra, compared to the original model.
 
@@ -275,7 +277,7 @@ mp_fishing_sss <- steadySingleSpecies(mp_fishing)
 plotSpectra(mp_fishing_sss, power = 2)
 ```
 
-![](species-interactions_files/figure-html/unnamed-chunk-21-1.png)
+![](species-interactions_files/figure-html/species-interactions-21-1.png)
 
 As expected, the largest species have their abundances reduced above 1kg if they are fished, and if they continue to encounter the same amount of prey and are exposed to the same amount of predation mortality.
 
@@ -300,7 +302,7 @@ Again the important point is that the above picture does does not show a steady 
 > >              wlim = c(1e-2, NA), ylim = c(1e-6, NA))
 > > ```
 > >
-> > ![](species-interactions_files/figure-html/unnamed-chunk-22-1.png)
+> > ![](species-interactions_files/figure-html/species-interactions-22-1.png)
 > >
 > > There is a clear trophic cascade.
 

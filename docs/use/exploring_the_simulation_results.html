@@ -78,9 +78,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2b56fc3a946dded167436aaf8afdd116.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-168708e50e24b8e1b0e5f655fe3dfab2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-2b56fc3a946dded167436aaf8afdd116.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-48433d71c0b498c5604c697fb2c20fdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8f0b54eb4acbc4d7b74caad47eb814e3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-48433d71c0b498c5604c697fb2c20fdd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -148,13 +148,13 @@ window.Quarto = {
 </script><link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Explore the simulation results – mizer course">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://mizer.course.sizespectrum.org/use/exploring_the_simulation_results_files/figure-html/plotBiomass-1.png">
+<meta property="og:image" content="https://mizer.course.sizespectrum.org/use/exploring_the_simulation_results_files/figure-html/getSSB_demo-1.png">
 <meta property="og:site_name" content="mizer course">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
 <meta name="twitter:title" content="Explore the simulation results – mizer course">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://mizer.course.sizespectrum.org/use/exploring_the_simulation_results_files/figure-html/plotBiomass-1.png">
+<meta name="twitter:image" content="https://mizer.course.sizespectrum.org/use/exploring_the_simulation_results_files/figure-html/getSSB_demo-1.png">
 <meta name="twitter:creator" content="gustavdelius">
 <meta name="twitter:site" content="@mizer_model">
 <meta name="twitter:image-height" content="960">
@@ -706,45 +706,23 @@ window.Quarto = {
 <p>Here we show a simple demonstration of using a summary function using the <code>sim</code> object we created earlier. Here, we use <code>getSSB()</code> to calculate the SSB of each species through time (note the use of the <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> function to only display the first few rows).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ssb</span> <span class="op">&lt;-</span> <span class="fu">getSSB</span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">ssb</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10 12</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ssb</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Spawning stock biomass (6 times x 12 species) [g] 
-  Sprat: min=1.14e+11 mean=1.44e+11 max=2.11e+11
-  Sandeel: min=1.74e+12 mean=2.82e+12 max=5.38e+12
-  N.pout: min=1.1e+11 mean=1.37e+11 max=1.83e+11
-  Herring: min=3.51e+11 mean=4.81e+11 max=6.04e+11
-  Dab: min=4.88e+09 mean=5.58e+09 max=6.89e+09
-  Whiting: min=7.71e+10 mean=8.97e+10 max=1.14e+11
-  Sole: min=4.54e+10 mean=5.26e+10 max=6.36e+10
-  Gurnard: min=5.4e+09 mean=6.98e+09 max=9.1e+09
-  Plaice: min=2.33e+11 mean=2.67e+11 max=3.03e+11
-  Haddock: min=1.18e+11 mean=1.39e+11 max=1.59e+11
-  Cod: min=2.9e+11 mean=3.6e+11 max=5.32e+11
-  Saithe: min=1.98e+11 mean=2.55e+11 max=3.28e+11</code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ssb</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="exploring_the_simulation_results_files/figure-html/getSSB_demo-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>As mentioned above, we can specify the size range for the <code>getsummaryBiomass()</code> and <code>getN()</code> functions. For example, here we calculate the total biomass of each species but only include individuals that are larger than 10 g and smaller than 1000 g.</p>
+</div>
+<p>As mentioned above, we can specify the size range for the <code>getBiomass()</code> and <code>getN()</code> functions. For example, here we calculate the total biomass of each species but only include individuals that are larger than 10 g and smaller than 1000 g.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">biomass</span> <span class="op">&lt;-</span> <span class="fu">getBiomass</span><span class="op">(</span><span class="va">sim</span>, min_w <span class="op">=</span> <span class="fl">10</span>, max_w <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">biomass</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Biomass (6 times x 12 species) [g] 
-  Sprat: min=1.44e+11 mean=1.76e+11 max=2.44e+11
-  Sandeel: min=1.1e+12 mean=2.18e+12 max=4.59e+12
-  N.pout: min=1.67e+11 mean=1.96e+11 max=2.39e+11
-  Herring: min=1.18e+12 mean=1.32e+12 max=1.54e+12
-  Dab: min=6.29e+09 mean=7.13e+09 max=8.37e+09
-  Whiting: min=1.27e+11 mean=1.39e+11 max=1.62e+11
-  Sole: min=1.12e+11 mean=1.18e+11 max=1.27e+11
-  Gurnard: min=1.91e+10 mean=2.22e+10 max=2.48e+10
-  Plaice: min=6.62e+11 mean=7.12e+11 max=7.66e+11
-  Haddock: min=3.23e+11 mean=3.41e+11 max=3.73e+11
-  Cod: min=4.52e+10 mean=5.35e+10 max=6.29e+10
-  Saithe: min=1.39e+11 mean=1.81e+11 max=2.16e+11</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">biomass</span> <span class="op">&lt;-</span> <span class="fu">getBiomass</span><span class="op">(</span><span class="va">sim</span>, min_w <span class="op">=</span> <span class="fl">10</span>, max_w <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">biomass</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="exploring_the_simulation_results_files/figure-html/getBiomass_demo-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section></section><section id="functions-for-calculating-indicators" class="level2"><h2 class="anchored" data-anchor-id="functions-for-calculating-indicators">Functions for calculating indicators</h2>
@@ -754,7 +732,7 @@ window.Quarto = {
 <p>For these examples we use the <code>sim</code> object we created earlier.</p>
 <p>The slope of the community can be calculated using the <code>getCommunitySlope()</code> function. Initially we include all species and all sizes in the calculation (only the first five rows are shown):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu">getCommunitySlope</span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu">getCommunitySlope</span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">slope</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
@@ -767,7 +745,7 @@ window.Quarto = {
 <p>This gives the slope, intercept and <span class="math inline">R^2</span> value through time (see the help file for <code>getCommunitySlope</code> for more details).</p>
 <p>We can include only the species we want with the <code>species</code> argument. Below we only include demersal species. We also restrict the size range of the community that is used in the calculation to between 10 g and 5 kg. The <code>species</code> argument is a character vector of the names of the species that we want to include in the calculation.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dem_species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Dab"</span>, <span class="st">"Whiting"</span>, <span class="st">"Sole"</span>, <span class="st">"Gurnard"</span>, <span class="st">"Plaice"</span>, <span class="st">"Haddock"</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dem_species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Dab"</span>, <span class="st">"Whiting"</span>, <span class="st">"Sole"</span>, <span class="st">"Gurnard"</span>, <span class="st">"Plaice"</span>, <span class="st">"Haddock"</span>,</span>
 <span>    <span class="st">"Cod"</span>, <span class="st">"Saithe"</span><span class="op">)</span></span>
 <span><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu">getCommunitySlope</span><span class="op">(</span><span class="va">sim</span>, min_w <span class="op">=</span> <span class="fl">10</span>, max_w <span class="op">=</span> <span class="fl">5000</span>, </span>
 <span>    species <span class="op">=</span> <span class="va">dem_species</span><span class="op">)</span></span>
@@ -781,13 +759,14 @@ window.Quarto = {
 </div>
 </div>
 </section></section><section id="plotting-the-results" class="level2"><h2 class="anchored" data-anchor-id="plotting-the-results">Plotting the results</h2>
-<p>R is very powerful when it comes to exploring data through plots. Two useful packages for plotting are <code>ggplot2</code> and <code>plotly</code>. These use data.frames for input data whereas many of the mizer functions return arrays or matrices. Fortunately it is straightforward to turn arrays and matrices into data.frames using the <code>melt()</code> function from the <code>reshape2</code> package that mizer makes available to you. Although <code>mizer</code> does include some dedicated plots, it is definitely worth your time getting to grips with these other plotting packages. This will make it possible for you to make your own plots.</p>
+<p>R is very powerful when it comes to exploring data through plots. Two useful packages for plotting are <code>ggplot2</code> and <code>plotly</code>. These use data.frames for input data whereas many of the mizer functions return arrays or matrices. Fortunately it is straightforward to turn arrays and matrices into data.frames using <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>.</p>
+<p>However, most of the time you will not need to use <code>ggplot2</code> or <code>plotly</code> directly but can use the plot methods included in mizer.</p>
 <p>Included in <code>mizer</code> are several dedicated plots that use <code>MizerSim</code> objects as inputs (see <a href="https://sizespectrum.org/mizer/reference/plotting_functions.html">the plots help page.</a>). As well as displaying the plots, these functions all return objects of type <code>ggplot</code> from the <code>ggplot2</code> package, meaning that they can be further modified by the user (e.g.&nbsp;by changing the plotting theme). See the help page of the individual plot functions for more details. The generic <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> method has also been overloaded for <code>MizerSim</code> objects. This produces several plots in the same window to provide a snapshot of the results of the simulation.</p>
 <p>Some of the plots plot values by size (for example <code>plotFeedingLevel()</code> and <code>plotSpectra()</code>). For these plots, the default is to use the data at the final time step of the projection. With these plotting functions, it is also possible to specify a different time, or a time range to average the values over before plotting.</p>
 <section id="sec:plot_examples" class="level3"><h3 class="anchored" data-anchor-id="sec:plot_examples">Plotting examples</h3>
 <p>Using the plotting functions is straightforward. For example, to plot the total biomass of each species against time you use the <code>plotBiomass()</code> function:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotBiomass</span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotBiomass</span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="exploring_the_simulation_results_files/figure-html/plotBiomass-1.png" class="img-fluid figure-img" width="672"></p>
@@ -797,7 +776,7 @@ window.Quarto = {
 </div>
 <p>As mentioned above, some of the plot functions plot values against size at a point in time (or averaged over a time period). For these plots it is possible to specify the time step to plot, or the time period to average the values over. The default is to use the final time step. Here we plot the abundance spectra (biomass), averaged over time = 5 to 10:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotSpectra</span><span class="op">(</span><span class="va">sim</span>, time_range <span class="op">=</span> <span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotSpectra</span><span class="op">(</span><span class="va">sim</span>, time_range <span class="op">=</span> <span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="exploring_the_simulation_results_files/figure-html/plotSpectra_example-1.png" class="img-fluid figure-img" width="672"></p>
@@ -807,7 +786,7 @@ window.Quarto = {
 </div>
 <p>As mentioned above, and as we have seen several times in this guide, the generic <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> method has also been overloaded. This produces 5 plots in the same window (<code>plotFeedingLevel()</code>, <code>plotBiomass()</code>, <code>plotPredMort()</code>, <code>plotFMort()</code> and <code>plotSpectra()</code>). It is possible to pass in the same arguments that these individual plots use, e.g.&nbsp;arguments to change the time period over which the data is averaged.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="exploring_the_simulation_results_files/figure-html/demo_summary_plot-1.png" class="img-fluid figure-img" width="672"></p>
@@ -815,6 +794,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>There is much more to be said about analysing and plotting simulation results. Take a look at the <a href="https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html">Cheatsheet: Analysis and Plotting</a>.</p>
 <p>The next section describes how to use what we have learned to <a href="../use/a_multispecies_model_of_the_north_sea.html">model the North Sea.</a></p>
 
 

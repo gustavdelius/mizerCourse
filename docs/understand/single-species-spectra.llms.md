@@ -40,7 +40,7 @@ We can plot the size spectrum with the [`plotSpectra()`](https://sizespectrum.or
 plotSpectra(params, power = 0)
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-3-1.png)
+![](single-species-spectra_files/figure-html/plot-spectra-number-density-1.png)
 
 The `power = 0` argument to the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function specifies that we want to plot the number density, rather than for example the biomass density. We’ll discuss this more below in the section on [other representations](#other-representations).
 
@@ -64,7 +64,7 @@ It is now time to do the first exercise of this tutorial.
 > > plot21
 > > ```
 > >
-> > ![](single-species-spectra_files/figure-html/unnamed-chunk-4-1.png)
+> > ![](single-species-spectra_files/figure-html/ex1-solution-1.png)
 
 ## Numbers
 
@@ -167,7 +167,7 @@ We can use the `power` argument of the [`plotSpectra()`](https://sizespectrum.or
 plotSpectra(params)
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-12-1.png)
+![](single-species-spectra_files/figure-html/plot-spectra-biomass-density-1.png)
 
 Now the green line representing the biomass density of the background has a slope of -1.05. The initial slope of the species biomass density is also negative, meaning that the biomass density in the species decreases with size.
 
@@ -177,7 +177,7 @@ We can also plot the biomass density in log weight, i.e., the Sheldon spectrum, 
 plotSpectra(params, power = 2)
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-13-1.png)
+![](single-species-spectra_files/figure-html/plot-spectra-biomass-log-1.png)
 
 This now shows an approximately constant background biomass density in log weight (the slope of the green line is -0.05). The biomass density of the species in log size initially increases. So if binned in logarithmically-sized bins the biomass in each bin will initially increase, until it starts decreasing close to the maximum size of the species.
 
@@ -191,7 +191,7 @@ There is another way to represent the size distribution. When we talk about size
 plotCDF(params, power = 0)
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-14-1.png)
+![](single-species-spectra_files/figure-html/plot-cdf-number-1.png)
 
 This plot shows very clearly that most fish are larvae.
 
@@ -221,34 +221,15 @@ biomass[61]
 
     [1] 4.005029e-05
 
-Let us briefly present yet another way to represent the size distribution. When we talk about size spectra, we always have the representation in terms of densities in mind. You may already be familiar with the concept of a densities from probability theory, where you can describe a probability distribution in terms of its probability density function. But perhaps you also know that there is an alternative description of the probability distribution in terms of the cumulative distribution function. We can similarly describe the size distribution of the biomass by a cumulative biomass distribution function, which gives the total biomass of all sizes up to a specific size.
-
-``` downlit
-# Initialise an array with the right dimensions
-cumulative_biomass <- biomass
-# Calculate the cumulative sum of all biomasses in previous bins
-cumulative_biomass[] <- cumsum(biomass)
-# Normalise this so that it is given as a percentage of the total biomass
-cdf <- cumulative_biomass / cumulative_biomass[1, 101] * 100
-# Melt the array to a data frame and then plot
-p_biomass_cdf <- ggplot(melt(cdf), aes(x = w, y = value)) +
-    geom_line() + 
-    labs(x = "Weight [g]",
-         y = "% of total biomass")
-p_biomass_cdf
-```
-
-![](single-species-spectra_files/figure-html/unnamed-chunk-18-1.png)
-
-Let us also look at the cumulative biomass distribution:
+We can describe the biomass distribution in terms of its cumulative distribution function, which gives the total biomass of all sizes up to a specific size:
 
 ``` downlit
 plotCDF(params, log_x = FALSE)
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-19-1.png)
+![](single-species-spectra_files/figure-html/plot-cdf-biomass-linear-1.png)
 
-This plot shows us for example that 50% of the individuals are smaller than 12.5g and only a very small percentage is larger than 75g. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but most of the biomass comes from large fish. So we need to always be very clear about which quantity we are considering.
+This plot shows us for example that 50% of the biomass comes from individuals that are smaller than 12.5g and individuals larger than 75g contribute very little to the total biomass. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but most of the biomass comes from large fish. So we need to always be very clear about which quantity we are considering.
 
 We can also plot the cumulative biomass distribution function on a logarithmic weight axis:
 
@@ -256,7 +237,7 @@ We can also plot the cumulative biomass distribution function on a logarithmic w
 plotCDF(params)
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-20-1.png)
+![](single-species-spectra_files/figure-html/plot-cdf-biomass-log-1.png)
 
 This graph contains exactly the same information as the previous graph, just showing more detail at smaller sizes and less detail at larger sizes. We can see for example that about 20% of the total biomass is from individuals smaller than 1g, which was difficult to see in the previous graph. The slope of this graph is the biomass density in log weight.
 
@@ -300,7 +281,7 @@ We would like to make a log-log plot of the growth rate against size to check th
 plot(growth_rate, log_x = TRUE, log_y = TRUE)
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-24-1.png)
+![](single-species-spectra_files/figure-html/plot-growth-rate-1.png)
 
 The reason `plot` knew how to label the axes and what to put in the legend is that [`getEGrowth()`](https://sizespectrum.org/mizer/reference/getEGrowth.html) returned the growth rate as an `ArraySpeciesBySize`, which has that information included as attributes.
 
@@ -342,7 +323,7 @@ Of course in a real model, the growth rate would not so exactly follow a power l
 > > plot(mort_rate, log_x = TRUE, log_y = TRUE)
 > > ```
 > >
-> > ![](single-species-spectra_files/figure-html/unnamed-chunk-28-1.png)
+> > ![](single-species-spectra_files/figure-html/ex3-solution-plot-1.png)
 > >
 > > ``` downlit
 > > mm <- lm(log(mort_rate[1, ]) ~ log(w(params)))
@@ -378,7 +359,7 @@ We can also check this claim numerically. Let’s look at the spectrum of indivi
 plot(n, log_x = TRUE, log_y = TRUE)
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-31-1.png)
+![](single-species-spectra_files/figure-html/plot-n-loglog-1.png)
 
 That confirms what we had seen earlier, that for fish less than 10 grams the number density is a power law. To determine the exponent of the power law we need the slope of that straight line in the log-log plot, and the easiest way to do that is to fit a linear model to the log variables:
 
@@ -413,7 +394,7 @@ Now that we understand the shape of the size spectrum for the juvenile fish, let
 plotSpectra(params, wlim = c(10, NA))
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-35-1.png)
+![](single-species-spectra_files/figure-html/plot-spectra-adult-1.png)
 
 The increase of abundance that we see at around the maturity size of our species is due to a drop in growth rate at that size. This in turn is due to the fact that the mature fish invests some of its energy into reproduction instead of growth. So the details of the shape of the adult spectrum will be influenced both by food intake, maintenance and mortality (like in juveniles), but also by how adults split their energy income between growth and reproduction.
 
@@ -426,13 +407,13 @@ p <- plot(psi(params), log_x = FALSE)
 p
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-36-1.png)
+![](single-species-spectra_files/figure-html/plot-psi-1.png)
 
 How was this maturity curve specified? You can find the details in the [mizer documentation](https://sizespectrum.org/mizer/reference/setReproduction.html#investment). There are four species parameters involved:
 
 - the maturity size `w_mat` at which 50% of the individuals are mature.
 - the size `w_mat25` at which 25% of the individuals are mature.
-- the asymptotic size `w_max` at which an organism invests 100% of its income into reproduction and thus growth is zero.
+- the size `w_repro_max` at which a typical mature individual invests 100% of its income into reproduction. (This is not a hard upper size limit: not all individuals are mature at `w_repro_max`, and diffusion in the growth process allows some to grow beyond it.)
 - an exponent `m` that determines how the proportion that an individual invests into reproduction scales with its size.
 
 Such species parameters are contained in a data frame inside the `params` object that we can access with the [`species_params()`](https://sizespectrum.org/mizer/reference/species_params.html) function.
@@ -444,7 +425,7 @@ species_params(params)
 As you can see, there are a lot of other species parameters, some of which we will talk about later. For now let’s just select the 4 parameters we are interested in.
 
 ``` downlit
-select(species_params(params), w_mat, w_mat25, w_max, m)
+select(species_params(params), w_mat, w_mat25, w_repro_max, m)
 ```
 
 And with this knowledge of parameters we can improve the plot for clarity and add a vertical line at 25% and 50% maturation weight
@@ -454,7 +435,7 @@ p + geom_vline(xintercept = species_params(params)$w_mat, lty = 2) +
     geom_vline(xintercept = species_params(params)$w_mat25, lty = 2, col = "grey")
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-39-1.png)
+![](single-species-spectra_files/figure-html/plot-psi-with-lines-1.png)
 
 ### Change in maturity curve
 
@@ -469,7 +450,7 @@ In this copy we now change the species parameters
 ``` downlit
 given_species_params(params_changed_maturity)$w_mat <- 40
 given_species_params(params_changed_maturity)$w_mat25 <- 30
-select(species_params(params_changed_maturity), w_mat, w_mat25, w_max, m)
+select(species_params(params_changed_maturity), w_mat, w_mat25, w_repro_max, m)
 ```
 
 Now the maturity curve has changed, which we can verify by plotting it
@@ -483,7 +464,7 @@ pc <- plot(psi(params_changed_maturity), log_x = FALSE) +
 pc
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-42-1.png)
+![](single-species-spectra_files/figure-html/plot-psi-changed-1.png)
 
 With the [`addPlot()`](https://sizespectrum.org/mizer/reference/addPlot.html) function we can add the new curve to the plot of the old curve for a quick comparison.
 
@@ -491,7 +472,7 @@ With the [`addPlot()`](https://sizespectrum.org/mizer/reference/addPlot.html) fu
 addPlot(p, psi(params_changed_maturity))
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-43-1.png)
+![](single-species-spectra_files/figure-html/addplot-psi-1.png)
 
 This change in the maturity curve of course implies a change in the growth rates.
 
@@ -506,7 +487,7 @@ This change in the maturity curve of course implies a change in the growth rates
 > > addPlot(p, getEGrowth(params_changed_maturity))
 > > ```
 > >
-> > ![](single-species-spectra_files/figure-html/unnamed-chunk-44-1.png)
+> > ![](single-species-spectra_files/figure-html/ex4-solution-1.png)
 
 ### Effect of changed maturity
 
@@ -524,7 +505,7 @@ plotSpectra2(params, name1 = "Early maturity",
              power = 2, resource = FALSE, wlim = c(10, NA))
 ```
 
-![](single-species-spectra_files/figure-html/unnamed-chunk-46-1.png)
+![](single-species-spectra_files/figure-html/plot-spectra2-comparison-1.png)
 
 As expected, the bump happens later due to the larger maturity size and it is less steep, because the maturity curve is less steep. This means that fish do not suddenly start investing most of their energy into reproduction, but still keep growing while they are maturity. Since they are still growing they will be moving from one size class to another and fewer individuals will accumulate in one size class.
 

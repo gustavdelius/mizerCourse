@@ -54,7 +54,7 @@ cel_model <- newMultispeciesParams(species_params = celtic_species_params,
 
     No h provided for some species, so using age at maturity to calculate it.
     No ks column so calculating from critical feeding level.
-    Using z0 = z0pre * w_max ^ z0exp for missing z0 values.
+    Using z0 = z0pre * w_inf ^ z0exp for missing z0 values.
     Using f0, h, lambda, kappa and the predation kernel to calculate gamma.
 
 The messages tell you that the [`newMultispeciesParams()`](https://sizespectrum.org/mizer/reference/newMultispeciesParams.html) function has made choices for some species parameters based on the information we supplied.
@@ -112,7 +112,7 @@ Mizer is agnostic of whether you want to measure biomass per square meter, or pe
 plotBiomassVsSpecies(cel_model2)
 ```
 
-![](create-first-model_files/figure-html/unnamed-chunk-8-1.png)
+![](create-first-model_files/figure-html/create-first-model-8-1.png)
 
 This shows for each species the model biomass (open circle) and the observed biomass (filled square, if available) on a logarithmic y-axis. The line connecting model value and observed value is for visual purposes only. We see that model values and observed values are many orders of magnitude apart.
 
@@ -128,7 +128,7 @@ Of course for the individual species the model biomasses will still disagree wit
 plotBiomassVsSpecies(cel_model3)
 ```
 
-![](create-first-model_files/figure-html/unnamed-chunk-10-1.png)
+![](create-first-model_files/figure-html/create-first-model-10-1.png)
 
 We see that the biomasses of Monkfish, European Hake and Cod are far too low in the model, as was already apparent from the size spectrum plot. So we should fix this in the next step.
 
@@ -141,7 +141,7 @@ cel_model4 <- matchBiomasses(cel_model3)
 plotBiomassVsSpecies(cel_model4)
 ```
 
-![](create-first-model_files/figure-html/unnamed-chunk-11-1.png)
+![](create-first-model_files/figure-html/create-first-model-11-1.png)
 
 Now the circles and squares lie exactly on top of each other. This is expected, because we simply changed the relative biomasses of species in the model. The size spectrum plot also look more healthy now.
 
@@ -165,7 +165,7 @@ Of course running to steady state has now messed up our biomasses again:
 plotBiomassVsSpecies(cel_model5)
 ```
 
-![](create-first-model_files/figure-html/unnamed-chunk-14-1.png)
+![](create-first-model_files/figure-html/create-first-model-14-1.png)
 
 Luckily the discrepancies are now much smaller than they were before. Before we deal with that, there is another issue we need to attend to in the next step.
 
@@ -215,7 +215,7 @@ Running to steady state has again messed up our biomasses:
 plotBiomassVsSpecies(cel_model7)
 ```
 
-![](create-first-model_files/figure-html/unnamed-chunk-18-1.png)
+![](create-first-model_files/figure-html/create-first-model-18-1.png)
 
 And it has also slightly messed up our growth rates:
 
@@ -238,7 +238,7 @@ cel_model8 <- cel_model7 |>
 plotBiomassVsSpecies(cel_model8)
 ```
 
-![](create-first-model_files/figure-html/unnamed-chunk-21-1.png)
+![](create-first-model_files/figure-html/create-first-model-21-1.png)
 
 And the growth rates too are matched much more precisely than really necessary:
 

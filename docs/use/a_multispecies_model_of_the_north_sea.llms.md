@@ -106,7 +106,7 @@ params <- newMultispeciesParams(NS_species_params,
     Because the age at maturity is not known, I need to fall back to using
     von Bertalanffy parameters, where available, and this is not reliable.
     No ks column so calculating from critical feeding level.
-    Using z0 = z0pre * w_max ^ z0exp for missing z0 values.
+    Using z0 = z0pre * w_inf ^ z0exp for missing z0 values.
     Using f0, h, lambda, kappa and the predation kernel to calculate gamma.
 
 ## Setting up and running the simulation
@@ -165,21 +165,21 @@ sim0 <- projectToSteady(params, effort = 0, return_sim = TRUE)
 
 Here we look at some of the ways the results of the simulation can be explored. We calculate the community indicators `mean maximum weight`, `mean individual weight`, `community slope` and the `large fish indicator` (LFI) over the simulation period, and compare them to the unexploited values. We also compare the simulated values of the LFI to a community target based on achieving a high proportion of the unexploited value of the LFI of 0.8 LFI\_{F=0}.
 
-The indicators are calculated using the functions described in [the section about indicator functions](../use/exploring_the_simulation_results.llms.md#functions-for-calculating-indicators). Here we calculate the LFI and the other community indicators for the unexploited community. When calculating these indicators we only include demersal species and individuals in the size range 10 g to 100 kg, and the LFI is based on species larger than 40 cm. Each of these functions returns a time series. We are interested only in the equilibrium unexploited values so we just select the final time step.
+The indicators are calculated using the functions described in [the section about indicator functions](../use/exploring_the_simulation_results.llms.md#functions-for-calculating-indicators). Here we calculate the LFI and the other community indicators for the unexploited community. When calculating these indicators we only include demersal species and individuals in the size range 10 g to 100 kg, and the LFI is based on species larger than 40 cm. Because we are interested only in the equilibrium unexploited values, we apply the indicator functions to `finalParams(sim0)`, the `MizerParams` object holding the state at the final time step of the simulation. Applied to a `MizerParams` object rather than a `MizerSim`, these functions return the single value for that state rather than a whole time series.
 
 ``` downlit
 demersal_species <- c("Dab", "Whiting", "Sole", "Gurnard", "Plaice",
                       "Haddock", "Cod", "Saithe")
-final <- idxFinalT(sim0)
-lfi0 <- getProportionOfLargeFish(sim0, species = demersal_species,
-                                 min_w = 10, max_w = 100e3, 
-                                 threshold_l = 40)[[final]]
-mw0 <- getMeanWeight(sim0, species = demersal_species,
-                     min_w = 10, max_w = 100e3)[[final]]
-mmw0 <- getMeanMaxWeight(sim0, species = demersal_species,
-                         min_w = 10, max_w = 100e3)[final, "mmw_biomass"]
-slope0 <- getCommunitySlope(sim0, species = demersal_species,
-                            min_w = 10, max_w = 100e3)[final, "slope"]
+params0 <- finalParams(sim0)
+lfi0 <- getProportionOfLargeFish(params0, species = demersal_species,
+                                 min_w = 10, max_w = 100e3,
+                                 threshold_l = 40)
+mw0 <- getMeanWeight(params0, species = demersal_species,
+                     min_w = 10, max_w = 100e3)
+mmw0 <- getMeanMaxWeight(params0, species = demersal_species,
+                         min_w = 10, max_w = 100e3)[["mmw_biomass"]]
+slope0 <- getCommunitySlope(params0, species = demersal_species,
+                            min_w = 10, max_w = 100e3)[["slope"]]
 ```
 
 We also calculate the time series of these indicators for the exploited community:
@@ -274,7 +274,7 @@ sim2 <- project(params, effort = scenario2, dt = 0.25)
 We can now compare the projected SSB values in both scenarios to the biodiversity reference points. First we calculate the biodiversity reference points (from the final time step in the unexploited `sim0` simulation):
 
 ``` downlit
-ssb0 <- getSSB(sim0)[final, ]
+ssb0 <- getSSB(params0)
 ```
 
 Now we build a data.frame of the projected SSB for each species. We make use of the `melt()` function to transform arrays into data frames.

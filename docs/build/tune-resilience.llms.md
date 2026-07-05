@@ -21,6 +21,14 @@ We load the model into the variable `cel_model`.
 cel_model <- readParams("../build/cel_model_landings.rds")
 ```
 
+    Warning in validGivenSpeciesParams(params@given_species_params): For the
+    species Haddock, Plaice the value for `w_mat25` is not smaller than that of
+    `w_mat`. I have corrected that by setting it to NA.
+
+    Warning in validGivenSpeciesParams(species_params): For the species Haddock,
+    Plaice the value for `w_mat25` is not smaller than that of `w_mat`. I have
+    corrected that by setting it to NA.
+
 ## Reproduction dynamics
 
 In this tutorial we will look at an aspect of the model that has a big impact on the resilience of species to perturbations: the reproduction dynamics. In the tutorial on [dynamics of size spectra](../understand/dynamics-of-spectra.llms.md#reproduction-level) in Part 1 we briefly looked at how density dependence of reproduction can influence how species react to changes in mortality, such as from fishing. It might be good if you go back to that tutorial and remind yourself.
@@ -50,7 +58,7 @@ These concepts are nicely illustrated by the following figure that you saw [earl
     Ignoring unknown labels:
     • size : "R_max"
 
-![](tune-resilience_files/figure-html/unnamed-chunk-4-1.png)
+![](tune-resilience_files/figure-html/tune-resilience-4-1.png)
 
 The black dot in the diagram represents the steady-state values for E_R and R\_{dd}. The solid curves represents how the density-dependent reproduction rate R\_{dd} depends on the rate E_R. Both the solid blue line and the solid black line go through the black dot, which means that they result in the same steady-state reproduction. They differ by the choice of the maximum reproduction rate `R_max` (the height of the dotted line) and the reproductive efficiency `erepro` (the slope of the dashed line representing R\_{di}).
 
@@ -182,7 +190,7 @@ plotYieldVsF(cel_model, species = "Haddock",
              F_range = seq(0.1, 0.9, 0.02))
 ```
 
-![](tune-resilience_files/figure-html/unnamed-chunk-11-1.png)
+![](tune-resilience_files/figure-html/tune-resilience-11-1.png)
 
 We refer to the yield achieved in the steady state as the *sustainable yield* (SY) because it can be sustained indefinitely. The sustainable yield for this species has a maximum (MSY) at a fishing mortality of about 0.3. We refer to this value as F_(MSY). This is close enough to the value of 0.35 that is given for F_(MSY) in [the ICES advice for our haddock stock](https://figshare.com/articles/report/Haddock_Melanogrammus_aeglefinus_in_divisions_7_b_k_southern_Celtic_Seas_and_English_Channel_/19447961).
 
@@ -193,7 +201,7 @@ plotYieldVsF(cel_model, species = "European Hake",
              F_range = seq(0.1, 0.5, 0.02))
 ```
 
-![](tune-resilience_files/figure-html/unnamed-chunk-12-1.png)
+![](tune-resilience_files/figure-html/tune-resilience-12-1.png)
 
 We read off that for hake the current value of F_(MSY) in the model is too high. In other words, it is not sensitive enough to fishing. We have probably put on too much extra density dependence on the reproduction. Let us look at the reproduction level we have currently chosen:
 
@@ -220,7 +228,7 @@ plotYieldVsF(cel_model, species = "European Hake",
                F_range = seq(0.1, 0.5, 0.02))
 ```
 
-![](tune-resilience_files/figure-html/unnamed-chunk-14-1.png)
+![](tune-resilience_files/figure-html/tune-resilience-14-1.png)
 
 The F_(MSY) is now closer to the one in the ICES advice. Next we look at whiting where [the ICES advice](https://ices-library.figshare.com/articles/report/Whiting_Merlangius_merlangus_in_divisions_7_b_c_and_7_e_k_southern_Celtic_Seas_and_western_English_Channel_/18633200) suggests a quite high F_(MSY) of 0.52.
 
@@ -229,7 +237,7 @@ plotYieldVsF(cel_model, species = "Whiting",
              F_range = seq(0.2, 0.8, 0.02))
 ```
 
-![](tune-resilience_files/figure-html/unnamed-chunk-15-1.png)
+![](tune-resilience_files/figure-html/tune-resilience-15-1.png)
 
 So in this case the model F_(MSY) is lower than the ICES one, so whiting in the model is less resilient to fishing than ICES estimated. To make whiting more resilient in the model we can put more density dependence on the reproduction. Let’s put the reproduction level very close to 1, which means that the reproduction rate is almost totally independent of the investment into reproduction.
 
@@ -242,7 +250,7 @@ plotYieldVsF(cel_model, species = "Whiting",
                F_range = seq(0.2, 0.8, 0.02))
 ```
 
-![](tune-resilience_files/figure-html/unnamed-chunk-16-1.png)
+![](tune-resilience_files/figure-html/tune-resilience-16-1.png)
 
 We see that even with this extreme choice the F_(MSY) in the model is smaller than the one estimated by ICES. This shows the limitation with the approach of trying to make the predictions from the mizer model agree with the predictions by ICES which uses single-species models. At some point we will need to start trusting the multi-species model. Ideally we would tune the mizer model to actual observational data rather than to the output of single-species stock assessment models. We should use mizer as the actual stock assessment model. Unfortunately, this will require more development because currently mizer is not yet stochastic, so can not model the flucutations in the real-world data. But stay tuned …
 
@@ -253,7 +261,7 @@ plotYieldVsF(cel_model, species = "Whiting",
                F_range = seq(0.2, 0.8, 0.02), tol = 0.0001)
 ```
 
-![](tune-resilience_files/figure-html/unnamed-chunk-17-1.png)
+![](tune-resilience_files/figure-html/tune-resilience-17-1.png)
 
 > **NOTE:**
 >

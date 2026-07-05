@@ -32,7 +32,7 @@ plotGrowthCurves(params, species_panel = TRUE)
     Warning: Removed 2 rows containing missing values or values outside the scale range
     (`geom_line()`).
 
-![](further-scenarios_files/figure-html/unnamed-chunk-4-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-4-1.png)
 
 the spectra,
 
@@ -46,7 +46,7 @@ the feeding levels,
 plotFeedingLevel(params)
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-6-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-6-1.png)
 
 and toothfish diet.
 
@@ -54,7 +54,7 @@ and toothfish diet.
 plotDiet(params, species = "D.ele")
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-7-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-7-1.png)
 
 For this model, we had the following main criteria for our project:
 
@@ -104,7 +104,7 @@ getReproductionLevel(params)
 plotYieldVsF(params, species = "D.ele", no_steps = 30, F_max = 2)
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-10-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-10,%20-1.png)
 
 They generally look good and the curve is dome-shaped.
 
@@ -119,7 +119,7 @@ sim0 <- project(params, effort = 0, t_max = 20)
 plotSpectraRelative(sim0, params)
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-11-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-11,%20-1.png)
 
 Here we can see the effect of the reduction in large sized individuals of heavily fished species on the other sizes and species in the model, relative to the unfished steady state.
 
@@ -143,7 +143,7 @@ ggplot(plot_dat, aes(x = Year, y = value)) +
     facet_wrap(~variable, nrow = 2, scales = "free")
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-13-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-13,%20-1.png)
 
 We can see from the data that there have been big changes in effort and catches through time. The first plot shows relative effort per area (please note that these data are *not correct* and are only being used for illustration in this example). Catches are in tonnes per square km fished. They have changed a lot over the years.
 
@@ -178,7 +178,7 @@ plotYieldGear(simf) +
                mapping = aes(x = Year, y = CatchPerArea))
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-15-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-15,%20-1.png)
 
 Here we can see that the modeled catch time series fall within the scatter of the observed catch data (reassuring), but the trends are different. It seems there is a sharp decline in modeled catches towards the end of the time series. While we should not expect the exact up and down fluctuations to be captured by our model (we don’t have anything forcing the changes through time other than fishing!), we could examine further how changing the reproduction parameters affects how well the model captures stock decline (and later, recovery), relative to the trends in the data. It may also be that our estimates of catchability and effort are way off (they are). And that other factors could be influencing observed changes not accounted for by our model.
 
@@ -219,12 +219,12 @@ qplot(year, neweffort, ylab = "effort", xlab = "")
 
     Warning: `qplot()` was deprecated in ggplot2 3.4.0.
 
-![](further-scenarios_files/figure-html/unnamed-chunk-17-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-17-1.png)
 
 Now you can run the same model above using this effort and then plot effort and biomass dynamics through time.
 
 ``` downlit
-params3 <- setInitialValues(params, sim0)
+params3 <- finalParams(sim0)
 simf3 <- project(params3, effort = neweffort)
 
 plotYieldGear(simf3) + 
@@ -236,13 +236,13 @@ plotYieldGear(simf3) +
     Warning: Removed 10 rows containing missing values or values outside the scale range
     (`geom_line()`).
 
-![](further-scenarios_files/figure-html/unnamed-chunk-18-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-18-1.png)
 
 ``` downlit
 plotBiomass(simf3)
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-18-2.png)
+![](further-scenarios_files/figure-html/further-scenarios-18-2.png)
 
 ``` downlit
 # If you like you can save the output for further analyses 
@@ -256,12 +256,12 @@ We can see here as effort develops towards a plateau of Fmax = 0.5 through time,
 Now let’s see what happens if we change fishing in the future. To do this we set up two scenarios, one where the model starts with the last time step of the fished scenario and continues into the future (the “status quo”). The other will be designed to explore a “more sustainable” scenario.
 
 ``` downlit
-# Use the parameters from the last simulation
-params <- getParams(simf3)
-params <- setInitialValues(params, simf3)
+# Use the parameters from the last simulation, with the initial spectra
+# and initial effort set to its final time step (2020)
+params <- finalParams(simf3)
 ```
 
-The [`setInitialValues()`](https://sizespectrum.org/mizer/reference/setInitialValues.html) function has set the initial spectra and the initial effort in the `params` object to the final values from `simf3`, i.e., to the values from 2020. The effort was
+The [`finalParams()`](https://sizespectrum.org/mizer/reference/finalParams.html) function has returned the model with its initial spectra and initial effort set to the final values from `simf3`, i.e., to the values from 2020. The effort was
 
 ``` downlit
 initial_effort(params)
@@ -280,7 +280,7 @@ dimnames(proj_effort_scen1) <-
 qplot(x = 2021:2070, y = proj_effort_scen1, ylab = "effort", xlab = "")
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-21-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-21-1.png)
 
 That was Scenario 1 (“status quo”), now let’s set up Scenario 2, the “more sustainable” option we wish to explore. Again, if we are working in the same units as the effort above we can change the F below to scale effort to be consistent with a value of F=0.2. So we need to set effort= catchability/targetF. Otherwise if you assume targetF= catchability\*E, and set catchability to 1, you can just use targetF=0.2 directly for Scenario 2.
 
@@ -297,7 +297,7 @@ proj_effort_scen2[11:50, select_gear] <- targetF
 qplot(x = 2021:2070, y = proj_effort_scen2, ylab = "effort", xlab = "")
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-22-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-22-1.png)
 
 Now we want to run the simulation forward using the [`project()`](https://sizespectrum.org/mizer/reference/project.html) function.
 
@@ -315,7 +315,7 @@ scen <- sim_scen2
 plotYield(scen)
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-24-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-24-1.png)
 
 ``` downlit
 # plot change in biomass under each scenario relative to current values
@@ -334,7 +334,7 @@ ggplot(Brel_scen) +
     Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
     ℹ Please use `linewidth` instead.
 
-![](further-scenarios_files/figure-html/unnamed-chunk-24-2.png)
+![](further-scenarios_files/figure-html/further-scenarios-24-2.png)
 
 Relative to 2020 values, reducing Fmsy to 0.2 has increased toothfish biomass and has affected the other species in the system too.
 
@@ -347,7 +347,7 @@ Let’s take a look at the relative exploitation status of the stocks using the 
 # get saved values from steady state without fishing that we generated earlier 
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/use/sim0.rds",
               destfile = "sim0.rds")
-sim0 <- readRDS("sim0.rds")
+sim0 <- readSim("sim0.rds")
 # get the unfished biomasses
 B_unfished <- getBiomass(sim0)[1, ]
 #scen 1
@@ -368,7 +368,10 @@ ggplot(Brel_scens, aes(fill = scen, y = value, x = species)) +
     scale_y_log10(name = "log10(Biomass/Biomass Unfished)")
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-25-1.png)
+    Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ℹ Please use `linewidth` instead.
+
+![](further-scenarios_files/figure-html/further-scenarios-25-1.png)
 
 ``` downlit
 # to save:
@@ -395,7 +398,7 @@ gear_params(params) <- data.frame(
     gear = c("longline", "trawler"),
     species = c("D.ele", "C.gun"),
     catchability = c(1, 1),
-    sel_fun = c("knife_edge", "knife_edge"),
+    sel_func = c("knife_edge", "knife_edge"),
     knife_edge_size = c(2722, 52)
     )
 #check it
@@ -420,7 +423,7 @@ sim_unfished <- projectToSteady(params, effort = 0, t_max = 500)
 plot(sim_unfished)
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-28-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-28-1.png)
 
 ``` downlit
 params_longline_trawl <- params
@@ -462,7 +465,7 @@ ggplot(Brel_scens, aes(fill = scen, y = value, x = species)) +
     scale_y_log10(name = "log10(Biomass/Biomass Unfished)")
 ```
 
-![](further-scenarios_files/figure-html/unnamed-chunk-29-1.png)
+![](further-scenarios_files/figure-html/further-scenarios-29,%20-1.png)
 
 The impact of the combined trawl and longline appears to have more of an effect on C.gun and the biomass of D.ele is slightly more depleted relative to the unfished state.
 

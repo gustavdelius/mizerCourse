@@ -39,9 +39,9 @@ Let’s make a plot to check that this did what we intended:
 plotSpectra(params_starved, power = 2, species = FALSE)
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-3-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-3-1.png)
 
-The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model using [`plot()`](https://rdrr.io/r/graphics/plot.default.html) and [`addPlot()`](https://sizespectrum.org/mizer/reference/addPlot.html).
+The plot shows the big drop in the background abundance in our selected size range. This reduced availability of prey in that size range will lead to a drop in the growth rate in the fish that feed in that size range. We can see the slow-down in growth by comparing the growth rates in the original model and the new model using [`plot()`](https://rdrr.io/r/graphics/plot.default.html) and [`addPlot()`](https://rdrr.io/pkg/mizer/man/addPlot.html).
 
 ``` downlit
 growth_rates_plot <- plot2(getEGrowth(params), getEGrowth(params_starved),
@@ -49,7 +49,7 @@ growth_rates_plot <- plot2(getEGrowth(params), getEGrowth(params_starved),
 growth_rates_plot
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-4-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-4-1.png)
 
 The slow-down occurs at a size that is about a factor of 100 larger than the size at which food is reduced. Why this is we will discuss in the next section.
 
@@ -59,7 +59,7 @@ The dip in the growth rate may not seem very significant in the above plot, but 
 params_starved <- steadySingleSpecies(params_starved)
 ```
 
-We can now visualise the difference in the size spectra with the [`plotSpectra2()`](https://sizespectrum.org/mizer/reference/plotSpectra2.html) function:
+We can now visualise the difference in the size spectra with the [`plotSpectra2()`](https://rdrr.io/pkg/mizer/man/plotSpectra2.html) function:
 
 ``` downlit
 spectra_plot <- plotSpectra2(params, name1 = "Original",
@@ -68,7 +68,7 @@ spectra_plot <- plotSpectra2(params, name1 = "Original",
 spectra_plot
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-6-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-6-1.png)
 
 The lack of food and the resulting slow-down in growth leads to a severe drop in the density of large fish. Because fish do not get enough food and do not grow into the next size class, they stay in smaller size classes for a longer time and are affected by mortality, which is higher for small size classes.
 
@@ -79,9 +79,9 @@ growth_rates_plot
 spectra_plot
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-7-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-7-1.png)
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-7-2.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-7-2.png)
 
 We see that where the growth starts slowing down, the abundance actually increases a little bit. This is because a decrease in the growth rate leads to a pile-up of individuals. You know this phenomenon from traffic jams. Where the speed of the cars decreases on a motorway, their density increases. Then when the speed increases again on the other side of the traffic jam, the density of cars drops and you wonder what caused the traffic jam in the first place. We see the same phenomenon in size spectrum dynamics. We see from the graphs above: it is where the growth rate starts growing faster again that the density goes down.
 
@@ -111,7 +111,7 @@ Here we hand over to you to investigate what happens when the prey abundance is 
 > >              power = 2)
 > > ```
 > >
-> > ![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-8-1.png)
+> > ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-8-1.png)
 
 ## How predation is modelled
 
@@ -133,7 +133,7 @@ Of these four factors, we have already been discussing the density of prey. In t
 
 ### The predation kernel
 
-Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function [`getPredKernel()`](https://sizespectrum.org/mizer/reference/setPredKernel.html).
+Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function [`getPredKernel()`](https://rdrr.io/pkg/mizer/man/setPredKernel.html).
 
 ``` downlit
 pred_kernel <- getPredKernel(params)
@@ -156,7 +156,7 @@ ggplot(melt(pred_kernel_10)) +
     Warning: Removed 181 rows containing missing values or values outside the scale range
     (`geom_line()`).
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-11-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-11-1.png)
 
 > **NOTE:**
 >
@@ -190,7 +190,7 @@ getPredKernel(params_pk)[, 81, , drop = FALSE] %>%
     Warning: Removed 181 rows containing missing values or values outside the scale range
     (`geom_line()`).
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-14-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-14-1.png)
 
 If we now again reduce the prey in the size range from 1mg to 10mg as before, we now expect this to produce a peak in the biomass spectrum somewhere between 1g and 10g. Let’s check.
 
@@ -205,7 +205,7 @@ plotSpectra2(params_starved, name1 = "beta = 100",
              power = 2)
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-15-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-15-1.png)
 
 The dip is indeed happening later.
 
@@ -229,7 +229,8 @@ Most people using mizer rarely modify the default assumptions about the body sca
 species_params(params)$gamma
 ```
 
-    [1] 2066.004
+    Target species 
+          2066.004 
 
 We change that to 1000 and find the new steady state.
 
@@ -247,11 +248,11 @@ gf_original$Model <- "Original"
 gf_new <- plotGrowthCurves(params_new_gamma, return_data = TRUE)
 gf_new$Model <- "Reduced search volume"
 
-ggplot(rbind(gf_original, gf_new), aes(x = Age, y = value, colour = Model)) +
+ggplot(rbind(gf_original, gf_new), aes(x = Age, y = `Size [g]`, colour = Model)) +
     geom_line()
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-18-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-18-1.png)
 
 As expected, the smaller search volume leads to a slower growth due to slower feeding rate.
 
@@ -266,11 +267,11 @@ plotFeedingLevel(params) + theme(text = element_text(size = 20))
 plotFeedingLevel(params_new_gamma) + theme(text = element_text(size = 20))
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-19-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-19-1.png)
 
 Original
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-19-2.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-19-2.png)
 
 Modified
 
@@ -282,7 +283,8 @@ The feeding level will depend on the maximum intake, search rate and food availa
 species_params(params)$h
 ```
 
-    [1] 30
+    Target species 
+                30 
 
 and is measured in gram of food per \text{gram}^{-n} of predator weight per year (remember, maximum consumption scales with fish weight to the power of n).
 
@@ -320,9 +322,9 @@ initial_effort(params_fishing) <- 1
 plotFMort(params_fishing)
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-22-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-22-1.png)
 
-The reason why the function that we have used to set the effort is called [`initial_effort()`](https://sizespectrum.org/mizer/reference/initial_effort.html) is that later when we run simulations of the fisheries mizer allows us to specify how the fishing effort changes over time. For now let us just look at what the new steady state size spectrum of our species looks like when it is exposed to the constant fishing effort, compared to the unfished steady state.
+The reason why the function that we have used to set the effort is called [`initial_effort()`](https://rdrr.io/pkg/mizer/man/initial_effort.html) is that later when we run simulations of the fisheries mizer allows us to specify how the fishing effort changes over time. For now let us just look at what the new steady state size spectrum of our species looks like when it is exposed to the constant fishing effort, compared to the unfished steady state.
 
 ``` downlit
 params_fishing <- steadySingleSpecies(params_fishing)
@@ -332,7 +334,7 @@ plotSpectra2(params, name1 = "No Fishing",
              power = 2, wlim = c(10, NA))
 ```
 
-![](predation-growth-and-mortality_files/figure-html/unnamed-chunk-23-1.png)
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-23-1.png)
 
 The difference may not seem to be very big, but note that we are using a logarithmic scale on the y axis. At large sizes the biomass densities differ almost by a factor of 30.
 
