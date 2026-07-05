@@ -291,7 +291,7 @@ Let's take a look at the relative exploitation status of the stocks using the pr
 # get saved values from steady state without fishing that we generated earlier 
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/use/sim0.rds",
               destfile = "sim0.rds")
-sim0 <- readRDS("sim0.rds")
+sim0 <- readSim("sim0.rds")
 # get the unfished biomasses
 B_unfished <- getBiomass(sim0)[1, ]
 #scen 1

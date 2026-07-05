@@ -246,7 +246,7 @@ gf_original$Model <- "Original"
 gf_new <- plotGrowthCurves(params_new_gamma, return_data = TRUE)
 gf_new$Model <- "Reduced search volume"
 
-ggplot(rbind(gf_original, gf_new), aes(x = Age, y = value, colour = Model)) +
+ggplot(rbind(gf_original, gf_new), aes(x = Age, y = `Size [g]`, colour = Model)) +
     geom_line()
 ```
 

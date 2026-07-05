@@ -29,7 +29,7 @@ We will use the following `MizerSim` object for these examples, where the
 effort array is the one we created in the 
 [previous section on running a simulation](running_a_simulation.qmd):
 
-```{r exploring_the_simulation_results-2, label = exploration_simulation}
+```{r exploration_simulation}
 sim <- project(NS_params, effort = effort_array, dt = 0.1, t_save = 1)
 ```
 
@@ -46,7 +46,7 @@ have just run, the time dimension of `n` has `r dimN` rows
 There are also 12 species each with 100 sizes. We can check this by running the
 `dim()` function and looking at the dimensions of the `n` array:
 
-```{r exploring_the_simulation_results-4, label=show_dim_n}
+```{r show_dim_n}
 dim(N(sim))
 ```
 
@@ -124,10 +124,9 @@ object we created earlier. Here, we use `getSSB()` to calculate the SSB of each
 species through time (note the use of the `head()` function to only display the
 first few rows).
 
-```{r exploring_the_simulation_results-9, label = getSSB_demo}
+```{r getSSB_demo}
 ssb <- getSSB(sim)
-dim(ssb)
-head(ssb)
+plot(ssb)
 ```
 
 As mentioned above, we can specify the size range for the `getBiomass()` and
@@ -135,9 +134,9 @@ As mentioned above, we can specify the size range for the `getBiomass()` and
 species but only include individuals that are larger than 10 g and smaller than
 1000 g.
 
-```{r exploring_the_simulation_results-10, label = getBiomass_demo}
+```{r getBiomass_demo}
 biomass <- getBiomass(sim, min_w = 10, max_w = 1000)
-head(biomass)
+plot(biomass)
 ```
 
 
@@ -167,7 +166,7 @@ The slope of the community can be calculated using the `getCommunitySlope()`
 function. Initially we include all species and all sizes in the calculation (only
 the first five rows are shown):
 
-```{r exploring_the_simulation_results-11, label=getCommunitySlope_demo}
+```{r getCommunitySlope_demo}
 slope <- getCommunitySlope(sim)
 head(slope)
 ```
@@ -181,7 +180,7 @@ that is used in the calculation to between 10 g and 5 kg. The `species` argument
 character vector of the names of the species that we want to include in the
 calculation.
 
-```{r exploring_the_simulation_results-12, label = getCommunitySlope_with_args}
+```{r getCommunitySlope_with_args}
 dem_species <- c("Dab", "Whiting", "Sole", "Gurnard", "Plaice", "Haddock",
     "Cod", "Saithe")
 slope <- getCommunitySlope(sim, min_w = 10, max_w = 5000, 
@@ -195,11 +194,9 @@ R is very powerful when it comes to exploring data through plots.  Two useful
 packages for plotting are `ggplot2` and `plotly`.  These use data.frames for input data
 whereas many of the mizer functions return arrays or
 matrices. Fortunately it is straightforward to turn arrays and matrices into
-data.frames using the `melt()` function from the `reshape2` package that mizer
-makes available to you.
-Although `mizer` does include some dedicated plots, it is definitely worth your
-time getting to grips with these other plotting packages. This
-will make it possible for you to make your own plots.
+data.frames using `as.data.frame()`.
+
+However, most of the time you will not need to use `ggplot2` or `plotly` directly but can use the plot methods included in mizer.
 
 Included in `mizer` are several dedicated plots that use `MizerSim` objects as
 inputs (see [the plots help page.](https://sizespectrum.org/mizer/reference/plotting_functions.html)). As
@@ -223,7 +220,7 @@ plotting.
 Using the plotting functions is straightforward. For example, to plot the total
 biomass of each species against time you use the `plotBiomass()` function:
 
-```{r exploring_the_simulation_results-13, label=plotBiomass, fig.keep='last'}
+```{r plotBiomass, fig.keep='last'}
 plotBiomass(sim)
 ```
 
@@ -233,7 +230,7 @@ to specify the time step to plot, or the time period to average the values over.
 The default is to use the final time step. Here we plot the abundance spectra
 (biomass), averaged over time = 5 to 10:
 
-```{r exploring_the_simulation_results-14, label=plotSpectra_example, fig.keep='last'}
+```{r plotSpectra_example, fig.keep='last'}
 plotSpectra(sim, time_range = 5:10)
 ```
 
@@ -245,9 +242,11 @@ and `plotSpectra()`). It is possible to pass in the same arguments that these
 individual plots use, e.g. arguments to change the time period over which the
 data is averaged.
 
-```{r exploring_the_simulation_results-15, label=demo_summary_plot}
+```{r demo_summary_plot}
 plot(sim)
 ```
+
+There is much more to be said about analysing and plotting simulation results. Take a look at the [Cheatsheet: Analysis and Plotting](https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html).
 
 The next section describes how to use what we have learned to 
 [model the North Sea.](a_multispecies_model_of_the_north_sea.qmd) 

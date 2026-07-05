@@ -221,7 +221,7 @@ We can describe the biomass distribution in terms of its cumulative distribution
 plotCDF(params, log_x = FALSE)
 ```
 
-This plot shows us for example that 50% of the biomass comes from individuals that are smaller than 12.5g and individuals larger than 75g contribute very little to the total biomass. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but most of the biomass comes from large fish. So we need to always be very clear about which quantity we are considering.
+This plot shows us for example that 50% of the biomass comes from individuals that are smaller than 12.5g and individuals larger than 75g contribute very little to the total biomass. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but half of the biomass comes from fish of 10g or larger. So we need to always be very clear about which quantity we are considering.
 
 We can also plot the cumulative biomass distribution function on a logarithmic weight axis:
 
