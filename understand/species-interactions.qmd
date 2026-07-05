@@ -4,7 +4,7 @@ title: "Species interactions"
 
 In the previous tutorials we studied a single species interacting with a fixed background community. In this tutorial we want to acknowledge that there is no such thing as a fixed background community. Instead, all species form part of a dynamical ecosystem in which changes to any species has knock-on effects on other species. Furthermore, the resulting changes in the other species will react back on the first species, which now finds its prey community and its predator community changed. This is where we realise that we need multi-species models, because without such a model we cannot predict how all these changes will affect each other.
 
-```{r}
+```{r species-interactions-1}
 #| message: false
 library(mizer)
 library(mizerExperimental)
@@ -17,13 +17,13 @@ In this first part of the course we aim for understanding, not realism. So in th
 
 We use the `newTraitParams()` function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the `newSingleSpeciesParams()` function, the `newTraitParams()` function does not set the initial spectra to their steady state values. We thus need to run the result through the `steady()` function. We assign the resulting MizerParams object to the variable `mp`.
 
-```{r message=FALSE}
+```{r species-interactions-2, message=FALSE}
 mp <- newTraitParams() |> steady()
 ```
 
 Let us look at the biomass density in log weight.
 
-```{r}
+```{r species-interactions-3}
 plotSpectra(mp, power = 2, total = TRUE)
 ```
 
@@ -35,7 +35,7 @@ Note how the community size spectrum, plotted in black, that is obtained by summ
 
 As in previous tutorials, we want to concentrate on the shapes of the size spectra and we do not yet want to look at what determines the overall abundance of each species. Therefore we modify the model so that it keeps the abundances at egg size fixed (i.e. numbers in the first size bin). You do not need to look in detail at the following code, except to note that a mizer model is very customisable in the sense that an advanced user can overwrite almost any behaviour with custom behaviour.
 
-```{r}
+```{r species-interactions-4}
 mp <- mp |>
     setRateFunction("RDI", "constantEggRDI") |>
     setRateFunction("RDD", "noRDD")
@@ -47,7 +47,7 @@ The functionality for customising and extending mizer will be the subject of an 
 
 The species interact with each other via predator-prey interactions. These interactions shape both mortality and energy income. In this section we look at mortality imposed on a particular species by its predators. We choose to look at species 8. The following graph shows the relative contributions to the mortality rate for species 8 from all the other species:
 
-```{r}
+```{r species-interactions-5}
 plotlyDeath(mp, species = "8")
 ```
 
@@ -61,7 +61,7 @@ In the above graph you also see that the smallest individuals and the largest in
 
 In the absence of other information, our simple trait-based model just assumes that this external mortality is such that the total mortality scales allometrically with an individual's size to the power of -1/4. This is why larval mortality is actually quite high. We can see this in the following plot which instead of proportions shows the actual mortality rates:
 
-```{r}
+```{r species-interactions-6}
 plotDeath(mp, species = "8", proportion = FALSE)
 ```
 
@@ -71,7 +71,7 @@ The `plotDeath()` function is extremely useful when building your own model. It 
 
 Now that we have investigated who eats species 8, we also want to know who is eaten by species 8. We can check that by plotting the diet of this species:
 
-```{r}
+```{r species-interactions-7}
 plotDiet(mp, species = "8")
 ```
 
@@ -93,7 +93,7 @@ Now, check what the diets of other species look like by making a plot for each s
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
 
-```{r}
+```{r species-interactions-8}
 plotDiet(mp)
 ```
 
@@ -104,7 +104,7 @@ plotDiet(mp)
 
 Now we arrive to an interesting and challenging aspects of multi-species modelling - setting up parameters for species and resource interactions. By default, mizer assumes that all species in the model can access all other species and resource equally and the amount of different prey consumed just depends on their relative abundance in the predator's feeding size range. So the default interaction matrix of the species in our model looks very simple
 
-```{r}
+```{r species-interactions-9}
 interaction_matrix(mp)
 ```
 
@@ -120,7 +120,7 @@ The interaction matrix can encode lots of effects. Sometimes the interaction mat
 
 Let's go ahead and change one value in the interaction matrix.
 
-```{r}
+```{r species-interactions-10}
 mp_modified <- mp
 # We change row 11 (predator species 11) and column 2 (prey species 2) 
 # to a smaller value
@@ -129,7 +129,7 @@ interaction_matrix(mp_modified)[11, 2] <- 0.2
 
 Now let's compare the source of mortality for species 2 in the two models.
 
-```{r}
+```{r species-interactions-11}
 #| layout-ncol: 2
 #| fig-subcap:
 #|   - "Original"
@@ -142,7 +142,7 @@ You will see a reduction of the contribution of species 11 to the mortality of s
 
 Next let us compare diets of species 11 in the two models.
 
-```{r}
+```{r species-interactions-12}
 #| layout-ncol: 2
 #| fig-subcap:
 #|   - "Original"
@@ -157,7 +157,7 @@ You will see a reduction in the contribution of species 2 to the diet of species
 
 The interaction coefficients between the fish species as consumers and the resource as food, which one could have expected to find in an additional column in the interaction matrix, is instead saved as a species parameter.
 
-```{r}
+```{r species-interactions-13}
 species_params(mp)$interaction_resource
 ```
 
@@ -165,7 +165,7 @@ We see that the default value for all these interaction coefficients is also 1.
 
 Now we might want to reduce the availability of resource to some predators. Perhaps we know that certain species much prefer to feed on other fish rather than on similar sized plankton. Let us look at an example where species 8 through 11 have a 20% reduction in their interaction with resource.
 
-```{r}
+```{r species-interactions-14}
 # We make a copy of the model
 mp_lessRes <- mp
 # and set the resource interaction to 0.8 for species 8 to 11
@@ -176,7 +176,7 @@ species_params(mp_lessRes)$interaction_resource
 
 Now we can look at the diet of for example species 9 and compare it with the previous model
 
-```{r}
+```{r species-interactions-15}
 #| layout-ncol: 2
 #| fig-subcap:
 #|   - "Original"
@@ -187,13 +187,13 @@ plotDiet(mp_lessRes, species = 9)
 
 The change seems small enough. However, now that we changed the availability of resources, which is so important for larval stages, these four species will experience a much reduced growth rate during their juvenile stage. We can see that effect by recalculating the single-species spectra with
 
-```{r}
+```{r species-interactions-16}
 mp_lessRes_sss <- steadySingleSpecies(mp_lessRes)
 ```
 
 and then ploting the spectra
 
-```{r}
+```{r species-interactions-17}
 plotSpectra(mp_lessRes_sss, power = 2)
 ```
 
@@ -209,11 +209,11 @@ As we just discussed, the above picture does does not show a steady state of the
 
 The easiest way to find the new steady state that the ecosystem will settle into is to simulate the full multi-species dynamics forward in time. Mizer refers to this simulation to find the future state of the ecosystem as "projecting". We can use the function `projectToSteady()` to project forward in time far enough so the system has settled down again close to the new steady state.
 
-```{r}
+```{r species-interactions-18}
 mp_lessRes_steady <- projectToSteady(mp_lessRes)
 ```
 
-```{r}
+```{r species-interactions-19}
 plotSpectra2(mp_lessRes_steady, name1 = "less resource", 
              mp, name2 = "original", 
              total = TRUE, power = 2, ylim = c(1e-8, NA), wlim = c(1e-3, NA))
@@ -228,14 +228,14 @@ Let's investigate these trophic cascades a bit more. This time we can look at ho
 
 The model has been set up with a knife-edge fishing gear that selects all individuals above 1kg, irrespective of species. This is not a realistic gear and mizer can do much better, as we will see in Part 3. But it serves our current purpose, because it will impose a fishing mortality that only impacts the larger species that actually grow to sizes above 1kg. To use that gear we just have to set a non-zero fishing effort. We create a new model `mp_fishing` with a fishing effort of 1:
 
-```{r}
+```{r species-interactions-20}
 mp_fishing <- mp
 initial_effort(mp_fishing) <- 1
 ```
 
 As we did in the section on [fishing mortality](predation-growth-and-mortality.html#fishing-mortality) in the previous tutorial, we can visualise the direct effect that this fishing mortality has on individual species:
 
-```{r}
+```{r species-interactions-21}
 mp_fishing_sss <- steadySingleSpecies(mp_fishing)
 plotSpectra(mp_fishing_sss, power = 2)
 ```
@@ -252,7 +252,7 @@ Project the `mp_fishing` model to its steady state and then make a plot comparin
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
 
-```{r}
+```{r species-interactions-22}
 mp_fishing_steady <- projectToSteady(mp_fishing_sss)
 
 plotSpectra2(mp, name1 = "No fishing",

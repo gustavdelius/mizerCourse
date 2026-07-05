@@ -2,7 +2,7 @@
 title: "Run a simulation"
 ---
 
-```{r include=FALSE}
+```{r running_a_simulation-1, include=FALSE}
 library(mizer)
 ```
 
@@ -130,7 +130,7 @@ We will use a MizerParams object with four gears.
 This example MizerParams object is called `NS_params` and is shipped with the mizer package.
 Let's have a look at its summary:
 
-```{r}
+```{r running_a_simulation-2}
 summary(NS_params)
 ```
 
@@ -140,7 +140,7 @@ time parameters. We will project the populations forward until time equals 10
 (`t_max` = 10), with a time step of 0.1 (`dt` = 0.1), saving the output every
 time step (`t_save` = 1). We use a constant effort value of 1.0.
 
-```{r label=siple_projection_single_effort}
+```{r running_a_simulation-3, label=siple_projection_single_effort}
 sim <- project(NS_params, effort = 1, t_max = 10, dt = 0.1, t_save = 1)
 ```
 
@@ -149,7 +149,7 @@ The resulting `sim` object is of class `MizerSim`. At this point we won't
 explore how the results can be investigated in detail. However, we will use the
 basic summary plot that you have seen before:
 
-```{r label=plot_basic_ms_sim}
+```{r running_a_simulation-4, label=plot_basic_ms_sim}
 plot(sim)
 ```
 
@@ -167,7 +167,7 @@ the species `w_mat` parameter.
 The effort through time can be inspected with `getEffort()` (we use the `head()`
 function to just show the first few lines).
 
-```{r label=show_effort}
+```{r running_a_simulation-5, label=show_effort}
 head(getEffort(sim))
 ```
 
@@ -181,7 +181,7 @@ the simulation results returned by `N()` and `NResource()`. Here we reduce `t_sa
 to 0.5, meaning that the effort and abundance information is stored at t = 1.0,
 1.5, 2.0 etc.
 
-```{r label=simple_proj_tsave05}
+```{r running_a_simulation-6, label=simple_proj_tsave05}
 sim <- project(NS_params, effort = 1, t_max = 10, dt = 0.1, t_save = 0.5)
 head(getEffort(sim))
 ```
@@ -197,14 +197,14 @@ example, here we want to switch off the industrial gear (i.e. effort = 0), keep
 the pelagic gear effort at 1, set the effort of the beam trawl gears to 0.3 and
 the effort of the otter trawl gear to 0.7. We set the `effort` like this:
 
-```{r label=set_effort_vector}
+```{r running_a_simulation-7, label=set_effort_vector}
 effort <- c(Industrial = 0, Pelagic = 1, Beam = 0.3, Otter = 0.7)
 ```
 
 We then call `project()` with this effort and inspect the resulting `effort`
 matrix (again we use the `head()` function to just show the first few lines):
 
-```{r label=project_effort_vector}
+```{r running_a_simulation-8, label=project_effort_vector}
 sim <- project(NS_params, effort = effort, t_max = 10, dt = 1, t_save = 1)
 head(getEffort(sim))
 ```
@@ -218,7 +218,7 @@ species at a particular time step (the default is the final time step). The
 fishing mortality on each of the species is determined by the effort of the gear
 that caught it.
 
-```{r label=plotFMort, fig.keep='last'}
+```{r running_a_simulation-9, label=plotFMort, fig.keep='last'}
 plotFMort(sim)
 ```
 
@@ -243,7 +243,7 @@ from 1 to 0.5.
 
 First we create the empty `effort` array:
 
-```{r label=set_empty_effort_array}
+```{r running_a_simulation-10, label=set_empty_effort_array}
 gear_names <- c("Industrial","Pelagic","Beam","Otter")
 times <- seq(from = 1, to = 10, by = 1)
 effort_array <- array(NA, dim = c(length(times), length(gear_names)),
@@ -252,7 +252,7 @@ effort_array <- array(NA, dim = c(length(times), length(gear_names)),
 
 Then we fill it up, one gear at a time, making heavy use of the `seq()` function to create a sequence:
 
-```{r label=fill_effort_array}
+```{r running_a_simulation-11, label=fill_effort_array}
 effort_array[,"Industrial"] <- 0.5
 effort_array[,"Pelagic"] <- seq(from = 1, to = 2, length = length(times))
 effort_array[,"Beam"] <- seq(from = 1, to = 0, length = length(times))
@@ -261,7 +261,7 @@ effort_array[,"Otter"] <- seq(from = 1, to = 0.5, length = length(times))
 
 The first few rows of the effort array are shown as an illustration:
 
-```{r label=show_effort_array}
+```{r running_a_simulation-12, label=show_effort_array}
 head(effort_array)
 ```
 
@@ -271,7 +271,7 @@ set the final time for the simulation.
 
 Now we can use this effort array in the projection:
 
-```{r label=project_effort_array}
+```{r running_a_simulation-13, label=project_effort_array}
 sim <- project(NS_params, effort = effort_array, dt = 0.1)
 head(sim@effort)
 ```

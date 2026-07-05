@@ -36,7 +36,7 @@ If you are new to RStudio, the video on the RStudio IDE homepage is well worth w
 
 R packages extend the functionality of R. mizer itself is such an R package. There is a central repository for R packages called CRAN which hosts all of the packages needed for this course, except for the mizerExperimental package. To install them on your computer just start RStudio and then in the console issue the command
 
-```{r}
+```{r install-tools-1}
 #| eval: false
 install.packages(c("mizer", "tidyverse", "plotly", "remotes", "usethis",
                    "rfishbase", "rmarkdown", "rstudioapi"))
@@ -44,7 +44,7 @@ install.packages(c("mizer", "tidyverse", "plotly", "remotes", "usethis",
 
 The mizerExperimental package is for code that is still experimental and thus changes frequently. Therefore it is hosted in a [GitHub repository](https://github.com/sizespectrum/mizerExperimental). You install it with
 
-```{r}
+```{r install-tools-2}
 #| eval: false
 remotes::install_github("sizespectrum/mizerExperimental", ref = "2f7d4ca")
 ```
@@ -57,7 +57,7 @@ Note the `ref` argument to `install_github()`. It specifies which particular ver
 
 To check that everything works, copy and paste and then run the following code:
 
-```{r}
+```{r install-tools-3}
 if (getRversion() < "4.0") warning("Your version of R is too old.")
 if (packageVersion("mizer") < "2.5.0") warning("Your version of mizer is too old.")
 if (packageVersion("mizerExperimental") != "2.4.0.9004") warning("You are using a different version of MizerExperimental. Please reinstall with the command given above.")

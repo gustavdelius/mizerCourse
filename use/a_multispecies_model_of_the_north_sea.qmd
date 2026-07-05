@@ -2,7 +2,7 @@
 title: "A simulation of the North Sea"
 ---
 
-```{r include=FALSE}
+```{r a_multispecies_model_of_the_north_sea-1, include=FALSE}
 library(mizer)
 species_str <- paste(NS_species_params[,"species"], collapse=", ")
 ```
@@ -31,7 +31,7 @@ comes as an example with the mizer package is a
 data.frame with columns for `species`, `w_max`, `w_mat`, `beta`, `sigma`,
 `k_vb`, `R_max` and `w_inf`.
 
-```{r}
+```{r a_multispecies_model_of_the_north_sea-2}
 NS_species_params
 ```
 
@@ -74,7 +74,7 @@ and `b` to convert between length and weight using the standard relation $w = a
 l^b$. These species parameters need to be added as columns to the
 `NS_species_params` data frame.
 
-```{r}
+```{r a_multispecies_model_of_the_north_sea-3}
 NS_species_params$a <- c(0.007, 0.001, 0.009, 0.002, 0.010, 0.006, 0.008, 0.004,
                       0.007, 0.005, 0.005, 0.007)
 NS_species_params$b <- c(3.014, 3.320, 2.941, 3.429, 2.986, 3.080, 3.019, 3.198,
@@ -88,7 +88,7 @@ frame. We also need a column specifying the name of the selectivity function we
 wish to use. Note it would probably be easier to put this data into a
 *.csv file and then read it in rather than type it in by hand like we do here:
 
-```{r label=adding_sel_params}
+```{r a_multispecies_model_of_the_north_sea-4, label=adding_sel_params}
 gear_params <- 
     data.frame(species = NS_species_params$species,
                gear = NS_species_params$species,
@@ -109,14 +109,14 @@ is stored in the csv file `NS_f_history.csv` included in the package. As before,
 we can use `read.csv()` to read in the data. This reads the data in as a
 `data.frame`. We want this to be a `matrix` so we use the `as()` function:
 
-```{r label=show_load_f_history}
+```{r a_multispecies_model_of_the_north_sea-5, label=show_load_f_history}
 f_location <- system.file("extdata", "NS_f_history.csv", package = "mizer")
 f_history <- as(read.csv(f_location, row.names = 1), "matrix")
 ```
 
 We can take a look at the first years of the data:
 
-```{r label=head_f_history}
+```{r a_multispecies_model_of_the_north_sea-6, label=head_f_history}
 head(f_history)
 ```
 
@@ -143,7 +143,7 @@ then an effort of 1 in 1990 will result in the fishing mortality being what it
 was in 1990. The effort in the other years will be relative to the effort in
 1990.
 
-```{r label=set_catchability}
+```{r a_multispecies_model_of_the_north_sea-7, label=set_catchability}
 gear_params$catchability <- as.numeric(f_history["1990", ])
 ```
 
@@ -160,7 +160,7 @@ interaction matrix `inter` that is shipped as an example with the mizer package,
 
 We now have all the information we need to create the `MizerParams` object:
 
-```{r label=make_ns_params, results='hide'}
+```{r a_multispecies_model_of_the_north_sea-8, label=make_ns_params, results='hide'}
 params <- newMultispeciesParams(NS_species_params, 
                                 interaction = inter, 
                                 kappa = 9.27e10,
@@ -176,7 +176,7 @@ object to 1990 so that the relative fishing effort in 1990 = 1. This is done
 using R function `sweep()`. We then check a few rows of the effort matrix to
 check this has happened:
 
-```{r label=rescale_effort}
+```{r a_multispecies_model_of_the_north_sea-9, label=rescale_effort}
 relative_effort <- sweep(f_history, 2, f_history["1990", ], "/")
 relative_effort[as.character(1988:1992), ]
 ```
@@ -191,7 +191,7 @@ first historical year until equilibrium is reached. We then use this steady
 state as the initial state for the simulation. This approach reduces
 the impact of transient dynamics.
 
-```{r}
+```{r a_multispecies_model_of_the_north_sea-10}
 params <- projectToSteady(params, effort = relative_effort["1967", ])
 ```
 
@@ -201,14 +201,14 @@ matrix as the `effort` argument to the `project()` function. We use `dt` = 0.25
 (the simulation will run faster than with the default value of 0.1, but tests
 show that the results are still stable) and save the results every year.
 
-```{r label=project_ns_model}
+```{r a_multispecies_model_of_the_north_sea-11, label=project_ns_model}
 sim <- project(params, effort = relative_effort, dt = 0.25, t_save = 1)
 ```
 
 Plotting the results, we can see how the biomasses of the stocks change over
 time.
 
-```{r label = plot_ns_biomass}
+```{r a_multispecies_model_of_the_north_sea-12, label = plot_ns_biomass}
 plotBiomass(sim)
 ```
 
@@ -216,7 +216,7 @@ To explore the state of the community it is useful to calculate indicators of
 the unexploited community. Therefore we also project forward to the steady state
 with 0 fishing effort.
 
-```{r label=unexploited_na}
+```{r a_multispecies_model_of_the_north_sea-13, label=unexploited_na}
 sim0 <- projectToSteady(params, effort = 0, return_sim = TRUE)
 ```
 
@@ -240,7 +240,7 @@ unexploited values, we apply the indicator functions to `finalParams(sim0)`, the
 Applied to a `MizerParams` object rather than a `MizerSim`, these functions
 return the single value for that state rather than a whole time series.
 
-```{r label=ns_comm_ref_point}
+```{r a_multispecies_model_of_the_north_sea-14, label=ns_comm_ref_point}
 demersal_species <- c("Dab", "Whiting", "Sole", "Gurnard", "Plaice",
                       "Haddock", "Cod", "Saithe")
 params0 <- finalParams(sim0)
@@ -258,7 +258,7 @@ slope0 <- getCommunitySlope(params0, species = demersal_species,
 We also calculate the time series of these indicators for the exploited
 community:
 
-```{r label=ns_comm_indicators}
+```{r a_multispecies_model_of_the_north_sea-15, label=ns_comm_indicators}
 lfi <- getProportionOfLargeFish(sim, species = demersal_species,
                                 min_w = 10, max_w = 100e3, 
                                 threshold_l = 40)
@@ -276,7 +276,7 @@ Here we do it using `ggplot2` which uses data.frames. We make three data.frames
 reference level): Each data.frame is a data.frame of each of the measures,
 stacked on top of each other.
 
-```{r label=plot_ns_indicators, fig.cap="Historical (solid) and unexploited (dashed) and reference (dotted) community indicators for the North Sea multispecies model."}
+```{r a_multispecies_model_of_the_north_sea-16, label=plot_ns_indicators, fig.cap="Historical (solid) and unexploited (dashed) and reference (dotted) community indicators for the North Sea multispecies model."}
 library(ggplot2)
 years <- 1967:2010
 # Simulated data
@@ -322,7 +322,7 @@ We will continue to use effort relative to the level in 1990.
 Here we build on our existing array of relative effort to make an array for the first scenario. Note the use of the `t()` command to transpose the array. This is needed because R recycles by rows, so we need to build the array with the dimensions rotated to start with.
 We make an array of the future effort, and then bind it underneath the `relative_effort` array used in the previous section.
 
-```{r label = ns_scenario1_relative_effort}
+```{r a_multispecies_model_of_the_north_sea-17, label = ns_scenario1_relative_effort}
 scenario1 <- t(array(relative_effort["2010", ], dim = c(12, 40),
     dimnames = list(NULL, year = 2011:2050)))
 scenario1 <- rbind(relative_effort, scenario1)
@@ -332,7 +332,7 @@ The relative effort array for the second scenario is more complicated to make an
 (it might be easier for you to prepare this in a spreadsheet and read it in).
 For this one we need values of $F_{MSY}$.  
 
-```{r label = ns_scenario2_relative_effort}
+```{r a_multispecies_model_of_the_north_sea-18, label = ns_scenario2_relative_effort}
 fmsy <- c(Sprat = 0.2, Sandeel = 0.2, N.pout = 0.2, Herring = 0.25, Dab = 0.2,
     Whiting = 0.2, Sole = 0.22, Gurnard = 0.2, Plaice = 0.25, Haddock = 0.3,
     Cod = 0.19, Saithe = 0.3)
@@ -347,7 +347,7 @@ for (sp in dimnames(scenario2)[[2]]) {
 
 We are now ready to project the two scenarios.
 
-```{r label = project_ns_future_scenarios}
+```{r a_multispecies_model_of_the_north_sea-19, label = project_ns_future_scenarios}
 sim1 <- project(params, effort = scenario1, dt = 0.25)
 sim2 <- project(params, effort = scenario2, dt = 0.25)
 ```
@@ -355,7 +355,7 @@ sim2 <- project(params, effort = scenario2, dt = 0.25)
 We can now compare the projected SSB values in both scenarios to the biodiversity reference points.
 First we calculate the biodiversity reference points (from the final time step in the unexploited `sim0` simulation):
 
-```{r label=ns_biodiv_ref_point}
+```{r a_multispecies_model_of_the_north_sea-20, label=ns_biodiv_ref_point}
 ssb0 <- getSSB(params0)
 ```
 
@@ -363,7 +363,7 @@ ssb0 <- getSSB(params0)
 Now we build a data.frame of the projected SSB for each species.
 We make use of the `melt()` function to transform arrays into data frames.
 
-```{r label=projected_ssb_ns, fig.cap="Historical and projected SSB under two fishing scenarios. Status quo (red), Fmsy (yellow). Unexploited (blue) and reference levels (purple) are also shown."}
+```{r a_multispecies_model_of_the_north_sea-21, label=projected_ssb_ns, fig.cap="Historical and projected SSB under two fishing scenarios. Status quo (red), Fmsy (yellow). Unexploited (blue) and reference levels (purple) are also shown."}
 years <- 1967:2050
 ssb1_df <- melt(getSSB(sim1))
 ssb2_df <- melt(getSSB(sim2))

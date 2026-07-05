@@ -4,7 +4,7 @@ title: "Collect parameters"
 
 In this tutorial we will discuss how to find the species-level information that goes into a mizer model. Perfect knowledge of the correct parameter values is impossible and judgement calls have to be made. We will invite you to make your own choices for the parameter values with which you will then build your first mizer model in the next tutorial.
 
-```{r}
+```{r collect-parameters-1}
 #| message: false
 library(mizer)
 library(mizerExperimental)
@@ -13,7 +13,7 @@ library(tidyverse)
 
 In this tutorial we will also use functions from the [rfishbase](https://docs.ropensci.org/rfishbase/) package which we will use to extract parameters from the huge [FishBase](https://www.fishbase.se) data base. 
 
-```{r message=FALSE}
+```{r collect-parameters-2, message=FALSE}
 library(rfishbase)
 ```
 
@@ -25,19 +25,19 @@ It is a good idea to start with only a small number of key species. You can alwa
 
 One good approach is to build on the efforts of others. There may already be a multi-species model in existence for your ecosystem and initially you could keep some of the choices made for that model. That is what we do in this tutorial. We want to build a model for the Celtic Sea. We build on a mizer model described in [Spence et al. (2021)](https://doi.org/10.1111/faf.12543). The model parameters are given in the [supplementary material](https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Ffaf.12543&file=faf12543-sup-0002-material.pdf) of that paper. James Martindale had the species parameters in a file and shared that with us. Let's load that and print the list of parameter names.
 
-```{r eval=FALSE}
+```{r collect-parameters-3, eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/species_params_spence_et_al.rds",
               destfile = "species_params_spence_et_al.rds")
 ```
 
-```{r}
+```{r collect-parameters-4}
 sp_spence <- readRDS("species_params_spence_et_al.rds")
 names(sp_spence)
 ```
 
 We are currently interested in the choice of species to include:
 
-```{r}
+```{r collect-parameters-5}
 sp_spence$species
 ```
 
@@ -47,7 +47,7 @@ You may wonder why we don't simply stick with their model. Why do we want to bui
 
 The species parameters go into a data frame that must have one row for each species and should have a column named `species` that contains the name by which you like to refer to this species. These species names will be used in plot legends for example, so do not make them too long. We will just stick with the names chosen by Spence et.al. So let's start to create our species parameter data frame by just selecting the `species` column from the data frame of Spence et.al.
 
-```{r}
+```{r collect-parameters-6}
 sp <- select(sp_spence, species)
 ```
 
@@ -55,26 +55,26 @@ We may later perhaps also choose to reuse some of the other parameters chosen by
 
 Now that we have our first column in our species parameter data frame we should already start a habit that will serve us well in the long run: always comment on how we chose the parameter values. So we'll put the following comment on the `species` column:
 
-```{r}
+```{r collect-parameters-7}
 comment(sp$species) <- "We follow the choice of species made by Spence et.al (2021) https://doi.org/10.1111/faf.12543"
 ```
 
 That way if years later we are wondering what made us choose to include these species, we can simply do
 
-```{r}
+```{r collect-parameters-8}
 comment(sp$species)
 ```
 
 While common names are convenient for presentation, they are ambiguous. We can use `rfishbase::common_to_sci()` to look up all the latin names of all the species that might correspond to a common name. For example
 
-```{r}
+```{r collect-parameters-9}
 herring_latin <- common_to_sci("Herring")
 herring_latin
 ```
 
 An easy way to find the latin name we want for our common species is to sort this table by `SpecCode` which will put the more common species towards the top.
 
-```{r}
+```{r collect-parameters-10}
 arrange(herring_latin, SpecCode)
 ```
 
@@ -82,7 +82,7 @@ We see that the non-uniqueness actually goes both ways. There are also several c
 
 After a little work we arrive at the correct scientific names of all our species and for later convenience we put them into our species data frame as well even though mizer will ignore them.
 
-```{r}
+```{r collect-parameters-11}
 sp$latin_name <- c("Clupea harengus", # Herring
                    "Sprattus sprattus", # Sprat
                    "Gadus morhua", # Cod
@@ -121,14 +121,14 @@ A practical way to estimate `w_inf` is to look at the largest fish that has been
 
 We have a data frame with observations of sizes of caught fish and can look through it for the largest sized fish of each species. 
 
-```{r eval=FALSE}
+```{r collect-parameters-12, eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/catch.csv",
               destfile = "catch.csv")
 ```
 
 <!-- TODO: give origin of the data. -->
 
-```{r}
+```{r collect-parameters-13}
 catch <- read.csv("catch.csv")
 
 max_size <- catch |>
@@ -139,14 +139,14 @@ max_size
 
 We see that we only had data for 12 of our 17 species. The species for which we still don't have an estimate for the asymptotic size are
 
-```{r}
+```{r collect-parameters-14}
 missing <- !(sp$species %in% max_size$species)
 sp$species[missing]
 ```
 
 For these we can use the maximum length recorded on FishBase in the "species" table.
 
-```{r}
+```{r collect-parameters-15}
 max_size_fishbase <- rfishbase::species(sp$latin_name[missing]) |>
     select(latin_name = Species, l_max = Length)
 max_size_fishbase
@@ -154,7 +154,7 @@ max_size_fishbase
 
 To combine these two tables we first need them to have a common column. So we add a species column to `max_size_fishbase` . Then we stack the two tables with `bind_rows()` and keep only the `species` and `l_max` columns
 
-```{r}
+```{r collect-parameters-16}
 max_size_fishbase <- max_size_fishbase |>
     left_join(select(sp, species, latin_name),
               by = "latin_name")
@@ -169,7 +169,7 @@ $$w = a \cdot l^b$$
 
 For many species the length-weight conversion coefficients $a$ and $b$ can be found on FishBase in the "estimates" table.
 
-```{r}
+```{r collect-parameters-17}
 length_weight <- estimate(sp$latin_name, fields = c("Species", "a", "b"))
 length_weight
 ```
@@ -178,7 +178,7 @@ Note that fishbase is continuously updated and the values you get for the length
 
 We can now add all this information to our species parameter data frame and use it to calculate the column we actually need, namely `w_inf`.
 
-```{r}
+```{r collect-parameters-18}
 sp <- sp |>
     left_join(length_weight, by = c("latin_name" = "Species")) |>
     left_join(max_size) |>
@@ -190,7 +190,7 @@ Even though mizer will never use the `l_max` column, it does not hurt to keep it
 
 Now it is time again to add comments to remind us of the origin of our parameters:
 
-```{r}
+```{r collect-parameters-19}
 comment(sp$a) <- "Taken from the `a` column in the 'estimates' table on FishBase on 07/12/2023."
 comment(sp$a) <- "Taken from the `b` column in the 'estimates' table on FishBase on 07/12/2023."
 comment(sp$l_max) <- "See https://mizer.course.sizespectrum.org/build/collect-parameters.html#asymptotic-size "
@@ -205,7 +205,7 @@ The problem is that the values for `h` are not given on FishBase and you may thu
 
 We can get estimates of the maturity size and the maturity age from the "maturity" table on FishBase:
 
-```{r}
+```{r collect-parameters-20}
 maturity_tbl <- rfishbase::maturity(sp$latin_name)
 maturity_tbl
 ```
@@ -216,7 +216,7 @@ Rather than with working with the above table inside R it might be a good idea t
 
 Here we will do something rather simple: we'll just take the median values over all the observations where both the length at maturity `Lm` and the age at maturity `tm` are given:
 
-```{r}
+```{r collect-parameters-21}
 median_maturity <- maturity_tbl |>
     group_by(Species) |>
     filter(!is.na(tm), !is.na(Lm)) |>
@@ -227,7 +227,7 @@ median_maturity
 
 We add this information to our species parameter data frame and also add a `w_mat` column.
 
-```{r}
+```{r collect-parameters-22}
 sp <- sp |>
     left_join(median_maturity, by = c("latin_name" = "Species")) |>
     mutate(w_mat = a * l_mat ^ b)
@@ -247,7 +247,7 @@ By default, mizer uses a predation kernel that looks like a bell curve on the lo
 
 For the Celtic Sea model we'll just use the beta and sigma values that were used by Spence et.al.
 
-```{r}
+```{r collect-parameters-23}
 sp <- left_join(sp, select(sp_spence, species, beta, sigma))
 comment(sp$beta) <- comment(sp$sigma) <- "Taken from Spence et.al (2021) https://doi.org/10.1111/faf.12543"
 ```
@@ -268,21 +268,21 @@ One problem with using stock-assessment estimates is that they are usually given
 
 Let us load in the estimates of spawning stock biomass that we obtained from the ICES reports by simply scaling them down to tonnes per square kilometre.
 
-```{r eval=FALSE}
+```{r collect-parameters-24, eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/celtic_sea_ssb.rds",
               destfile = "celtic_sea_ssb.rds")
 ```
 
 The biomass estimates go into a `biomass_observed` column in the species parameter data frame.
 
-```{r}
+```{r collect-parameters-25}
 sp$biomass_observed <- readRDS("celtic_sea_ssb.rds")
 comment(sp$biomass_observed) <- "Average of spawning stock biomass over the years 2012--2021 taken from ICES stock assessment reports."
 ```
 
 Biomass estimates will only include individuals above a certain size, for example because the smaller individuals are not retained by our fishing gear. This cutoff size in grams you specify in the `biomass_cutoff` parameter. Because we are using an estimate of the spawning stock biomass, which includes individuals above the maturity size, we set `biomass_cutoff` to `w_mat`.
 
-```{r}
+```{r collect-parameters-26}
 sp$biomass_cutoff <- sp$w_mat
 comment(sp$biomass_cutoff) <- "Set to `w_mat` because `biomass_observed` represents spawning stock biomass."
 sp |> select(species, biomass_observed, biomass_cutoff)
@@ -298,7 +298,7 @@ Don't worry too much about the predation kernel parameters because we will retur
 
 When you are happy with the species parameters, save them with
 
-```{r}
+```{r collect-parameters-27}
 saveRDS(sp, "celtic_species_params.rds")
 ```
 
@@ -343,12 +343,12 @@ By default, mizer assumes that all species can interact with each other equally 
 
 1.  **Spatial and temporal overlap of species in a large ecosystem**. This way the interaction matrix is set based on species co-occurrences in various fisheries surveys or observations. In other words we observe how often a pair of species is found in same surveys. This is how species interactions are set up in the model by [Spence et.al.(2021)](https://onlinelibrary.wiley.com/doi/10.1111/faf.12543) and we will use their interaction matrix for our model:
 
-```{r eval=FALSE}
+```{r collect-parameters-28, eval=FALSE}
 download.file("https://raw.githubusercontent.com/gustavdelius/mizerCourse/master/build/celtic_interaction.csv",
               destfile = "celtic_interaction.csv")
 ```
 
-```{r}
+```{r collect-parameters-29}
 celtic_interaction <-  read.csv("celtic_interaction.csv", row.names = 1)
 celtic_interaction
 ```
@@ -371,12 +371,12 @@ You provide the information about the gears in a data frame similar to the speci
 
 For our initial model we have set up a simple gear parameter data frame describing only a single gear that we call "Commercial". It targets all species in our model. The choice of parameters is again inspired by the paper by [Spence et al.(2021)](https://onlinelibrary.wiley.com/doi/10.1111/faf.12543)
 
-```{r eval=FALSE}
+```{r collect-parameters-30, eval=FALSE}
 download.file("https://raw.githubusercontent.com/gustavdelius/mizerCourse/master/build/celtic_gear_params.csv",
               destfile = "celtic_gear_params.csv")
 ```
 
-```{r}
+```{r collect-parameters-31}
 celtic_gear_params <- read.csv("celtic_gear_params.csv")
 celtic_gear_params
 ```

@@ -4,7 +4,7 @@ title: "Tune resilience"
 
 In the previous tutorials we tuned our model parameters so that the steady state of the model agrees with observed growth rates, average observed biomasses and average observed catches. We did not yet tune how sensitively our model reacts to changes away from its steady state. In particular, we did not tune how resilient the species are to fishing. We will do that in this tutorial.
 
-```{r}
+```{r tune-resilience-1}
 #| message: false
 library(mizer)
 library(mizerExperimental)
@@ -13,14 +13,14 @@ library(tidyverse)
 
 Note that your latest version of the model will differ from ours, so the plots you obtain by following this tutorial will differ from those displayed on this webpage. By noting these differences you will get a first feel for how sensitive a mizer model is to the choice of parameters. You can download the model that produced the results on this page with
 
-```{r eval=FALSE}
+```{r tune-resilience-2, eval=FALSE}
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/cel_model_landings.rds",
               destfile = "cel_model_landings.rds")
 ```
 
 We load the model into the variable `cel_model`.
 
-```{r}
+```{r tune-resilience-3}
 cel_model <- readParams("../build/cel_model_landings.rds")
 ```
 
@@ -53,7 +53,7 @@ There are several quantities that were introduced in that earlier tutorial that 
 
 These concepts are nicely illustrated by the following figure that you saw [earlier](../understand/dynamics-of-spectra.qmd#density-dependence-in-reproduction):
 
-```{r}
+```{r tune-resilience-4}
 #| echo: false
 E_R <- seq(0, 20, by = 0.5)
 
@@ -121,7 +121,7 @@ Alternatively, you can use [Ken Andersen's book](https://books.google.dk/books?h
 
 The reproduction parameters in our model are currently rather random:
 
-```{r}
+```{r tune-resilience-5}
 getReproductionLevel(cel_model)
 ```
 
@@ -133,20 +133,20 @@ We use the `setBevertonHolt()` function to set the values for `erepro`. That fun
 
 If we try to set the value for `erepro` very low, the `setBevertonHolt()` function will issue a warning:
 
-```{r}
+```{r tune-resilience-6}
 cel_model <- setBevertonHolt(cel_model, erepro = 0.0001)
 ```
 
 Because we want all species to have the same value, we choose a value that is larger than those required. So we choose `erepro = 0.001`.
 
-```{r}
+```{r tune-resilience-7}
 cel_model <- setBevertonHolt(cel_model, erepro = 0.001)
 species_params(cel_model) |> select(erepro, R_max)
 ```
 
 Let's see what reproduction levels this gives:
 
-```{r}
+```{r tune-resilience-8}
 getReproductionLevel(cel_model)
 ```
 
@@ -154,13 +154,13 @@ It is quite typical that large slow-growing species have a higher reproduction l
 
 Remember: the reproduction level is the ratio between `RDD` and `R_max` and can vary between 0 and 1. It tells us how close the actual reproduction (after applying density dependence) is to the theoretical maximum, set by `R_max`. So instead of using the `getReproductionLevel()` function we could also have done the calculation ourselves:
 
-```{r}
+```{r tune-resilience-9}
 getRDD(cel_model) / species_params(cel_model)$R_max
 ```
 
 We can also look how close the density dependent reproduction rate RDD is to the density independent reproduction rate RDI:
 
-```{r}
+```{r tune-resilience-10}
 getRDI(cel_model) / getRDD(cel_model)
 ```
 
@@ -174,7 +174,7 @@ We now want to adjust the reproduction levels so that the resilience of the spec
 
 To measure the resilience of our species to fishing, we will change the fishing mortality for one species at a time and check how their yields change in response. We keep the fishing mortality for the other species fixed. For our selected species we run through a range of fishing mortalities. For each fishing mortality we run the projection until the system has settled down to a new steady state. Then we calculates the yield in that steady state. After doing that for all fishing mortalities we can plot all the results in a graph showing yield on the y axis versus fishing mortality F on the x axis. The `plotYieldVsF()` function does all that for us. Here we plot the yield curve for haddock:
 
-```{r}
+```{r tune-resilience-11}
 #| message: false 
 plotYieldVsF(cel_model, species = "Haddock", 
              F_range = seq(0.1, 0.9, 0.02))
@@ -184,7 +184,7 @@ We refer to the yield achieved in the steady state as the *sustainable yield* (S
 
 Next we look at hake, for which [the ICES advice](https://figshare.com/articles/report/Hake_Merluccius_merluccius_in_subareas_4_6_and_7_and_in_divisions_3_a_8_a_b_and_8_d_Northern_stock_Greater_North_Sea_Celtic_Seas_and_the_northern_Bay_of_Biscay_/18635171/1) gives a value for F~MSY~ of only 0.26.
 
-```{r}
+```{r tune-resilience-12}
 #| message: false 
 plotYieldVsF(cel_model, species = "European Hake", 
              F_range = seq(0.1, 0.5, 0.02))
@@ -192,13 +192,13 @@ plotYieldVsF(cel_model, species = "European Hake",
 
 We read off that for hake the current value of F~MSY~ in the model is too high. In other words, it is not sensitive enough to fishing. We have probably put on too much extra density dependence on the reproduction. Let us look at the reproduction level we have currently chosen:
 
-```{r}
+```{r tune-resilience-13}
 getReproductionLevel(cel_model)["European Hake"]
 ```
 
 Let us see what the yield curve would look like when we only include the density depencence in recruitment that is automatically included in the mizer model and do not add anything extra. So we set the reproduction level to 0.
 
-```{r}
+```{r tune-resilience-14}
 #| message: false 
 # First we save current reproduction level into a vector 
 rep_level <- getReproductionLevel(cel_model)
@@ -216,7 +216,7 @@ plotYieldVsF(cel_model, species = "European Hake",
 The F~MSY~ is now closer to the one in the ICES advice. Next we look at whiting where
 [the ICES advice](https://ices-library.figshare.com/articles/report/Whiting_Merlangius_merlangus_in_divisions_7_b_c_and_7_e_k_southern_Celtic_Seas_and_western_English_Channel_/18633200) suggests a quite high F~MSY~ of 0.52.
 
-```{r}
+```{r tune-resilience-15}
 #| message: false 
 plotYieldVsF(cel_model, species = "Whiting", 
              F_range = seq(0.2, 0.8, 0.02))
@@ -224,7 +224,7 @@ plotYieldVsF(cel_model, species = "Whiting",
 
 So in this case the model F~MSY~ is lower than the ICES one, so whiting in the model is less resilient to fishing than ICES estimated. To make whiting more resilient in the model we can put more density dependence on the reproduction. Let's put the reproduction level very close to 1, which means that the reproduction rate is almost totally independent of the investment into reproduction.
 
-```{r}
+```{r tune-resilience-16}
 #| message: false 
 rep_level["Whiting"] <- 0.999
 cel_model <- setBevertonHolt(cel_model, 
@@ -238,7 +238,7 @@ We see that even with this extreme choice the F~MSY~ in the model is smaller tha
 
 One minor point: if you are wondering why the above yield curve is not smooth but has that kink around F=0.45. That is just because the simulation did not run long enough to really capture the final steady state. The projection stops when the dynamics has settled down to within some tolerance. If we decrease the tolerance we get more precise values for the steady state yield:
 
-```{r}
+```{r tune-resilience-17}
 #| message: false 
 plotYieldVsF(cel_model, species = "Whiting", 
                F_range = seq(0.2, 0.8, 0.02), tol = 0.0001)

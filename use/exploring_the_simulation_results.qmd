@@ -2,7 +2,7 @@
 title: "Explore the simulation results"
 ---
 
-```{r include=FALSE}
+```{r exploring_the_simulation_results-1, include=FALSE}
 library(mizer)
 gear_names <- c("Industrial", "Pelagic", "Beam", "Otter")
 times <- seq(from = 1, to = 10, by = 1)
@@ -29,7 +29,7 @@ We will use the following `MizerSim` object for these examples, where the
 effort array is the one we created in the 
 [previous section on running a simulation](running_a_simulation.qmd):
 
-```{r label = exploration_simulation}
+```{r exploring_the_simulation_results-2, label = exploration_simulation}
 sim <- project(NS_params, effort = effort_array, dt = 0.1, t_save = 1)
 ```
 
@@ -46,14 +46,14 @@ have just run, the time dimension of `n` has `r dimN` rows
 There are also 12 species each with 100 sizes. We can check this by running the
 `dim()` function and looking at the dimensions of the `n` array:
 
-```{r label=show_dim_n}
+```{r exploring_the_simulation_results-4, label=show_dim_n}
 dim(N(sim))
 ```
 
 To pull out the abundances of a particular species through time at size you can
 subset the array. For example to look at Cod through time you can use:
 
-```{r results='hide'}
+```{r exploring_the_simulation_results-5, results='hide'}
 N(sim)[, "Cod", ]
 ```
 
@@ -66,7 +66,7 @@ output is only saved every year.
 Often we are particularly interested in the results at the final time-step.
 These we can access with
 
-```{r results='hide'}
+```{r exploring_the_simulation_results-6, results='hide'}
 finalN(sim)
 ```
 
@@ -74,14 +74,14 @@ which is a two dimensional array (species x size).
 
 The projected resource abundances can be accesses similarly with
 
-```{r results='hide'}
+```{r exploring_the_simulation_results-7, results='hide'}
 NResource(sim)
 ```
 
 This returns a two-dimensional array (time x size). And if we are only
 interested in the final time step
 
-```{r results='hide'}
+```{r exploring_the_simulation_results-8, results='hide'}
 finalNResource(sim)
 ```
 
@@ -124,7 +124,7 @@ object we created earlier. Here, we use `getSSB()` to calculate the SSB of each
 species through time (note the use of the `head()` function to only display the
 first few rows).
 
-```{r label = getSSB_demo}
+```{r exploring_the_simulation_results-9, label = getSSB_demo}
 ssb <- getSSB(sim)
 dim(ssb)
 head(ssb)
@@ -135,7 +135,7 @@ As mentioned above, we can specify the size range for the `getBiomass()` and
 species but only include individuals that are larger than 10 g and smaller than
 1000 g.
 
-```{r label = getBiomass_demo}
+```{r exploring_the_simulation_results-10, label = getBiomass_demo}
 biomass <- getBiomass(sim, min_w = 10, max_w = 1000)
 head(biomass)
 ```
@@ -167,7 +167,7 @@ The slope of the community can be calculated using the `getCommunitySlope()`
 function. Initially we include all species and all sizes in the calculation (only
 the first five rows are shown):
 
-```{r label=getCommunitySlope_demo}
+```{r exploring_the_simulation_results-11, label=getCommunitySlope_demo}
 slope <- getCommunitySlope(sim)
 head(slope)
 ```
@@ -181,7 +181,7 @@ that is used in the calculation to between 10 g and 5 kg. The `species` argument
 character vector of the names of the species that we want to include in the
 calculation.
 
-```{r label = getCommunitySlope_with_args}
+```{r exploring_the_simulation_results-12, label = getCommunitySlope_with_args}
 dem_species <- c("Dab", "Whiting", "Sole", "Gurnard", "Plaice", "Haddock",
     "Cod", "Saithe")
 slope <- getCommunitySlope(sim, min_w = 10, max_w = 5000, 
@@ -223,7 +223,7 @@ plotting.
 Using the plotting functions is straightforward. For example, to plot the total
 biomass of each species against time you use the `plotBiomass()` function:
 
-```{r label=plotBiomass, fig.keep='last'}
+```{r exploring_the_simulation_results-13, label=plotBiomass, fig.keep='last'}
 plotBiomass(sim)
 ```
 
@@ -233,7 +233,7 @@ to specify the time step to plot, or the time period to average the values over.
 The default is to use the final time step. Here we plot the abundance spectra
 (biomass), averaged over time = 5 to 10:
 
-```{r label=plotSpectra_example, fig.keep='last'}
+```{r exploring_the_simulation_results-14, label=plotSpectra_example, fig.keep='last'}
 plotSpectra(sim, time_range = 5:10)
 ```
 
@@ -245,7 +245,7 @@ and `plotSpectra()`). It is possible to pass in the same arguments that these
 individual plots use, e.g. arguments to change the time period over which the
 data is averaged.
 
-```{r label=demo_summary_plot}
+```{r exploring_the_simulation_results-15, label=demo_summary_plot}
 plot(sim)
 ```
 

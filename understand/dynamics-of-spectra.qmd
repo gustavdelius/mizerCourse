@@ -27,7 +27,7 @@ Size spectrum dynamics is very intuitive: The rate at which the number of indivi
 
 What makes these seemingly obvious dynamics interesting is how the growth rate and the death rate are determined in terms of the abundance of prey and predators and the feeding preferences and physiological parameters of the individuals. We have discussed a bit of that in previous tutorials and will discuss it much more in upcoming tutorials. We will discuss the birth rate $R_{dd}$ below in the section on [how reproduction is modelled](dynamics-of-spectra.html#how-reproduction-is-modelled). But first we want to look at the results of simulating the size spectrum dynamics.
 
-```{r}
+```{r dynamics-of-spectra-1}
 #| message: false
 library(mizer)
 library(mizerExperimental)
@@ -38,7 +38,7 @@ library(tidyverse)
 
 In the previous tutorial, in the section on [trophic cascades](species-interactions.qmd#trophic-cascades), we already simulated the size-spectrum dynamics to find the new steady state. But we only looked at the final outcome once the dynamics had settled down to the new steady state. We reproduce the code here:
 
-```{r message=FALSE}
+```{r dynamics-of-spectra-2, message=FALSE}
 # Create trait-based model
 mp <- newTraitParams() |> 
     # run to steady state with constant reproduction rate
@@ -64,13 +64,13 @@ plotSpectra2(mp_lessRes_steady, name1 = "less resource",
 
 But we can also save and then display the spectra of all the species at intermediate times. This is what the `project()` function does. It projects the current state forward in time and saves the result of that simulation in a larger object, a MizerSim object, which contains the resulting time series of size spectra. Let's use it to project forward by 24 years.
 
-```{r}
+```{r dynamics-of-spectra-3}
 sim_lessRes <- project(mp_lessRes, t_max = 24)
 ```
 
 We can now use this MizerSim object in the `animateSpectra()` function to create an animation showing the change in the size spectra over time.
 
-```{r}
+```{r dynamics-of-spectra-4}
 animateSpectra(sim_lessRes, total = TRUE, power = 2, 
                ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
@@ -81,7 +81,7 @@ Go ahead, press the Play button.
 
 Of course we can also get at the numeric values of the spectra at different times. First of all the function `getTimes()` gives the times at which simulation results are available in the MizerSim object:
 
-```{r}
+```{r dynamics-of-spectra-5}
 getTimes(sim_lessRes)
 ```
 
@@ -89,19 +89,19 @@ The simulation results have been saved at yearly intervals. We could have change
 
 The function `N()` returns a three-dimensional array (time x species x size) with the number density of consumers. To get for example the number density for the 2nd species after 5 years in the 1st size class we do
 
-```{r}
+```{r dynamics-of-spectra-6}
 N(sim_lessRes)[6, 2, 1]
 ```
 
 The function `getBiomass()` acting on a MizerSim object returns an array (time x species) containing the total biomass in grams at each time step for each species. So for example the biomass in grams of the 2nd species after 5 years is
 
-```{r}
+```{r dynamics-of-spectra-7}
 getBiomass(sim_lessRes)[6, 2]
 ```
 
 The biomass time series can be plotted with `plotBiomass()`:
 
-```{r}
+```{r dynamics-of-spectra-8}
 plotBiomass(sim_lessRes)
 ```
 
@@ -113,7 +113,7 @@ The above simulation was run with constant abundance in the smallest size class 
 
 To see the effect we run the same code as above after deleting the two lines that turned off the reproduction dynamics. We also specify with `t_save = 2` that we want to save the spectrum only every second year, which speeds up the display of the animation.
 
-```{r message=FALSE}
+```{r dynamics-of-spectra-9, message=FALSE}
 # Create trait-based model and run to steady state
 mp <- newTraitParams() |> steady()
 
@@ -144,7 +144,7 @@ $$
 
 This is calculated in mizer with `getRDI()`:
 
-```{r}
+```{r dynamics-of-spectra-10}
 getRDI(mp)
 ```
 
@@ -164,7 +164,7 @@ $$ R_{dd} = R_{di} \frac{R_{max}}{R_{di} + R_{max}}$$
 
 Rather than looking at the formula, let's look at a figure:
 
-```{r}
+```{r dynamics-of-spectra-11}
 #| echo: false
 E_R <- seq(0, 20, by = 0.5)
 
@@ -204,7 +204,7 @@ The important fact to observe is that the solid curves becomes more shallow as $
 
 This density-dependent rate of reproduction is calculated in mizer with `getRDD()`:
 
-```{r}
+```{r dynamics-of-spectra-12}
 getRDD(mp)
 ```
 
@@ -222,19 +222,19 @@ The ratio $R_{dd} / R_{max}$ we denote as the **reproduction level**. This name 
 
 We can get the reproduction levels of the different species with `getReproductionLevel()`:
 
-```{r}
+```{r dynamics-of-spectra-13}
 getReproductionLevel(mp)
 ```
 
 We see that by default `newTraitParams()` had given all species the same reproduction level. We can change the reproduction level with the `setBevertonHolt()` function. We can set different reproduction levels for each species, but here we will simply set it to 0.9 for all species:
 
-```{r}
+```{r dynamics-of-spectra-14}
 mp9 <- setBevertonHolt(mp, reproduction_level = 0.9)
 ```
 
 Changing the reproduction level has no effect on the steady state, because that only depends on the rate of egg production $R_{dd}$ and that is kept fixed when changing the reproduction level. We can check that by running our new model to steady state and plotting that steady state together with the original steady state. 
 
-```{r}
+```{r dynamics-of-spectra-15}
 mp9 <- projectToSteady(mp9)
 
 plotSpectra2(mp, name1 = "reproduction_level = 0.25",
@@ -244,7 +244,7 @@ plotSpectra2(mp, name1 = "reproduction_level = 0.25",
 
 They overlap perfectly. However the reproduction level does have an effect on how sensitive the system is to changes. As an example, let us look at the dynamics that is triggered by the reduction in interaction with the resource by species 8 through 11.
 
-```{r}
+```{r dynamics-of-spectra-16}
 # We make a copy of the model
 mp_lessRes9 <- mp9
 # and set the resource interaction to 0.8 for species 8 to 11
@@ -268,7 +268,7 @@ Go back to the example with fishing on individuals above 1kg from the section on
 ::: {.callout-caution collapse="true"}
 #### Show me the solution
 
-```{r message=FALSE}
+```{r dynamics-of-spectra-17, message=FALSE}
 # We make a copy of the trait-based model
 mp_fishing <- mp
 # Set the reproduction level set to 0.5 for all species
