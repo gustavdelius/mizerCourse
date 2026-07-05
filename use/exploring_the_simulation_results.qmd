@@ -130,7 +130,7 @@ dim(ssb)
 head(ssb)
 ```
 
-As mentioned above, we can specify the size range for the `getsummaryBiomass()` and
+As mentioned above, we can specify the size range for the `getBiomass()` and
 `getN()` functions. For example, here we calculate the total biomass of each
 species but only include individuals that are larger than 10 g and smaller than
 1000 g.

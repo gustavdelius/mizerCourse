@@ -195,7 +195,7 @@ qplot(year, neweffort, ylab = "effort", xlab = "")
 Now you can run the same model above using this effort and then plot effort and biomass dynamics through time.
 
 ```{r}
-params3 <- setInitialValues(params, sim0)
+params3 <- finalParams(sim0)
 simf3 <- project(params3, effort = neweffort)
 
 plotYieldGear(simf3) + 
@@ -217,12 +217,12 @@ We can see here as effort develops towards a plateau of Fmax = 0.5 through time,
 Now let's see what happens if we change fishing in the future. To do this we set up two scenarios, one where the model starts with the last time step of the fished scenario and continues into the future (the "status quo"). The other will be designed to explore a "more sustainable" scenario.
 
 ```{r}
-# Use the parameters from the last simulation
-params <- getParams(simf3)
-params <- setInitialValues(params, simf3)
+# Use the parameters from the last simulation, with the initial spectra
+# and initial effort set to its final time step (2020)
+params <- finalParams(simf3)
 ```
 
-The `setInitialValues()` function has set the initial spectra and the initial effort in the `params` object to the final values from `simf3`, i.e., to the values from 2020. The effort was
+The `finalParams()` function has returned the model with its initial spectra and initial effort set to the final values from `simf3`, i.e., to the values from 2020. The effort was
 
 ```{r}
 initial_effort(params)
@@ -336,7 +336,7 @@ gear_params(params) <- data.frame(
     gear = c("longline", "trawler"),
     species = c("D.ele", "C.gun"),
     catchability = c(1, 1),
-    sel_fun = c("knife_edge", "knife_edge"),
+    sel_func = c("knife_edge", "knife_edge"),
     knife_edge_size = c(2722, 52)
     )
 #check it

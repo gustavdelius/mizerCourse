@@ -197,30 +197,13 @@ For example the biomass of fish between 1 gram and 1.12 grams is
 biomass[61]
 ```
 
-Let us briefly present yet another way to represent the size distribution. When we talk about size spectra, we always have the representation in terms of densities in mind. You may already be familiar with the concept of a densities from probability theory, where you can describe a probability distribution in terms of its probability density function. But perhaps you also know that there is an alternative description of the probability distribution in terms of the cumulative distribution function. We can similarly describe the size distribution of the biomass by a cumulative biomass distribution function, which gives the total biomass of all sizes up to a specific size.
-
-```{r}
-# Initialise an array with the right dimensions
-cumulative_biomass <- biomass
-# Calculate the cumulative sum of all biomasses in previous bins
-cumulative_biomass[] <- cumsum(biomass)
-# Normalise this so that it is given as a percentage of the total biomass
-cdf <- cumulative_biomass / cumulative_biomass[1, 101] * 100
-# Melt the array to a data frame and then plot
-p_biomass_cdf <- ggplot(melt(cdf), aes(x = w, y = value)) +
-    geom_line() + 
-    labs(x = "Weight [g]",
-         y = "% of total biomass")
-p_biomass_cdf
-```
-
-Let us also look at the cumulative biomass distribution:
+We can describe the biomass distribution in terms of its cumulative distribution function, which gives the total biomass of all sizes up to a specific size:
 
 ```{r}
 plotCDF(params, log_x = FALSE)
 ```
 
-This plot shows us for example that 50% of the individuals are smaller than 12.5g and only a very small percentage is larger than 75g. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but most of the biomass comes from large fish. So we need to always be very clear about which quantity we are considering.
+This plot shows us for example that 50% of the biomass comes from individuals that are smaller than 12.5g and individuals larger than 75g contribute very little to the total biomass. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but most of the biomass comes from large fish. So we need to always be very clear about which quantity we are considering.
 
 We can also plot the cumulative biomass distribution function on a logarithmic weight axis:
 

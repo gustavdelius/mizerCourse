@@ -35,7 +35,7 @@ There is another plot that shows us that our model currently has too little reso
 plotFeedingLevel(cel_model)
 ```
 
-Recall from the [section on the feeding level](../understand/predation-growth-and-mortality.qmd#feeding-level) in Part 1 of the course that the feeding level is the ratio between the maximum intake rate and the actual intake rate, so can never exceed 1. The closer it is to 1 the more satiated the fish is and the less of the encountered prey it will consume. The reason the feeding levels in the above plot is higher at larger sizes than at smaller sizes is that at larger sizes the fish start feeding on other fish while at smaller sizes they have to rely on the resource, and the resource is not as abundant as it should be.
+Recall from the [section on the feeding level](../understand/predation-growth-and-mortality.qmd#feeding-level) in Part 1 of the course that the feeding level is the ratio between the actual intake rate and the maximum intake rate, so can never exceed 1. The closer it is to 1 the more satiated the fish is and the less of the encountered prey it will consume. The reason the feeding levels in the above plot is higher at larger sizes than at smaller sizes is that at larger sizes the fish start feeding on other fish while at smaller sizes they have to rely on the resource, and the resource is not as abundant as it should be.
 
 We will now want to increase the abundance of resource, both to get the community abundance more in line with Sheldon's observation and to give the fish a more constant feeding level throughout their life. We will first start doing this the tedious way in code and then introduce the `tuneParams()` shiny gadget to do it with point and click.
 

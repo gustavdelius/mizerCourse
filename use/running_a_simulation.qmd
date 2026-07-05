@@ -112,10 +112,6 @@ different ways. The results of the simulations will not be explored in detail.
 We will leave that for
 [the section on exploring the simulation results.](exploring_the_simulation_results.qmd#).
 
-
-\subsection{Summary functions for MizerSim objects}
-\label{sec:summaries}
-
 Remember that the fishing mortality by size on a species is the product of the
 selectivity, the catchability and the effort of the gear that caught it. We have
 not specified any catchability values in the species parameter data.frame so the
@@ -178,14 +174,6 @@ head(getEffort(sim))
 The `effort` slot shows the effort by time and gear. In this example, we
 specified the `effort` argument as a single numeric of value 1. As you can see
 this results in the same effort being used for all gears for all time steps.
-
-A `summary()` method is also available for objects of type `MizerSim`. This is
-essentially the same as the summary for `MizerParams` objects, but includes
-information on the simulation time parameters.
-
-```{r summary_mizersim,eval=FALSE}
-summary(sim)
-```
 
 If we decrease `t_save` but keep `t_max` the same then we can see that the time
 dimension of the `effort` array changes accordingly. This will also be true of
