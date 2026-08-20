@@ -171,7 +171,7 @@ function to just show the first few lines).
 head(getEffort(sim))
 ```
 
-The `effort` slot shows the effort by time and gear. In this example, we
+`getEffort()` returns the effort by time and gear. In this example, we
 specified the `effort` argument as a single numeric of value 1. As you can see
 this results in the same effort being used for all gears for all time steps.
 
@@ -273,7 +273,7 @@ Now we can use this effort array in the projection:
 
 ```{r running_a_simulation-13, label=project_effort_array}
 sim <- project(NS_params, effort = effort_array, dt = 0.1)
-head(sim@effort)
+head(getEffort(sim))
 ```
 
 As you can see, it can be quite fiddly to set up a complicated effort array so

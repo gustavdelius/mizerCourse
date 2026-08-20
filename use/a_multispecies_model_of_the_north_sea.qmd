@@ -156,13 +156,13 @@ This was estimated along with the values `R_max` as part of the calibration
 process. 
 
 We will use the
-interaction matrix `inter` that is shipped as an example with the mizer package, see also (https://sizespectrum.org/mizer/articles/multispecies_model.html#setting-the-interaction-matrix).
+interaction matrix `NS_interaction` that is shipped as an example with the mizer package, see also (https://sizespectrum.org/mizer/articles/multispecies_model.html#setting-the-interaction-matrix).
 
 We now have all the information we need to create the `MizerParams` object:
 
 ```{r a_multispecies_model_of_the_north_sea-8, label=make_ns_params, results='hide'}
 params <- newMultispeciesParams(NS_species_params, 
-                                interaction = inter, 
+                                interaction = NS_interaction, 
                                 kappa = 9.27e10,
                                 gear_params = gear_params)
 ```
@@ -304,7 +304,9 @@ ggplot(community_plot_data) +
               data = community_reference_level)
 ```
 
-According to our simulations, historically the LFI in the North Sea has been below the reference level.
+According to our simulations, the LFI in the North Sea stayed below the
+reference level for most of the historical period, only rising above it in
+the last few years of the simulation.
 
 
 ## Future projections

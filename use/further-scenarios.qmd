@@ -35,7 +35,7 @@ plotGrowthCurves(params, species_panel = TRUE)
 the spectra,
 
 ```{r further-scenarios-5}
-plotlySpectra(params, power = 2, total = TRUE)
+plotlySpectra(params, biomass = TRUE, per_log_size = TRUE, total = TRUE)
 ```
 
 the feeding levels,
@@ -83,7 +83,7 @@ This shows that the model has been calibrated with a very low level of fishing m
 Let's look at the reproduction levels and the yield curve for toothfish:
 
 ```{r further-scenarios-10, ,message=FALSE}
-getReproductionLevel(params)
+reproduction_level(params)
 
 plotYieldVsF(params, species = "D.ele", no_steps = 30, F_max = 2)
 
@@ -136,7 +136,7 @@ How do we incorporate the effort data into the model? First, we have to re-arran
 effort_time <- array(c(rep(0,13), dat$EffortPerArea), 
                      dim = c(length(1990:2020), 1),
                      dimnames = list("time" = 1990:2020, 
-                                     "gear" = params@gear_params$gear[1]))
+                                     "gear" = gear_params(params)$gear[1]))
 ```
 
 Next we use the effort data to project the model forwards from it's steady state. But wait - we did not set up the model for the first year of the data, when fishing only just began. It may make more sense to use a steady state without fishing as the initial values for our projection.
@@ -188,8 +188,10 @@ neweffort <- neweffort / gear_params(params)$catchability[1]
 # overwrite the catchability to 1:
 # gear_params(params)$catchability[1] <- 1
 
-year = 1990:2020
-qplot(year, neweffort, ylab = "effort", xlab = "")
+effort_df <- data.frame(year = 1990:2020, effort = as.vector(neweffort))
+ggplot(effort_df, aes(x = year, y = effort)) +
+    geom_point() +
+    labs(x = "", y = "effort")
 ```
 
 Now you can run the same model above using this effort and then plot effort and biomass dynamics through time.
@@ -235,7 +237,10 @@ proj_effort_scen1 <- matrix(initial_effort(params), nrow = 50, ncol = 1, byrow =
 dimnames(proj_effort_scen1) <- 
     list(time = 2021:2070, gear = unique(gear_params(params)$gear))
 # check it
-qplot(x = 2021:2070, y = proj_effort_scen1, ylab = "effort", xlab = "")
+ggplot(data.frame(year = 2021:2070, effort = as.vector(proj_effort_scen1)),
+       aes(x = year, y = effort)) +
+    geom_point() +
+    labs(x = "", y = "effort")
 ```
 
 That was Scenario 1 ("status quo"), now let's set up Scenario 2, the "more sustainable" option we wish to explore. Again, if we are working in the same units as the effort above we can change the F below to scale effort to be consistent with a value of F=0.2. So we need to set effort= catchability/targetF. Otherwise if you assume targetF= catchability\*E, and set catchability to 1, you can just use targetF=0.2 directly for Scenario 2.
@@ -250,7 +255,10 @@ proj_effort_scen2[1:10,select_gear] <-
 # then hold at target
 proj_effort_scen2[11:50, select_gear] <- targetF
 # check it
-qplot(x = 2021:2070, y = proj_effort_scen2, ylab = "effort", xlab = "")
+ggplot(data.frame(year = 2021:2070, effort = as.vector(proj_effort_scen2)),
+       aes(x = year, y = effort)) +
+    geom_point() +
+    labs(x = "", y = "effort")
 ```
 
 Now we want to run the simulation forward using the `project()` function.
@@ -271,12 +279,12 @@ plotYield(scen)
 B_current <- getBiomass(scen)[1, ]
 Brel_scen <- melt(sweep(getBiomass(scen), 2, B_current, "/"))
 colnames(Brel_scen)[2] <- "Species"
-legend_levels <- intersect(names(scen@params@linecolour), Brel_scen$Species)
+legend_levels <- intersect(names(getColours(params)), Brel_scen$Species)
 ggplot(Brel_scen) + 
-  geom_line(aes(x = time,y = value,color = Species), size = 1) + 
-  geom_hline(yintercept = 1, linetype = 1, colour = "grey", size = 0.75) +
+  geom_line(aes(x = time, y = value, color = Species), linewidth = 1) + 
+  geom_hline(yintercept = 1, linetype = 1, colour = "grey", linewidth = 0.75) +
   scale_y_continuous(name = "Relative biomass") +
-  scale_color_manual(values = params@linecolour[legend_levels]) +
+  scale_color_manual(values = getColours(params)[legend_levels]) +
   theme(legend.key = element_rect(fill = "white")) 
 ```
 
@@ -308,7 +316,7 @@ Brel_scens <- rbind(data.frame(species = names(Brel_scen1_2050),
 # barplot comparing the 2 scenarios by 2050
 ggplot(Brel_scens, aes(fill = scen, y = value, x = species)) + 
     geom_bar(position = "dodge", stat = "identity") + 
-     geom_hline(yintercept = 0.1, linetype = 2, colour = "red", size = 0.5) + 
+     geom_hline(yintercept = 0.1, linetype = 2, colour = "red", linewidth = 0.5) + 
     scale_y_log10(name = "log10(Biomass/Biomass Unfished)")
 
 # to save:
@@ -383,7 +391,7 @@ Brel_scens <- rbind(data.frame(species = names(Brel_longline),
 # barplot comparing the 2 scenarios by 2050
 ggplot(Brel_scens, aes(fill = scen, y = value, x = species)) + 
     geom_bar(position = "dodge", stat = "identity") + 
-    geom_hline(yintercept = 0.1, linetype = 2, colour = "red", size = 0.5)  + 
+    geom_hline(yintercept = 0.1, linetype = 2, colour = "red", linewidth = 0.5)  + 
     scale_y_log10(name = "log10(Biomass/Biomass Unfished)")
 ```
 
