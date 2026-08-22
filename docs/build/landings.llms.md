@@ -28,7 +28,7 @@ catch_lengths <- read.csv("catch.csv")
 head(catch_lengths)
 ```
 
-For each species we have numbers of individuals observed in 1cm wide length bins (the `dl` column indicates the width of each bin). If you get an error message saying that the `catch.csv` file can not be found: you will find the code for downloading it in the [earlier tutorial](../build/collect-parameters.llms.md#asymptotic-size) when estimating asymptotic sizes.
+For each species we have numbers of individuals observed in 1cm wide length bins (the `dl` column indicates the width of each bin). If you get an error message saying that the `catch.csv` file can not be found, run the [`download.file()`](https://rdrr.io/r/utils/download.file.html) command above to fetch it.
 
 In addition to this information about the size distribution of the catches we have the total biomass of the annual commercial landings for each species, i.e., the fisheries yield. Like the spawning stock biomass estimates we used in the tutorial on [collecting parameters](../build/collect-parameters.llms.md), we obtained the values for the yield in tonnes per square kilometre (or, equivalently, grams per square metre) from the 2021 [ICES stock assessment database](https://stecf.jrc.ec.europa.eu/dd/fdi) by dividing the total yield of the assessed stock by the area of the assessment region in square kilometres and taking the geometric mean over the time period from 2012 to 2021. Here we just load them in from a file we prepared and store them in a `yield_observed` column in the species parameter dataframe of our model:
 
@@ -36,8 +36,6 @@ In addition to this information about the size distribution of the catches we ha
 download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/celtic_yields.rds",
               destfile = "celtic_yields.rds")
 ```
-
-https://github.com/gustavdelius/mizerCourse/raw/master/build/
 
 ``` downlit
 gear_params(cel_model)$yield_observed <- readRDS("celtic_yields.rds")
@@ -89,10 +87,10 @@ plotYieldVsSize(cel_model, species = "Cod", catch = catch_lengths,
 
 This looks better. We should have no scruples adjusting the gear selectivity parameters using our mizer model because they are hard to estimate outside a model.
 
-Now that we have changed fishing selectivity we need to find a new steady state. It is important to run [`steady()`](https://rdrr.io/pkg/mizer/man/steady.html) frequently, while making small changes to the model parameters. If we accumulate too many changes, finding a new steady state might be harder.
+Now that we have changed fishing selectivity we need to find a new steady state. It is important to run [`tuneSteadyState()`](https://rdrr.io/pkg/mizer/man/tuneSteadyState.html) frequently, while making small changes to the model parameters. If we accumulate too many changes, finding a new steady state might be harder.
 
 ``` downlit
-cel_model <- steady(cel_model)
+cel_model <- tuneSteadyState(cel_model)
 ```
 
 You probably wondered how I knew what the right values for the `l50` and `l25` parameter were for cod. The answer is that I used trial and error with the help of the [`tuneParams()`](https://sizespectrum.org/mizerExperimental/reference/tuneParams.html). We’ll do some more of that in the following video. We pass the catch length data into the [`tuneParams()`](https://sizespectrum.org/mizerExperimental/reference/tuneParams.html) function via the `catch` argument:

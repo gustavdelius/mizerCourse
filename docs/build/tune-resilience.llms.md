@@ -21,14 +21,6 @@ We load the model into the variable `cel_model`.
 cel_model <- readParams("../build/cel_model_landings.rds")
 ```
 
-    Warning in validGivenSpeciesParams(params@given_species_params): For the
-    species Haddock, Plaice the value for `w_mat25` is not smaller than that of
-    `w_mat`. I have corrected that by setting it to NA.
-
-    Warning in validGivenSpeciesParams(species_params): For the species Haddock,
-    Plaice the value for `w_mat25` is not smaller than that of `w_mat`. I have
-    corrected that by setting it to NA.
-
 ## Reproduction dynamics
 
 In this tutorial we will look at an aspect of the model that has a big impact on the resilience of species to perturbations: the reproduction dynamics. In the tutorial on [dynamics of size spectra](../understand/dynamics-of-spectra.llms.md#reproduction-level) in Part 1 we briefly looked at how density dependence of reproduction can influence how species react to changes in mortality, such as from fishing. It might be good if you go back to that tutorial and remind yourself.
@@ -95,7 +87,7 @@ Alternatively, you can use [Ken Andersen’s book](https://books.google.dk/books
 The reproduction parameters in our model are currently rather random:
 
 ``` downlit
-getReproductionLevel(cel_model)
+reproduction_level(cel_model)
 ```
 
            Herring          Sprat            Cod        Haddock        Whiting 
@@ -119,7 +111,11 @@ If we try to set the value for `erepro` very low, the [`setBevertonHolt()`](http
 cel_model <- setBevertonHolt(cel_model, erepro = 0.0001)
 ```
 
-    Warning in setBevertonHolt.MizerParams(cel_model, erepro = 1e-04): For the following species `erepro` has been increased to the smallest possible value: erepro[Herring] = 0.000647; erepro[Sprat] = 0.000814; erepro[Blue whiting] = 0.000265; erepro[Norway Pout] = 0.000704; erepro[Poor Cod] = 0.000359; erepro[Horse Mackerel] = 0.000303; erepro[Common Dab] = 0.000173; erepro[Megrim] = 0.000218; erepro[Boarfish] = 0.00076
+    Warning: For the following species `erepro` has been increased to the smallest
+    possible value: erepro[Herring] = 0.000647; erepro[Sprat] = 0.000814;
+    erepro[Blue whiting] = 0.000265; erepro[Norway Pout] = 0.000704; erepro[Poor
+    Cod] = 0.000359; erepro[Horse Mackerel] = 0.000303; erepro[Common Dab] =
+    0.000173; erepro[Megrim] = 0.000218; erepro[Boarfish] = 0.00076
 
 Because we want all species to have the same value, we choose a value that is larger than those required. So we choose `erepro = 0.001`.
 
@@ -131,7 +127,7 @@ species_params(cel_model) |> select(erepro, R_max)
 Let’s see what reproduction levels this gives:
 
 ``` downlit
-getReproductionLevel(cel_model)
+reproduction_level(cel_model)
 ```
 
            Herring          Sprat            Cod        Haddock        Whiting 
@@ -145,7 +141,7 @@ getReproductionLevel(cel_model)
 
 It is quite typical that large slow-growing species have a higher reproduction level than smaller fast-growing species.
 
-Remember: the reproduction level is the ratio between `RDD` and `R_max` and can vary between 0 and 1. It tells us how close the actual reproduction (after applying density dependence) is to the theoretical maximum, set by `R_max`. So instead of using the [`getReproductionLevel()`](https://sizespectrum.org/mizer/reference/getReproductionLevel.html) function we could also have done the calculation ourselves:
+Remember: the reproduction level is the ratio between `RDD` and `R_max` and can vary between 0 and 1. It tells us how close the actual reproduction (after applying density dependence) is to the theoretical maximum, set by `R_max`. So instead of using the [`reproduction_level()`](https://sizespectrum.org/mizer/reference/setBevertonHolt.html) function we could also have done the calculation ourselves:
 
 ``` downlit
 getRDD(cel_model) / species_params(cel_model)$R_max
@@ -183,7 +179,7 @@ We now want to adjust the reproduction levels so that the resilience of the spec
 
 ### Exploring yield curves
 
-To measure the resilience of our species to fishing, we will change the fishing mortality for one species at a time and check how their yields change in response. We keep the fishing mortality for the other species fixed. For our selected species we run through a range of fishing mortalities. For each fishing mortality we run the projection until the system has settled down to a new steady state. Then we calculates the yield in that steady state. After doing that for all fishing mortalities we can plot all the results in a graph showing yield on the y axis versus fishing mortality F on the x axis. The [`plotYieldVsF()`](https://sizespectrum.org/mizerExperimental/reference/plotYieldVsF.html) function does all that for us. Here we plot the yield curve for haddock:
+To measure the resilience of our species to fishing, we will change the fishing mortality for one species at a time and check how their yields change in response. We keep the fishing mortality for the other species fixed. For our selected species we run through a range of fishing mortalities. For each fishing mortality we run the projection until the system has settled down to a new steady state. Then we calculates the yield in that steady state. After doing that for all fishing mortalities we can plot all the results in a graph showing yield on the y axis versus fishing mortality F on the x axis. The [`plotYieldVsF()`](https://sizespectrum.org/mizer/reference/plotYieldVsF.html) function does all that for us. Here we plot the yield curve for haddock:
 
 ``` downlit
 plotYieldVsF(cel_model, species = "Haddock", 
@@ -206,7 +202,7 @@ plotYieldVsF(cel_model, species = "European Hake",
 We read off that for hake the current value of F_(MSY) in the model is too high. In other words, it is not sensitive enough to fishing. We have probably put on too much extra density dependence on the reproduction. Let us look at the reproduction level we have currently chosen:
 
 ``` downlit
-getReproductionLevel(cel_model)["European Hake"]
+reproduction_level(cel_model)["European Hake"]
 ```
 
     European Hake 
@@ -216,7 +212,7 @@ Let us see what the yield curve would look like when we only include the density
 
 ``` downlit
 # First we save current reproduction level into a vector 
-rep_level <- getReproductionLevel(cel_model)
+rep_level <- reproduction_level(cel_model)
 # then we replace our species' reproduction level with a new value 
 rep_level["European Hake"] <- 0
 # and assign it back to the model 

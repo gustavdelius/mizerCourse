@@ -37,12 +37,12 @@ As a final simplification in this and the next two tutorials, we will only consi
 We can plot the size spectrum with the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function.
 
 ``` downlit
-plotSpectra(params, power = 0)
+plotSpectra(params, biomass = FALSE)
 ```
 
 ![](single-species-spectra_files/figure-html/plot-spectra-number-density-1.png)
 
-The `power = 0` argument to the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function specifies that we want to plot the number density, rather than for example the biomass density. We’ll discuss this more below in the section on [other representations](#other-representations).
+The `biomass = FALSE` argument to the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function specifies that we want to plot the number density, rather than the biomass density. We’ll discuss this more below in the section on [other representations](#other-representations).
 
 The green line represents the number density of the background community, labelled as “Resource” in the plot legend, in which our foreground species finds itself. The green line is a straight line with slope `lambda = -2.05`. Thus the number density of the background community is proportional to w^{-2.05}. It is important to understand that a power-law curve looks like a straight line when plotted on logarithmic axes and the slope of the line is the exponent in the power law. If this does not sound familiar, please revisit the section in the previous tutorial where we [fitted a power-law](observed-size-spectra.qmdfitting-a-power-law) to the community spectrum.
 
@@ -60,7 +60,7 @@ It is now time to do the first exercise of this tutorial.
 > >
 > > ``` downlit
 > > params21 <- newSingleSpeciesParams(lambda = 2.1)
-> > plot21 <- plotSpectra(params21, power = 0)
+> > plot21 <- plotSpectra(params21, biomass = FALSE)
 > > plot21
 > > ```
 > >
@@ -161,7 +161,7 @@ We have seen in the previous tutorial on [observed size spectra](../understand/o
 
 B(w) = N\_{\log}(w) = w N(w) \text{ and } B\_{\log}(w) = w^2 N(w).
 
-We can use the `power` argument of the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function to determine which of these densities to plot. Above we plotted the number density by setting `power = 0`. Without the `power` argument (or with `power = 1` which is the default) the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function plots the biomass density as a function of weight, which is also the number density as a function of log weight:
+We can use two arguments of the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function to determine which of these densities to plot: `biomass` chooses between a number density and a biomass density, and `per_log_size` chooses whether the density is taken with respect to weight or with respect to log weight. Above we plotted the number density by setting `biomass = FALSE`. With the default `biomass = TRUE` and `per_log_size = FALSE`, i.e., without giving either argument, the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function plots the biomass density as a function of weight, which is also the number density as a function of log weight:
 
 ``` downlit
 plotSpectra(params)
@@ -171,10 +171,10 @@ plotSpectra(params)
 
 Now the green line representing the biomass density of the background has a slope of -1.05. The initial slope of the species biomass density is also negative, meaning that the biomass density in the species decreases with size.
 
-We can also plot the biomass density in log weight, i.e., the Sheldon spectrum, by supplying the argument `power = 2` to [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html).
+We can also plot the biomass density in log weight, i.e., the Sheldon spectrum, by supplying the arguments `biomass = TRUE` and `per_log_size = TRUE` to [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html).
 
 ``` downlit
-plotSpectra(params, power = 2)
+plotSpectra(params, biomass = TRUE, per_log_size = TRUE)
 ```
 
 ![](single-species-spectra_files/figure-html/plot-spectra-biomass-log-1.png)
@@ -188,7 +188,7 @@ So for example, we might want to consider the prey biomass available to two diff
 There is another way to represent the size distribution. When we talk about size spectra, we always have the representation in terms of densities in mind. You may already be familiar with the concept of a densities from probability theory, where you can describe a probability distribution in terms of its probability density function. But perhaps you also know that there is an alternative description of the probability distribution in terms of the cumulative distribution function (CDF). We can similarly describe the size distribution by a cumulative abundance distribution function, which gives the proportion of fish that are smaller than a given size:
 
 ``` downlit
-plotCDF(params, power = 0)
+plotCDF(params, biomass = FALSE)
 ```
 
 ![](single-species-spectra_files/figure-html/plot-cdf-number-1.png)
@@ -229,7 +229,7 @@ plotCDF(params, log_x = FALSE)
 
 ![](single-species-spectra_files/figure-html/plot-cdf-biomass-linear-1.png)
 
-This plot shows us for example that 50% of the biomass comes from individuals that are smaller than 12.5g and individuals larger than 75g contribute very little to the total biomass. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but most of the biomass comes from large fish. So we need to always be very clear about which quantity we are considering.
+This plot shows us for example that 50% of the biomass comes from individuals that are smaller than 12.5g and individuals larger than 75g contribute very little to the total biomass. Compare that with the abundance distribution we plotted in the previous section. Almost all fish are tiny, but half of the biomass comes from fish of 10g or larger. So we need to always be very clear about which quantity we are considering.
 
 We can also plot the cumulative biomass distribution function on a logarithmic weight axis:
 
@@ -502,7 +502,8 @@ Then we can use the function [`plotSpectra2()`](https://sizespectrum.org/mizer/r
 ``` downlit
 plotSpectra2(params, name1 = "Early maturity",
              params_changed_maturity, name2 = "Late maturity",
-             power = 2, resource = FALSE, wlim = c(10, NA))
+             biomass = TRUE, per_log_size = TRUE,
+             resource = FALSE, wlim = c(10, NA))
 ```
 
 ![](single-species-spectra_files/figure-html/plot-spectra2-comparison-1.png)

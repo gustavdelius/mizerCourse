@@ -12,7 +12,7 @@ sim <- project(NS_params, effort = effort_array, dt = 0.1, t_save = 1)
 
 ## Accessing the simulation results
 
-The projected species abundances at size through time can be obtained with `N(sim)`. This returns a three-dimensional array (time x species x size). Consequently, this array can get very big so inspecting it can be difficult. In the example we have just run, the time dimension of `n` has 10 rows (one for the initial population and then one for each of the saved time steps). There are also 12 species each with 100 sizes. We can check this by running the [`dim()`](https://rdrr.io/r/base/dim.html) function and looking at the dimensions of the `n` array:
+The projected species abundances at size through time can be obtained with `N(sim)`. This returns a three-dimensional array (time x species x size). Consequently, this array can get very big so inspecting it can be difficult. In the example we have just run, the time dimension of the returned array has 10 rows (one for the initial population and then one for each of the saved time steps). There are also 12 species each with 100 sizes. We can check this by running the [`dim()`](https://rdrr.io/r/base/dim.html) function and looking at the dimensions of the array returned by `N(sim)`:
 
 ``` downlit
 dim(N(sim))

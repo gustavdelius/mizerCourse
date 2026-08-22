@@ -16,7 +16,7 @@ Alternatively, if you can not or do not want to install R on your computer, you 
 
 The tutorials in this course assume that you are using [RStudio](https://posit.co/products/open-source/rstudio/) to work with R. If you prefer to use a different R environment, then you may need to translate some of the instructions to how things are in your R environment.
 
-RStudio develops rapidly and adds useful features all the time and so it is best if you [install the latest version](https://posit.co/download/rstudio-desktop/#download). This course was written with version 2023.06.0. If you already have RStudio installed but it is an older version, the way to upgrade is to just install the newest version. The old version will automatically be replaced by the new.
+RStudio develops rapidly and adds useful features all the time and so it is best if you [install the latest version](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads). This course was written with version 2026.08.1. If you already have RStudio installed but it is an older version, the way to upgrade is to just install the newest version. The old version will automatically be replaced by the new.
 
 If you are new to RStudio, the video on the RStudio IDE homepage is well worth watching.
 
@@ -25,19 +25,17 @@ If you are new to RStudio, the video on the RStudio IDE homepage is well worth w
 R packages extend the functionality of R. mizer itself is such an R package. There is a central repository for R packages called CRAN which hosts all of the packages needed for this course, except for the mizerExperimental package. To install them on your computer just start RStudio and then in the console issue the command
 
 ``` downlit
-install.packages(c("mizer", "tidyverse", "plotly", "remotes", "usethis",
+install.packages(c("mizer", "tidyverse", "plotly", "pak", "usethis",
                    "rfishbase", "rmarkdown", "rstudioapi"))
 ```
 
 The mizerExperimental package is for code that is still experimental and thus changes frequently. Therefore it is hosted in a [GitHub repository](https://github.com/sizespectrum/mizerExperimental). You install it with
 
 ``` downlit
-remotes::install_github("sizespectrum/mizerExperimental", ref = "2f7d4ca")
+pak::pak("sizespectrum/mizerExperimental")
 ```
 
 This may give you a list of other packages that you have already installed that have newer versions available and ask you to specify which ones you want to update. For the purpose of this course it probably will not be important, so if you like you can skip the updates for now.
-
-Note the `ref` argument to `install_github()`. It specifies which particular version of the code you want to install. This makes sure that the version you install will behave as expected in this course. Unlike the mizer package, the mizerExperimental package does not promise that newer versions remain backwards compatible to earlier versions. So if you want reproducible code it will be best to install a fixed version.
 
 ## Checking your installation
 
@@ -45,15 +43,9 @@ To check that everything works, copy and paste and then run the following code:
 
 ``` downlit
 if (getRversion() < "4.0") warning("Your version of R is too old.")
-if (packageVersion("mizer") < "2.5.0") warning("Your version of mizer is too old.")
-if (packageVersion("mizerExperimental") != "2.4.0.9004") warning("You are using a different version of MizerExperimental. Please reinstall with the command given above.")
-```
-
-    Warning: You are using a different version of MizerExperimental. Please
-    reinstall with the command given above.
-
-``` downlit
-if (packageVersion("tidyverse") < "1.3.0") warning("Your version of tidyverse is very old. While this may not create a problem, updating it is nevertheless advised.")
+if (packageVersion("mizer") < "3.3.0") warning("Your version of mizer is too old.")
+if (packageVersion("mizerExperimental") < "3.2.0") warning("You are using an old version of MizerExperimental. Please reinstall with the command given above.")
+if (packageVersion("tidyverse") < "2.0.0") warning("Your version of tidyverse is old. While this may not create a problem, updating it is nevertheless advised.")
 library(mizer)
 library(mizerExperimental)
 ```
@@ -61,15 +53,15 @@ library(mizerExperimental)
 
     Attaching package: 'mizerExperimental'
 
-    The following objects are masked from 'package:mizer':
+    The following object is masked from 'package:mizer':
 
-        markBackground, removeBackgroundSpecies
+        plotYieldVsF
 
 ``` downlit
 plotDeath(NS_params)
 ```
 
-![](install-tools_files/figure-html/unnamed-chunk-3-1.png)
+![](install-tools_files/figure-html/install-tools-3-1.png)
 
 If you do not get any “Warning” or “Error”, then everything is fine. If you experience problems, see below.
 

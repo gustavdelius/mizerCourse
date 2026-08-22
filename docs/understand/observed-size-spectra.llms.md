@@ -140,7 +140,7 @@ p <- ggplot(size_data) +
 p
 ```
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-6-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-6-1.png)
 
 > **NOTE:**
 >
@@ -168,7 +168,7 @@ p + scale_y_log10()
 
     Warning in scale_y_log10(): log-10 transformation introduced infinite values.
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-7-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-7-1.png)
 
 > **NOTE:**
 >
@@ -214,7 +214,7 @@ p2 <- ggplot(size_data) +
 p2
 ```
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-9-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-9-1.png)
 
 The heights are now slightly more even among the bins, because the largest bin is so wide.
 
@@ -268,7 +268,7 @@ It is very important that you break up your reading of the tutorials with some h
 > > histogram_22
 > > ```
 > >
-> > ![](observed-size-spectra_files/figure-html/unnamed-chunk-12-1.png)
+> > ![](observed-size-spectra_files/figure-html/observed-size-spectra-12-1.png)
 
 > **NOTE:**
 >
@@ -282,7 +282,7 @@ The third thing we can do to get a better-looking plot is to also display the we
 p2 + scale_x_log10()
 ```
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-13-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-13-1.png)
 
 Note how on the logarithmically-scaled x-axis the logarithmically-sized bins all have the same width.
 
@@ -368,7 +368,7 @@ p_number_density <- ggplot(binned_numbers) +
 p_number_density
 ```
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-18-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-18-1.png)
 
 > **NOTE:**
 >
@@ -382,7 +382,7 @@ p_number_density +
     scale_y_log10()
 ```
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-19-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-19-1.png)
 
 It is time for your second exercise of the course.
 
@@ -444,7 +444,7 @@ It is time for your second exercise of the course.
 > > p_number_density_22
 > > ```
 > >
-> > ![](observed-size-spectra_files/figure-html/unnamed-chunk-25-1.png)
+> > ![](observed-size-spectra_files/figure-html/observed-size-spectra-25-1.png)
 > >
 > > Note how the plotting code is the same except that we specified that it should use our new dataframe `binned_numbers_22`.
 
@@ -475,7 +475,7 @@ ggplot(binned_numbers, aes(x = bin_midpoint, y = Number_density)) +
     geom_smooth(method = 'lm')
 ```
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-27-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-27-1.png)
 
 > **NOTE:**
 >
@@ -541,7 +541,7 @@ ggplot(binned_biomass, aes(x = bin_midpoint, y = Biomass_density)) +
 
     `geom_smooth()` using formula = 'y ~ x'
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-29-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-29-1.png)
 
 Fitting a linear model to the binned biomass density data now gives
 
@@ -601,7 +601,7 @@ ggplot(long_data, aes(x = bin_midpoint, y = Density, colour = Type)) +
     geom_smooth(method = 'lm', se = FALSE)
 ```
 
-![](observed-size-spectra_files/figure-html/unnamed-chunk-32-1.png)
+![](observed-size-spectra_files/figure-html/observed-size-spectra-32-1.png)
 
 > **NOTE:**
 >

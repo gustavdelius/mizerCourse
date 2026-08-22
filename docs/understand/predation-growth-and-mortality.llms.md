@@ -36,7 +36,8 @@ Let’s make a plot to check that this did what we intended:
 
 ``` downlit
 # The `species = FALSE` means that we will only plot the background
-plotSpectra(params_starved, power = 2, species = FALSE)
+plotSpectra(params_starved, biomass = TRUE, per_log_size = TRUE,
+            species = FALSE)
 ```
 
 ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-3-1.png)
@@ -64,7 +65,7 @@ We can now visualise the difference in the size spectra with the [`plotSpectra2(
 ``` downlit
 spectra_plot <- plotSpectra2(params, name1 = "Original",
                              params_starved, name2 = "Less prey",
-                             power = 2)
+                             biomass = TRUE, per_log_size = TRUE)
 spectra_plot
 ```
 
@@ -108,7 +109,7 @@ Here we hand over to you to investigate what happens when the prey abundance is 
 > >
 > > plotSpectra2(params, name1 = "Original",
 > >              params_overfed, name2 = "More prey",
-> >              power = 2)
+> >              biomass = TRUE, per_log_size = TRUE)
 > > ```
 > >
 > > ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-8-1.png)
@@ -133,22 +134,22 @@ Of these four factors, we have already been discussing the density of prey. In t
 
 ### The predation kernel
 
-Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function [`getPredKernel()`](https://sizespectrum.org/mizer/reference/setPredKernel.html).
+Fish will be particularly good at catching prey in a specific range of sizes, smaller than themselves. This is encoded in the size-spectrum model by the predation kernel. Let us take a look at the predation kernel in our model. We can obtain it with the function [`pred_kernel()`](https://sizespectrum.org/mizer/reference/setPredKernel.html).
 
 ``` downlit
-pred_kernel <- getPredKernel(params)
+kernel <- pred_kernel(params)
 ```
 
 This is a large three-dimensional array (predator species x predator size x prey size). We extract the kernel of a predator of size 10g (using that we remember that this is in size class 81)
 
 ``` downlit
-pred_kernel_10 <- pred_kernel[, 81, , drop = FALSE]
+kernel_10 <- kernel[, 81, , drop = FALSE]
 ```
 
 The `drop = FALSE` option is there to prevent R from dropping any of the array dimensions. We can now plot this:
 
 ``` downlit
-ggplot(melt(pred_kernel_10)) +
+ggplot(melt(kernel_10)) +
   geom_line(aes(x = w_prey, y = value)) +
   scale_x_log10(limits = c(1e-4, 10))
 ```
@@ -180,7 +181,7 @@ given_species_params(params_pk)$beta <- 1000
 Let’s make a plot to see that the predation kernel has indeed changed.
 
 ``` downlit
-getPredKernel(params_pk)[, 81, , drop = FALSE] %>% 
+pred_kernel(params_pk)[, 81, , drop = FALSE] %>% 
   melt() %>% 
   ggplot() +
   geom_line(aes(x = w_prey, y = value)) +
@@ -202,7 +203,7 @@ params_pk <- steadySingleSpecies(params_pk)
 
 plotSpectra2(params_starved, name1 = "beta = 100",
              params_pk, name2 = "beta = 1000",
-             power = 2)
+             biomass = TRUE, per_log_size = TRUE)
 ```
 
 ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-15-1.png)
@@ -331,7 +332,7 @@ params_fishing <- steadySingleSpecies(params_fishing)
 
 plotSpectra2(params, name1 = "No Fishing",
              params_fishing, name2 = "Knife-edge",
-             power = 2, wlim = c(10, NA))
+             biomass = TRUE, per_log_size = TRUE, wlim = c(10, NA))
 ```
 
 ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-23-1.png)

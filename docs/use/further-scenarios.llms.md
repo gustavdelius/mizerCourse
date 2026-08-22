@@ -37,7 +37,7 @@ plotGrowthCurves(params, species_panel = TRUE)
 the spectra,
 
 ``` downlit
-plotlySpectra(params, power = 2, total = TRUE)
+plotlySpectra(params, biomass = TRUE, per_log_size = TRUE, total = TRUE)
 ```
 
 the feeding levels,
@@ -92,7 +92,7 @@ This shows that the model has been calibrated with a very low level of fishing m
 Let’s look at the reproduction levels and the yield curve for toothfish:
 
 ``` downlit
-getReproductionLevel(params)
+reproduction_level(params)
 ```
 
         D.ele     C.gun     C.rhi     L.squ     M.cam     B.eat     B.irr     G.acu 
@@ -157,7 +157,7 @@ How do we incorporate the effort data into the model? First, we have to re-arran
 effort_time <- array(c(rep(0,13), dat$EffortPerArea), 
                      dim = c(length(1990:2020), 1),
                      dimnames = list("time" = 1990:2020, 
-                                     "gear" = params@gear_params$gear[1]))
+                                     "gear" = gear_params(params)$gear[1]))
 ```
 
 Next we use the effort data to project the model forwards from it’s steady state. But wait - we did not set up the model for the first year of the data, when fishing only just began. It may make more sense to use a steady state without fishing as the initial values for our projection.
@@ -167,7 +167,8 @@ Next we use the effort data to project the model forwards from it’s steady sta
 params <- projectToSteady(params, effort = 0)
 ```
 
-    Convergence was achieved in 1.5 years.
+    Reached the convergence tolerance after 1.5 years. The biomasses change at up
+    to 0.0023 per year.
 
 ``` downlit
 #project with fishing effort
@@ -213,11 +214,11 @@ neweffort <- neweffort / gear_params(params)$catchability[1]
 # overwrite the catchability to 1:
 # gear_params(params)$catchability[1] <- 1
 
-year = 1990:2020
-qplot(year, neweffort, ylab = "effort", xlab = "")
+effort_df <- data.frame(year = 1990:2020, effort = as.vector(neweffort))
+ggplot(effort_df, aes(x = year, y = effort)) +
+    geom_point() +
+    labs(x = "", y = "effort")
 ```
-
-    Warning: `qplot()` was deprecated in ggplot2 3.4.0.
 
 ![](further-scenarios_files/figure-html/further-scenarios-17-1.png)
 
@@ -232,6 +233,9 @@ plotYieldGear(simf3) +
                mapping = aes(x = Year, y = CatchPerArea)) + 
     xlim(2000, 2020)
 ```
+
+    Scale for x is already present.
+    Adding another scale for x, which will replace the existing scale.
 
     Warning: Removed 10 rows containing missing values or values outside the scale range
     (`geom_line()`).
@@ -277,7 +281,10 @@ proj_effort_scen1 <- matrix(initial_effort(params), nrow = 50, ncol = 1, byrow =
 dimnames(proj_effort_scen1) <- 
     list(time = 2021:2070, gear = unique(gear_params(params)$gear))
 # check it
-qplot(x = 2021:2070, y = proj_effort_scen1, ylab = "effort", xlab = "")
+ggplot(data.frame(year = 2021:2070, effort = as.vector(proj_effort_scen1)),
+       aes(x = year, y = effort)) +
+    geom_point() +
+    labs(x = "", y = "effort")
 ```
 
 ![](further-scenarios_files/figure-html/further-scenarios-21-1.png)
@@ -294,7 +301,10 @@ proj_effort_scen2[1:10,select_gear] <-
 # then hold at target
 proj_effort_scen2[11:50, select_gear] <- targetF
 # check it
-qplot(x = 2021:2070, y = proj_effort_scen2, ylab = "effort", xlab = "")
+ggplot(data.frame(year = 2021:2070, effort = as.vector(proj_effort_scen2)),
+       aes(x = year, y = effort)) +
+    geom_point() +
+    labs(x = "", y = "effort")
 ```
 
 ![](further-scenarios_files/figure-html/further-scenarios-22-1.png)
@@ -322,17 +332,14 @@ plotYield(scen)
 B_current <- getBiomass(scen)[1, ]
 Brel_scen <- melt(sweep(getBiomass(scen), 2, B_current, "/"))
 colnames(Brel_scen)[2] <- "Species"
-legend_levels <- intersect(names(scen@params@linecolour), Brel_scen$Species)
+legend_levels <- intersect(names(getColours(params)), Brel_scen$Species)
 ggplot(Brel_scen) + 
-  geom_line(aes(x = time,y = value,color = Species), size = 1) + 
-  geom_hline(yintercept = 1, linetype = 1, colour = "grey", size = 0.75) +
+  geom_line(aes(x = time, y = value, color = Species), linewidth = 1) + 
+  geom_hline(yintercept = 1, linetype = 1, colour = "grey", linewidth = 0.75) +
   scale_y_continuous(name = "Relative biomass") +
-  scale_color_manual(values = params@linecolour[legend_levels]) +
+  scale_color_manual(values = getColours(params)[legend_levels]) +
   theme(legend.key = element_rect(fill = "white")) 
 ```
-
-    Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-    ℹ Please use `linewidth` instead.
 
 ![](further-scenarios_files/figure-html/further-scenarios-24-2.png)
 
@@ -364,12 +371,9 @@ Brel_scens <- rbind(data.frame(species = names(Brel_scen1_2050),
 # barplot comparing the 2 scenarios by 2050
 ggplot(Brel_scens, aes(fill = scen, y = value, x = species)) + 
     geom_bar(position = "dodge", stat = "identity") + 
-     geom_hline(yintercept = 0.1, linetype = 2, colour = "red", size = 0.5) + 
+     geom_hline(yintercept = 0.1, linetype = 2, colour = "red", linewidth = 0.5) + 
     scale_y_log10(name = "log10(Biomass/Biomass Unfished)")
 ```
-
-    Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-    ℹ Please use `linewidth` instead.
 
 ![](further-scenarios_files/figure-html/further-scenarios-25-1.png)
 
@@ -417,7 +421,8 @@ Now let’s run two simulations, one with light fishing mortality (F = 0.2) and 
 sim_unfished <- projectToSteady(params, effort = 0, t_max = 500)
 ```
 
-    Convergence was achieved in 69 years.
+    Reached the convergence tolerance after 69 years. The biomasses change at up to
+    0.021 per year.
 
 ``` downlit
 plot(sim_unfished)
@@ -431,7 +436,8 @@ sim_longline_trawl <- projectToSteady(params_longline_trawl,
                                       effort = 0.1, t_max = 500)
 ```
 
-    Convergence was achieved in 34.5 years.
+    Reached the convergence tolerance after 34.5 years. The biomasses change at up
+    to 0.014 per year.
 
 ``` downlit
 params_longline <- params
@@ -439,7 +445,8 @@ gear_params(params_longline)$catchability[2] <- 0
 sim_longline <- projectToSteady(params_longline, effort = 0.1, t_max = 500)
 ```
 
-    Convergence was achieved in 34.5 years.
+    Reached the convergence tolerance after 34.5 years. The biomasses change at up
+    to 0.013 per year.
 
 ``` downlit
 # plot change in biomass under each scenario relative to unfished values
@@ -461,7 +468,7 @@ Brel_scens <- rbind(data.frame(species = names(Brel_longline),
 # barplot comparing the 2 scenarios by 2050
 ggplot(Brel_scens, aes(fill = scen, y = value, x = species)) + 
     geom_bar(position = "dodge", stat = "identity") + 
-    geom_hline(yintercept = 0.1, linetype = 2, colour = "red", size = 0.5)  + 
+    geom_hline(yintercept = 0.1, linetype = 2, colour = "red", linewidth = 0.5)  + 
     scale_y_log10(name = "log10(Biomass/Biomass Unfished)")
 ```
 

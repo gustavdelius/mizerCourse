@@ -79,10 +79,11 @@ While common names are convenient for presentation, they are ambiguous. We can u
 herring_latin <- common_to_sci("Herring")
 ```
 
-    duckdb is keeping downloaded extensions in a temporary directory:
-    ℹ /tmp/Rtmp5dwiVb/duckdb/extensions
-    This is removed when the R session ends, so extensions are re-downloaded each session.
-    ℹ To keep them, point `options(duckdb.extension_directory =)` or the `DUCKDB_EXTENSION_DIRECTORY` environment variable at a permanent path.
+    duckdb is storing downloaded extensions and secrets under ~/.duckdb:
+    ℹ /home/gustav/.duckdb
+    This persists across sessions and is shared with the DuckDB CLI and other clients.
+    ℹ Run duckdb(shared_home = FALSE) to use a temporary directory instead.
+    ℹ See ?duckdb_storage for details and alternatives.
     Joining with `by = join_by(Subfamily, GenCode, FamCode)`
     Joining with `by = join_by(FamCode)`
     Joining with `by = join_by(Order, Ordnum, Class, ClassNum)`
@@ -130,65 +131,43 @@ The following picture gives a summary of the most important species parameters. 
 
 At this point it might be useful to go back and re-watch the second half of [Ken Andersen’s introductory lecture](../understand/index.llms.md#video-introduction) which explains species parameters used in mizer. It is great how mizer can start building a model with only very few species parameters! For most other parameters, if values are not supplied by the user, mizer will fill them with default values using size-based theory or species averages.
 
-If you don’t like defaults you can change them all. You can find the complete list of species parameters used in mizer in the help page of [`species_params()`](https://sizespectrum.org/mizer/reference/species_params.html). Advanced users can also overrule the way mizer uses allometric scaling relations. You can read about all the details in the help page for [`setParams()`](https://sizespectrum.org/mizer/reference/setParams.html).
+If you don’t like defaults you can change them all. You can find the complete list of species parameters used in mizer in the help page of [`species_params()`](https://sizespectrum.org/mizer/reference/species_params.html). Advanced users can also overrule the way mizer uses allometric scaling relations. You can read about all the details in the [Guide: Changing model parameters](https://sizespectrum.org/mizer/articles/guide-change-parameters.html).
 
 ### Asymptotic size
 
-The required size parameter in mizer is `w_inf`, the von Bertalanffy asymptotic size (in grams). This is the size that an average individual of the species would approach if it kept growing according to its von Bertalanffy growth curve. Mizer uses `w_inf` to set sensible defaults for several other size parameters, including the maturity size `w_mat`, the size `w_repro_max` at which a mature individual invests all its energy into reproduction, and the computational upper boundary of the size grid `w_max` (which defaults to `1.5 * w_inf`). Note that `w_inf` is not a hard limit on size: because individuals vary and because of diffusion in the growth process, some individuals will grow larger than `w_inf`.
+The required size parameter in mizer is `w_inf`, the von Bertalanffy asymptotic size (in grams). This is the size that an average individual of the species would approach if it kept growing according to its von Bertalanffy growth curve. Mizer uses `w_inf` to set sensible defaults for several other size parameters, including the maturity size `w_mat`, the size `w_repro_max` at which a mature individual invests all its energy into reproduction, and the computational upper boundary of the size grid `w_max` (which defaults to `1.5 * w_inf`). Note that `w_inf` is not a hard limit on size: because individuals vary and because of randomness in the growth process, some individuals will grow larger than `w_inf`.
 
-A practical way to estimate `w_inf` is to look at the largest fish that has been caught in your study area. This will tend to slightly overestimate the asymptotic size of an average individual, and if you are fishing very hard it could instead be an underestimate, but our estimate does not have to be perfect.
-
-We have a data frame with observations of sizes of caught fish and can look through it for the largest sized fish of each species.
+Because `w_inf` is *defined* as the asymptote of the von Bertalanffy growth curve, the natural place to get it from is a study that has fitted such a curve. FishBase collects the results of these studies in its “popgrowth” table, one row per published growth study:
 
 ``` downlit
-download.file("https://github.com/gustavdelius/mizerCourse/raw/master/build/catch.csv",
-              destfile = "catch.csv")
-```
-
-``` downlit
-catch <- read.csv("catch.csv")
-
-max_size <- catch |>
-    group_by(species) |>
-    summarise(l_max = max(length))
-max_size
-```
-
-We see that we only had data for 12 of our 17 species. The species for which we still don’t have an estimate for the asymptotic size are
-
-``` downlit
-missing <- !(sp$species %in% max_size$species)
-sp$species[missing]
-```
-
-    [1] Norway Pout Poor Cod    Mackerel    Megrim      Boarfish   
-    17 Levels: Blue whiting Boarfish Cod Common Dab European Hake ... Whiting
-
-For these we can use the maximum length recorded on FishBase in the “species” table.
-
-``` downlit
-max_size_fishbase <- rfishbase::species(sp$latin_name[missing]) |>
-    select(latin_name = Species, l_max = Length)
+growth_tbl <- rfishbase::popgrowth(sp$latin_name)
 ```
 
     Joining with `by = join_by(SpecCode)`
 
 ``` downlit
-max_size_fishbase
+select(growth_tbl, Species, Sex, Loo, TLinfinity, K, Type, Locality)
 ```
 
-To combine these two tables we first need them to have a common column. So we add a species column to `max_size_fishbase` . Then we stack the two tables with [`bind_rows()`](https://dplyr.tidyverse.org/reference/bind_rows.html) and keep only the `species` and `l_max` columns
+The column `Loo` holds the estimated asymptotic length L\_\infty, but each study reports it in whatever length measure that study used, which the `Type` column records: total length (“TL”), standard length (“SL”) or fork length (“FL”). The `TLinfinity` column holds the same value converted to total length. Total length is the measure that the length-weight relationship we use below is based on, so `TLinfinity` is the column we want.
+
+> **IMPORTANT:**
+>
+> We are taking *only* the asymptotic length L\_\infty from these von Bertalanffy fits. We will not use the von Bertalanffy growth rate parameter `K`, because the growth curve that mizer produces has a different shape from the von Bertalanffy curve.
+
+As with the length-weight coefficients, there are many studies per species, from different areas and different decades, and it is not obvious how to combine them. We do something simple and take the median over all studies:
 
 ``` downlit
-max_size_fishbase <- max_size_fishbase |>
-    left_join(select(sp, species, latin_name),
-              by = "latin_name")
-max_size <- bind_rows(max_size, max_size_fishbase) |>
-    select(species, l_max)
-max_size
+median_linf <- growth_tbl |>
+    group_by(Species) |>
+    filter(!is.na(TLinfinity)) |>
+    summarise(l_inf = median(TLinfinity))
+median_linf
 ```
 
-This table gives us the largest length for each species but mizer likes to use weight instead of length. To convert from length to weight we use the allometric length-weight relationship which says that the length `l` in cm and the weight `w` in grams of an average individual are related as:
+If you know that some of these studies are more relevant to your area or your time period than others, you should select them using the `Locality`, `YearStart` and `Sex` columns rather than lumping them all together as we have done here.
+
+This table gives us the asymptotic length for each species but mizer likes to use weight instead of length. To convert from length to weight we use the allometric length-weight relationship which says that the length `l` in cm and the weight `w` in grams of an average individual are related as:
 
 w = a \cdot l^b
 
@@ -206,30 +185,23 @@ length_weight
 
 Note that fishbase is continuously updated and the values you get for the length-weight conversion coefficients will change over time. The values above are already different from the ones in November 2022 when this course was first written.
 
-We can now add all this information to our species parameter data frame and use it to calculate the column we actually need, namely `w_inf`.
+We can now add all this information to our species parameter data frame:
 
 ``` downlit
 sp <- sp |>
     left_join(length_weight, by = c("latin_name" = "Species")) |>
-    left_join(max_size) |>
-    mutate(w_inf = a * l_max ^ b)
-```
-
-    Joining with `by = join_by(species)`
-
-``` downlit
+    left_join(median_linf, by = c("latin_name" = "Species"))
 sp
 ```
 
-Even though mizer will never use the `l_max` column, it does not hurt to keep it around.
+Mizer will convert all lengths to weights automatically using the `a` and `b` parameters.
 
 Now it is time again to add comments to remind us of the origin of our parameters:
 
 ``` downlit
-comment(sp$a) <- "Taken from the `a` column in the 'estimates' table on FishBase on 07/12/2023."
-comment(sp$a) <- "Taken from the `b` column in the 'estimates' table on FishBase on 07/12/2023."
-comment(sp$l_max) <- "See https://mizer.course.sizespectrum.org/build/collect-parameters.html#asymptotic-size "
-comment(sp$w_inf) <- "Calculated from `l_max` using weight-length parameters `a` and `b`."
+comment(sp$a) <- "Taken from the `a` column in the 'estimates' table on FishBase."
+comment(sp$b) <- "Taken from the `b` column in the 'estimates' table on FishBase."
+comment(sp$l_inf) <- "Median of `TLinfinity` over all entries in the 'popgrowth' table on FishBase."
 ```
 
 ### Growth parameters
@@ -252,7 +224,7 @@ maturity_tbl
 
 You can see that the table has many entries for each species with estimates from various locations and times and it is not clear how to combine all these estimates into a good estimate for our particular area. I am sure there will be a lot of debate about this at the course meetings.
 
-Rather than with working with the above table inside R it might be a good idea to explore it on the FishBase website. For example here is the [maturity page for Cod](https://www.fishbase.se/Reproduction/MaturityList.php?ID=69).
+Rather than working with the above table inside R it might be a good idea to explore it on the FishBase website. For example here is the [maturity page for Cod](https://www.fishbase.se/Reproduction/MaturityList.php?ID=69).
 
 Here we will do something rather simple: we’ll just take the median values over all the observations where both the length at maturity `Lm` and the age at maturity `tm` are given:
 
@@ -265,11 +237,10 @@ median_maturity <- maturity_tbl |>
 median_maturity
 ```
 
-We add this information to our species parameter data frame and also add a `w_mat` column.
+We add this information to our species parameter data frame and also add a `w_mat` column because this will be useful below.
 
 ``` downlit
-sp <- sp |>
-    left_join(median_maturity, by = c("latin_name" = "Species")) |>
+sp <- left_join(sp, median_maturity, by = c("latin_name" = "Species")) |>
     mutate(w_mat = a * l_mat ^ b)
 
 comment(sp$l_mat) <- "Median of `Lm` over all observations on the 'maturity' table on FishBase that had both `Lm` and `tm`."
@@ -277,7 +248,7 @@ comment(sp$age_mat) <- "Median of `tm` over all observations on the 'maturity' t
 comment(sp$w_mat) <- "Calculated from `l_mat` using weight-length parameters `a` and `b`."
 ```
 
-We are not saying that this is a good way to get information on growth. A better way might be to analyse size-at-age data in an appropriate way. However we would warn against the temptation of using von Bertalannfy growth curve parameters because they describe a different kind of growth curve than the one mizer needs. We discussed this in a [mizer blog post](https://blog.mizer.sizespectrum.org/posts/2022-11-30-dont-use-von-bertalanffy-growth-parameters/).
+We are not saying that this is a good way to get information on growth. A better way might be to analyse age-at-length data in an appropriate way.
 
 ### Predation kernel
 
@@ -322,10 +293,10 @@ The biomass estimates go into a `biomass_observed` column in the species paramet
 
 ``` downlit
 sp$biomass_observed <- readRDS("celtic_sea_ssb.rds")
-comment(sp$biomass_observed) <- "Average of spawning stock biomass over the years 2012--2021 taken from ICES stock assessment reports."
+comment(sp$biomass_observed) <- "Average of spawning stock biomass over the years 2012--2021 taken from ICES stock assessment reports, scaled them down to tonnes per square kilometre"
 ```
 
-Biomass estimates will only include individuals above a certain size, for example because the smaller individuals are not retained by our fishing gear. This cutoff size in grams you specify in the `biomass_cutoff` parameter. Because we are using an estimate of the spawning stock biomass, which includes individuals above the maturity size, we set `biomass_cutoff` to `w_mat`.
+Biomass estimates will only include individuals above a certain size, for example because the smaller individuals are not retained by our fishing gear. This cutoff size in grams you specify in the `biomass_cutoff` parameter. Because we are using an estimate of the spawning stock biomass, which includes individuals above the maturity size, we set `biomass_cutoff` to `w_mat` (which we had already calculated above).
 
 ``` downlit
 sp$biomass_cutoff <- sp$w_mat
@@ -361,9 +332,7 @@ There are many other parameters that are used to describe species properties, bu
 
 - The investment into reproduction by mature individuals as a scaling exponent m. Default is `1`.
 
-&nbsp;
-
-    There is a lot of debate about the correct values for these exponents. Some schools of thought argue that energy intake should scale with individual's surface area (exponent of $2/3$) whereas energy expenditure should scale with body volume (exponent of $1$). Others suggest that food intake and metabolism exponents should both scale with $3/4$. There are no clear rules and these exponents in reality are likely to vary across species.
+There is a lot of debate about the correct values for these exponents. Some schools of thought argue that energy intake should scale with individual’s surface area (exponent of 2/3) whereas energy expenditure should scale with body volume (exponent of 1). Others suggest that food intake and metabolism exponents should both scale with 3/4. There are no clear rules and these exponents in reality are likely to vary across species.
 
 2.  The species **search volume** is set from the search rate constant `gamma` and its body size scaling exponent `q`. If no value is provided, `gamma` is set so that when prey abundance is described by the power law with the exponent `lambda`, the search volume will lead to a juvenile feeding level of `f0 = 0.6`.
 
@@ -371,7 +340,7 @@ There are many other parameters that are used to describe species properties, bu
 
 4.  The **external mortality rate** (also called background or baseline mortality) is by default set to a size-independent constant `z0`. If no values are provided mizer assumes that species with small asymptotic body sizes have much higher baseline mortality rate. For example, a species with `w_inf` = 35 g will have `z0` = 0.18, a species with `w_inf` = 150g will have `z0` = 0.11 and a species with `w_inf` = 14kg will have `z0` = 0.025.
 
-5.  We already discussed the parameters involved in setting the [investment into reproduction](..understand/single-species-spectra.hqmd#investment-into-reproduction) previously. The reproduction investment exponent `m` determines the scaling of the investment into reproduction for mature individuals. By default `m` = 1 which means that after maturation the rate at which individual fish invests energy into reproduction scales linearly with size (if you want more information, you can find it [here](https://sizespectrum.org/mizer/reference/setReproduction.html#investment-into-reproduction)). This default can be changed to another value if different scaling is preferred (e.g. in case you might want to explore [hyper-allometric reproduction investment options](https://www.pnas.org/doi/abs/10.1073/pnas.2100695118)). The steepness of population level energy allocation to reproduction is determined by `w_mat25`, the size at which 25% of individuals are mature.
+5.  We already discussed the parameters involved in setting the [investment into reproduction](..understand/single-species-spectra.hqmd#investment-into-reproduction) previously. The reproduction investment exponent `m` determines the scaling of the investment into reproduction for mature individuals. By default `m` = 1 which means that after maturation the rate at which individual fish invests energy into reproduction scales linearly with size (if you want more information, you can find it [here](https://sizespectrum.org/mizer/reference/setReproduction.html#investment-into-reproduction)). This default can be changed to another value if different scaling is preferred (e.g. in case you might want to explore [hyper-allometric reproduction investment options](https://www.pnas.org/doi/abs/10.1073/pnas.2100695118)). The steepness of the maturity ogive is determined by `w_mat25`, the size at which 25% of individuals are mature.
 
 6.  The species minimum body size in the model `w_min` is by default set to 0.001 in grams, a typical size of a fish egg.
 

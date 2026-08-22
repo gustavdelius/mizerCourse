@@ -34,7 +34,7 @@ In the previous tutorial, in the section on [trophic cascades](../understand/spe
 # Create trait-based model
 mp <- newTraitParams() |> 
     # run to steady state with constant reproduction rate
-    steady() |>
+    tuneSteadyState() |>
     # turn of reproduction and instead keep egg abundance constant
     setRateFunction("RDI", "constantEggRDI") |>
     setRateFunction("RDD", "noRDD")
@@ -50,7 +50,7 @@ mp_lessRes_steady <- projectToSteady(mp_lessRes)
 # We compare the steady states
 plotSpectra2(mp_lessRes_steady, name1 = "less resource", 
              mp, name2 = "original",
-             total = TRUE, power = 2,
+             total = TRUE, biomass = TRUE, per_log_size = TRUE,
              ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
@@ -65,7 +65,7 @@ sim_lessRes <- project(mp_lessRes, t_max = 24)
 We can now use this MizerSim object in the [`animateSpectra()`](https://sizespectrum.org/mizer/reference/animate.html) function to create an animation showing the change in the size spectra over time.
 
 ``` downlit
-animateSpectra(sim_lessRes, total = TRUE, power = 2, 
+animateSpectra(sim_lessRes, total = TRUE, biomass = TRUE, per_log_size = TRUE, 
                ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
@@ -117,7 +117,7 @@ To see the effect we run the same code as above after deleting the two lines tha
 
 ``` downlit
 # Create trait-based model and run to steady state
-mp <- newTraitParams() |> steady()
+mp <- newTraitParams() |> tuneSteadyState()
 
 # We make a copy of the model
 mp_lessRes <- mp
@@ -128,7 +128,7 @@ given_species_params(mp_lessRes)$interaction_resource[8:11] <- 0.8
 sim_lessRes <- project(mp_lessRes, t_max = 30, t_save = 2)
 
 # We animate the result
-animateSpectra(sim_lessRes, total = TRUE, power = 2, 
+animateSpectra(sim_lessRes, total = TRUE, biomass = TRUE, per_log_size = TRUE, 
                ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
@@ -205,10 +205,10 @@ We have seen the two species parameters that determine how the energy invested i
 
 The ratio R\_{dd} / R\_{max} we denote as the **reproduction level**. This name may remind you of the feeding level, which was the ratio between the actual feeding rate and the maximum feeding rate and described the level of density dependence coming from satiation. It takes a value between 0 and 1. It follows from our discussion in the previous section that a species with a high reproduction level is more resilient to changes.
 
-We can get the reproduction levels of the different species with [`getReproductionLevel()`](https://sizespectrum.org/mizer/reference/getReproductionLevel.html):
+We can get the reproduction levels of the different species with [`reproduction_level()`](https://sizespectrum.org/mizer/reference/setBevertonHolt.html):
 
 ``` downlit
-getReproductionLevel(mp)
+reproduction_level(mp)
 ```
 
        1    2    3    4    5    6    7    8    9   10   11 
@@ -226,12 +226,14 @@ Changing the reproduction level has no effect on the steady state, because that 
 mp9 <- projectToSteady(mp9)
 ```
 
-    Convergence was achieved in 3 years.
+    Reached the convergence tolerance after 3 years. The biomasses change at up to
+    0.0015 per year.
 
 ``` downlit
 plotSpectra2(mp, name1 = "reproduction_level = 0.25",
              mp9, name2 = "reproduction_level = 0.9",
-             total = TRUE, power = 2, ylim = c(1e-8, NA), wlim = c(1e-3, NA))
+             total = TRUE, biomass = TRUE, per_log_size = TRUE,
+             ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
 ![](dynamics-of-spectra_files/figure-html/dynamics-of-spectra-15-1.png)
@@ -246,7 +248,7 @@ given_species_params(mp_lessRes9)$interaction_resource[8:11] <- 0.8
 
 sim_lessRes9 <- project(mp_lessRes9, t_max = 30, t_save = 2)
 
-animateSpectra(sim_lessRes9, total = TRUE, power = 2, 
+animateSpectra(sim_lessRes9, total = TRUE, biomass = TRUE, per_log_size = TRUE, 
                ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
@@ -272,7 +274,7 @@ The problem of course is that in practice the reproduction level is hardly ever 
 > > sim_fishing <- project(mp_fishing, t_max = 20, t_save = 2)
 > >
 > > # Animate the result
-> > animateSpectra(sim_fishing, total = TRUE, power = 2, 
+> > animateSpectra(sim_fishing, total = TRUE, biomass = TRUE, per_log_size = TRUE, 
 > >                ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 > > ```
 

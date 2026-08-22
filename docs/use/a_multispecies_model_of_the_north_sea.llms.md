@@ -91,23 +91,23 @@ gear_params$catchability <- as.numeric(f_history["1990", ])
 
 Considering the other model parameters, we will use default values for all of the other parameters apart from `kappa`, the carrying capacity of the resource spectrum (see [see the section on resource density](https://sizespectrum.org/mizer/articles/model_description.html#resource-density)). This was estimated along with the values `R_max` as part of the calibration process.
 
-We will use the interaction matrix `inter` that is shipped as an example with the mizer package, see also (https://sizespectrum.org/mizer/articles/multispecies_model.html#setting-the-interaction-matrix).
+We will use the interaction matrix `NS_interaction` that is shipped as an example with the mizer package, see also (https://sizespectrum.org/mizer/articles/multispecies_model.html#setting-the-interaction-matrix).
 
 We now have all the information we need to create the `MizerParams` object:
 
 ``` downlit
 params <- newMultispeciesParams(NS_species_params, 
-                                interaction = inter, 
+                                interaction = NS_interaction, 
                                 kappa = 9.27e10,
                                 gear_params = gear_params)
 ```
 
-    Because you have n != p, the default value for `h` is not very good.
-    Because the age at maturity is not known, I need to fall back to using
-    von Bertalanffy parameters, where available, and this is not reliable.
-    No ks column so calculating from critical feeding level.
-    Using z0 = z0pre * w_inf ^ z0exp for missing z0 values.
-    Using f0, h, lambda, kappa and the predation kernel to calculate gamma.
+    ℹ No h provided for some species, so using age at maturity to calculate it.
+    ℹ Because you have n != p, the default value for `h` is not very good.
+    ℹ Because the age at maturity is not known, I need to fall back to using
+    von Bertalanffy parameters, where available.
+    ℹ Using z0 = z0pre * w_inf ^ z0exp for calculated z0 values.
+    ℹ Using f0, h, lambda, kappa and the predation kernel to calculate gamma.
 
 ## Setting up and running the simulation
 
@@ -137,7 +137,8 @@ We could just project forward with these relative efforts. However, the populati
 params <- projectToSteady(params, effort = relative_effort["1967", ])
 ```
 
-    Convergence was achieved in 24 years.
+    Reached the convergence tolerance after 24 years. The biomasses change at up to
+    0.0027 per year.
 
 We now have our parameter object and out matrix of efforts relative to 1990. We use this effort matrix as the `effort` argument to the `project()` function. We use `dt` = 0.25 (the simulation will run faster than with the default value of 0.1, but tests show that the results are still stable) and save the results every year.
 
@@ -159,7 +160,8 @@ To explore the state of the community it is useful to calculate indicators of th
 sim0 <- projectToSteady(params, effort = 0, return_sim = TRUE)
 ```
 
-    Convergence was achieved in 42 years.
+    Reached the convergence tolerance after 42 years. The biomasses change at up to
+    0.00096 per year.
 
 ## Exploring the model outputs
 
@@ -230,7 +232,7 @@ ggplot(community_plot_data) +
 
 Historical (solid) and unexploited (dashed) and reference (dotted) community indicators for the North Sea multispecies model.
 
-According to our simulations, historically the LFI in the North Sea has been below the reference level.
+According to our simulations, the LFI in the North Sea stayed below the reference level for most of the historical period, only rising above it in the last few years of the simulation.
 
 ## Future projections
 
