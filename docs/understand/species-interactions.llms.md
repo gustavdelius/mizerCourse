@@ -12,16 +12,16 @@ library(tidyverse)
 
 In this first part of the course we aim for understanding, not realism. So in this tutorial we investigate the tangled web of interactions in an idealised multi-species system. We choose a trait-based model in which the species making up the community differ from each other only in a single trait: their asymptotic body size (sometimes it is also called maximum body size).
 
-We use the [`newTraitParams()`](https://sizespectrum.org/mizer/reference/newTraitParams.html) function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the [`newSingleSpeciesParams()`](https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html) function, the [`newTraitParams()`](https://sizespectrum.org/mizer/reference/newTraitParams.html) function does not set the initial spectra to their steady state values. We thus need to run the result through the [`steady()`](https://sizespectrum.org/mizer/reference/steady.html) function. We assign the resulting MizerParams object to the variable `mp`.
+We use the [`newTraitParams()`](https://sizespectrum.org/mizer/reference/newTraitParams.html) function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the [`newSingleSpeciesParams()`](https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html) function, the [`newTraitParams()`](https://sizespectrum.org/mizer/reference/newTraitParams.html) function does not set the initial spectra to their steady state values. We thus need to run the result through the [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html) function. We assign the resulting MizerParams object to the variable `mp`.
 
 ``` downlit
-mp <- newTraitParams() |> steady()
+mp <- newTraitParams() |> tuneSteadyState()
 ```
 
 Let us look at the biomass density in log weight.
 
 ``` downlit
-plotSpectra(mp, power = 2, total = TRUE)
+plotSpectra(mp, biomass = TRUE, per_log_size = TRUE, total = TRUE)
 ```
 
 ![](species-interactions_files/figure-html/species-interactions-3-1.png)
@@ -226,7 +226,7 @@ mp_lessRes_sss <- steadySingleSpecies(mp_lessRes)
 and then ploting the spectra
 
 ``` downlit
-plotSpectra(mp_lessRes_sss, power = 2)
+plotSpectra(mp_lessRes_sss, biomass = TRUE, per_log_size = TRUE)
 ```
 
 ![](species-interactions_files/figure-html/species-interactions-17-1.png)
@@ -241,18 +241,20 @@ We can see the drastic reduction in the abundances of species 8 to 11.
 
 As we just discussed, the above picture does does not show a steady state of the ecosystem. Species now find themselves with a different abundance of predators and prey and this will change their mortality and their growth and hence their size spectra.
 
-The easiest way to find the new steady state that the ecosystem will settle into is to simulate the full multi-species dynamics forward in time. Mizer refers to this simulation to find the future state of the ecosystem as “projecting”. We can use the function [`projectToSteady()`](https://sizespectrum.org/mizer/reference/projectToSteady.html) to project forward in time far enough so the system has settled down again close to the new steady state.
+The easiest way to find the new steady state that the ecosystem will settle into is to simulate the full multi-species dynamics forward in time. Mizer refers to this simulation to find the future state of the ecosystem as “projecting”. We can use the function [`projectToSteady()`](https://sizespectrum.org/mizer/reference/superseded_steady.html) to project forward in time far enough so the system has settled down again close to the new steady state.
 
 ``` downlit
 mp_lessRes_steady <- projectToSteady(mp_lessRes)
 ```
 
-    Convergence was achieved in 24 years.
+    Reached the convergence tolerance after 24 years. The biomasses change at up to
+    0.01 per year.
 
 ``` downlit
 plotSpectra2(mp_lessRes_steady, name1 = "less resource", 
              mp, name2 = "original", 
-             total = TRUE, power = 2, ylim = c(1e-8, NA), wlim = c(1e-3, NA))
+             total = TRUE, biomass = TRUE, per_log_size = TRUE,
+             ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
 ![](species-interactions_files/figure-html/species-interactions-19-1.png)
@@ -274,7 +276,7 @@ As we did in the section on [fishing mortality](predation-growth-and-mortality.l
 
 ``` downlit
 mp_fishing_sss <- steadySingleSpecies(mp_fishing)
-plotSpectra(mp_fishing_sss, power = 2)
+plotSpectra(mp_fishing_sss, biomass = TRUE, per_log_size = TRUE)
 ```
 
 ![](species-interactions_files/figure-html/species-interactions-21-1.png)
@@ -293,12 +295,13 @@ Again the important point is that the above picture does does not show a steady 
 > > mp_fishing_steady <- projectToSteady(mp_fishing_sss)
 > > ```
 > >
-> >     Convergence was achieved in 12 years.
+> >     Reached the convergence tolerance after 12 years. The biomasses change at up to
+> >     0.0011 per year.
 > >
 > > ``` downlit
 > > plotSpectra2(mp, name1 = "No fishing",
 > >              mp_fishing_steady, name2 = "Fishing",
-> >              power = 2,
+> >              biomass = TRUE, per_log_size = TRUE,
 > >              wlim = c(1e-2, NA), ylim = c(1e-6, NA))
 > > ```
 > >

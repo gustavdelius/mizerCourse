@@ -122,7 +122,7 @@ Alternatively, you can use [Ken Andersen's book](https://books.google.dk/books?h
 The reproduction parameters in our model are currently rather random:
 
 ```{r tune-resilience-5}
-getReproductionLevel(cel_model)
+reproduction_level(cel_model)
 ```
 
 We will tune them to achieve the desired value for F~MSY~.
@@ -147,12 +147,12 @@ species_params(cel_model) |> select(erepro, R_max)
 Let's see what reproduction levels this gives:
 
 ```{r tune-resilience-8}
-getReproductionLevel(cel_model)
+reproduction_level(cel_model)
 ```
 
 It is quite typical that large slow-growing species have a higher reproduction level than smaller fast-growing species.
 
-Remember: the reproduction level is the ratio between `RDD` and `R_max` and can vary between 0 and 1. It tells us how close the actual reproduction (after applying density dependence) is to the theoretical maximum, set by `R_max`. So instead of using the `getReproductionLevel()` function we could also have done the calculation ourselves:
+Remember: the reproduction level is the ratio between `RDD` and `R_max` and can vary between 0 and 1. It tells us how close the actual reproduction (after applying density dependence) is to the theoretical maximum, set by `R_max`. So instead of using the `reproduction_level()` function we could also have done the calculation ourselves:
 
 ```{r tune-resilience-9}
 getRDD(cel_model) / species_params(cel_model)$R_max
@@ -193,7 +193,7 @@ plotYieldVsF(cel_model, species = "European Hake",
 We read off that for hake the current value of F~MSY~ in the model is too high. In other words, it is not sensitive enough to fishing. We have probably put on too much extra density dependence on the reproduction. Let us look at the reproduction level we have currently chosen:
 
 ```{r tune-resilience-13}
-getReproductionLevel(cel_model)["European Hake"]
+reproduction_level(cel_model)["European Hake"]
 ```
 
 Let us see what the yield curve would look like when we only include the density depencence in recruitment that is automatically included in the mizer model and do not add anything extra. So we set the reproduction level to 0.
@@ -201,7 +201,7 @@ Let us see what the yield curve would look like when we only include the density
 ```{r tune-resilience-14}
 #| message: false 
 # First we save current reproduction level into a vector 
-rep_level <- getReproductionLevel(cel_model)
+rep_level <- reproduction_level(cel_model)
 # then we replace our species' reproduction level with a new value 
 rep_level["European Hake"] <- 0
 # and assign it back to the model 

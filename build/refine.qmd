@@ -24,7 +24,7 @@ cel_model <- readParams("cel_model.rds")
 One bit of information that we did not supply when we set up the model was the abundance of the resource. Let us take a look at the size-spectrum plot to see what value mizer chose:
 
 ```{r refine-3}
-plotlySpectra(cel_model, power = 2, total = TRUE)
+plotlySpectra(cel_model, biomass = TRUE, per_log_size = TRUE, total = TRUE)
 ```
 
 We have put `total = TRUE` to include the total community spectrum in the plot in black. At the smallest sizes the community is comprised of the resource only, plotted in green, but then at larger sizes the fish contribute. Sheldon's observation was that the community size spectrum would be approximately flat all the way from bacteria to whales. We notice that the above plot does not quite conform to that observation. Instead, the spectrum is quite a bit lower at small sizes, then rises at the sizes where the fish dominate. It then drops off again because we have not included anything larger than cod in our model. No whales here. To get a community spectrum more in line with Sheldon's observation we should increase the resource abundance
@@ -50,13 +50,13 @@ cel_model <- scaleDownBackground(cel_model, factor = 1/2)
 That the function scales down rather than up, so that we need to set the scaling factor to 1/2 rather than 2, is a historical accident. Let's look at the spectrum plot now:
 
 ```{r refine-6}
-plotlySpectra(cel_model, power = 2, total = TRUE)
+plotlySpectra(cel_model, biomass = TRUE, per_log_size = TRUE, total = TRUE)
 ```
 
 The resource has increased by a factor of 2, even if this is not very noticeable on this logarithmic y axis. But we are now no longer in steady state. As always after we have made a modification, we need to run the dynamics to get back to steady state. But before we do that, we also want to match the growth rates again because they will of course have increased by increasing the resource abundance. So we do
 
 ```{r refine-7, message=FALSE, warning=FALSE}
-cel_model <- cel_model |> matchGrowth() |> steady()
+cel_model <- cel_model |> matchGrowth() |> tuneSteadyState()
 ```
 
 This has now messed up the biomasses in the model:
@@ -68,7 +68,7 @@ plotBiomassVsSpecies(cel_model)
 So we also do
 
 ```{r refine-9, message=FALSE, warning=FALSE}
-cel_model <- cel_model |> matchBiomasses() |> steady()
+cel_model <- cel_model |> matchBiomasses() |> tuneSteadyState()
 ```
 
 This is what the feeding levels look like now:

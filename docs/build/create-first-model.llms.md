@@ -52,10 +52,9 @@ cel_model <- newMultispeciesParams(species_params = celtic_species_params,
                                    lambda = 2.05, n = 3/4, p = 3/4)
 ```
 
-    No h provided for some species, so using age at maturity to calculate it.
-    No ks column so calculating from critical feeding level.
-    Using z0 = z0pre * w_inf ^ z0exp for missing z0 values.
-    Using f0, h, lambda, kappa and the predation kernel to calculate gamma.
+    ℹ No h provided for some species, so using age at maturity to calculate it.
+    ℹ Using z0 = z0pre * w_inf ^ z0exp for calculated z0 values.
+    ℹ Using f0, h, lambda, kappa and the predation kernel to calculate gamma.
 
 The messages tell you that the [`newMultispeciesParams()`](https://sizespectrum.org/mizer/reference/newMultispeciesParams.html) function has made choices for some species parameters based on the information we supplied.
 
@@ -75,34 +74,36 @@ You can get that metadata back later with [`getMetadata()`](https://sizespectrum
 The [`newMultispeciesParams()`](https://sizespectrum.org/mizer/reference/newMultispeciesParams.html) function does not currently put much effort into choosing a good initial community configuration. Let’s have a look at what it has set up:
 
 ``` downlit
-plotlySpectra(cel_model, power = 2)
+plotlySpectra(cel_model, biomass = TRUE, per_log_size = TRUE)
 ```
 
 There is a lot wrong here. The species spectra lack the characteristic bulge at adult sizes. Also the species spectra do not line up nicely with the abundance of the resource. But most importantly, these spectra are not close to their steady state values.
 
-We will now project to the steady state, which will finally give us realistic species spectra. To do this we use the function [`steady()`](https://sizespectrum.org/mizer/reference/steady.html) that implements our trick of keeping the reproduction rate and the resource spectrum constant while running the size-spectrum dynamics until the system has settled down in its steady state.
+We will now project to the steady state, which will finally give us realistic species spectra. To do this we use the function [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html) that implements our trick of keeping the reproduction rate and the resource spectrum constant while running the size-spectrum dynamics until the system has settled down in its steady state.
 
 ``` downlit
-cel_model2 <- steady(cel_model)
+cel_model2 <- tuneSteadyState(cel_model)
 ```
 
-    Convergence was achieved in 70.5 years.
+    Reached the convergence tolerance after 61.5 years. The biomasses change at up
+    to 0.0029 per year.
 
-    Warning in setBevertonHolt.MizerParams(params, reproduction_level = old_reproduction_level): The following species require an unrealistic value greater than 1 for `erepro`: Boarfish
+    Warning: The following species require an unrealistic value greater than 1 for
+    `erepro`: Boarfish
 
 We can ignore the warning about unrealistic reproductive efficiencies. Those warnings are an artefact of how the reproduction level is set by default. We could fix those defaults, but we are not yet concerned with the reproduction dynamics so we don’t have to do that and just ignore the warnings.
 
 Now let us look at the spectra in the steady state:
 
 ``` downlit
-plotlySpectra(cel_model2, power = 2)
+plotlySpectra(cel_model2, biomass = TRUE, per_log_size = TRUE)
 ```
 
 They look a lot more like species size spectra should look like, although there are still clearly some oddities, like the very low abundance of Monkfish among others.
 
 > **CAUTION:**
 >
-> The [`steady()`](https://sizespectrum.org/mizer/reference/steady.html) function is not guaranteed to find the steady state. By default it stops after running the dynamics for a maximum of 99 years. If it warns you that it has not reached a steady state, then you should first try to run it again to see if within the next 99 years it reaches steay state. But if that still does not help, it may be that the steady state is actually unstable. In that case the system evolves towards an oscillating state instead. Luckily, this is rare for realistic parameters, but may well happen while you are still trying to find the correct parameters. If you encounter this phenomenon with your parameter choices, please let us know in the comments. We can then use your example to discuss the solution.
+> The [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html) function is not guaranteed to find the steady state. By default it stops after running the dynamics for a maximum of 99 years. If it warns you that it has not reached a steady state, then you should first try to run it again to see if within the next 99 years it reaches steady state. Sometimes the system evolves towards an oscillating state instead. Luckily, this is rare for realistic parameters, but may well happen while you are still trying to find the correct parameters. If you encounter this phenomenon with your parameter choices, please let us know in the comments. We can then use your example to discuss the solution.
 
 ## Step 3: Calibrate the model scale
 
@@ -138,6 +139,13 @@ To fix the discrepancy between the model biomasses and the observed biomasses we
 
 ``` downlit
 cel_model4 <- matchBiomasses(cel_model3)
+```
+
+    `matchBiomasses()` has rescaled the model and so moved it off its steady state.
+    Run `tuneSteadyState()` to settle it again. You can check with
+    `getSteadyResidual()`.
+
+``` downlit
 plotBiomassVsSpecies(cel_model4)
 ```
 
@@ -146,17 +154,17 @@ plotBiomassVsSpecies(cel_model4)
 Now the circles and squares lie exactly on top of each other. This is expected, because we simply changed the relative biomasses of species in the model. The size spectrum plot also look more healthy now.
 
 ``` downlit
-plotlySpectra(cel_model4, power = 2)
+plotlySpectra(cel_model4, biomass = TRUE, per_log_size = TRUE)
 ```
 
-There are similar functions [`matchNumbers()`](https://sizespectrum.org/mizer/reference/matchNumbers.html) and [`matchYields()`](https://sizespectrum.org/mizer/reference/matchYields.html) that you would use in case either total numbers of individuals or fisheries yields are known instead of total biomasses.
+There is a similar function [`matchNumbers()`](https://sizespectrum.org/mizer/reference/matchNumbers.html) that you would use in case total numbers of individuals are known instead of total biomasses.
 
 ## Step 5: Project to steady state
 
 After we have rescaled the spectra of the individual species to reproduce the observed biomasses, the system is no longer in a steady state. All species now experience a new prey distribution and a new predator distribution and so their growth and death rates have changed, which requires us to run the dynamics again to find the new steady state:
 
 ``` downlit
-cel_model5 <- steady(cel_model4)
+cel_model5 <- tuneSteadyState(cel_model4)
 ```
 
 Of course running to steady state has now messed up our biomasses again:
@@ -171,7 +179,7 @@ Luckily the discrepancies are now much smaller than they were before. Before we 
 
 > **CAUTION:**
 >
-> It may be that the change in biomasses needed is so great that the system has difficulties finding its steady state again after calling [`matchBiomasses()`](https://sizespectrum.org/mizer/reference/matchBiomasses.html). In that case you may want to try to not adjust all species in one go. You can use the `species` argument to [`matchBiomasses()`](https://sizespectrum.org/mizer/reference/matchBiomasses.html) to only adjust a subset of species, then call [`steady()`](https://sizespectrum.org/mizer/reference/steady.html) then adjust the rest and then call [`steady()`](https://sizespectrum.org/mizer/reference/steady.html) again.
+> It may be that the change in biomasses needed is so great that the system has difficulties finding its steady state again after calling [`matchBiomasses()`](https://sizespectrum.org/mizer/reference/matchBiomasses.html). In that case you may want to try to not adjust all species in one go. You can use the `species` argument to [`matchBiomasses()`](https://sizespectrum.org/mizer/reference/matchBiomasses.html) to only adjust a subset of species, then call [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html) then adjust the rest and then call [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html) again.
 
 ## Step 6: Calibrate growth
 
@@ -189,7 +197,13 @@ We can fix that with the [`matchGrowth()`](https://sizespectrum.org/mizer/refere
 cel_model6 <- matchGrowth(cel_model5)
 ```
 
-    Warning in setBevertonHolt.MizerParams(params): For the following species `erepro` has been increased to the smallest possible value: erepro[Cod] = 0.00121; erepro[European Hake] = 0.0137; erepro[Monkfish] = 7.65e-05
+    `matchGrowth()` has rescaled the model and so moved it off its steady state.
+    Run `tuneSteadyState()` to settle it again. You can check with
+    `getSteadyResidual()`.
+
+    Warning: For the following species `erepro` has been increased to the smallest
+    possible value: erepro[Cod] = 0.000778; erepro[European Hake] = 0.00386;
+    erepro[Monkfish] = 6.3e-05
 
 ``` downlit
 age_mat_model = age_mat(cel_model6)
@@ -201,11 +215,11 @@ data.frame(age_mat_model, age_mat_observed)
 Now that we have corrected the growth rates, the system is of course again out of its steady state. So again we run the dynamics until the system has settled into its new steady state.
 
 ``` downlit
-cel_model7 <- steady(cel_model6) 
-plotlySpectra(cel_model7, power = 2, total = TRUE)
+cel_model7 <- tuneSteadyState(cel_model6) 
+plotlySpectra(cel_model7, biomass = TRUE, per_log_size = TRUE, total = TRUE)
 ```
 
-You see a pattern emerging. Whenever we have made a change to the system we have to run the dynamics with the [`steady()`](https://sizespectrum.org/mizer/reference/steady.html) function to get to the new steady state.
+You see a pattern emerging. Whenever we have made a change to the system we have to run the dynamics with the [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html) function to get to the new steady state.
 
 ## Step 8: Rinse and repeat
 
@@ -217,22 +231,16 @@ plotBiomassVsSpecies(cel_model7)
 
 ![](create-first-model_files/figure-html/create-first-model-18-1.png)
 
-And it has also slightly messed up our growth rates:
-
-``` downlit
-age_mat_model = age_mat(cel_model7)
-data.frame(age_mat_model, age_mat_observed)
-```
-
 We appear to be in a bind: If we match the biomasses and growth rates we are no longer at steady state, if we run to steady state we no longer match the biomasses and growth rates. But notice that the discrepancies are not as big as previously. So we don’t give up but simply keep iterating.
 
 ``` downlit
 cel_model8 <- cel_model7 |>
-    calibrateBiomass() |> matchBiomasses() |> matchGrowth() |> steady() |>
-    calibrateBiomass() |> matchBiomasses() |> matchGrowth() |> steady() 
+    calibrateBiomass() |> matchBiomasses() |> matchGrowth() |> tuneSteadyState() |>
+    calibrateBiomass() |> matchBiomasses() |> matchGrowth() |> tuneSteadyState() |>
+    calibrateBiomass() |> matchBiomasses() |> matchGrowth() |> tuneSteadyState()
 ```
 
-(There are possible variations of this. You could leave out the [`calibrateBiomass()`](https://sizespectrum.org/mizer/reference/calibrateBiomass.html) steps. You could insert an additional [`steady()`](https://sizespectrum.org/mizer/reference/steady.html) step between [`matchBiomasses()`](https://sizespectrum.org/mizer/reference/matchBiomasses.html) and [`matchGrowth()`](https://sizespectrum.org/mizer/reference/matchGrowth.html). Some variants may converge faster than others, but it really makes no practical difference because this is so fast anyway. ) It turns out that in this example iterating twice more was enough. Even in the steady state the biomasses are now spot on:
+(There are possible variations of this. You could leave out the [`calibrateBiomass()`](https://sizespectrum.org/mizer/reference/calibrateBiomass.html) steps. You could insert an additional [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html) step between [`matchBiomasses()`](https://sizespectrum.org/mizer/reference/matchBiomasses.html) and [`matchGrowth()`](https://sizespectrum.org/mizer/reference/matchGrowth.html). Some variants may converge faster than others, but it really makes no practical difference because this is so fast anyway. ) It turns out that in this example iterating three times more was enough. Even in the steady state the biomasses are now spot on:
 
 ``` downlit
 plotBiomassVsSpecies(cel_model8)
@@ -269,16 +277,16 @@ We have gone through the 8-step process of building a mizer model from your spec
 
 1.  Create a MizerParams object with [`newMultispeciesParams()`](https://sizespectrum.org/mizer/reference/newMultispeciesParams.html).
 
-2.  Find a coexistence steady state with [`steady()`](https://sizespectrum.org/mizer/reference/steady.html).
+2.  Find a coexistence steady state with [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html).
 
 3.  Set the scale of the model to agree with the observed total biomass with [`calibrateBiomass()`](https://sizespectrum.org/mizer/reference/calibrateBiomass.html). This does not spoil the steady state.
 
 4.  Use `matchBiomass()` to move the size spectra of the species up or down to match the observed biomasses. This will spoil the steady state.
 
-5.  Project back to steady state with [`steady()`](https://sizespectrum.org/mizer/reference/steady.html).
+5.  Project back to steady state with [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html).
 
 6.  Use [`matchGrowth()`](https://sizespectrum.org/mizer/reference/matchGrowth.html) to adjust the physiological rates so that the species reach their maturity size at maturity age.
 
-7.  Project back to steady state with [`steady()`](https://sizespectrum.org/mizer/reference/steady.html).
+7.  Project back to steady state with [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html).
 
 8.  Iterate steps 4 through 7 as often as you like to get the steady-state biomasses to agree as precisely with your observations as you like.

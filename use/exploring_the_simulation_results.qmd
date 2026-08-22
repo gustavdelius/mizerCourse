@@ -41,10 +41,10 @@ dimN <- dim(N(sim))[1]
 The projected species abundances at size through time can be obtained with 
 `N(sim)`.  This returns a three-dimensional array (time x species x size). Consequently,
 this array can get very big so inspecting it can be difficult. In the example we
-have just run, the time dimension of `n` has `r dimN` rows
+have just run, the time dimension of the returned array has `r dimN` rows
 (one for the initial population and then one for each of the saved time steps).
 There are also 12 species each with 100 sizes. We can check this by running the
-`dim()` function and looking at the dimensions of the `n` array:
+`dim()` function and looking at the dimensions of the array returned by `N(sim)`:
 
 ```{r show_dim_n}
 dim(N(sim))
@@ -246,7 +246,7 @@ data is averaged.
 plot(sim)
 ```
 
-There is much more to be said about analysing and plotting simulation results. Take a look at the [Cheatsheet: Analysis and Plotting](https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html).
+There is much more to be said about analysing and plotting simulation results. Take a look at the [Guide: Analysing and plotting results](https://sizespectrum.org/mizer/articles/guide-analyse-and-plot.html).
 
 The next section describes how to use what we have learned to 
 [model the North Sea.](a_multispecies_model_of_the_north_sea.qmd) 

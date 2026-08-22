@@ -15,16 +15,16 @@ library(tidyverse)
 
 In this first part of the course we aim for understanding, not realism. So in this tutorial we investigate the tangled web of interactions in an idealised multi-species system. We choose a trait-based model in which the species making up the community differ from each other only in a single trait: their asymptotic body size (sometimes it is also called maximum body size).
 
-We use the `newTraitParams()` function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the `newSingleSpeciesParams()` function, the `newTraitParams()` function does not set the initial spectra to their steady state values. We thus need to run the result through the `steady()` function. We assign the resulting MizerParams object to the variable `mp`.
+We use the `newTraitParams()` function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the `newSingleSpeciesParams()` function, the `newTraitParams()` function does not set the initial spectra to their steady state values. We thus need to run the result through the `tuneSteadyState()` function. We assign the resulting MizerParams object to the variable `mp`.
 
 ```{r species-interactions-2, message=FALSE}
-mp <- newTraitParams() |> steady()
+mp <- newTraitParams() |> tuneSteadyState()
 ```
 
 Let us look at the biomass density in log weight.
 
 ```{r species-interactions-3}
-plotSpectra(mp, power = 2, total = TRUE)
+plotSpectra(mp, biomass = TRUE, per_log_size = TRUE, total = TRUE)
 ```
 
 We see 11 species spectra and a resource spectrum. The resource spectrum starts at a smaller size than the fish spectra, in order to provide food also for the smallest individuals (larvae) of the fish spectra. Each species spectrum has a shape of the type we expect, given what we have seen in the tutorial on [single species spectra](single-species-spectra.qmd). The spectra of the different species all look essentially the same, except for being shifted along the size axis. This is because in this trait-based model the species differ only through their asymptotic size. This regularity will of course not be present in a real-world ecosystem, but it makes it easier for us to build an intuition about the effects of species interactions.
@@ -194,7 +194,7 @@ mp_lessRes_sss <- steadySingleSpecies(mp_lessRes)
 and then ploting the spectra
 
 ```{r species-interactions-17}
-plotSpectra(mp_lessRes_sss, power = 2)
+plotSpectra(mp_lessRes_sss, biomass = TRUE, per_log_size = TRUE)
 ```
 
 We can see the drastic reduction in the abundances of species 8 to 11.
@@ -216,7 +216,8 @@ mp_lessRes_steady <- projectToSteady(mp_lessRes)
 ```{r species-interactions-19}
 plotSpectra2(mp_lessRes_steady, name1 = "less resource", 
              mp, name2 = "original", 
-             total = TRUE, power = 2, ylim = c(1e-8, NA), wlim = c(1e-3, NA))
+             total = TRUE, biomass = TRUE, per_log_size = TRUE,
+             ylim = c(1e-8, NA), wlim = c(1e-3, NA))
 ```
 
 There is much to see in this graph. We can see how the reduction in the abundance of large individuals leads to undulations in fish and resource size spectra, compared to the original model.
@@ -237,7 +238,7 @@ As we did in the section on [fishing mortality](predation-growth-and-mortality.h
 
 ```{r species-interactions-21}
 mp_fishing_sss <- steadySingleSpecies(mp_fishing)
-plotSpectra(mp_fishing_sss, power = 2)
+plotSpectra(mp_fishing_sss, biomass = TRUE, per_log_size = TRUE)
 ```
 
 As expected, the largest species have their abundances reduced above 1kg if they are fished, and if they continue to encounter the same amount of prey and are exposed to the same amount of predation mortality.
@@ -257,7 +258,7 @@ mp_fishing_steady <- projectToSteady(mp_fishing_sss)
 
 plotSpectra2(mp, name1 = "No fishing",
              mp_fishing_steady, name2 = "Fishing",
-             power = 2,
+             biomass = TRUE, per_log_size = TRUE,
              wlim = c(1e-2, NA), ylim = c(1e-6, NA))
 ```
 

@@ -119,22 +119,32 @@ website:
             href: https://sizespectrum.org/mizer/articles/multispecies_model.html
           - text: The General Mizer Size-spectrum Model
             href: https://sizespectrum.org/mizer/articles/model_description.html
-          - text: Cheat sheets
-          - text: 'Cheatsheet: Model Setup and Calibration'
-            href: https://sizespectrum.org/mizer/articles/cheatsheet-model-setup-and-calibration.html
-          - text: 'Cheatsheet: Changing Model Parameters'
-            href: https://sizespectrum.org/mizer/articles/cheatsheet-changing-parameters.html
-          - text: 'Cheatsheet: Fishing'
-            href: https://sizespectrum.org/mizer/articles/cheatsheet-fishing.html
-          - text: 'Cheatsheet: Analysis and Plotting'
-            href: https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html
-          - text: Extending mizer
-          - text: Extending mizer
-            href: https://sizespectrum.org/mizer/articles/extending-mizer.html
-          - text: Using mizer extension packages
-            href: https://sizespectrum.org/mizer/articles/using-extension-packages.html
-          - text: Creating a mizer extension package
-            href: https://sizespectrum.org/mizer/articles/creating-extension-packages.html
+          - text: Guides
+          - text: 'Guide: Understanding size-spectrum dynamics'
+            href: https://sizespectrum.org/mizer/articles/guide-understand-size-spectrum-dynamics.html
+          - text: 'Guide: Building a mizer model'
+            href: https://sizespectrum.org/mizer/articles/guide-build-model.html
+          - text: 'Guide: Reaching steady state and calibrating'
+            href: https://sizespectrum.org/mizer/articles/guide-calibrate-model.html
+          - text: 'Guide: Changing model parameters'
+            href: https://sizespectrum.org/mizer/articles/guide-change-parameters.html
+          - text: 'Guide: Setting up fishing'
+            href: https://sizespectrum.org/mizer/articles/guide-set-up-fishing.html
+          - text: 'Guide: Running a mizer simulation'
+            href: https://sizespectrum.org/mizer/articles/guide-run-simulation.html
+          - text: 'Guide: Analysing and plotting mizer results'
+            href: https://sizespectrum.org/mizer/articles/guide-analyse-and-plot.html
+          - text: 'Guide: Analysing dynamic stability'
+            href: https://sizespectrum.org/mizer/articles/guide-analyse-stability.html
+          - text: 'Guide: Extending mizer'
+            href: https://sizespectrum.org/mizer/articles/guide-extend-mizer.html
+          - text: 'Guide: Using mizer extension packages'
+            href: https://sizespectrum.org/mizer/articles/guide-use-extension-packages.html
+          - text: 'Guide: Creating a mizer extension package'
+            href: https://sizespectrum.org/mizer/articles/guide-create-extension-package.html
+          - text: Upgrading
+          - text: Upgrading your mizer code
+            href: https://sizespectrum.org/mizer/articles/upgrading.html
           - text: Technical articles
           - text: Cohort dynamics and diffusion
             href: https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html
@@ -146,18 +156,19 @@ website:
             href: https://sizespectrum.org/mizer/articles/fft.html
           - text: Analytic Test
             href: https://sizespectrum.org/mizer/articles/analytic_test.html
+          - text: Dynamic stability and Hopf bifurcations
+            href: https://sizespectrum.org/mizer/articles/dynamic_stability.html
+          - text: Discontinuous rate functions
+            href: https://sizespectrum.org/mizer/articles/discontinuous_rates.html
           - text: More articles...
             href: https://sizespectrum.org/mizer/articles/index.html
       - text: Reference
         href: https://sizespectrum.org/mizer/reference/index.html
-      - text: Changelog
-        href: https://sizespectrum.org/mizer/news/index.html
       - text: Publications
         href: https://sizespectrum.org/mizer/articles/publications.html
+      - text: Changelog
+        href: https://sizespectrum.org/mizer/news/index.html
     right:
-      - icon: robot
-        text: Ask AI
-        href: https://notebooklm.google.com/notebook/6aa51f75-d1a8-4140-9180-84532ef5f821
       - text: Blog
         href: https://blog.mizer.sizespectrum.org
       - icon: twitter
