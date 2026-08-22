@@ -5,5 +5,4 @@ toc: true
 toc-depth: 3
 
 execute:
-  cache: true
   freeze: true

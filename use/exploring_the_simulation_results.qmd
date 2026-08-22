@@ -246,7 +246,7 @@ data is averaged.
 plot(sim)
 ```
 
-There is much more to be said about analysing and plotting simulation results. Take a look at the [Cheatsheet: Analysis and Plotting](https://sizespectrum.org/mizer/articles/cheatsheet-analysis-and-plotting.html).
+There is much more to be said about analysing and plotting simulation results. Take a look at the [Guide: Analysing and plotting results](https://sizespectrum.org/mizer/articles/guide-analyse-and-plot.html).
 
 The next section describes how to use what we have learned to 
 [model the North Sea.](a_multispecies_model_of_the_north_sea.qmd) 
