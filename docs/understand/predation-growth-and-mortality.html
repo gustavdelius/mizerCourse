@@ -718,6 +718,7 @@ window.Quarto = {
 <li><a href="#predation-mortality" id="toc-predation-mortality" class="nav-link" data-scroll-target="#predation-mortality">Predation mortality</a></li>
   <li><a href="#background-and-external-mortality" id="toc-background-and-external-mortality" class="nav-link" data-scroll-target="#background-and-external-mortality">Background and external mortality</a></li>
   <li><a href="#fishing-mortality" id="toc-fishing-mortality" class="nav-link" data-scroll-target="#fishing-mortality">Fishing mortality</a></li>
+  <li><a href="#change-in-mortality" id="toc-change-in-mortality" class="nav-link" data-scroll-target="#change-in-mortality">Effect of a change in mortality</a></li>
   </ul>
 </li>
   <li><a href="#summary-and-recap" id="toc-summary-and-recap" class="nav-link" data-scroll-target="#summary-and-recap">Summary and recap</a></li>
@@ -827,7 +828,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>We see that where the growth starts slowing down, the abundance actually increases a little bit. This is because a decrease in the growth rate leads to a pile-up of individuals. You know this phenomenon from traffic jams. Where the speed of the cars decreases on a motorway, their density increases. Then when the speed increases again on the other side of the traffic jam, the density of cars drops and you wonder what caused the traffic jam in the first place. We see the same phenomenon in size spectrum dynamics. We see from the graphs above: it is where the growth rate starts growing faster again that the density goes down.</p>
+<p>We see that where the growth starts slowing down, the abundance actually increases a little bit. This is because a decrease in the growth rate leads to a pile-up of individuals. You know this phenomenon from traffic jams. Where the speed of the cars decreases on a motorway, their density increases. Then when the speed increases again on the other side of the traffic jam, the density of cars drops again and you wonder what caused the traffic jam in the first place. We see the same phenomenon in size spectrum dynamics. But the pile-up is not the whole story, and here it is the smaller part of it. While the fish are stuck at the sizes where they grow slowly, they are exposed to mortality for longer, so fewer of them make it through. That is why the density does not just return to its old level once the growth rate has picked up again: it stays lower at all larger sizes, even where the growth rate is back to normal. It is as if many of the cars had left the motorway while they were stuck in the jam, so that there are fewer cars on the road after it. We will look at this effect of mortality accumulating while the fish grow more closely in the section on <a href="#change-in-mortality">the effect of a change in mortality</a> below.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -888,6 +889,7 @@ Important
 </div>
 </div>
 </div>
+<p>Now growth speeds up. Where it speeds up, the fish thin out a little, and because they spend less time exposed to mortality on the way, more of them survive to larger sizes.</p>
 </div>
 </div>
 </div>
@@ -1113,6 +1115,13 @@ Important
 <p>Here we only look at what fishing gear is set up by default in our simple single-species model:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/gear_params.html">gear_params</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["species"],"name":[1],"type":["chr"],"align":["left"]},{"label":["gear"],"name":[2],"type":["chr"],"align":["left"]},{"label":["sel_func"],"name":[3],"type":["chr"],"align":["left"]},{"label":["knife_edge_size"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["catchability"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Target species","2":"knife_edge_gear","3":"knife_edge","4":"25.11886","5":"1","_rn_":"Target species, knife_edge_gear"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
 </div>
 <p>We see that there is only one gear, called “knife_edge_gear” targeting our one species, called “Target species”. The size-selectivity is described by a knife_edge function with a <code>knife_edge_size</code> of about 25 grams. This means that all fish greater than about 25 grams will be exposed to the same fishing mortality while smaller fish will experience no fishing mortality. Mizer can of course also deal with more general selectivity curves.</p>
 <p>We also need to specify the fishing effort, which will be multiplied by the catchability and the selectivity to get the annual instantaneous fishing mortality rate. For illustration we will set the effort to 1 and plot the resulting fishing mortality.</p>
@@ -1142,13 +1151,86 @@ Important
 </div>
 </div>
 <p>The difference may not seem to be very big, but note that we are using a logarithmic scale on the y axis. At large sizes the biomass densities differ almost by a factor of 30.</p>
+<p>Notice also that the fishing mortality is the same at all sizes above the knife-edge size, and yet the difference between the two spectra keeps growing with size. A fish of 80 g has been exposed to fishing all the way from 25 g, while a fish of 40 g has only been exposed from 25 g to 40 g. So the abundance at a size depends not just on the mortality at that size but on the mortality at all the sizes the fish had to grow through to get there. This is so important that we will look at it more closely in the next section.</p>
+</section><section id="change-in-mortality" class="level3"><h3 class="anchored" data-anchor-id="change-in-mortality">Effect of a change in mortality</h3>
+<p>To see more clearly how mortality shapes the size spectrum, let us do a controlled experiment. In our single-species model all the natural mortality is external mortality: the species does not feed on itself and the background community is fixed. We can get the external mortality with <code><a href="https://sizespectrum.org/mizer/reference/setExtMort.html">ext_mort()</a></code> and change it with <code>ext_mort()&lt;-</code>. Let us increase it by 50% for fish between 0.1 g and 1 g and find the new steady state.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_mort</span> <span class="op">&lt;-</span> <span class="va">params</span></span>
+<span><span class="va">mort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/setExtMort.html">ext_mort</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span></span>
+<span><span class="va">band1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/w.html">w</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">0.1</span> <span class="op">&amp;</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/w.html">w</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1</span></span>
+<span><span class="va">mort</span><span class="op">[</span>, <span class="va">band1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mort</span><span class="op">[</span>, <span class="va">band1</span><span class="op">]</span> <span class="op">*</span> <span class="fl">1.5</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/setExtMort.html">ext_mort</a></span><span class="op">(</span><span class="va">params_mort</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">mort</span></span>
+<span><span class="va">params_mort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_mort</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Instead of plotting the two spectra on top of each other, we plot the relative difference between them with <code><a href="https://sizespectrum.org/mizer/reference/plotSpectraRelative.html">plotSpectraRelative()</a></code>. This is <span class="math inline">2(N_2 - N_1)/(N_2 + N_1)</span>, where <span class="math inline">N_1</span> is the abundance in the first model and <span class="math inline">N_2</span> that in the second. It is negative where the second model has fewer fish than the first.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotSpectraRelative.html">plotSpectraRelative</a></span><span class="op">(</span><span class="va">params</span>, <span class="va">params_mort</span>, resource <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The abundance falls across the band where we increased the mortality, which is no surprise. But it then stays lower at all larger sizes, even though the mortality at those sizes is exactly what it was before. Fewer fish make it through the band, and nothing at larger sizes makes up for that loss.</p>
+<p>Now let us in addition decrease the mortality by 50% for fish between 1 g and 10 g.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">params_mort2</span> <span class="op">&lt;-</span> <span class="va">params_mort</span></span>
+<span><span class="va">band2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/w.html">w</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/w.html">w</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">10</span></span>
+<span><span class="va">mort</span><span class="op">[</span>, <span class="va">band2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mort</span><span class="op">[</span>, <span class="va">band2</span><span class="op">]</span> <span class="op">*</span> <span class="fl">0.5</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/setExtMort.html">ext_mort</a></span><span class="op">(</span><span class="va">params_mort2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">mort</span></span>
+<span><span class="va">params_mort2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://sizespectrum.org/mizer/reference/steadySingleSpecies.html">steadySingleSpecies</a></span><span class="op">(</span><span class="va">params_mort2</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We plot the relative change in the mortality rate, which we get with <code><a href="https://sizespectrum.org/mizer/reference/plotRelative.html">plotRelative()</a></code>, directly above the relative change in the abundance:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotRelative.html">plotRelative</a></span><span class="op">(</span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/getMort.html">getMort</a></span><span class="op">(</span><span class="va">params</span><span class="op">)</span>, <span class="fu"><a href="https://sizespectrum.org/mizer/reference/getMort.html">getMort</a></span><span class="op">(</span><span class="va">params_mort2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://sizespectrum.org/mizer/reference/plotSpectraRelative.html">plotSpectraRelative</a></span><span class="op">(</span><span class="va">params</span>, <span class="va">params_mort2</span>, resource <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-layout-panel" data-layout-nrow="2">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-27-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The abundance falls across the first band and rises again across the second. Its lowest point is at 1 g, where the change in mortality switches from an increase to a decrease. It is not in the middle of the band of increased mortality, even though the mortality is increased equally across that whole band.</p>
+<p>The reason is that as long as the fish grow through sizes where they do worse than before, every further bit of growth costs them a little more, so their abundance relative to the original model keeps falling. It only starts to recover once they reach sizes where they do better than before. So the abundance has a minimum where the change in mortality switches from an increase to a decrease, and a maximum where it switches from a decrease to an increase. Think of a bath with the tap running and the plug pulled. The water level depends on the whole history of inflow and outflow, and it is highest not when the tap runs fastest but at the moment the outflow overtakes the inflow.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Expand for the maths
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>At steady state, the number density of a species whose eggs enter the spectrum at the egg size <span class="math inline">w_0</span> at a rate <span class="math inline">R</span> is <span class="math display">N(w) = \frac{R}{g(w)}\exp\left(-\int_{w_0}^{w}\frac{\mu(w')}{g(w')}\,dw'\right).</span> The factor <span class="math inline">1/g(w)</span> describes the pile-up of fish where they grow slowly, the traffic-jam effect. The exponential is the proportion of fish that survive the journey from the egg size to size <span class="math inline">w</span>. The ratio <span class="math inline">\mu/g</span> is the mortality rate multiplied by the time a fish takes to grow through one gram, so it is the risk of dying per gram of growth, and the integral adds up this risk over all the sizes a fish has to grow through to reach size <span class="math inline">w</span>.</p>
+<p>Taking the logarithm, the change in <span class="math inline">\log N(w)</span> caused by a change in mortality is minus the change in <span class="math inline">\mu/g</span> added up over all sizes below <span class="math inline">w</span>. It is a running total, and a running total has its minimum where the quantity being added switches from positive to negative.</p>
+</div>
+</div>
+</div>
+<p>Because it is the ratio <span class="math inline">\mu/g</span> that matters, a slow-down in growth has the same kind of effect as an increase in mortality: the fish spend more time exposed to mortality, so fewer of them survive to larger sizes. That is the large drop in abundance that we saw in the section on <a href="#effect-of-prey-availability">the effect of prey availability</a>, and it comes on top of the local pile-up where the growth slows down.</p>
+<p>This way of thinking will be important when we look at multi-species models in the next tutorial. There the mortality and growth rates change because the abundances of predators and prey change. It explains, for example, why the peaks and troughs in a <a href="species-interactions.html#trophic-cascades">trophic cascade</a> are not spaced by the preferred predator/prey mass ratio, as one might naively expect.</p>
 </section></section><section id="summary-and-recap" class="level2"><h2 class="anchored" data-anchor-id="summary-and-recap">Summary and recap</h2>
 <p>1) In a mizer model the growth curve is not fixed but instead the growth rate of an individual changes as the prey abundance changes. This makes it important to understand how fish choose their prey.</p>
-<p>2) A size spectrum model reacts differently to low prey abundance than a predator-prey model. In a size spectrum model when the growth rate of a predator slows down due to lack of prey, the abundance of predators of that size increases.</p>
+<p>2) A size spectrum model reacts differently to low prey abundance than a predator-prey model. In a size spectrum model when the growth rate of a predator slows down due to lack of prey, predators pile up where the slow-down starts. But because they then spend longer exposed to mortality, fewer of them survive to larger sizes.</p>
 <p>3) A fish is assumed to have a feeding preference for prey in a range of sizes at a certain fraction of its own size. So as the fish grows up, its preference shifts to larger sizes, an effect known as ontogenetic diet shift.</p>
 <p>4) The search rate of a species determines the rate at which it can find food and thus influences its growth rate. In mizer this search rate is an allometric rate with exponent <span class="math inline">q</span> which by default is set as <span class="math inline">q=2-\lambda+n</span> so that at least in the larval stage the growth rate scales with exponent <span class="math inline">n = 3/4</span>.</p>
 <p>5) Fish have a maximum intake rate that scales with body size with exponent <span class="math inline">n = 3/4</span>. Due to scarcity of prey they will only feed at a proportion of their maximum intake rate. This proportion is called the feeding level.</p>
-<p>6) Species size spectra depend strongly on mortality rates and in a realistic model this mortality rate will depend on the abundance of predators. We will explore this in greater detail in the next tutorials. Here we just looked at the effect of fishing mortality on the size spectrum.</p>
+<p>6) Species size spectra depend strongly on mortality rates and in a realistic model this mortality rate will depend on the abundance of predators. We will explore this in greater detail in the next tutorials. Here we looked at the effect of fishing mortality and of changes in the external mortality on the size spectrum.</p>
+<p>7) A change in mortality, or in growth, at some sizes changes the abundance at all larger sizes, because every fish has to grow through those sizes first. On top of that, fish pile up where growth slows down. Where growth does not change, the abundance has its peaks and troughs where the change in mortality switches sign, not where the change is largest.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
