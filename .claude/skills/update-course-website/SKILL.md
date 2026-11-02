@@ -172,9 +172,10 @@ that was rendered:
 bash <skill-dir>/scripts/check-rendered-page.sh understand/predation-growth-and-mortality [base-ref]
 ```
 
-`<skill-dir>` is the absolute path this skill was loaded from. A worktree has
-no `.claude/`, so a relative path would not find the script. `base-ref`
-defaults to `HEAD`, the last committed version of the page.
+`<skill-dir>` is the absolute path this skill was loaded from. A worktree of a
+branch cut before this skill was committed does not contain the skill, so a
+relative path would not find the script there. `base-ref` defaults to `HEAD`,
+the last committed version of the page.
 
 The script reports:
 

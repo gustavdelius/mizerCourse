@@ -130,6 +130,15 @@ quarto render understand/predation-growth-and-mortality.qmd --cache-refresh > ..
   `*_cache/` folders.
 - A single-page render also updates that page's entries in `docs/search.json`
   and `docs/sitemap.xml`. A content-only change needs no full render.
+- **Check that each render succeeded**: exit status 0, and `Output created:` at
+  the end of the log. A failed render leaves the old HTML in `docs/` untouched,
+  so the step 4 check would pass on the stale page without checking anything.
+- A chunk can fail even though nobody touched it, when the installed mizer has
+  changed an API since the page was last rendered. The page is then broken for
+  students too. Find the fix with the upgrade-mizer-code skill, and confirm the
+  released CRAN version behaves the same, not just the installed development
+  version. Commit the fix as its own source commit and say so in the PR
+  description.
 
 Record the versions the figures were made with, for the commit message:
 
@@ -163,9 +172,10 @@ that was rendered:
 bash <skill-dir>/scripts/check-rendered-page.sh understand/predation-growth-and-mortality [base-ref]
 ```
 
-`<skill-dir>` is the absolute path this skill was loaded from. A worktree has
-no `.Codex/`, so a relative path would not find the script. `base-ref`
-defaults to `HEAD`, the last committed version of the page.
+`<skill-dir>` is the absolute path this skill was loaded from. A worktree of a
+branch cut before this skill was committed does not contain the skill, so a
+relative path would not find the script there. `base-ref` defaults to `HEAD`,
+the last committed version of the page.
 
 The script reports:
 
@@ -208,10 +218,3 @@ Rendered with Quarto <x>, mizer <y>, mizerExperimental <z>.
   is the user's call.
 - **Clean up:** afterwards, remove the worktree from the main checkout with
   `git worktree remove <path>`.
-
-## Exercises and the worksheet repository
-
-Tutorials send students to exercises in a separate worksheet repository, in
-files like `worksheet3-predation-growth-and-mortality.Rmd`. If a change adds or
-alters an exercise, that repository needs a matching change. It is not in this
-repository, so tell the user instead of guessing where it lives.
