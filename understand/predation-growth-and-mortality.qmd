@@ -92,7 +92,7 @@ The above shows that size spectrum dynamics is very different from predator-prey
 
 The reduction of prey has led to a significant reduction in the overall abundance of the species. This is in spite of the fact that we have kept the abundance constant at the lowest size, i.e. we assumed that recruitment of new fish is not affected by what happens in larger size classes. In reality, the drastic reduction of spawning stock biomass will lead to a reduction in the number of eggs as well, so the effect will be even more dramatic.
 
-Here we hand over to you to investigate what happens when the prey abundance is increased instead of decreased. Please open the worksheet named "worksheet3-predation-growth-and-mortality.Rmd" in your worksheet repository, where you will find the following exercise:
+Here we hand over to you to investigate what happens when the prey abundance is increased instead of decreased.
 
 ::: {.callout-caution collapse="false"}
 ### Exercise 1
