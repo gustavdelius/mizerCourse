@@ -25,7 +25,24 @@ where $N(w)$ is the number density at size $w$, $g(w)$ is the growth rate and $\
 Size spectrum dynamics is very intuitive: The rate at which the number of individuals in a size class changes is the difference between the rate at which individuals are entering the size class and the rate at which they are leaving the size class. Individuals can enter a size class by growing in or, in the case of the smallest size class, by being born into it. They can leave by growing out or by dying.
 :::
 
-What makes these seemingly obvious dynamics interesting is how the growth rate and the death rate are determined in terms of the abundance of prey and predators and the feeding preferences and physiological parameters of the individuals. We have discussed a bit of that in previous tutorials and will discuss it much more in upcoming tutorials. We will discuss the birth rate $R_{dd}$ below in the section on [how reproduction is modelled](dynamics-of-spectra.html#how-reproduction-is-modelled). But first we want to look at the results of simulating the size spectrum dynamics.
+The equation above assumes that all individuals of the same size grow at the same rate $g(w)$. But as we discussed in the section on [randomness in growth](predation-growth-and-mortality.qmd#randomness-in-growth), in reality two fish of the same size will grow at different rates, so a group of fish that start out at the same size will spread out over a range of sizes as they grow up. Mizer can describe this by adding a diffusion term to the equation. The growth rate $g(w)$ then becomes the average growth rate of individuals of size $w$, and a diffusion rate $D(w)$ describes how quickly their sizes spread out around that average. Growth diffusion is switched off by default, and all the models in this course are run without it.
+
+::: {.callout-note collapse="true"}
+### Expand for the maths
+
+With growth diffusion the size-spectrum equation becomes
+
+$$
+\frac{\partial N(w)}{\partial t} + \frac{\partial}{\partial w}\left(g(w) N(w) - \frac{1}{2}\frac{\partial D(w) N(w)}{\partial w}\right)
+  = -\mu(w) N(w).
+$$
+
+The expression in the brackets is the rate at which individuals grow through size $w$. The diffusion rate $D(w)$ is measured in grams squared per year: it is the rate at which the variance of the sizes of a group of individuals that started out at size $w$ increases.
+
+You can switch on the diffusion that is due to the randomness in prey sizes with `use_predation_diffusion(params) <- TRUE` and add further diffusion with the `D_ext` species parameter. The function `getDiffusion()` returns the total diffusion rate. The mizer article [Cohort dynamics and diffusion](https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html) shows how diffusion spreads out a cohort of fish that all hatched at the same time.
+:::
+
+What makes these seemingly obvious dynamics interesting is how the growth rate and the death rate are determined in terms of the abundance of prey and predators and the feeding preferences and physiological parameters of the individuals. We have discussed a bit of that in previous tutorials and will discuss it much more in upcoming tutorials. We will discuss the birth rate $R_{dd}$ below in the section on [reproduction dynamics](#reproduction-dynamics). But first we want to look at the results of simulating the size spectrum dynamics.
 
 ```{r dynamics-of-spectra-1}
 #| message: false
@@ -136,7 +153,7 @@ Given that reproduction has such an important impact on the response of species 
 
 ### Energy invested into reproduction
 
-We already discussed the [investment into reproduction](single-species-spectra.html#investment-into-reproduction) in an earlier tutorial. As mature individuals grow, they invest an increasing proportion of their income into reproduction and at their asymptotic size they would be investing all income into reproduction. Summing up all these investments from mature individuals of a particular species gives the total rate $E_R$ at which that species invests energy into reproduction. This total rate of investment is multiplied by a reproduction efficiency factor `erepro`, divided by a factor of 2 to take into account that only females reproduce, and then divided by the egg weight `w_min` to convert it into the rate at which eggs are produced. The equation is:
+We already discussed the [investment into reproduction](single-species-spectra.html#investment-into-reproduction) in an earlier tutorial. As mature individuals grow, they invest an increasing proportion of their income into reproduction and at the size `w_repro_max` they would be investing all income into reproduction. Summing up all these investments from mature individuals of a particular species gives the total rate $E_R$ at which that species invests energy into reproduction. This total rate of investment is multiplied by a reproduction efficiency factor `erepro`, divided by a factor of 2 to take into account that only females reproduce, and then divided by the egg weight `w_min` to convert it into the rate at which eggs are produced. The equation is:
 
 $$
 R_{di} = \frac{\text{erepro}}{2 w_{min}} E_R.

@@ -220,6 +220,12 @@ The dip is indeed happening later.
 >
 > Do not confuse the prey preference with the diet. Just because a predator might prefer to feed on prey of a particular size if it had free choice does not mean that it actually feeds predominantly on such prey. The actual diet of the fish depends also on the availability of prey. Because smaller prey are more abundant, the realised predator prey mass ratio in the diet will be smaller than the preferred predator prey mass ratio. This is particularly important when estimating the predation kernel from stomach data.
 
+### Randomness in growth
+
+The predation kernel also tells us something about how individual fish grow. A fish does not take in a steady stream of food. It grows in jumps, each time it catches and digests a prey item, and the size of each jump depends on the size of the prey it happened to catch. Because the predation kernel is quite wide, two fish of the same size will by chance eat different sequences of prey and so will grow at different rates. Fish also differ from each other in other ways, for example in their genes or in the local conditions they experience, and this leads to further differences in growth. So a group of fish that start out at the same size will spread out over a range of sizes as they grow up.
+
+The growth rate that mizer calculates is the average growth rate of the individuals of a given size. Since version 3.0, mizer can also describe how the growth of individuals varies around this average, with a *diffusion rate*. Mizer can calculate the diffusion that is due to the randomness in prey sizes from the predation kernel, and you switch this on with `use_predation_diffusion(params) <- TRUE`. Any further variability between individuals you can add with the `D_ext` species parameter. The function [`getDiffusion()`](https://sizespectrum.org/mizer/reference/getDiffusion.html) returns the total diffusion rate. Growth diffusion is switched off by default, and all the models in this course are run without it. We will see how it enters the equation for the size-spectrum dynamics in the tutorial on [dynamics of spectra](../understand/dynamics-of-spectra.llms.md#size-spectrum-dynamics).
+
 ### Search volume
 
 Next we consider the factor that models the volume of water a filter feeder is able to filter in a certain amount of time, or the volume of water a predatory fish is able to patrol in a certain amount of time. This is difficult to model from first principles, although people have tried to argue in terms of swimming speeds of fish. We assume that this search volume rate is also an allometric rate. Let \gamma(w), also called gamma, denote this rate for a predator of size w. Thus we assume that \gamma(w) = \gamma_0\\ w^q for some exponent q. We know that a fish needs to consume prey at a rate that scales with its body size to the power n, with n about 3/4. We also know that the prey density will be approximately described by a power law, i.e., that N(w) \approx N_0\\ w^{-\lambda}. A bit of maths then says that q = 2 - \lambda + n. The formula is based on observations about size distributions and the fact that in the real world, evolution had made sure that the fish have developed a feeding strategy that allows it to cover its metabolic costs. Together this would have led to that search volume exponent of approximately q=2-\lambda+n but of course in reality there is quite a bit of variability.
@@ -258,6 +264,8 @@ ggplot(rbind(gf_original, gf_new), aes(x = Age, y = `Size [g]`, colour = Model))
 ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-18-1.png)
 
 As expected, the smaller search volume leads to a slower growth due to slower feeding rate.
+
+Such a growth curve shows how a fish would grow if at each size it grew at the average growth rate for that size. As we discussed in the section on [randomness in growth](#randomness-in-growth), real fish grow at different rates, so their sizes at a given age will be scattered around this curve.
 
 ### Feeding level
 
@@ -393,7 +401,7 @@ The reason is that as long as the fish grow through sizes where they do worse th
 
 > **NOTE:**
 >
-> At steady state, the number density of a species whose eggs enter the spectrum at the egg size w_0 at a rate R is N(w) = \frac{R}{g(w)}\exp\left(-\int\_{w_0}^{w}\frac{\mu(w')}{g(w')}\\dw'\right). The factor 1/g(w) describes the pile-up of fish where they grow slowly, the traffic-jam effect. The exponential is the proportion of fish that survive the journey from the egg size to size w. The ratio \mu/g is the mortality rate multiplied by the time a fish takes to grow through one gram, so it is the risk of dying per gram of growth, and the integral adds up this risk over all the sizes a fish has to grow through to reach size w.
+> At steady state, and without growth diffusion, the number density of a species whose eggs enter the spectrum at the egg size w_0 at a rate R is N(w) = \frac{R}{g(w)}\exp\left(-\int\_{w_0}^{w}\frac{\mu(w')}{g(w')}\\dw'\right). The factor 1/g(w) describes the pile-up of fish where they grow slowly, the traffic-jam effect. The exponential is the proportion of fish that survive the journey from the egg size to size w. The ratio \mu/g is the mortality rate multiplied by the time a fish takes to grow through one gram, so it is the risk of dying per gram of growth, and the integral adds up this risk over all the sizes a fish has to grow through to reach size w.
 >
 > Taking the logarithm, the change in \log N(w) caused by a change in mortality is minus the change in \mu/g added up over all sizes below w. It is a running total, and a running total has its minimum where the quantity being added switches from positive to negative.
 
@@ -407,7 +415,7 @@ This way of thinking will be important when we look at multi-species models in t
 
 2\) A size spectrum model reacts differently to low prey abundance than a predator-prey model. In a size spectrum model when the growth rate of a predator slows down due to lack of prey, predators pile up where the slow-down starts. But because they then spend longer exposed to mortality, fewer of them survive to larger sizes.
 
-3\) A fish is assumed to have a feeding preference for prey in a range of sizes at a certain fraction of its own size. So as the fish grows up, its preference shifts to larger sizes, an effect known as ontogenetic diet shift.
+3\) A fish is assumed to have a feeding preference for prey in a range of sizes at a certain fraction of its own size. So as the fish grows up, its preference shifts to larger sizes, an effect known as ontogenetic diet shift. Because a fish eats prey of a range of sizes, individuals of the same size grow at different rates. Mizer can describe this with growth diffusion, but it is switched off by default.
 
 4\) The search rate of a species determines the rate at which it can find food and thus influences its growth rate. In mizer this search rate is an allometric rate with exponent q which by default is set as q=2-\lambda+n so that at least in the larval stage the growth rate scales with exponent n = 3/4.
 

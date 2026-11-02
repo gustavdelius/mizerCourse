@@ -10,7 +10,7 @@ library(tidyverse)
 
 ## Trait-based model
 
-In this first part of the course we aim for understanding, not realism. So in this tutorial we investigate the tangled web of interactions in an idealised multi-species system. We choose a trait-based model in which the species making up the community differ from each other only in a single trait: their asymptotic body size (sometimes it is also called maximum body size).
+In this first part of the course we aim for understanding, not realism. So in this tutorial we investigate the tangled web of interactions in an idealised multi-species system. We choose a trait-based model in which the species making up the community differ from each other only in a single trait: their asymptotic body size (sometimes loosely called maximum body size, although because of randomness in growth some individuals grow larger than the asymptotic size).
 
 We use the [`newTraitParams()`](https://sizespectrum.org/mizer/reference/newTraitParams.html) function to create our idealised trait-based multi-species model. The function has many parameters, but we will just keep the defaults. Unlike the [`newSingleSpeciesParams()`](https://sizespectrum.org/mizer/reference/newSingleSpeciesParams.html) function, the [`newTraitParams()`](https://sizespectrum.org/mizer/reference/newTraitParams.html) function does not set the initial spectra to their steady state values. We thus need to run the result through the [`tuneSteadyState()`](https://sizespectrum.org/mizer/reference/tuneSteadyState.html) function. We assign the resulting MizerParams object to the variable `mp`.
 
@@ -295,8 +295,8 @@ Again the important point is that the above picture does does not show a steady 
 > > mp_fishing_steady <- projectToSteady(mp_fishing_sss)
 > > ```
 > >
-> >     Reached the convergence tolerance after 12 years. The biomasses change at up to
-> >     0.0011 per year.
+> >     Reached the convergence tolerance after 10.5 years. The biomasses change at up
+> >     to 0.0015 per year.
 > >
 > > ``` downlit
 > > plotSpectra2(mp, name1 = "No fishing",

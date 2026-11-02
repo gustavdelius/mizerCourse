@@ -183,7 +183,7 @@ Luckily the discrepancies are now much smaller than they were before. Before we 
 
 ## Step 6: Calibrate growth
 
-The growth rates in the model are not quite right yet. We can see that by calculating the age at which the fish in the steady state of the model would reach maturity size, using the [`age_mat()`](https://sizespectrum.org/mizer/reference/age_mat.html) function, and comparing it to the observed age at maturity in the real world that we extracted from FishBase in the previous tutorial and saved in the species parameters.
+The growth rates in the model are not quite right yet. We can see that by calculating the age at which a fish in the steady state of the model would reach maturity size if it grew at the average growth rate, using the [`age_mat()`](https://sizespectrum.org/mizer/reference/age_mat.html) function, and comparing it to the observed age at maturity in the real world that we extracted from FishBase in the previous tutorial and saved in the species parameters. Both numbers describe a typical fish: because of [randomness in growth](../understand/predation-growth-and-mortality.llms.md#randomness-in-growth), individual fish reach their maturity size at a range of ages.
 
 ``` downlit
 age_mat_model = age_mat(cel_model5)
