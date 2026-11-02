@@ -241,7 +241,7 @@ One minor point: if you are wondering why the above yield curve is not smooth bu
 ```{r tune-resilience-17}
 #| message: false 
 plotYieldVsF(cel_model, species = "Whiting", 
-               F_range = seq(0.2, 0.8, 0.02), tol = 0.0001)
+               F_range = seq(0.2, 0.8, 0.02), distance_tol = 0.0001)
 ```
 
 
