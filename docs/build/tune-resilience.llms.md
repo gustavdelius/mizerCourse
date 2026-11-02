@@ -21,6 +21,10 @@ We load the model into the variable `cel_model`.
 cel_model <- readParams("../build/cel_model_landings.rds")
 ```
 
+    The species parameter `w_repro_max` holds a value that a recalculation would
+    not reproduce. I have recorded it among the given species parameters so that it
+    is not overwritten.
+
 ## Reproduction dynamics
 
 In this tutorial we will look at an aspect of the model that has a big impact on the resilience of species to perturbations: the reproduction dynamics. In the tutorial on [dynamics of size spectra](../understand/dynamics-of-spectra.llms.md#reproduction-level) in Part 1 we briefly looked at how density dependence of reproduction can influence how species react to changes in mortality, such as from fishing. It might be good if you go back to that tutorial and remind yourself.
@@ -131,7 +135,7 @@ reproduction_level(cel_model)
 ```
 
            Herring          Sprat            Cod        Haddock        Whiting 
-         0.3530674      0.1860801      0.9504024      0.9904808      0.9872004 
+         0.3530954      0.1860801      0.9504024      0.9904808      0.9872004 
       Blue whiting    Norway Pout       Poor Cod  European Hake       Monkfish 
          0.7354517      0.2958390      0.6414372      0.9444962      0.9921768 
     Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim 
@@ -148,7 +152,7 @@ getRDD(cel_model) / species_params(cel_model)$R_max
 ```
 
            Herring          Sprat            Cod        Haddock        Whiting 
-         0.3530674      0.1860801      0.9504024      0.9904808      0.9872004 
+         0.3530954      0.1860801      0.9504024      0.9904808      0.9872004 
       Blue whiting    Norway Pout       Poor Cod  European Hake       Monkfish 
          0.7354517      0.2958390      0.6414372      0.9444962      0.9921768 
     Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim 
@@ -163,7 +167,7 @@ getRDI(cel_model) / getRDD(cel_model)
 ```
 
            Herring          Sprat            Cod        Haddock        Whiting 
-          1.545756       1.228622      20.162286     105.050457      78.127562 
+          1.545823       1.228622      20.162286     105.050457      78.127562 
       Blue whiting    Norway Pout       Poor Cod  European Hake       Monkfish 
           3.780028       1.420130       2.788912      18.016799     127.825441 
     Horse Mackerel       Mackerel     Common Dab         Plaice         Megrim 
@@ -254,14 +258,14 @@ One minor point: if you are wondering why the above yield curve is not smooth bu
 
 ``` downlit
 plotYieldVsF(cel_model, species = "Whiting", 
-               F_range = seq(0.2, 0.8, 0.02), tol = 0.0001)
+               F_range = seq(0.2, 0.8, 0.02), distance_tol = 0.0001)
 ```
 
 ![](tune-resilience_files/figure-html/tune-resilience-17-1.png)
 
 > **NOTE:**
 >
-> If you run the above code yourself in your worksheet, you will notice that for some fishing mortalities, `plotYieldCurve()` gives a warning that convergence was not reached within the 99 years for which we ran the projection. This means that we stopped the simulation before the species had settled into a new stable state for that fishing level and thus the result for this specific fishing level is only approximate. But approximate values are good enough for our purpose. Usually we find that it is the more extreme values of F where we do not get convergence.
+> If you run the above code yourself, you will notice that for some fishing mortalities, `plotYieldCurve()` gives a warning that convergence was not reached within the 99 years for which we ran the projection. This means that we stopped the simulation before the species had settled into a new stable state for that fishing level and thus the result for this specific fishing level is only approximate. But approximate values are good enough for our purpose. Usually we find that it is the more extreme values of F where we do not get convergence.
 
 ## Exercise
 
