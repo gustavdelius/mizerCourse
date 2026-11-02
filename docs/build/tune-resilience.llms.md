@@ -265,7 +265,7 @@ plotYieldVsF(cel_model, species = "Whiting",
 
 > **NOTE:**
 >
-> If you run the above code yourself, you will notice that for some fishing mortalities, `plotYieldCurve()` gives a warning that convergence was not reached within the 99 years for which we ran the projection. This means that we stopped the simulation before the species had settled into a new stable state for that fishing level and thus the result for this specific fishing level is only approximate. But approximate values are good enough for our purpose. Usually we find that it is the more extreme values of F where we do not get convergence.
+> If at some fishing mortality the projection does not settle down within its time limit (100 years by default), [`plotYieldVsF()`](https://sizespectrum.org/mizer/reference/plotYieldVsF.html) marks that point with a cross. The yield there is only approximate, because the simulation was stopped before the species had reached a new steady state, so you should not rely on it. You can give the projections more time with the `t_max` argument. In the plots above the model settled at every fishing mortality, so there are no crosses. If instead the model settles into regular oscillations, the curve shows the average yield, with a band around it for the range the yield covers during an oscillation.
 
 ## Exercise
 
