@@ -84,7 +84,7 @@ spectra_plot
 
 ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-7-2.png)
 
-We see that where the growth starts slowing down, the abundance actually increases a little bit. This is because a decrease in the growth rate leads to a pile-up of individuals. You know this phenomenon from traffic jams. Where the speed of the cars decreases on a motorway, their density increases. Then when the speed increases again on the other side of the traffic jam, the density of cars drops and you wonder what caused the traffic jam in the first place. We see the same phenomenon in size spectrum dynamics. We see from the graphs above: it is where the growth rate starts growing faster again that the density goes down.
+We see that where the growth starts slowing down, the abundance actually increases a little bit. This is because a decrease in the growth rate leads to a pile-up of individuals. You know this phenomenon from traffic jams. Where the speed of the cars decreases on a motorway, their density increases. Then when the speed increases again on the other side of the traffic jam, the density of cars drops again and you wonder what caused the traffic jam in the first place. We see the same phenomenon in size spectrum dynamics. But the pile-up is not the whole story, and here it is the smaller part of it. While the fish are stuck at the sizes where they grow slowly, they are exposed to mortality for longer, so fewer of them make it through. That is why the density does not just return to its old level once the growth rate has picked up again: it stays lower at all larger sizes, even where the growth rate is back to normal. It is as if many of the cars had left the motorway while they were stuck in the jam, so that there are fewer cars on the road after it. We will look at this effect of mortality accumulating while the fish grow more closely in the section on [the effect of a change in mortality](#change-in-mortality) below.
 
 > **IMPORTANT:**
 >
@@ -92,7 +92,7 @@ We see that where the growth starts slowing down, the abundance actually increas
 
 The reduction of prey has led to a significant reduction in the overall abundance of the species. This is in spite of the fact that we have kept the abundance constant at the lowest size, i.e. we assumed that recruitment of new fish is not affected by what happens in larger size classes. In reality, the drastic reduction of spawning stock biomass will lead to a reduction in the number of eggs as well, so the effect will be even more dramatic.
 
-Here we hand over to you to investigate what happens when the prey abundance is increased instead of decreased. Please open the worksheet named “worksheet3-predation-growth-and-mortality.Rmd” in your worksheet repository, where you will find the following exercise:
+Here we hand over to you to investigate what happens when the prey abundance is increased instead of decreased.
 
 > **CAUTION:**
 >
@@ -113,6 +113,8 @@ Here we hand over to you to investigate what happens when the prey abundance is 
 > > ```
 > >
 > > ![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-8-1.png)
+> >
+> > Now growth speeds up. Where it speeds up, the fish thin out a little, and because they spend less time exposed to mortality on the way, more of them survive to larger sizes.
 
 ## How predation is modelled
 
@@ -339,11 +341,71 @@ plotSpectra2(params, name1 = "No Fishing",
 
 The difference may not seem to be very big, but note that we are using a logarithmic scale on the y axis. At large sizes the biomass densities differ almost by a factor of 30.
 
+Notice also that the fishing mortality is the same at all sizes above the knife-edge size, and yet the difference between the two spectra keeps growing with size. A fish of 80 g has been exposed to fishing all the way from 25 g, while a fish of 40 g has only been exposed from 25 g to 40 g. So the abundance at a size depends not just on the mortality at that size but on the mortality at all the sizes the fish had to grow through to get there. This is so important that we will look at it more closely in the next section.
+
+### Effect of a change in mortality
+
+To see more clearly how mortality shapes the size spectrum, let us do a controlled experiment. In our single-species model all the natural mortality is external mortality: the species does not feed on itself and the background community is fixed. We can get the external mortality with [`ext_mort()`](https://sizespectrum.org/mizer/reference/setExtMort.html) and change it with `ext_mort()<-`. Let us increase it by 50% for fish between 0.1 g and 1 g and find the new steady state.
+
+``` downlit
+params_mort <- params
+mort <- ext_mort(params)
+band1 <- w(params) >= 0.1 & w(params) < 1
+mort[, band1] <- mort[, band1] * 1.5
+ext_mort(params_mort) <- mort
+params_mort <- steadySingleSpecies(params_mort)
+```
+
+Instead of plotting the two spectra on top of each other, we plot the relative difference between them with [`plotSpectraRelative()`](https://sizespectrum.org/mizer/reference/plotSpectraRelative.html). This is 2(N_2 - N_1)/(N_2 + N_1), where N_1 is the abundance in the first model and N_2 that in the second. It is negative where the second model has fewer fish than the first.
+
+``` downlit
+plotSpectraRelative(params, params_mort, resource = FALSE)
+```
+
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-25-1.png)
+
+The abundance falls across the band where we increased the mortality, which is no surprise. But it then stays lower at all larger sizes, even though the mortality at those sizes is exactly what it was before. Fewer fish make it through the band, and nothing at larger sizes makes up for that loss.
+
+Now let us in addition decrease the mortality by 50% for fish between 1 g and 10 g.
+
+``` downlit
+params_mort2 <- params_mort
+band2 <- w(params) >= 1 & w(params) < 10
+mort[, band2] <- mort[, band2] * 0.5
+ext_mort(params_mort2) <- mort
+params_mort2 <- steadySingleSpecies(params_mort2)
+```
+
+We plot the relative change in the mortality rate, which we get with [`plotRelative()`](https://sizespectrum.org/mizer/reference/plotRelative.html), directly above the relative change in the abundance:
+
+``` downlit
+plotRelative(getMort(params), getMort(params_mort2))
+plotSpectraRelative(params, params_mort2, resource = FALSE)
+```
+
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-27-1.png)
+
+![](predation-growth-and-mortality_files/figure-html/predation-growth-and-mortality-27-2.png)
+
+The abundance falls across the first band and rises again across the second. Its lowest point is at 1 g, where the change in mortality switches from an increase to a decrease. It is not in the middle of the band of increased mortality, even though the mortality is increased equally across that whole band.
+
+The reason is that as long as the fish grow through sizes where they do worse than before, every further bit of growth costs them a little more, so their abundance relative to the original model keeps falling. It only starts to recover once they reach sizes where they do better than before. So the abundance has a minimum where the change in mortality switches from an increase to a decrease, and a maximum where it switches from a decrease to an increase. Think of a bath with the tap running and the plug pulled. The water level depends on the whole history of inflow and outflow, and it is highest not when the tap runs fastest but at the moment the outflow overtakes the inflow.
+
+> **NOTE:**
+>
+> At steady state, the number density of a species whose eggs enter the spectrum at the egg size w_0 at a rate R is N(w) = \frac{R}{g(w)}\exp\left(-\int\_{w_0}^{w}\frac{\mu(w')}{g(w')}\\dw'\right). The factor 1/g(w) describes the pile-up of fish where they grow slowly, the traffic-jam effect. The exponential is the proportion of fish that survive the journey from the egg size to size w. The ratio \mu/g is the mortality rate multiplied by the time a fish takes to grow through one gram, so it is the risk of dying per gram of growth, and the integral adds up this risk over all the sizes a fish has to grow through to reach size w.
+>
+> Taking the logarithm, the change in \log N(w) caused by a change in mortality is minus the change in \mu/g added up over all sizes below w. It is a running total, and a running total has its minimum where the quantity being added switches from positive to negative.
+
+Because it is the ratio \mu/g that matters, a slow-down in growth has the same kind of effect as an increase in mortality: the fish spend more time exposed to mortality, so fewer of them survive to larger sizes. That is the large drop in abundance that we saw in the section on [the effect of prey availability](#effect-of-prey-availability), and it comes on top of the local pile-up where the growth slows down.
+
+This way of thinking will be important when we look at multi-species models in the next tutorial. There the mortality and growth rates change because the abundances of predators and prey change. It explains, for example, why the peaks and troughs in a [trophic cascade](species-interactions.llms.md#trophic-cascades) are not spaced by the preferred predator/prey mass ratio, as one might naively expect.
+
 ## Summary and recap
 
 1\) In a mizer model the growth curve is not fixed but instead the growth rate of an individual changes as the prey abundance changes. This makes it important to understand how fish choose their prey.
 
-2\) A size spectrum model reacts differently to low prey abundance than a predator-prey model. In a size spectrum model when the growth rate of a predator slows down due to lack of prey, the abundance of predators of that size increases.
+2\) A size spectrum model reacts differently to low prey abundance than a predator-prey model. In a size spectrum model when the growth rate of a predator slows down due to lack of prey, predators pile up where the slow-down starts. But because they then spend longer exposed to mortality, fewer of them survive to larger sizes.
 
 3\) A fish is assumed to have a feeding preference for prey in a range of sizes at a certain fraction of its own size. So as the fish grows up, its preference shifts to larger sizes, an effect known as ontogenetic diet shift.
 
@@ -351,4 +413,6 @@ The difference may not seem to be very big, but note that we are using a logarit
 
 5\) Fish have a maximum intake rate that scales with body size with exponent n = 3/4. Due to scarcity of prey they will only feed at a proportion of their maximum intake rate. This proportion is called the feeding level.
 
-6\) Species size spectra depend strongly on mortality rates and in a realistic model this mortality rate will depend on the abundance of predators. We will explore this in greater detail in the next tutorials. Here we just looked at the effect of fishing mortality on the size spectrum.
+6\) Species size spectra depend strongly on mortality rates and in a realistic model this mortality rate will depend on the abundance of predators. We will explore this in greater detail in the next tutorials. Here we looked at the effect of fishing mortality and of changes in the external mortality on the size spectrum.
+
+7\) A change in mortality, or in growth, at some sizes changes the abundance at all larger sizes, because every fish has to grow through those sizes first. On top of that, fish pile up where growth slows down. Where growth does not change, the abundance has its peaks and troughs where the change in mortality switches sign, not where the change is largest.
