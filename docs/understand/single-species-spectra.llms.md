@@ -44,7 +44,7 @@ plotSpectra(params, biomass = FALSE)
 
 The `biomass = FALSE` argument to the [`plotSpectra()`](https://sizespectrum.org/mizer/reference/plotSpectra.html) function specifies that we want to plot the number density, rather than the biomass density. We’ll discuss this more below in the section on [other representations](#other-representations).
 
-The green line represents the number density of the background community, labelled as “Resource” in the plot legend, in which our foreground species finds itself. The green line is a straight line with slope `lambda = -2.05`. Thus the number density of the background community is proportional to w^{-2.05}. It is important to understand that a power-law curve looks like a straight line when plotted on logarithmic axes and the slope of the line is the exponent in the power law. If this does not sound familiar, please revisit the section in the previous tutorial where we [fitted a power-law](observed-size-spectra.qmdfitting-a-power-law) to the community spectrum.
+The green line represents the number density of the background community, labelled as “Resource” in the plot legend, in which our foreground species finds itself. The green line is a straight line with slope `lambda = -2.05`. Thus the number density of the background community is proportional to w^{-2.05}. It is important to understand that a power-law curve looks like a straight line when plotted on logarithmic axes and the slope of the line is the exponent in the power law. If this does not sound familiar, please revisit the section in the previous tutorial where we [fitted a power-law](../understand/observed-size-spectra.llms.md#fitting-a-power-law) to the community spectrum.
 
 The other line represents the number density of our single species, which by default is just named unimaginatively “Target species”. We see that it is a straight line initially, but then has a bump before declining rapidly at large sizes. We will discuss in a short while what causes that shape.
 
@@ -413,7 +413,7 @@ How was this maturity curve specified? You can find the details in the [mizer do
 
 - the maturity size `w_mat` at which 50% of the individuals are mature.
 - the size `w_mat25` at which 25% of the individuals are mature.
-- the size `w_repro_max` at which a typical mature individual invests 100% of its income into reproduction. (This is not a hard upper size limit: not all individuals are mature at `w_repro_max`, and diffusion in the growth process allows some to grow beyond it.)
+- the size `w_repro_max` at which a typical mature individual invests 100% of its income into reproduction. (This is not a hard upper size limit: not all individuals are mature at `w_repro_max`, and individuals grow at different rates, so in reality some grow beyond it. Mizer can model these differences in growth with [growth diffusion](../understand/predation-growth-and-mortality.llms.md#randomness-in-growth), which we will discuss in the next tutorial. In the simple model of this tutorial growth diffusion is switched off and the size grid ends at `w_repro_max`.)
 - an exponent `m` that determines how the proportion that an individual invests into reproduction scales with its size.
 
 Such species parameters are contained in a data frame inside the `params` object that we can access with the [`species_params()`](https://sizespectrum.org/mizer/reference/species_params.html) function.
@@ -508,7 +508,7 @@ plotSpectra2(params, name1 = "Early maturity",
 
 ![](single-species-spectra_files/figure-html/plot-spectra2-comparison-1.png)
 
-As expected, the bump happens later due to the larger maturity size and it is less steep, because the maturity curve is less steep. This means that fish do not suddenly start investing most of their energy into reproduction, but still keep growing while they are maturity. Since they are still growing they will be moving from one size class to another and fewer individuals will accumulate in one size class.
+As expected, the bump happens later due to the larger maturity size and it is less steep, because the maturity curve is less steep. This means that fish do not suddenly start investing most of their energy into reproduction, but still keep growing while they are maturity. Since they are still growing they will be moving from one size class to another and fewer individuals will accumulate in one size class. If individuals of the same size grew at different rates, as we will discuss in the next tutorial, they would be spread out over an even wider range of sizes and the bump would be smoother still.
 
 This was our first investigation of how the shape of a species size spectrum changes as model parameters are changed. We will do much more in this direction in the next tutorial in which we discuss how growth and mortality are determined through predation.
 

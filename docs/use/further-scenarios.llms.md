@@ -70,7 +70,7 @@ For this model, we had the following main criteria for our project:
 
 - The modeled catches through time captured the trends in the reported catches through time.
 
-We can see from these plots that we still have more work to do with refining the model. The size at age for some species seem much higher than the empirical parameters, feeding level is near satiation for all species and the biomass of some species is much higher than the data. However size-at-age data are typically highly variable. So, let’s set some of those issues aside for now. However with what you have already learned in this course you will probably be able to easily fix some of these issues. Feel free to do that and see how it impacts the remainder of this tutorial.
+We can see from these plots that we still have more work to do with refining the model. The size at age for some species seem much higher than the empirical parameters, feeding level is near satiation for all species and the biomass of some species is much higher than the data. However size-at-age data are typically highly variable, because individual fish grow at different rates, while the growth curves above show how a fish would grow at the average growth rate. (Mizer can describe this variability with [growth diffusion](../understand/predation-growth-and-mortality.llms.md#randomness-in-growth), but this model does not use it.) So, let’s set some of those issues aside for now. However with what you have already learned in this course you will probably be able to easily fix some of these issues. Feel free to do that and see how it impacts the remainder of this tutorial.
 
 Let’s take a look at how fishing is set up in this model.
 
@@ -265,7 +265,7 @@ Now let’s see what happens if we change fishing in the future. To do this we s
 params <- finalParams(simf3)
 ```
 
-The [`finalParams()`](https://sizespectrum.org/mizer/reference/finalParams.html) function has returned the model with its initial spectra and initial effort set to the final values from `simf3`, i.e., to the values from 2020. The effort was
+The [`finalParams()`](https://sizespectrum.org/mizer/reference/getParams.html) function has returned the model with its initial spectra and initial effort set to the final values from `simf3`, i.e., to the values from 2020. The effort was
 
 ``` downlit
 initial_effort(params)
