@@ -42,7 +42,7 @@ The expression in the brackets is the rate at which individuals grow through siz
 You can switch on the diffusion that is due to the randomness in prey sizes with `use_predation_diffusion(params) <- TRUE` and add further diffusion with the `D_ext` species parameter. The function `getDiffusion()` returns the total diffusion rate. The mizer article [Cohort dynamics and diffusion](https://sizespectrum.org/mizer/articles/cohort_dynamics_and_diffusion.html) shows how diffusion spreads out a cohort of fish that all hatched at the same time.
 :::
 
-What makes these seemingly obvious dynamics interesting is how the growth rate and the death rate are determined in terms of the abundance of prey and predators and the feeding preferences and physiological parameters of the individuals. We have discussed a bit of that in previous tutorials and will discuss it much more in upcoming tutorials. We will discuss the birth rate $R_{dd}$ below in the section on [how reproduction is modelled](dynamics-of-spectra.html#how-reproduction-is-modelled). But first we want to look at the results of simulating the size spectrum dynamics.
+What makes these seemingly obvious dynamics interesting is how the growth rate and the death rate are determined in terms of the abundance of prey and predators and the feeding preferences and physiological parameters of the individuals. We have discussed a bit of that in previous tutorials and will discuss it much more in upcoming tutorials. We will discuss the birth rate $R_{dd}$ below in the section on [reproduction dynamics](#reproduction-dynamics). But first we want to look at the results of simulating the size spectrum dynamics.
 
 ```{r dynamics-of-spectra-1}
 #| message: false
